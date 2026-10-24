@@ -1412,7 +1412,7 @@ document.querySelectorAll('#piko .pkside').forEach(s=>{const o=s.dataset.o;
 
 /* ========== ほうせき さがし（かみコップ シャッフル） ========== */
 const CUP={n:3,lv:1,slot:[],gem:0,st:'idle',turn:1,tries:{'1':0,'-1':0},sc:{'1':0,'-1':0},per:5,raf:0,tm:[],els:[]};
-const CUP_LV=[{nm:'かんたん',sw:6,ms:620},{nm:'ふつう',sw:10,ms:430},{nm:'むずかしい',sw:16,ms:290}];
+const CUP_LV=[{nm:'かんたん',sw:6,ms:620},{nm:'ふつう',sw:10,ms:430},{nm:'むずかしい',sw:16,ms:290},{nm:'🔥 げきむず',sw:26,ms:150}];
 const CUP_SVG='<svg viewBox="0 0 100 110" aria-hidden="true"><path d="M8 104 L22 8 Q50 0 78 8 L92 104 Q50 112 8 104Z" fill="#fffaf0" stroke="#c9b48f" stroke-width="3"/><path d="M14 66 L86 66 L89 86 L11 86Z" fill="var(--cc)"/><ellipse cx="50" cy="8" rx="28" ry="5" fill="#e9dcc3" stroke="#c9b48f" stroke-width="2"/><path d="M28 20 L22 92" stroke="#fff" stroke-width="5" opacity=".7"/></svg>';
 const CUP_COL=['#e9546b','#3d8bff','#2fbf5b','#f2a516','#8a6bd8'];
 function startCup(){show('cup');cupStop();CUP.tries={'1':0,'-1':0};CUP.sc={'1':0,'-1':0};CUP.turn=1;cupBuild();cupOpts();cupInfo();
@@ -1427,8 +1427,8 @@ function cupOpts(){const box=$('cupOpts');box.innerHTML='';const busy=['show','s
 function cupX(slot){const W=$('cupStage').clientWidth,cw=cupW();const gap=(W-cw*CUP.n)/(CUP.n+1);return gap+slot*(cw+gap);}
 function cupW(){const st=$('cupStage');return Math.min(st.clientWidth/(CUP.n+.8),st.clientHeight*.55);}
 function cupBuild(){const st=$('cupStage');st.innerHTML='';CUP.els=[];CUP.slot=[...Array(CUP.n).keys()];
-  for(let i=0;i<CUP.n;i++){const w=document.createElement('button');w.className='cupw';w.style.setProperty('--cc',CUP_COL[i]);
-    w.innerHTML=`<span class="gem">💎</span><span class="cupb">${CUP_SVG}</span>`;w.setAttribute('aria-label',`コップ ${i+1}`);
+  for(let i=0;i<CUP.n;i++){const w=document.createElement('button');w.className='cupw';w.style.setProperty('--cc','#e9546b');
+    w.innerHTML=`<span class="gem">💎</span><span class="cupb">${CUP_SVG}</span>`;w.setAttribute('aria-label','コップ');
     w.onclick=()=>cupPick(i);st.appendChild(w);CUP.els.push(w);}
   cupLayout();}
 function cupLayout(){const cw=cupW(),H=$('cupStage').clientHeight;
@@ -1455,14 +1455,14 @@ function cupShuffle(left){CUP.st='shuffle';cupInfo();duo('cupMsg','シャッフ�
   const ia=CUP.slot.indexOf(a),ib=CUP.slot.indexOf(b);
   const xa=cupX(a),xb=cupX(b),H=$('cupStage').clientHeight,cw=cupW(),y0=H/2-cw*.55;
   const arc=Math.min(H*.3,cw*.9)*(.7+Math.abs(a-b)*.15);
-  const ms=CUP_LV[CUP.lv].ms*(1+Math.abs(a-b)*.12)*(left<3?1.15:1);
+  const ms=CUP_LV[CUP.lv].ms*(1+Math.abs(a-b)*.12)*(left<3&&CUP.lv<3?1.15:1);
   const t0=performance.now();CUP.els[ia].style.zIndex=3;CUP.els[ib].style.zIndex=2;
   const step=t=>{let p=Math.min(1,(t-t0)/ms);const e=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2,s=Math.sin(Math.PI*e);
     CUP.els[ia].style.transform=`translate(${xa+(xb-xa)*e}px,${y0-arc*s}px) scale(${1+.08*s})`;
     CUP.els[ib].style.transform=`translate(${xb+(xa-xb)*e}px,${y0+arc*.55*s}px) scale(${1-.08*s})`;
     if(p<1){CUP.raf=requestAnimationFrame(step);return;}
     CUP.slot[ia]=b;CUP.slot[ib]=a;note&&BGM.on&&BGM.ctx&&note(520+left*20,BGM.ctx.currentTime,.05,'triangle',.05);
-    CUP.tm.push(setTimeout(()=>cupShuffle(left-1),60));};
+    CUP.tm.push(setTimeout(()=>cupShuffle(left-1),CUP.lv===3?15:60));};
   CUP.raf=requestAnimationFrame(step);}
 function cupPick(i){if(CUP.st!=='pick')return;buzz();CUP.st='done';const o=CUP.turn,ok=i===CUP.gem;
   CUP.tries[o]++;if(ok)CUP.sc[o]++;cupLift(i,true);
