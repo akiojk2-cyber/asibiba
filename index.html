@@ -360,6 +360,37 @@ html,body{overflow:hidden;overscroll-behavior:none}
 .cupw .gem{position:absolute;left:50%;bottom:2%;transform:translateX(-50%);font-size:46cqw;line-height:1;opacity:0}
 .cupw.has .gem{opacity:1}
 #cupOpts{gap:8px}
+/* ===== だがしやの ゲーム ===== */
+.tiles.two{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+.hjside{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto;gap:8px;min-height:0;border-radius:24px;padding:8px}
+.hjside.top{transform:rotate(180deg)}
+.hjside.p1c{background:#e9546b}.hjside.p2c{background:#3d8bff}
+.hjcvw{grid-row:1;grid-column:2;height:100%;aspect-ratio:100/160;min-height:0;max-width:56vw}
+.hjcvw canvas{width:100%;height:100%;display:block;border-radius:12px;box-shadow:0 0 0 4px #7a4a24;touch-action:none}
+.hjbtn{grid-row:1;border:none;border-radius:20px;font-size:clamp(18px,3.2vw,26px);font-weight:bold;background:#fff;color:#3a2e1f;touch-action:none;box-shadow:0 6px 0 rgba(0,0,0,.2);line-height:1.4}
+.hjbtn:active{transform:translateY(4px);box-shadow:0 2px 0 rgba(0,0,0,.2)}
+.hjbtn.ready{background:#ffe14d}
+.hjinfo{grid-column:1/-1;display:flex;justify-content:space-between;gap:10px;color:#fff;font-weight:bold;font-size:17px;padding:0 6px}
+#rl{--side:clamp(200px,23vh,260px)}
+.rlside .rlcoin{font-size:22px;font-weight:bold}
+.rlbets{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px;flex:1;min-height:0}
+.rlb{border:none;border-radius:14px;background:#f6efe2;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2px;min-height:0;color:var(--ink)}
+.rlb.has{background:#ffe14d}
+.rlb:disabled{opacity:.6}
+.rle{font-size:clamp(22px,4.2vw,36px);line-height:1.1}
+.rlp{font-size:14px;font-weight:bold}
+.rln{font-size:13px;min-height:1.1em;color:#c8102e;font-weight:bold}
+.rlrow{display:flex;gap:8px}
+.rlrow button{flex:1;border:none;border-radius:14px;padding:10px;font-size:19px;font-weight:bold;color:#fff;background:#2fbf5b;box-shadow:0 4px 0 rgba(0,0,0,.2)}
+.rlrow button.gray{background:#9a8f80;flex:0 0 34%}
+.rlrow button:disabled{opacity:.4}
+.rlmid{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;gap:6px;min-height:0}
+.rlmid .duo span{font-size:clamp(18px,3.4vw,28px)}
+.rlwheelw{flex:1;min-height:0;width:100%;display:flex;align-items:center;justify-content:center;container-type:size}
+#rlWheel{position:relative;width:min(96cqw,96cqh);aspect-ratio:1;border-radius:50%;background:radial-gradient(#4a2370,#1b0d2e 70%);box-shadow:0 0 0 8px #c9a227,0 0 0 12px #7a5a10,inset 0 0 30px #000}
+#rlWheel::after{content:"COIN\AROULETTE";white-space:pre;position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;color:#ffd400;font-weight:bold;font-size:min(5cqw,5cqh);letter-spacing:.1em;pointer-events:none}
+.lamp{position:absolute;width:15%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:#3b2a4d;display:flex;align-items:center;justify-content:center;font-size:min(6.4cqw,6.4cqh);box-shadow:inset 0 0 0 3px #6c5a80;filter:grayscale(.7) brightness(.65);transition:filter .05s}
+.lamp.on{background:#fff6b0;filter:none;box-shadow:0 0 18px 6px #ffe14d,inset 0 0 0 3px #ffd400;transform:translate(-50%,-50%) scale(1.15);z-index:1}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -388,6 +419,11 @@ html,body{overflow:hidden;overscroll-behavior:none}
     <button class="tile" style="--c:#1f9fb8" onclick="startHockey()"><span class="ti">🏒</span><span class="tn">エアホッケー</span><span class="ts">ゴールに いれろ</span></button>
     <button class="tile" style="--c:#8a6bd8" onclick="startJust()"><span class="ti">⏱️</span><span class="tn">ジャストタイム</span><span class="ts">ぴったりの びょうで タッチ</span></button>
     <button class="tile" style="--c:#d96aa7" onclick="startMem()"><span class="ti">🐶</span><span class="tn">しんけいすいじゃく</span><span class="ts">おなじ どうぶつを さがせ</span></button>
+  </div>
+  <div class="mhead">🪙 なつかしの だがしや ゲーム</div>
+  <div class="tiles two">
+    <button class="tile" style="--c:#b87333" onclick="startHj()"><span class="ti">🪙</span><span class="tn">10えん はじき</span><span class="ts">あなに おちずに ゴールへ</span></button>
+    <button class="tile" style="--c:#5b2d86" onclick="startRl()"><span class="ti">🎰</span><span class="tn">コイン ルーレット</span><span class="ts">マークに かけて まわせ</span></button>
   </div>
   <button class="bgm-btn" id="bgmMenu" onclick="bgmToggle()">🎵 おんがく：オン</button>
 </div></section>
@@ -587,6 +623,28 @@ html,body{overflow:hidden;overscroll-behavior:none}
     <div class="srow"><div class="me"><div class="dotc"></div><div><div class="name">あか</div><div class="num"><b class="cnt">0</b> かい あたり</div></div></div><div class="status"></div>
       <div class="ibtns btns"><button class="cbtn c-reset" data-act="reset" aria-label="さいしょから">🔄</button><button class="cbtn c-menu" data-act="menu" aria-label="メニュー">🏠</button></div></div>
     <div class="help"></div>
+  </div>
+</section>
+
+<!-- 10えん はじき -->
+<section id="hj" class="screen rt">
+  <div class="hjside top p2c" data-o="-1"><button class="hjbtn" data-side="L">◀<br>はじく</button><div class="hjcvw"><canvas id="hjCv-1" aria-label="あおの ばん"></canvas></div><button class="hjbtn" data-side="R">はじく<br>▶</button><div class="hjinfo"><span>あお　<span class="hjwin"></span></span><span class="hjmsg"></span></div></div>
+  <div class="center"><div class="duo" id="hjMsg"></div><div class="crow"><button class="cb" id="hjGo">▶ スタート</button><button class="cb gray" data-menu aria-label="メニュー">🏠</button></div></div>
+  <div class="hjside bottom p1c" data-o="1"><button class="hjbtn" data-side="L">◀<br>はじく</button><div class="hjcvw"><canvas id="hjCv1" aria-label="あかの ばん"></canvas></div><button class="hjbtn" data-side="R">はじく<br>▶</button><div class="hjinfo"><span>あか　<span class="hjwin"></span></span><span class="hjmsg"></span></div></div>
+</section>
+
+<!-- コイン ルーレット -->
+<section id="rl" class="screen game">
+  <div class="side top kside rlside p2c" data-o="-1">
+    <div class="srow"><div class="me"><div class="dotc"></div><div class="name">あお</div><span class="rlcoin"></span></div><div class="status rlbetsum"></div></div>
+    <div class="rlbets"></div>
+    <div class="rlrow"><button class="gray" data-act="clear">とりけし</button><button data-act="ok">OK！</button></div>
+  </div>
+  <div class="mid"><div class="rlmid"><div class="duo" id="rlMsg"></div><div class="rlwheelw"><div id="rlWheel"></div></div><div class="crow"><button class="cb gray" data-act="reset" aria-label="さいしょから">🔄</button><button class="cb gray" data-menu aria-label="メニュー">🏠</button></div></div></div>
+  <div class="side bottom kside rlside p1c" data-o="1">
+    <div class="srow"><div class="me"><div class="dotc"></div><div class="name">あか</div><span class="rlcoin"></span></div><div class="status rlbetsum"></div></div>
+    <div class="rlbets"></div>
+    <div class="rlrow"><button class="gray" data-act="clear">とりけし</button><button data-act="ok">OK！</button></div>
   </div>
 </section>
 
@@ -897,7 +955,7 @@ function padSet(sec,o,big,sc,dim){const p=document.querySelector(`#${sec} .pad[d
 function bindPads(sec,fn){document.querySelectorAll(`#${sec} .pad`).forEach(p=>
   p.addEventListener('pointerdown',e=>{e.preventDefault();fn(+p.dataset.o);}));}
 document.querySelectorAll('[data-menu]').forEach(b=>b.addEventListener('click',askMenu));
-function stopAll(){if(typeof cupStop==='function')cupStop();if(typeof pkStop==='function')pkStop();hayStop();tugStop();jStop();hkStop();if(typeof spStop==='function')spStop();}
+function stopAll(){if(typeof hjStop==='function')hjStop();if(typeof rlStop==='function')rlStop();if(typeof cupStop==='function')cupStop();if(typeof pkStop==='function')pkStop();hayStop();tugStop();jStop();hkStop();if(typeof spStop==='function')spStop();}
 
 /* ========== よんもくならべ ========== */
 const C4={b:[],turn:1,first:1,hist:[],over:false,win:[],last:-1,sc:{'1':0,'-1':0}};
@@ -1473,6 +1531,133 @@ function cupPick(i){if(CUP.st!=='pick')return;buzz();CUP.st='done';const o=CUP.t
     CUP.tm.push(setTimeout(()=>modal(`<span class="big">${a===b?'🤝 ひきわけ！':'🎉 '+PNAME(a>b?1:-1)+'の かち！'}</span><span class="small">あか ${a}かい ・ あお ${b}かい あたり</span>`,[{label:'OK'}]),1400));}
   cupInfo();cupOpts();}
 $('cup').addEventListener('click',e=>{const a=e.target.closest('[data-act]');if(!a)return;({menu:askMenu,reset:()=>askReset(startCup)})[a.dataset.act]?.();});
+
+// はじき：ぶつり
+const HJ_W=100,HJ_H=160,HJ_R=4.5,HJ_G=95,HJ_V=118;
+const HJ_LEDGES=[{x1:3,x2:30,y:150,s:'L'},{x1:70,x2:97,y:124,s:'R'},{x1:3,x2:30,y:98,s:'L'},{x1:70,x2:97,y:72,s:'R'},{x1:3,x2:30,y:46,s:'L'},{x1:66,x2:97,y:22,s:'R',goal:true}];
+const HJ_HOLES=[];
+for(let i=1;i<HJ_LEDGES.length;i++){const t=HJ_LEDGES[i],R=t.s==='R';
+  HJ_HOLES.push({x:R?83:17,y:t.y+11,r:5.5});            // たりない
+  if(!t.goal)HJ_HOLES.push({x:R?90:10,y:t.y-15,r:5.5});            // つよすぎ
+  HJ_HOLES.push({x:50,y:t.y+6,r:5});}                    // まんなか
+function hjFlick(c,p){const L=c.s==='L';c.vx=(L?1:-1)*(26+64*p);c.vy=-Math.sqrt(2*HJ_G*(8+44*p));c.st='fly';}
+function hjStep(c,dt){ // かえりち: null | 'land' | 'out' | 'goal' | 'reset'
+  const py=c.y;c.vy+=HJ_G*dt;c.x+=c.vx*dt;c.y+=c.vy*dt;
+  c.vx*=Math.pow(.6,dt);
+  if(c.x<HJ_R){c.x=HJ_R;c.vx=Math.abs(c.vx)*.45;} if(c.x>HJ_W-HJ_R){c.x=HJ_W-HJ_R;c.vx=-Math.abs(c.vx)*.45;}
+  if(c.y<HJ_R){c.y=HJ_R;c.vy=Math.abs(c.vy)*.3;c.vx*=.5;}
+  const sp=Math.hypot(c.vx,c.vy);
+  if(c.vy>0)for(const h of HJ_HOLES)if(Math.hypot(c.x-h.x,c.y-h.y)<h.r)return'out';
+  if(c.vy>0)for(let i=0;i<HJ_LEDGES.length;i++){const l=HJ_LEDGES[i];
+    if(py+HJ_R<=l.y&&c.y+HJ_R>=l.y&&c.x>l.x1-1&&c.x<l.x2+1){c.y=l.y-HJ_R;c.vx=c.vy=0;c.st='rest';c.s=l.s;c.lv=i;
+      c.x=l.s==='L'?Math.max(c.x,l.x1+HJ_R):Math.min(c.x,l.x2-HJ_R);return l.goal?'goal':'land';}}
+  if(c.y>HJ_H+HJ_R)return'reset';
+  return null;}
+function hjPlace(c,i){const l=HJ_LEDGES[i];c.lv=i;c.s=l.s;c.x=l.s==='L'?l.x1+HJ_R+2:l.x2-HJ_R-2;c.y=l.y-HJ_R;c.vx=c.vy=0;c.st='rest';}
+/* ========== 10えん はじき ========== */
+const HJ={st:'idle',p:{},tm:[],raf:0,last:0,sc:{'1':0,'-1':0},CHARGE:1400};
+function hjCv(o){return $('hjCv'+o);}
+function hjSize(){for(const o of['1','-1']){const cv=hjCv(o),r=cv.getBoundingClientRect(),d=window.devicePixelRatio||1;
+  if(!r.width)continue;cv.width=Math.round(r.width*d);cv.height=Math.round(r.height*d);}}
+window.addEventListener('resize',()=>{if($('hj').classList.contains('on')){hjSize();hjDraw();}});
+function startHj(){show('hj');hjStop();for(const o of['1','-1']){HJ.p[o]={c:{},charge:null,msg:'',outs:0};hjPlace(HJ.p[o].c,0);}
+  requestAnimationFrame(()=>{hjSize();hjDraw();});duo('hjMsg','「スタート」で きょうそう！<br><small>ボタンを ながく おすほど つよく はじくよ</small>');
+  $('hjGo').disabled=false;$('hjGo').textContent='▶ スタート';hjUI();}
+function hjStop(){HJ.tm.forEach(clearTimeout);HJ.tm=[];cancelAnimationFrame(HJ.raf);HJ.st='idle';}
+$('hjGo').addEventListener('click',()=>{if(HJ.st==='count'||HJ.st==='play')return;
+  for(const o of['1','-1']){HJ.p[o]={c:{},charge:null,msg:'',outs:0};hjPlace(HJ.p[o].c,0);}
+  HJ.st='count';$('hjGo').disabled=true;hjUI();hjDraw();
+  ['3','2','1'].forEach((n,k)=>HJ.tm.push(setTimeout(()=>{duo('hjMsg',n);sfx();},k*700)));
+  HJ.tm.push(setTimeout(()=>{HJ.st='play';duo('hjMsg','スタート！');HJ.last=performance.now();HJ.raf=requestAnimationFrame(hjLoop);},2100));});
+function hjPower(o){const ch=HJ.p[o].charge;return ch?Math.min(1,(performance.now()-ch.t0)/HJ.CHARGE):0;}
+function hjDown(o,side){if(HJ.st!=='play')return;const P=HJ.p[o];
+  if(P.c.st!=='rest'){return;}
+  if(P.c.s!==side){P.msg=side==='L'?'みぎの ボタンだよ →':'← ひだりの ボタンだよ';hjUI();return;}
+  P.charge={side,t0:performance.now()};P.msg='';hjUI();}
+function hjUp(o,side){const P=HJ.p[o];if(!P||!P.charge||P.charge.side!==side)return;
+  const pw=hjPower(o);P.charge=null;if(HJ.st!=='play'||P.c.st!=='rest')return;
+  hjFlick(P.c,pw);hjSound('flick');hjUI();}
+function hjLoop(t){if(HJ.st!=='play')return;const dt=Math.min(.05,(t-HJ.last)/1000);HJ.last=t;
+  for(const o of['1','-1']){const P=HJ.p[o];if(P.c.st!=='fly')continue;
+    const n=8;let r=null;for(let i=0;i<n&&!r;i++)r=hjStep(P.c,dt/n);
+    if(r==='land'){hjSound('land');P.msg=P.c.lv>0?`${P.c.lv}だんめ！`:'';}
+    else if(r==='out'){P.c.st='out';P.outs++;P.msg='アウト！ さいしょから';hjSound('out');buzz();
+      HJ.tm.push(setTimeout(()=>{hjPlace(P.c,0);P.msg='';hjUI();},900));}
+    else if(r==='reset'){hjPlace(P.c,0);P.msg='おちちゃった…';}
+    else if(r==='goal'){P.c.st='goal';hjWin(o);return;}
+    if(r)hjUI();}
+  hjDraw();HJ.raf=requestAnimationFrame(hjLoop);}
+function hjWin(o){HJ.st='over';HJ.sc[o]++;hjSound('goal');buzz();hjDraw();hjUI();
+  duo('hjMsg',`${PNAME(+o)}の かち！`);$('hjGo').disabled=false;$('hjGo').textContent='▶ もういっかい';
+  setTimeout(()=>modal(`<span class="big">🎉 ${PNAME(+o)}の かち！</span><span class="small">ゴール！ （あか ${HJ.sc['1']} ・ あお ${HJ.sc['-1']}）</span>`,[{label:'OK'}]),500);}
+function hjUI(){for(const o of['1','-1']){const s=document.querySelector(`#hj .hjside[data-o="${o}"]`),P=HJ.p[o];if(!P)continue;
+  s.querySelector('.hjmsg').textContent=P.msg||(HJ.st==='play'&&P.c.st==='rest'?(P.c.s==='L'?'← ひだりの ボタンで はじく':'みぎの ボタンで はじく →'):'');
+  s.querySelector('.hjwin').textContent=`かち ${HJ.sc[o]}`;
+  s.querySelectorAll('.hjbtn').forEach(b=>b.classList.toggle('ready',HJ.st==='play'&&P.c.st==='rest'&&P.c.s===b.dataset.side));}}
+function hjDraw(){for(const o of['1','-1']){const cv=hjCv(o),P=HJ.p[o];if(!cv.width||!P)continue;const x=cv.getContext('2d'),k=cv.width/HJ_W;
+  x.setTransform(k,0,0,k,0,0);
+  x.fillStyle='#1f6b45';x.fillRect(0,0,HJ_W,HJ_H);
+  x.strokeStyle='rgba(255,255,255,.08)';x.lineWidth=.4;for(let y=8;y<HJ_H;y+=8){x.beginPath();x.moveTo(0,y);x.lineTo(HJ_W,y);x.stroke();}
+  for(const h of HJ_HOLES){x.fillStyle='#0b1a12';x.beginPath();x.arc(h.x,h.y,h.r,0,7);x.fill();x.strokeStyle='#c9a227';x.lineWidth=.8;x.stroke();
+    x.fillStyle='#e9546b';x.font='bold 3px sans-serif';x.textAlign='center';x.textBaseline='middle';x.fillText('アウト',h.x,h.y);}
+  HJ_LEDGES.forEach((l,i)=>{x.fillStyle=l.goal?'#f2c230':'#c9ced6';x.fillRect(l.x1,l.y,l.x2-l.x1,3);x.fillStyle=l.goal?'#b8860b':'#7d8590';x.fillRect(l.x1,l.y+3,l.x2-l.x1,1.2);
+    x.fillStyle=l.goal?'#fff4c2':'rgba(255,255,255,.75)';x.font=`bold ${l.goal?6:4}px sans-serif`;x.textAlign='center';x.textBaseline='alphabetic';
+    if(l.goal||!i)x.fillText(l.goal?'🎁 ゴール':'スタート',(l.x1+l.x2)/2,l.y+(l.goal?-6:9));});
+  const c=P.c;if(c.st!=='out'){const pw=P.charge?hjPower(o):0;
+    if(P.charge){x.fillStyle='rgba(255,255,255,.25)';x.fillRect(c.s==='L'?2:HJ_W-8,c.y-26,6,22);x.fillStyle=pw>.85?'#e9546b':'#ffd400';x.fillRect(c.s==='L'?2:HJ_W-8,c.y-4-22*pw,6,22*pw);}
+    x.fillStyle='#b87333';x.beginPath();x.arc(c.x,c.y,HJ_R,0,7);x.fill();x.strokeStyle='#7a4a1f';x.lineWidth=.8;x.stroke();
+    x.fillStyle='#5e3512';x.font='bold 3.6px sans-serif';x.textAlign='center';x.textBaseline='middle';x.fillText('10',c.x,c.y+.2);}}
+  if(HJ.st==='play'&&(HJ.p['1']?.charge||HJ.p['-1']?.charge)&&!HJ.raf)HJ.raf=requestAnimationFrame(hjLoop);}
+function hjSound(k){if(!BGM.on||!BGM.ctx)return;const t=BGM.ctx.currentTime;
+  if(k==='flick'){note(900,t,.05,'square',.06);}else if(k==='land'){note(660,t,.08,'triangle',.12);}
+  else if(k==='out'){note(300,t,.15,'sawtooth',.07);note(180,t+.12,.25,'sawtooth',.07);}
+  else if(k==='goal'){[784,988,1175,1568].forEach((f,i)=>note(f,t+i*.09,.15,'square',.06));}}
+document.querySelectorAll('#hj .hjside').forEach(s=>{const o=s.dataset.o;
+  s.querySelectorAll('.hjbtn').forEach(b=>{const side=b.dataset.side;
+    b.addEventListener('pointerdown',e=>{e.preventDefault();try{b.setPointerCapture(e.pointerId);}catch(_){}hjDown(o,side);});
+    ['pointerup','pointercancel'].forEach(ev=>b.addEventListener(ev,()=>hjUp(o,side)));});});
+
+/* ========== コイン ルーレット ========== */
+const RL_MK=[{e:'🍒',p:3},{e:'🍋',p:4},{e:'🔔',p:5},{e:'🍉',p:8},{e:'⭐',p:15},{e:'7️⃣',p:16}];
+const RL_RING=[0,1,2,0,3,1,0,4,2,1,0,3,2,1,0,5];
+const RL={coins:{},bet:{},ready:{},st:'idle',pos:0,round:0,ROUNDS:10,tm:[],START:10};
+function startRl(){show('rl');rlStop();RL.coins={'1':RL.START,'-1':RL.START};RL.round=0;rlNewBet();
+  const w=$('rlWheel');if(!w.childElementCount)RL_RING.forEach((m,i)=>{const d=document.createElement('div');d.className='lamp';
+    const a=i/16*Math.PI*2-Math.PI/2;d.style.left=(50+Math.cos(a)*41)+'%';d.style.top=(50+Math.sin(a)*41)+'%';d.textContent=RL_MK[m].e;w.appendChild(d);});
+  rlRender();}
+function rlStop(){RL.tm.forEach(clearTimeout);RL.tm=[];RL.st='idle';}
+function rlNewBet(){RL.bet={'1':[0,0,0,0,0,0],'-1':[0,0,0,0,0,0]};RL.ready={'1':!RL.coins['1'],'-1':!RL.coins['-1']};RL.st='bet';RL.round++;
+  duo('rlMsg',`${RL.round}かいめ ／ ${RL.ROUNDS}<br><small>コインを かけて 「OK」！</small>`);}
+function rlRender(){
+  [...$('rlWheel').children].forEach((d,i)=>d.classList.toggle('on',i===RL.pos&&RL.st!=='bet'));
+  document.querySelectorAll('#rl .rlside').forEach(s=>{const o=s.dataset.o,b=RL.bet[o]||[0,0,0,0,0,0],sum=b.reduce((a,c)=>a+c,0);
+    s.querySelector('.rlcoin').textContent=`🪙 ${RL.coins[o]}まい`;s.querySelector('.rlbetsum').textContent=sum?`かけた ${sum}まい`:'';
+    s.classList.toggle('on',RL.st==='bet'&&!RL.ready[o]);
+    const g=s.querySelector('.rlbets');if(!g.childElementCount)RL_MK.forEach((m,i)=>{const bt=document.createElement('button');bt.className='rlb';
+      bt.innerHTML=`<span class="rle">${m.e}</span><span class="rlp">×${m.p}</span><span class="rln"></span>`;
+      bt.addEventListener('pointerdown',e=>{e.preventDefault();rlBet(o,i);});g.appendChild(bt);});
+    [...g.children].forEach((bt,i)=>{bt.querySelector('.rln').textContent=b[i]?`${b[i]}まい`:'';bt.classList.toggle('has',!!b[i]);bt.disabled=RL.st!=='bet'||RL.ready[o];});
+    s.querySelector('[data-act=clear]').disabled=RL.st!=='bet'||RL.ready[o]||!sum;
+    const ok=s.querySelector('[data-act=ok]');ok.disabled=RL.st!=='bet'||RL.ready[o]||!sum;ok.textContent=RL.ready[o]&&RL.st==='bet'?'まってね…':'OK！';});}
+function rlBet(o,i){if(RL.st!=='bet'||RL.ready[o]||RL.coins[o]<=0)return;RL.coins[o]--;RL.bet[o][i]++;sfx();rlRender();}
+document.querySelectorAll('#rl .rlside').forEach(s=>{const o=s.dataset.o;
+  s.querySelector('[data-act=clear]').addEventListener('click',()=>{if(RL.st!=='bet'||RL.ready[o])return;RL.coins[o]+=RL.bet[o].reduce((a,c)=>a+c,0);RL.bet[o]=[0,0,0,0,0,0];rlRender();});
+  s.querySelector('[data-act=ok]').addEventListener('click',()=>{if(RL.st!=='bet')return;RL.ready[o]=true;rlRender();if(RL.ready['1']&&RL.ready['-1'])rlSpin();});});
+function rlSpin(){RL.st='spin';duo('rlMsg','まわれ〜！');const total=32+Math.floor(Math.random()*16)+16;let k=0;
+  const step=()=>{RL.pos=(RL.pos+1)%16;k++;rlRender();if(BGM.on&&BGM.ctx)note(1200,BGM.ctx.currentTime,.03,'square',.04);
+    if(k>=total){rlResult();return;}const r=k/total;RL.tm.push(setTimeout(step,35+Math.pow(r,3)*420));};
+  step();}
+function rlResult(){const m=RL_RING[RL.pos],mk=RL_MK[m];const got={};
+  for(const o of['1','-1']){got[o]=RL.bet[o][m]*mk.p;RL.coins[o]+=got[o];}
+  if(BGM.on&&BGM.ctx){const t=BGM.ctx.currentTime;(got['1']||got['-1']?[784,988,1175,1568]:[400,300]).forEach((f,i)=>note(f,t+i*.1,.15,'square',.06));}
+  RL.st='result';rlRender();
+  const line=o=>got[o]?`${PNAME(+o)} ＋${got[o]}まい！`:`${PNAME(+o)} ざんねん`;
+  duo('rlMsg',`<span style="font-size:1.4em">${mk.e}</span> ×${mk.p}<br><small>${line('1')} ／ ${line('-1')}</small>`);
+  const fin=RL.round>=RL.ROUNDS||(!RL.coins['1']&&!RL.coins['-1']);
+  RL.tm.push(setTimeout(()=>{if(fin){RL.st='over';rlRender();const a=RL.coins['1'],b=RL.coins['-1'];
+      modal(`<span class="big">${a===b?'🤝 ひきわけ！':'🎉 '+PNAME(a>b?1:-1)+'の かち！'}</span><span class="small">あか ${a}まい ・ あお ${b}まい</span>`,[{label:'もういちど',fn:startRl}]);}
+    else{rlNewBet();rlRender();}},2600));}
+$('rl').addEventListener('click',e=>{const a=e.target.closest('[data-act]');if(!a)return;({menu:askMenu,reset:()=>askReset(startRl)})[a.dataset.act]?.();});
 
 /* ========== BGM・こうかおん（この ページのための オリジナル曲） ========== */
 const BGM={on:true,ctx:null,out:null,timer:null,step:0,next:0};
