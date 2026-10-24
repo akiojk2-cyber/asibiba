@@ -309,6 +309,39 @@ html,body{overflow:hidden;overscroll-behavior:none}
 .pc .cn{position:absolute;top:6%;right:8%;font-size:13cqw;font-weight:bold;opacity:.55}
 .pc.new{animation:pop .25s ease}
 @media (min-width:600px){.tiles{grid-template-columns:repeat(3,minmax(0,1fr))}}
+/* ===== ピコピコ たいけつ ===== */
+#piko.on{grid-template-rows:minmax(0,1fr) minmax(300px,1.35fr) minmax(0,1fr)}
+.pkside{display:flex;flex-direction:column;gap:8px;min-height:0;border-radius:28px;padding:10px;color:#fff}
+.pkside.top{transform:rotate(180deg)}
+.pkside.p1c{background:#e9546b}.pkside.p2c{background:#3d8bff}
+.pkhead{display:flex;align-items:center;gap:10px;font-weight:bold;font-size:20px}
+.pkhead .pkpt{font-size:30px}
+.pkbar{flex:1;height:16px;background:rgba(255,255,255,.35);border-radius:999px;overflow:hidden}
+.pkbar i{display:block;height:100%;background:#fff;border-radius:999px}
+.pkbar i.low{background:#ffd400}
+.pkbtns{flex:1;min-height:0;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pkbtns button{border:none;border-radius:22px;font-weight:bold;color:#3a2e1f;background:#fff;box-shadow:0 6px 0 rgba(0,0,0,.2);touch-action:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:clamp(20px,3.6vw,30px)}
+.pkbtns button .em{font-size:clamp(40px,8vw,72px);line-height:1}
+.pkbtns button.held{background:#ffe14d;transform:translateY(4px);box-shadow:0 2px 0 rgba(0,0,0,.2)}
+.pkbtns button.cool{opacity:.45}
+.pknote{min-height:1.3em;text-align:center;font-weight:bold;font-size:17px}
+.pkstage{display:grid;grid-template-rows:1fr auto 1fr;align-items:center;justify-items:center;background:var(--card);border-radius:24px;padding:22px 8px;gap:10px;min-height:0;overflow:hidden}
+.pkh{position:relative;width:clamp(90px,16vw,140px);aspect-ratio:1;display:flex;align-items:center;justify-content:center}
+.pkh.top{transform:rotate(180deg);align-self:start}
+.pkh:not(.top){align-self:end}
+.pkh .face{font-size:clamp(64px,12vw,104px);line-height:1}
+.pkh .hat{position:absolute;top:-16%;left:50%;transform:translate(-50%,-40%) scale(.6);font-size:clamp(50px,9vw,80px);opacity:0;transition:transform .08s,opacity .08s;pointer-events:none}
+.pkh .hat.on{opacity:1;transform:translate(-50%,0) scale(1)}
+.pkh .hm{position:absolute;top:-30%;right:-38%;font-size:clamp(48px,9vw,80px);opacity:0;pointer-events:none;transform-origin:80% 80%}
+.pkh .hm.go{animation:pkswing .5s ease-in}
+@keyframes pkswing{0%{opacity:1;transform:translateY(120%) rotate(70deg)}60%{opacity:1;transform:translateY(0) rotate(-25deg)}100%{opacity:0;transform:translateY(0) rotate(-25deg)}}
+.pkh .fx{position:absolute;top:-10%;left:-30%;font-weight:bold;font-size:clamp(22px,4vw,34px);opacity:0;white-space:nowrap;pointer-events:none}
+.pkh .fx.show{animation:pop .3s ease;opacity:1}
+.pkh .fx.hit{color:#e9546b}.pkh .fx.block{color:#6b7c93}
+.pkmid{display:flex;flex-direction:column;align-items:center;gap:6px}
+.tile.wide{grid-column:1/-1;min-height:96px;flex-direction:row;gap:14px}
+.tile.wide .ti{font-size:44px}
+.tile .new{background:#fff;color:#e9546b;font-size:12px;font-weight:bold;border-radius:999px;padding:2px 8px}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -329,6 +362,7 @@ html,body{overflow:hidden;overscroll-behavior:none}
   </div>
   <div class="mhead">⚡ わいわい からだを つかう</div>
   <div class="tiles">
+    <button class="tile wide" style="--c:#ff6f3c" onclick="startPiko()"><span class="ti">🔨</span><span style="display:flex;flex-direction:column;align-items:flex-start;gap:2px"><span class="tn">ピコピコ たいけつ <span class="new">NEW</span></span><span class="ts">たたくと まもれない！ さきに 5かい あてたら かち</span></span></button>
     <button class="tile" style="--c:#0f8a5f" onclick="startSpd()"><span class="ti">🃏</span><span class="tn">スピード</span><span class="ts">はやく カードを だしきれ</span></button>
     <button class="tile" style="--c:#e0a800" onclick="startHay()"><span class="ti">⚡</span><span class="tn">はやおし たいけつ</span><span class="ts">「いまだ！」で タッチ</span></button>
     <button class="tile" style="--c:#e9546b" onclick="startTug()"><span class="ti">💪</span><span class="tn">つなひき れんだ</span><span class="ts">れんだで ひっぱれ</span></button>
@@ -504,6 +538,21 @@ html,body{overflow:hidden;overscroll-behavior:none}
       <div class="ibtns btns"><button class="cbtn c-reset" data-act="reset" aria-label="さいしょから">🔄</button><button class="cbtn c-menu" data-act="menu" aria-label="メニュー">🏠</button></div></div>
     <div class="shand"></div>
     <button class="seeno" hidden>せーの！</button>
+  </div>
+</section>
+
+<!-- ピコピコ たいけつ -->
+<section id="piko" class="screen rt">
+  <div class="pkside top p2c" data-o="-1">
+    <div class="pkhead"><span>あお</span><span class="pkpt">0</span><span>てん</span><span class="pkbar" aria-label="ヘルメット ゲージ"><i></i></span><span>⛑️</span></div>
+    <div class="pkbtns"><button class="pkhit"><span class="em">🔨</span>たたく</button><button class="pkguard"><span class="em">⛑️</span>まもる<small style="font-size:.5em">（おしてる あいだ）</small></button></div>
+    <div class="pknote"></div>
+  </div>
+  <div class="pkstage"><div class="pkh top" id="pkHead-1"><span class="face">🙂</span><span class="hat">⛑️</span><span class="hm">🔨</span><span class="fx"></span></div><div class="pkmid"><div class="duo" id="pkMsg"></div><div class="crow"><button class="cb" id="pkGo">▶ スタート</button><button class="cb gray" data-menu aria-label="メニュー">🏠</button></div></div><div class="pkh " id="pkHead1"><span class="face">🙂</span><span class="hat">⛑️</span><span class="hm">🔨</span><span class="fx"></span></div></div>
+  <div class="pkside bottom p1c" data-o="1">
+    <div class="pkhead"><span>あか</span><span class="pkpt">0</span><span>てん</span><span class="pkbar" aria-label="ヘルメット ゲージ"><i></i></span><span>⛑️</span></div>
+    <div class="pkbtns"><button class="pkhit"><span class="em">🔨</span>たたく</button><button class="pkguard"><span class="em">⛑️</span>まもる<small style="font-size:.5em">（おしてる あいだ）</small></button></div>
+    <div class="pknote"></div>
   </div>
 </section>
 
@@ -814,7 +863,7 @@ function padSet(sec,o,big,sc,dim){const p=document.querySelector(`#${sec} .pad[d
 function bindPads(sec,fn){document.querySelectorAll(`#${sec} .pad`).forEach(p=>
   p.addEventListener('pointerdown',e=>{e.preventDefault();fn(+p.dataset.o);}));}
 document.querySelectorAll('[data-menu]').forEach(b=>b.addEventListener('click',askMenu));
-function stopAll(){hayStop();tugStop();jStop();hkStop();if(typeof spStop==='function')spStop();}
+function stopAll(){if(typeof pkStop==='function')pkStop();hayStop();tugStop();jStop();hkStop();if(typeof spStop==='function')spStop();}
 
 /* ========== よんもくならべ ========== */
 const C4={b:[],turn:1,first:1,hist:[],over:false,win:[],last:-1,sc:{'1':0,'-1':0}};
@@ -1184,6 +1233,61 @@ function spRender(){
 document.querySelectorAll('#spd .seeno').forEach(b=>b.addEventListener('pointerdown',e=>{e.preventDefault();spSeeno(b.closest('.side').dataset.p);}));
 $('spd').addEventListener('click',e=>{const a=e.target.closest('[data-act]');if(!a)return;
   ({reset:()=>askReset(startSpd),menu:askMenu})[a.dataset.act]?.();});
+
+/* ========== ピコピコ たいけつ ========== */
+// たたく：ふりおろしまで 0.35びょう、そのあと 0.4びょうは まもれない。まもる：おしている あいだ ヘルメット（ゲージが へる）
+const PK={st:'idle',sc:{'1':0,'-1':0},hold:{},gauge:{},broken:{},swingAt:{},dizzyTo:{},tm:[],raf:0,last:0,goal:5,
+  SWING:350,RECOVER:400,DIZZY:700,DRAIN:2.2,FILL:1.8};
+const pkNow=()=>performance.now();
+function pkGuarding(o){const t=pkNow();return PK.st==='play'&&PK.hold[o]&&!PK.broken[o]&&PK.gauge[o]>0&&!(PK.swingAt[o]&&t<PK.swingAt[o]+PK.SWING+PK.RECOVER)&&!(t<PK.dizzyTo[o]);}
+function pkBusy(o){const t=pkNow();return(PK.swingAt[o]&&t<PK.swingAt[o]+PK.SWING+PK.RECOVER)||t<PK.dizzyTo[o];}
+function startPiko(){show('piko');pkStop();PK.sc={'1':0,'-1':0};pkReset();duo('pkMsg','「スタート」を おしてね');$('pkGo').disabled=false;$('pkGo').textContent='▶ スタート';pkDraw();}
+function pkReset(){PK.hold={'1':false,'-1':false};PK.gauge={'1':1,'-1':1};PK.broken={'1':false,'-1':false};PK.swingAt={'1':0,'-1':0};PK.dizzyTo={'1':0,'-1':0};}
+function pkStop(){PK.tm.forEach(clearTimeout);PK.tm=[];cancelAnimationFrame(PK.raf);PK.st='idle';}
+$('pkGo').addEventListener('click',()=>{if(PK.st==='count'||PK.st==='play')return;
+  if(PK.st==='over')PK.sc={'1':0,'-1':0};
+  pkReset();PK.st='count';$('pkGo').disabled=true;pkDraw();
+  ['3','2','1'].forEach((n,k)=>PK.tm.push(setTimeout(()=>{duo('pkMsg',n);sfx();},k*700)));
+  PK.tm.push(setTimeout(()=>{PK.st='play';duo('pkMsg','ピコピコ たいけつ！');PK.last=pkNow();PK.raf=requestAnimationFrame(pkLoop);},2100));});
+function pkLoop(t){if(PK.st!=='play')return;const dt=Math.min(.05,(t-PK.last)/1000);PK.last=t;
+  for(const o of['1','-1']){
+    if(pkGuarding(o)){PK.gauge[o]=Math.max(0,PK.gauge[o]-dt/PK.DRAIN);if(PK.gauge[o]===0){PK.broken[o]=true;pkSound('break');}}
+    else{PK.gauge[o]=Math.min(1,PK.gauge[o]+dt/PK.FILL);if(PK.broken[o]&&PK.gauge[o]>=.35)PK.broken[o]=false;}}
+  pkDraw();PK.raf=requestAnimationFrame(pkLoop);}
+function pkHit(o){if(PK.st!=='play'||pkBusy(o))return;const op=String(-o);
+  PK.swingAt[o]=pkNow();pkSound('swing');
+  const hm=$('pkHead'+op).querySelector('.hm');hm.classList.remove('go');void hm.offsetWidth;hm.classList.add('go');
+  PK.tm.push(setTimeout(()=>{if(PK.st!=='play')return;
+    const head=$('pkHead'+op),fx=head.querySelector('.fx');
+    if(pkGuarding(op)){fx.textContent='カーン！';fx.className='fx show block';pkSound('block');}
+    else{fx.textContent='ピコッ！';fx.className='fx show hit';pkSound('hit');buzz();
+      PK.sc[o]++;PK.dizzyTo[op]=pkNow()+PK.DIZZY;
+      if(PK.sc[o]>=PK.goal){PK.st='over';cancelAnimationFrame(PK.raf);pkDraw();duo('pkMsg',`${PNAME(+o)}の かち！`);
+        $('pkGo').textContent='▶ もういっかい';$('pkGo').disabled=false;
+        setTimeout(()=>modal(`<span class="big">🎉 ${PNAME(+o)}の かち！</span><span class="small">あか ${PK.sc['1']} ・ あお ${PK.sc['-1']}</span>`,[{label:'OK'}]),500);}}
+    setTimeout(()=>fx.className='fx',450);},PK.SWING));}
+function pkDraw(){const t=pkNow();
+  for(const o of['1','-1']){
+    const s=document.querySelector(`#piko .pkside[data-o="${o}"]`),head=$('pkHead'+o);
+    const g=pkGuarding(o),dz=t<PK.dizzyTo[o],sw=PK.swingAt[o]&&t<PK.swingAt[o]+PK.SWING+PK.RECOVER;
+    s.querySelector('.pkpt').textContent=PK.sc[o];
+    const bar=s.querySelector('.pkbar i');bar.style.width=(PK.gauge[o]*100)+'%';bar.classList.toggle('low',PK.broken[o]);
+    s.querySelector('.pkhit').classList.toggle('cool',PK.st!=='play'||!!sw||dz);
+    s.querySelector('.pkguard').classList.toggle('held',g);
+    s.querySelector('.pkguard').classList.toggle('cool',PK.broken[o]||!!sw||dz);
+    s.querySelector('.pknote').textContent=PK.st!=='play'?'':dz?'💫 くらくら…':PK.broken[o]?'ヘルメット こわれた！ まってね':sw?'ふってる あいだは まもれない！':g?'まもってる！':'';
+    head.querySelector('.hat').classList.toggle('on',g);
+    head.querySelector('.face').textContent=dz?'😵':PK.st==='over'?(PK.sc[o]>=PK.goal?'😆':'😭'):g?'😤':sw?'😠':'🙂';}}
+function pkSound(k){if(!BGM.on||!BGM.ctx)return;const t=BGM.ctx.currentTime;
+  if(k==='swing'){note(300,t,.12,'triangle',.08);}
+  else if(k==='hit'){note(1100,t,.07,'sine',.2);note(1700,t+.06,.1,'sine',.18);}
+  else if(k==='block'){note(620,t,.25,'square',.06);note(930,t,.3,'square',.04);}
+  else if(k==='break'){note(400,t,.1,'sawtooth',.06);note(250,t+.08,.2,'sawtooth',.06);}}
+document.querySelectorAll('#piko .pkside').forEach(s=>{const o=s.dataset.o;
+  s.querySelector('.pkhit').addEventListener('pointerdown',e=>{e.preventDefault();pkHit(o);});
+  const gb=s.querySelector('.pkguard');
+  gb.addEventListener('pointerdown',e=>{e.preventDefault();try{gb.setPointerCapture(e.pointerId);}catch(_){}PK.hold[o]=true;});
+  ['pointerup','pointercancel','lostpointercapture'].forEach(ev=>gb.addEventListener(ev,()=>{PK.hold[o]=false;}));});
 
 /* ========== BGM・こうかおん（この ページのための オリジナル曲） ========== */
 const BGM={on:true,ctx:null,out:null,timer:null,step:0,next:0};
