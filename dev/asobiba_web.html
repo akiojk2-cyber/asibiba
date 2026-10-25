@@ -383,6 +383,8 @@ html,body{overflow:hidden;overscroll-behavior:none}
 .rlbets{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px;flex:1;min-height:0}
 .rlb{border:none;border-radius:14px;background:#f6efe2;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2px;min-height:0;color:var(--ink)}
 .rlb.has{background:#ffe14d}
+.rlb.max{background:#ffb347}
+.rlb.max .rln::after{content:" MAX";font-size:.8em}
 .rlb:disabled{opacity:.6}
 .rle{font-size:clamp(22px,4.2vw,36px);line-height:1.1}
 .rlp{font-size:14px;font-weight:bold}
@@ -1666,28 +1668,29 @@ document.querySelectorAll('#hj .hjside').forEach(s=>{const o=s.dataset.o;
     ['pointerup','pointercancel'].forEach(ev=>b.addEventListener(ev,()=>hjUp(o,side)));});});
 
 /* ========== コイン ルーレット ========== */
-const RL_MK=[{e:'🍒',p:3},{e:'🍋',p:4},{e:'🔔',p:5},{e:'🍉',p:8},{e:'⭐',p:15},{e:'7️⃣',p:16}];
-const RL_RING=[0,1,2,0,3,1,0,4,2,1,0,3,2,1,0,5];
-const RL={coins:{},bet:{},ready:{},st:'idle',pos:0,round:0,ROUNDS:10,tm:[],START:10};
+const RL_MK=[{e:'🍒',p:6},{e:'🍋',p:5},{e:'🔔',p:6},{e:'🍉',p:9},{e:'⭐',p:18},{e:'7️⃣',p:18},{e:'0️⃣',p:0,lose:true}];  // さいごの 0 は ハズレ（かけられない）
+const RL_NB=6;
+const RL_RING=[0,1,2,6,3,1,0,4,2,1,6,3,0,1,2,5];
+const RL={coins:{},bet:{},ready:{},st:'idle',pos:0,round:0,MAXR:40,GOAL:50,MAXBET:5,tm:[],START:20};
 function startRl(){show('rl');rlStop();RL.coins={'1':RL.START,'-1':RL.START};RL.round=0;rlNewBet();
   const w=$('rlWheel');if(!w.childElementCount)RL_RING.forEach((m,i)=>{const d=document.createElement('div');d.className='lamp';
-    const a=i/16*Math.PI*2-Math.PI/2;d.style.left=(50+Math.cos(a)*41)+'%';d.style.top=(50+Math.sin(a)*41)+'%';d.textContent=RL_MK[m].e;w.appendChild(d);});
+    const a=i/RL_RING.length*Math.PI*2-Math.PI/2;d.style.left=(50+Math.cos(a)*41)+'%';d.style.top=(50+Math.sin(a)*41)+'%';d.textContent=RL_MK[m].e;w.appendChild(d);});
   rlRender();}
 function rlStop(){RL.tm.forEach(clearTimeout);RL.tm=[];RL.st='idle';}
 function rlNewBet(){RL.bet={'1':[0,0,0,0,0,0],'-1':[0,0,0,0,0,0]};RL.ready={'1':!RL.coins['1'],'-1':!RL.coins['-1']};RL.st='bet';RL.round++;
-  duo('rlMsg',`${RL.round}かいめ ／ ${RL.ROUNDS}<br><small>コインを かけて 「OK」！</small>`);}
+  duo('rlMsg',`${RL.round}かいめ ／ ${RL.GOAL}まい ためたら かち！<br><small>ひとつの めに ${RL.MAXBET}まいまで ・ 0️⃣は ハズレ</small>`);}
 function rlRender(){
   [...$('rlWheel').children].forEach((d,i)=>d.classList.toggle('on',i===RL.pos&&RL.st!=='bet'));
   document.querySelectorAll('#rl .rlside').forEach(s=>{const o=s.dataset.o,b=RL.bet[o]||[0,0,0,0,0,0],sum=b.reduce((a,c)=>a+c,0);
-    s.querySelector('.rlcoin').textContent=`🪙 ${RL.coins[o]}まい`;s.querySelector('.rlbetsum').textContent=sum?`かけた ${sum}まい`:'';
+    s.querySelector('.rlcoin').textContent=`🪙 ${RL.coins[o]} ／ ${RL.GOAL}まい`;s.querySelector('.rlbetsum').textContent=sum?`かけた ${sum}まい`:'';
     s.classList.toggle('on',RL.st==='bet'&&!RL.ready[o]);
-    const g=s.querySelector('.rlbets');if(!g.childElementCount)RL_MK.forEach((m,i)=>{const bt=document.createElement('button');bt.className='rlb';
+    const g=s.querySelector('.rlbets');if(!g.childElementCount)RL_MK.slice(0,RL_NB).forEach((m,i)=>{const bt=document.createElement('button');bt.className='rlb';
       bt.innerHTML=`<span class="rle">${m.e}</span><span class="rlp">×${m.p}</span><span class="rln"></span>`;
       bt.addEventListener('pointerdown',e=>{e.preventDefault();rlBet(o,i);});g.appendChild(bt);});
-    [...g.children].forEach((bt,i)=>{bt.querySelector('.rln').textContent=b[i]?`${b[i]}まい`:'';bt.classList.toggle('has',!!b[i]);bt.disabled=RL.st!=='bet'||RL.ready[o];});
+    [...g.children].forEach((bt,i)=>{bt.querySelector('.rln').textContent=b[i]?`${b[i]}まい`:'';bt.classList.toggle('has',!!b[i]);bt.classList.toggle('max',b[i]>=RL.MAXBET);bt.disabled=RL.st!=='bet'||RL.ready[o];});
     s.querySelector('[data-act=clear]').disabled=RL.st!=='bet'||RL.ready[o]||!sum;
     const ok=s.querySelector('[data-act=ok]');ok.disabled=RL.st!=='bet'||RL.ready[o]||!sum;ok.textContent=RL.ready[o]&&RL.st==='bet'?'まってね…':'OK！';});}
-function rlBet(o,i){if(RL.st!=='bet'||RL.ready[o]||RL.coins[o]<=0)return;RL.coins[o]--;RL.bet[o][i]++;sfx();rlRender();}
+function rlBet(o,i){if(RL.st!=='bet'||RL.ready[o]||RL.coins[o]<=0||RL.bet[o][i]>=RL.MAXBET)return;RL.coins[o]--;RL.bet[o][i]++;sfx();rlRender();}
 document.querySelectorAll('#rl .rlside').forEach(s=>{const o=s.dataset.o;
   s.querySelector('[data-act=clear]').addEventListener('click',()=>{if(RL.st!=='bet'||RL.ready[o])return;RL.coins[o]+=RL.bet[o].reduce((a,c)=>a+c,0);RL.bet[o]=[0,0,0,0,0,0];rlRender();});
   s.querySelector('[data-act=ok]').addEventListener('click',()=>{if(RL.st!=='bet')return;RL.ready[o]=true;rlRender();if(RL.ready['1']&&RL.ready['-1'])rlSpin();});});
@@ -1696,14 +1699,15 @@ function rlSpin(){RL.st='spin';duo('rlMsg','まわれ〜！');const total=32+Mat
     if(k>=total){rlResult();return;}const r=k/total;RL.tm.push(setTimeout(step,35+Math.pow(r,3)*420));};
   step();}
 function rlResult(){const m=RL_RING[RL.pos],mk=RL_MK[m];const got={};
-  for(const o of['1','-1']){got[o]=RL.bet[o][m]*mk.p;RL.coins[o]+=got[o];}
+  for(const o of['1','-1']){got[o]=mk.lose?0:RL.bet[o][m]*mk.p;RL.coins[o]+=got[o];}
   if(BGM.on&&BGM.ctx){const t=BGM.ctx.currentTime;(got['1']||got['-1']?[784,988,1175,1568]:[400,300]).forEach((f,i)=>note(f,t+i*.1,.15,'square',.06));}
   RL.st='result';rlRender();
   const line=o=>got[o]?`${PNAME(+o)} ＋${got[o]}まい！`:`${PNAME(+o)} ざんねん`;
-  duo('rlMsg',`<span style="font-size:1.4em">${mk.e}</span> ×${mk.p}<br><small>${line('1')} ／ ${line('-1')}</small>`);
-  const fin=RL.round>=RL.ROUNDS||(!RL.coins['1']&&!RL.coins['-1']);
-  RL.tm.push(setTimeout(()=>{if(fin){RL.st='over';rlRender();const a=RL.coins['1'],b=RL.coins['-1'];
-      modal(`<span class="big">${a===b?'🤝 ひきわけ！':'🎉 '+PNAME(a>b?1:-1)+'の かち！'}</span><span class="small">あか ${a}まい ・ あお ${b}まい</span>`,[{label:'もういちど',fn:startRl}]);}
+  duo('rlMsg',`<span style="font-size:1.4em">${mk.e}</span> ${mk.lose?'ハズレ！':'×'+mk.p}<br><small>${line('1')} ／ ${line('-1')}</small>`);
+  const A=RL.coins['1'],B=RL.coins['-1'],G=RL.GOAL;
+  const why=(A>=G||B>=G)?`${G}まい たっせい！`:(!A||!B)?'コインが なくなった':RL.round>=RL.MAXR?`${RL.MAXR}かい おわり`:'';
+  RL.tm.push(setTimeout(()=>{if(why){RL.st='over';rlRender();
+      modal(`<span class="big">${A===B?'🤝 ひきわけ！':'🎉 '+PNAME(A>B?1:-1)+'の かち！'}</span><span class="small">${why}<br>あか ${A}まい ・ あお ${B}まい</span>`,[{label:'もういちど',fn:startRl}]);}
     else{rlNewBet();rlRender();}},2600));}
 $('rl').addEventListener('click',e=>{const a=e.target.closest('[data-act]');if(!a)return;({menu:askMenu,reset:()=>askReset(startRl)})[a.dataset.act]?.();});
 
