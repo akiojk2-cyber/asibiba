@@ -421,6 +421,37 @@ html,body{overflow:hidden;overscroll-behavior:none}
 .memgrid{transition:transform .6s ease}
 .memgrid.turned,#cupStage.turned{transform:rotate(180deg)}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ころころ ドロップ（たて 2ぶんかつ） */
+#puyo.on{display:grid;position:fixed;inset:0;width:auto;max-width:none;height:auto;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;padding:calc(8px + env(safe-area-inset-top,0px)) max(8px,env(safe-area-inset-right,0px)) calc(8px + env(safe-area-inset-bottom,0px)) max(8px,env(safe-area-inset-left,0px))}
+.pyside{display:flex;flex-direction:column;gap:6px;min-height:0;min-width:0;border-radius:20px;padding:6px}
+.pyside.top{transform:rotate(180deg)}
+.pyside.p1c{background:#e9546b}.pyside.p2c{background:#3d8bff}
+.pyhead{display:flex;align-items:center;gap:6px;color:#fff;font-weight:bold;min-height:62px;padding:0 4px}
+.pyname{font-size:22px}
+.pywin{font-size:15px;white-space:nowrap}
+.pygb{flex:1;font-size:14px;line-height:1.25;text-align:center;min-width:0}
+.pygb.on{background:rgba(0,0,0,.28);border-radius:10px;padding:4px;animation:pyblink .5s infinite alternate}
+.pynextw{display:flex;flex-direction:column;align-items:center;font-size:12px;gap:2px}
+.pync{display:block;background:rgba(0,0,0,.25);border-radius:8px}
+.pypause{border:none;background:rgba(255,255,255,.92);border-radius:12px;width:48px;height:48px;font-size:24px;flex-shrink:0;color:#3a2e1f}
+.pymain{flex:1;min-height:0;display:flex;align-items:flex-end;justify-content:center;position:relative}
+.pycv{display:block;border-radius:10px;box-shadow:0 0 0 3px rgba(255,255,255,.85)}
+.pymain.shake{animation:pyshake .3s}
+.pypop{position:absolute;left:50%;top:40%;transform:translate(-50%,-50%);font-size:clamp(28px,6vw,46px);font-weight:900;color:#fff;text-shadow:0 3px 0 #000,0 0 12px #000;pointer-events:none;opacity:0;white-space:nowrap}
+.pypop.on{animation:pypop 1.1s ease-out forwards}
+.pypop.stay{animation:none;opacity:1}
+@keyframes pypop{0%{opacity:0;transform:translate(-50%,-30%) scale(.6)}15%{opacity:1;transform:translate(-50%,-50%) scale(1.15)}70%{opacity:1}100%{opacity:0;transform:translate(-50%,-80%) scale(1)}}
+@keyframes pyblink{from{opacity:1}to{opacity:.55}}
+@keyframes pyshake{0%,100%{transform:none}25%{transform:translateY(6px)}75%{transform:translateY(-4px)}}
+.pyctl{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;height:clamp(90px,13vh,160px);flex-shrink:0}
+.pyctl button{border:none;border-radius:16px;background:#fff;color:#3a2e1f;font-size:clamp(26px,5vw,40px);font-weight:bold;box-shadow:0 5px 0 rgba(0,0,0,.2);touch-action:none;user-select:none;-webkit-user-select:none}
+.pyctl button.hold{transform:translateY(3px);box-shadow:0 2px 0 rgba(0,0,0,.2);background:#ffe14d}
+.pycenter{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(560px,88vw);background:var(--card);border-radius:24px;padding:16px;display:flex;flex-direction:column;align-items:center;gap:12px;box-shadow:0 10px 40px rgba(0,0,0,.35);z-index:5}
+.pycenter.hide{display:none}
+.pycenter .duo span{font-size:clamp(20px,3.6vw,30px)}
+#pyOpts{gap:6px}
+#pyOpts .jchip{padding:6px 12px;font-size:15px}
 </style>
 </head>
 <body>
@@ -441,7 +472,8 @@ html,body{overflow:hidden;overscroll-behavior:none}
   <div class="mhead">⚡ わいわい からだを つかう</div>
   <div class="tiles">
     <button class="tile wide" style="--c:#ff6f3c" onclick="startPiko()"><span class="ti">🔨</span><span style="display:flex;flex-direction:column;align-items:flex-start;gap:2px"><span class="tn">ピコピコ たいけつ</span><span class="ts">たたくと まもれない！ さきに 5かい あてたら かち</span></span></button>
-    <button class="tile wide" style="--c:#c27c0e" onclick="startCup()"><span class="ti">💎</span><span style="display:flex;flex-direction:column;align-items:flex-start;gap:2px"><span class="tn">ほうせき さがし <span class="new">NEW</span></span><span class="ts">シャッフルした コップの どこに ある？</span></span></button>
+    <button class="tile wide" style="--c:#c27c0e" onclick="startCup()"><span class="ti">💎</span><span style="display:flex;flex-direction:column;align-items:flex-start;gap:2px"><span class="tn">ほうせき さがし</span><span class="ts">シャッフルした コップの どこに ある？</span></span></button>
+    <button class="tile wide" style="--c:#3b4fd8" onclick="startPuyo()"><span class="ti">🟢</span><span style="display:flex;flex-direction:column;align-items:flex-start;gap:2px"><span class="tn">ころころ ドロップ <span class="new">NEW</span></span><span class="ts">おなじ いろを 4つ つなげて けす！ れんさで こうげき</span></span></button>
     <button class="tile" style="--c:#0f8a5f" onclick="startSpd()"><span class="ti">🃏</span><span class="tn">スピード</span><span class="ts">はやく カードを だしきれ</span></button>
     <button class="tile" style="--c:#e0a800" onclick="startHay()"><span class="ti">⚡</span><span class="tn">はやおし たいけつ</span><span class="ts">「いまだ！」で タッチ</span></button>
     <button class="tile" style="--c:#e9546b" onclick="startTug()"><span class="ti">💪</span><span class="tn">つなひき れんだ</span><span class="ts">れんだで ひっぱれ</span></button>
@@ -588,6 +620,21 @@ html,body{overflow:hidden;overscroll-behavior:none}
   <canvas id="hkCanvas" aria-label="エアホッケーの リンク"></canvas>
   <div class="hkbtns"><button id="hkMenu" aria-label="メニュー">🏠</button><button id="hkReset" aria-label="さいしょから">🔄</button></div>
 </section>
+
+<section id="puyo" class="screen">
+  <div class="pyside top p2c" data-o="-1">
+    <div class="pyhead"><span class="pyname">あお</span><span class="pywin"></span><span class="pygb"></span><span class="pynextw">つぎ<canvas class="pync" aria-hidden="true"></canvas></span><button class="pypause" aria-label="ひとやすみ">Ⅱ</button></div>
+    <div class="pymain"><canvas class="pycv" aria-label="あおの フィールド"></canvas><div class="pypop"></div></div>
+    <div class="pyctl"><button data-k="L" aria-label="ひだりへ">◀</button><button data-k="T" aria-label="まわす">⟳</button><button data-k="D" aria-label="はやく おとす">▼</button><button data-k="R" aria-label="みぎへ">▶</button></div>
+  </div>
+  <div class="pyside bottom p1c" data-o="1">
+    <div class="pyhead"><span class="pyname">あか</span><span class="pywin"></span><span class="pygb"></span><span class="pynextw">つぎ<canvas class="pync" aria-hidden="true"></canvas></span><button class="pypause" aria-label="ひとやすみ">Ⅱ</button></div>
+    <div class="pymain"><canvas class="pycv" aria-label="あかの フィールド"></canvas><div class="pypop"></div></div>
+    <div class="pyctl"><button data-k="L" aria-label="ひだりへ">◀</button><button data-k="T" aria-label="まわす">⟳</button><button data-k="D" aria-label="はやく おとす">▼</button><button data-k="R" aria-label="みぎへ">▶</button></div>
+  </div>
+  <div class="pycenter" id="pyCenter"><div class="duo" id="pyMsg"></div><div class="crow" id="pyOpts"></div><div class="crow"><button class="cb" id="pyGo">▶ スタート</button><button class="cb gray" data-menu aria-label="メニュー">🏠</button></div></div>
+</section>
+
 
 <!-- こいこい -->
 <section id="koi" class="screen game">
@@ -984,7 +1031,7 @@ function padSet(sec,o,big,sc,dim){const p=document.querySelector(`#${sec} .pad[d
 function bindPads(sec,fn){document.querySelectorAll(`#${sec} .pad`).forEach(p=>
   p.addEventListener('pointerdown',e=>{e.preventDefault();fn(+p.dataset.o);}));}
 document.querySelectorAll('[data-menu]').forEach(b=>b.addEventListener('click',askMenu));
-function stopAll(){if(typeof hjStop==='function')hjStop();if(typeof rlStop==='function')rlStop();if(typeof cupStop==='function')cupStop();if(typeof pkStop==='function')pkStop();hayStop();tugStop();jStop();hkStop();if(typeof spStop==='function')spStop();}
+function stopAll(){if(typeof pyStop==='function')pyStop();if(typeof hjStop==='function')hjStop();if(typeof rlStop==='function')rlStop();if(typeof cupStop==='function')cupStop();if(typeof pkStop==='function')pkStop();hayStop();tugStop();jStop();hkStop();if(typeof spStop==='function')spStop();}
 
 /* ========== よんもくならべ ========== */
 const C4={b:[],turn:1,first:1,hist:[],over:false,win:[],last:-1,sc:{'1':0,'-1':0}};
@@ -1727,6 +1774,130 @@ function rlResult(){const m=RL_RING[RL.pos],mk=RL_MK[m];const got={};
       modal(`<span class="big">${A===B?'🤝 ひきわけ！':'🎉 '+PNAME(A>B?1:-1)+'の かち！'}</span><span class="small">${why}<br>あか ${A}まい ・ あお ${B}まい</span>`,[{label:'もういちど',fn:startRl}]);}
     else{rlNewBet();rlRender();}},2600));}
 $('rl').addEventListener('click',e=>{const a=e.target.closest('[data-act]');if(!a)return;({menu:askMenu,reset:()=>askReset(startRl)})[a.dataset.act]?.();});
+
+
+/* ========== ころころ ドロップ（おなじ いろを 4つ つなげて けす たいせん） ========== */
+const PY_W=6,PY_H=13,PY_GB=9,PY_COL=[null,'#ff4d6d','#2fbf55','#3d8bff','#ffc61a','#b46cff'];
+const PY_BONUS=[0,0,3,6,10,15,20,26,33,40,48,56];
+const PY_D=[[0,-1],[1,0],[0,1],[-1,0]];
+const PY={st:'idle',p:{},seq:[],nc:4,raf:0,last:0,t:0,sc:{'1':0,'-1':0},tm:[],paused:false};
+function pySide(o){return document.querySelector(`#puyo .pyside[data-o="${o}"]`);}
+function pyPair(i){while(PY.seq.length<=i){const r=()=>1+Math.floor(Math.random()*PY.nc);PY.seq.push([r(),r()]);}return PY.seq[i];}
+function pyNew(o){return{o,g:Array.from({length:PY_H},()=>Array(PY_W).fill(0)),cur:null,idx:0,st:'wait',fallT:0,lockT:0,lockN:0,chain:0,pend:0,flash:null,ft:0,soft:false,hold:{},dead:false,gbDone:false};}
+function pyCellAt(P,x,y){if(x<0||x>=PY_W||y>=PY_H)return 1;if(y<0)return 0;return P.g[y][x];}
+function pyCells(c){const d=PY_D[c.r];return[[c.x,c.y,c.a],[c.x+d[0],c.y+d[1],c.b]];}
+function pyFits(P,c){return pyCells(c).every(([x,y])=>!pyCellAt(P,x,y));}
+function pySpawn(P){const [a,b]=pyPair(P.idx++);P.cur={x:2,y:1,r:0,a,b};P.st='fall';P.fallT=0;P.lockT=0;P.lockN=0;P.chain=0;P.gbDone=false;
+  if(!pyFits(P,P.cur))pyLose(P);}
+function pyTouch(P){if(P.lockT>0&&P.lockN<10){P.lockT=0;P.lockN++;}}
+function pyMove(P,dx){if(P.st!=='fall')return false;const c={...P.cur,x:P.cur.x+dx};if(pyFits(P,c)){P.cur=c;pyTouch(P);return true;}return false;}
+function pyRot(P){if(P.st!=='fall')return;const c={...P.cur,r:(P.cur.r+1)%4},d=PY_D[c.r];
+  const tries=[[0,0]];if(d[0])tries.push([-d[0],0]);if(d[1]>0)tries.push([0,-1]);
+  for(const [dx,dy] of tries){const t={...c,x:c.x+dx,y:c.y+dy};if(pyFits(P,t)){P.cur=t;pyTouch(P);pySnd('rot');return;}}
+  const q={...P.cur,r:(P.cur.r+2)%4},qt=PY_D[q.r][1]>0?{...q,y:q.y-1}:q;   // せまい ところは くるっと はんてん
+  if(pyFits(P,qt)){P.cur=qt;pyTouch(P);pySnd('rot');}}
+function pyIv(){return Math.max(140,650-Math.floor(PY.t/20000)*70);}
+function pyUpdate(P,dt){
+  if(P.st==='fall'){const iv=P.soft?35:pyIv();P.fallT+=dt;
+    while(P.fallT>=iv){P.fallT-=iv;const c={...P.cur,y:P.cur.y+1};if(pyFits(P,c)){P.cur=c;P.lockT=0;}else{P.fallT=0;break;}}
+    if(!pyFits(P,{...P.cur,y:P.cur.y+1})){P.lockT+=dt;if(P.lockT>=(P.soft?80:450))pyLock(P);}}
+  else if(P.st==='drop'){P.ft+=dt;if(P.ft>=35){P.ft=0;if(!pyGrav(P))pyCheck(P);}}
+  else if(P.st==='flash'){P.ft+=dt;if(P.ft>=450)pyPop(P);}}
+function pyLock(P){for(const [x,y,c] of pyCells(P.cur))if(y>=0)P.g[y][x]=c;P.cur=null;P.st='drop';P.ft=0;pySnd('land');}
+function pyGrav(P){let mv=false;for(let y=PY_H-2;y>=0;y--)for(let x=0;x<PY_W;x++)if(P.g[y][x]&&!P.g[y+1][x]){P.g[y+1][x]=P.g[y][x];P.g[y][x]=0;mv=true;}return mv;}
+function pyGroups(P){const seen=Array.from({length:PY_H},()=>Array(PY_W).fill(false)),out=[];
+  for(let y=1;y<PY_H;y++)for(let x=0;x<PY_W;x++){const c=P.g[y][x];if(!c||c===PY_GB||seen[y][x])continue;
+    const st=[[x,y]],grp=[];seen[y][x]=true;
+    while(st.length){const [cx,cy]=st.pop();grp.push([cx,cy]);
+      for(const [dx,dy] of PY_D){const nx=cx+dx,ny=cy+dy;if(nx<0||nx>=PY_W||ny<1||ny>=PY_H||seen[ny][nx]||P.g[ny][nx]!==c)continue;seen[ny][nx]=true;st.push([nx,ny]);}}
+    if(grp.length>=4)out.push(grp);}
+  return out;}
+function pyCheck(P){const gs=pyGroups(P);
+  if(gs.length){P.chain++;P.flash=gs.flat();P.st='flash';P.ft=0;
+    let atk=Math.max(1,P.flash.length-3)+PY_BONUS[Math.min(P.chain,PY_BONUS.length-1)]+(gs.length-1)*2;
+    const c=Math.min(P.pend,atk);P.pend-=c;atk-=c;   // そうさい
+    const opp=PY.p[String(-P.o)];if(atk>0&&opp&&!opp.dead)opp.pend+=atk;
+    if(P.chain>=2)pyPopText(P.o,`${P.chain}れんさ！`);pySnd('pop',P.chain);pyUI();return;}
+  if(P.pend>0&&!P.gbDone){P.gbDone=true;pyGarbage(P);P.st='drop';P.ft=0;pyUI();return;}
+  if(P.g[1][2]){pyLose(P);return;}
+  pySpawn(P);}
+function pyPop(P){const kill=new Set(P.flash.map(([x,y])=>y*PY_W+x));
+  for(const [x,y] of P.flash)for(const [dx,dy] of PY_D){const nx=x+dx,ny=y+dy;if(nx>=0&&nx<PY_W&&ny>=0&&ny<PY_H&&P.g[ny][nx]===PY_GB)kill.add(ny*PY_W+nx);}
+  kill.forEach(k=>{P.g[Math.floor(k/PY_W)][k%PY_W]=0;});P.flash=null;P.st='drop';P.ft=0;}
+function pyGarbage(P){const n=Math.min(P.pend,30);P.pend-=n;const cnt=Array(PY_W).fill(Math.floor(n/PY_W));
+  const cols=[0,1,2,3,4,5].sort(()=>Math.random()-.5);for(let i=0;i<n%PY_W;i++)cnt[cols[i]]++;
+  for(let x=0;x<PY_W;x++)for(let k=0;k<cnt[x];k++){let y=PY_H-1;while(y>=0&&P.g[y][x])y--;if(y<0)break;P.g[y][x]=PY_GB;}
+  pySnd('gb');const m=pySide(P.o).querySelector('.pymain');m.classList.remove('shake');void m.offsetWidth;m.classList.add('shake');}
+function pyLose(P){P.dead=true;P.st='dead';P.cur=null;}
+function pyLoop(t){if(PY.st!=='play')return;const dt=Math.min(50,t-PY.last);PY.last=t;
+  if(!PY.paused){PY.t+=dt;for(const o of['1','-1'])pyUpdate(PY.p[o],dt);pyHold(dt);}
+  const d1=PY.p['1'].dead,d2=PY.p['-1'].dead;
+  if(d1||d2){pyDraw();pyEnd(d1&&d2?0:d1?-1:1);return;}
+  pyDraw();PY.raf=requestAnimationFrame(pyLoop);}
+function pyKeyDown(o,k){const P=PY.p[o];if(PY.st!=='play'||PY.paused||!P||P.dead)return;
+  if(k==='L'||k==='R'){pyMove(P,k==='L'?-1:1);P.hold[k]=-170;}
+  else if(k==='T')pyRot(P);else if(k==='D')P.soft=true;}
+function pyKeyUp(o,k){const P=PY.p[o];if(!P)return;if(k==='D')P.soft=false;else delete P.hold[k];}
+function pyHold(dt){for(const o of['1','-1']){const P=PY.p[o];for(const k in P.hold){P.hold[k]+=dt;while(P.hold[k]>=60){P.hold[k]-=60;pyMove(P,k==='L'?-1:1);}}}}
+function pyBlob(x,X,Y,s,c){const cx=(X+.5)*s,cy=(Y+.5)*s,r=s*.44,dot=(px,py,rx,ry)=>{x.beginPath();x.ellipse(px,py,rx,ry,0,0,Math.PI*2);x.fill();};
+  if(c===PY_GB){x.fillStyle='#c9ced6';dot(cx,cy,r,r);x.fillStyle='#9aa1ab';dot(cx-r*.3,cy-r*.25,r*.18,r*.18);dot(cx+r*.3,cy+r*.2,r*.14,r*.14);return;}
+  x.fillStyle=PY_COL[c];dot(cx,cy,r,r);
+  x.fillStyle='rgba(255,255,255,.4)';dot(cx-r*.38,cy-r*.45,r*.2,r*.14);
+  x.fillStyle='#fff';dot(cx-r*.32,cy+r*.02,r*.2,r*.26);dot(cx+r*.32,cy+r*.02,r*.2,r*.26);
+  x.fillStyle='#222';dot(cx-r*.27,cy+r*.1,r*.1,r*.12);dot(cx+r*.37,cy+r*.1,r*.1,r*.12);}
+function pyDraw(){for(const o of['1','-1']){const P=PY.p[o],s0=pySide(o),cv=s0.querySelector('.pycv');if(!P||!cv.width)continue;
+  const x=cv.getContext('2d'),s=cv.width/PY_W;x.setTransform(1,0,0,1,0,0);
+  x.fillStyle='#1d2340';x.fillRect(0,0,cv.width,cv.height);
+  x.strokeStyle='rgba(255,255,255,.06)';x.lineWidth=1;for(let i=1;i<PY_W;i++){x.beginPath();x.moveTo(i*s,0);x.lineTo(i*s,cv.height);x.stroke();}
+  x.strokeStyle='rgba(255,90,110,.55)';x.lineWidth=s*.08;const mx=2.5*s,my=.5*s,k=s*.2;x.beginPath();x.moveTo(mx-k,my-k);x.lineTo(mx+k,my+k);x.moveTo(mx+k,my-k);x.lineTo(mx-k,my+k);x.stroke();
+  const fl=P.flash?new Set(P.flash.map(([a,b])=>b*PY_W+a)):null,blink=fl&&Math.floor(P.ft/75)%2===1,hid=(X,y)=>blink&&fl.has(y*PY_W+X);
+  for(let y=1;y<PY_H;y++)for(let X=0;X<PY_W;X++){const c=P.g[y][X];if(!c||c===PY_GB||hid(X,y))continue;x.fillStyle=PY_COL[c];
+    if(X+1<PY_W&&P.g[y][X+1]===c&&!hid(X+1,y))x.fillRect((X+.5)*s,(y-1+.2)*s,s,s*.6);
+    if(y+1<PY_H&&P.g[y+1][X]===c&&!hid(X,y+1))x.fillRect((X+.2)*s,(y-1+.5)*s,s*.6,s);}
+  for(let y=1;y<PY_H;y++)for(let X=0;X<PY_W;X++){const c=P.g[y][X];if(c&&!hid(X,y))pyBlob(x,X,y-1,s,c);}
+  if(P.cur&&P.st==='fall')for(const [X,y,c] of pyCells(P.cur))if(y>=1)pyBlob(x,X,y-1,s,c);
+  if(P.dead){x.fillStyle='rgba(0,0,0,.55)';x.fillRect(0,0,cv.width,cv.height);}
+  const nc=s0.querySelector('.pync');if(nc.width){const n=nc.getContext('2d'),cs=nc.height/2,gap=nc.width-cs*2;n.setTransform(1,0,0,1,0,0);n.clearRect(0,0,nc.width,nc.height);
+    for(let j=0;j<2;j++){const pr=pyPair(P.idx+j);n.setTransform(1,0,0,1,j*(cs+gap),0);pyBlob(n,0,0,cs,pr[1]);pyBlob(n,0,1,cs,pr[0]);}}}}
+function pySize(){const d=window.devicePixelRatio||1;for(const o of['1','-1']){const s=pySide(o),m=s.querySelector('.pymain'),w=m.clientWidth,h=m.clientHeight;if(!w||!h)continue;
+  const cell=Math.floor(Math.min(w/PY_W,h/(PY_H-1))),cv=s.querySelector('.pycv');
+  cv.style.width=cell*PY_W+'px';cv.style.height=cell*(PY_H-1)+'px';cv.width=Math.round(cell*PY_W*d);cv.height=Math.round(cell*(PY_H-1)*d);
+  const nc=s.querySelector('.pync'),cs=Math.round(Math.min(26,cell*.45));nc.style.width=(cs*2+8)+'px';nc.style.height=cs*2+'px';nc.width=Math.round((cs*2+8)*d);nc.height=Math.round(cs*2*d);}}
+function pyUI(){for(const o of['1','-1']){const s=pySide(o),P=PY.p[o],n=P?P.pend:0,g=s.querySelector('.pygb');
+  s.querySelector('.pywin').textContent=`かち ${PY.sc[o]}`;g.textContent=n?`おじゃま ${n}こ くるよ！`:'';g.classList.toggle('on',!!n);}}
+function pyPopText(o,txt,stay){const el=pySide(o).querySelector('.pypop');el.textContent=txt;el.classList.remove('on','stay');void el.offsetWidth;el.classList.add(stay?'stay':'on');}
+function pyOpts(){const box=$('pyOpts');box.innerHTML='';const busy=PY.st==='count'||PY.st==='play';
+  [[3,'かんたん'],[4,'ふつう'],[5,'むずかしい']].forEach(([n,nm])=>{const b=document.createElement('button');b.className='jchip'+(PY.nc===n?' on':'');b.textContent=`${nm}（${n}いろ）`;b.disabled=busy;
+    b.onclick=()=>{PY.nc=n;PY.seq=[];pyOpts();pyDraw();};box.appendChild(b);});
+  $('pyGo').disabled=busy;$('pyGo').textContent=PY.st==='over'?'▶ もういっかい':'▶ スタート';}
+function startPuyo(){show('puyo');pyStop();PY.st='idle';PY.seq=[];for(const o of['1','-1'])PY.p[o]=pyNew(+o);
+  document.querySelectorAll('#puyo .pypop').forEach(e=>e.classList.remove('on','stay'));
+  $('pyCenter').classList.remove('hide');duo('pyMsg','ころころ ドロップ<br><small>おなじ いろを 4つ つなげて けそう！<br>れんさで あいてに おじゃまを おくれ</small>');pyOpts();
+  requestAnimationFrame(()=>{pySize();pyDraw();pyUI();});}
+function pyStop(){PY.tm.forEach(clearTimeout);PY.tm=[];cancelAnimationFrame(PY.raf);if(PY.st==='play'||PY.st==='count')PY.st='idle';PY.paused=false;}
+function pyGo(){if(PY.st==='count'||PY.st==='play')return;PY.seq=[];PY.t=0;for(const o of['1','-1'])PY.p[o]=pyNew(+o);
+  document.querySelectorAll('#puyo .pypop').forEach(e=>e.classList.remove('on','stay'));
+  PY.st='count';pyOpts();pySize();pyDraw();pyUI();
+  ['3','2','1'].forEach((n,k)=>PY.tm.push(setTimeout(()=>{duo('pyMsg',n);sfx();},k*600)));
+  PY.tm.push(setTimeout(()=>{$('pyCenter').classList.add('hide');PY.st='play';for(const o of['1','-1'])pySpawn(PY.p[o]);PY.last=performance.now();PY.raf=requestAnimationFrame(pyLoop);},1800));}
+function pyEnd(w){PY.st='over';if(w)PY.sc[w>0?'1':'-1']++;pyUI();pySnd('end');buzz();
+  if(w){pyPopText(w>0?'1':'-1','かち！',true);pyPopText(w>0?'-1':'1','ばたんきゅ〜',true);}else{pyPopText('1','ひきわけ',true);pyPopText('-1','ひきわけ',true);}
+  PY.tm.push(setTimeout(()=>{duo('pyMsg',w?`🎉 ${PNAME(w)}の かち！`:'🤝 ひきわけ！');$('pyCenter').classList.remove('hide');pyOpts();},1500));}
+function pyPause(){if(PY.st!=='play'){askMenu();return;}PY.paused=true;
+  modal('ひとやすみ ちゅう',[{label:'メニューへ',cls:'gray',fn:goMenu},{label:'つづける',fn:()=>{PY.paused=false;PY.last=performance.now();}}]);}
+function pySnd(k,n){if(!BGM.on||!BGM.ctx)return;const t=BGM.ctx.currentTime;
+  if(k==='rot')note(1000,t,.03,'square',.03);
+  else if(k==='land')note(300,t,.05,'triangle',.08);
+  else if(k==='pop'){const b=523*Math.pow(1.12,Math.min(n,8)-1);[1,1.25,1.5].forEach((m,i)=>note(b*m,t+i*.05,.1,'square',.05));}
+  else if(k==='gb')note(140,t,.2,'sawtooth',.07);
+  else if(k==='end')[784,659,523,392].forEach((f,i)=>note(f,t+i*.12,.15,'triangle',.08));}
+document.querySelectorAll('#puyo .pyside').forEach(s=>{const o=s.dataset.o;
+  s.querySelectorAll('.pyctl button').forEach(b=>{const k=b.dataset.k;
+    b.addEventListener('pointerdown',e=>{e.preventDefault();try{b.setPointerCapture(e.pointerId);}catch(_){}b.classList.add('hold');pyKeyDown(o,k);});
+    ['pointerup','pointercancel','lostpointercapture'].forEach(ev=>b.addEventListener(ev,()=>{b.classList.remove('hold');pyKeyUp(o,k);}));});
+  s.querySelector('.pypause').addEventListener('click',pyPause);});
+$('pyGo').addEventListener('click',pyGo);
+window.addEventListener('resize',()=>{if($('puyo').classList.contains('on')){pySize();pyDraw();}});
 
 /* ========== BGM・こうかおん（この ページのための オリジナル曲） ========== */
 const BGM={on:true,ctx:null,out:null,timer:null,step:0,next:0};
