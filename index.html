@@ -370,28 +370,27 @@ html,body{overflow:hidden;overscroll-behavior:none}
 #cupOpts{gap:8px}
 /* ===== だがしやの ゲーム ===== */
 .tiles.two{grid-template-columns:repeat(2,minmax(0,1fr))!important}
-.hjside{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);grid-template-rows:minmax(0,1fr);gap:6px;min-height:0;border-radius:24px;padding:6px}
+#hj.on{display:grid;position:fixed;inset:0;width:auto;max-width:none;height:auto;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;padding:calc(8px + env(safe-area-inset-top,0px)) max(8px,env(safe-area-inset-right,0px)) calc(8px + env(safe-area-inset-bottom,0px)) max(8px,env(safe-area-inset-left,0px))}
+.hjside{display:flex;flex-direction:column;gap:6px;min-height:0;min-width:0;border-radius:20px;padding:6px}
 .hjside.top{transform:rotate(180deg)}
 .hjside.p1c{background:#e9546b}.hjside.p2c{background:#3d8bff}
-.hjcvw{grid-row:1;grid-column:2;height:100%;aspect-ratio:100/160;min-height:0;max-width:70vw}
-.hjcvw canvas{width:100%;height:100%;display:block;border-radius:12px;box-shadow:0 0 0 4px #7a4a24;touch-action:none}
-.hjbtn{grid-row:1;align-self:end;height:calc(100% - 56px);border:none;border-radius:20px;font-size:clamp(18px,3.2vw,26px);font-weight:bold;background:#fff;color:#3a2e1f;touch-action:none;box-shadow:0 6px 0 rgba(0,0,0,.2);line-height:1.4}
-.hjbtn[data-side=L]{grid-column:1}.hjbtn[data-side=R]{grid-column:3}
+.hjinfo{display:flex;align-items:center;gap:8px;color:#fff;font-weight:bold;font-size:16px;min-height:48px;padding:0 4px}
+.hjname{font-size:20px;white-space:nowrap}.hjname .hjwin{font-size:15px}
+.hjmsg{flex:1;text-align:center;line-height:1.3}
+.hjpause{border:none;background:rgba(255,255,255,.92);border-radius:12px;width:44px;height:44px;font-size:20px;flex-shrink:0}
+.hjcvw{flex:1;min-height:0;display:flex;align-items:flex-end;justify-content:center}
+.hjcvw canvas{display:block;border-radius:12px;box-shadow:0 0 0 4px #7a4a24;touch-action:none}
+.hjbtns{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;height:clamp(100px,12vh,150px);flex-shrink:0}
+.hjbtn{border:none;border-radius:20px;font-size:clamp(20px,3.4vw,28px);font-weight:bold;background:#fff;color:#3a2e1f;touch-action:none;box-shadow:0 6px 0 rgba(0,0,0,.2);line-height:1.3;user-select:none;-webkit-user-select:none}
 .hjbtn:active{transform:translateY(4px);box-shadow:0 2px 0 rgba(0,0,0,.2)}
 .hjbtn.ready{background:#ffe14d}
-.hjinfo{display:contents}
-.hjinfo>span{grid-row:1;align-self:start;pointer-events:none;color:#fff;font-weight:bold;font-size:16px;line-height:1.3;padding:2px 6px}
-.hjinfo>span:first-child{grid-column:1}.hjinfo>span:last-child{grid-column:3;text-align:right}
-.hjcenter{flex-direction:column;gap:6px;padding:6px 8px}
-.hjrow{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}
-#hjMsg small{display:none}
-.hjhint{display:block;font-size:14px;font-weight:bold;color:#7a6a55;margin-top:6px}
-.hjcenter .duo span{font-size:clamp(18px,3vw,26px)}
-.hjcenter .cb{padding:8px 16px;font-size:18px}
+.hjhint{display:block;font-size:13px;font-weight:bold;color:#7a6a55;margin-top:4px}
+.hjcenter{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(600px,90vw);background:var(--card);border-radius:24px;padding:16px;display:flex;flex-direction:column;align-items:center;gap:12px;box-shadow:0 10px 40px rgba(0,0,0,.35);z-index:5}
+.hjcenter.hide{display:none}
+.hjcenter .duo span{font-size:clamp(20px,3.4vw,28px)}
 #hjOpts{gap:6px;align-items:center}
-#hjOpts .jchip{padding:5px 12px;font-size:15px}
+#hjOpts .jchip{padding:6px 12px;font-size:15px}
 .hjolbl{font-size:15px;font-weight:bold;color:#5a4a33;margin-left:6px}
-#hj.on{grid-template-rows:minmax(0,1fr) auto minmax(0,1fr);gap:6px}
 #rl{--side:clamp(165px,18vh,205px)}
 #rl .mid{padding:0}
 .rlside .rlcoin{font-size:22px;font-weight:bold}
@@ -444,7 +443,14 @@ html,body{overflow:hidden;overscroll-behavior:none}
 @keyframes pypop{0%{opacity:0;transform:translate(-50%,-30%) scale(.6)}15%{opacity:1;transform:translate(-50%,-50%) scale(1.15)}70%{opacity:1}100%{opacity:0;transform:translate(-50%,-80%) scale(1)}}
 @keyframes pyblink{from{opacity:1}to{opacity:.55}}
 @keyframes pyshake{0%,100%{transform:none}25%{transform:translateY(6px)}75%{transform:translateY(-4px)}}
-.pyctl{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;height:clamp(90px,13vh,160px);flex-shrink:0}
+.pyctl{display:flex;align-items:center;justify-content:space-between;gap:8px;height:clamp(150px,16vh,210px);flex-shrink:0;padding:2px 6px}
+.pydpad{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr));height:100%;aspect-ratio:1;gap:3px}
+.pydpad .u{grid-area:1/2}.pydpad .l{grid-area:2/1}.pydpad .c{grid-area:2/2;background:#fff;border-radius:6px;opacity:.85}.pydpad .r{grid-area:2/3}.pydpad .d{grid-area:3/2}
+.pyctl .pydpad button{border-radius:10px;font-size:clamp(20px,3vh,30px);padding:0}
+.pyab{position:relative;height:100%;flex:1;min-width:0;max-width:220px}
+.pyctl .pyab button{position:absolute;width:clamp(64px,8.5vh,92px);aspect-ratio:1;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1;font-size:clamp(28px,4vh,42px);padding:0}
+.pyab button small{font-size:13px;margin-top:2px}
+.pyab .a{right:0;top:0;background:#ffe14d}.pyab .b{left:0;bottom:0}
 .pyctl button{border:none;border-radius:16px;background:#fff;color:#3a2e1f;font-size:clamp(26px,5vw,40px);font-weight:bold;box-shadow:0 5px 0 rgba(0,0,0,.2);touch-action:none;user-select:none;-webkit-user-select:none}
 .pyctl button.hold{transform:translateY(3px);box-shadow:0 2px 0 rgba(0,0,0,.2);background:#ffe14d}
 .pycenter{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(560px,88vw);background:var(--card);border-radius:24px;padding:16px;display:flex;flex-direction:column;align-items:center;gap:12px;box-shadow:0 10px 40px rgba(0,0,0,.35);z-index:5}
@@ -452,6 +458,33 @@ html,body{overflow:hidden;overscroll-behavior:none}
 .pycenter .duo span{font-size:clamp(20px,3.6vw,30px)}
 #pyOpts{gap:6px}
 #pyOpts .jchip{padding:6px 12px;font-size:15px}
+
+/* メニュー：iPadでは スクロールなしで 1がめんに おさめる */
+@media (min-width:600px) and (min-height:640px){
+  #menu.on{overflow:hidden;max-width:900px;margin:0 auto}
+  #menu .mwrap{height:100%;box-sizing:border-box;padding:calc(6px + env(safe-area-inset-top,0px)) 12px calc(8px + env(safe-area-inset-bottom,0px))}
+  #menu .title{font-size:clamp(24px,3vh,36px);margin:0}
+  #menu .sub{font-size:clamp(14px,1.6vh,19px);margin:0 0 2px}
+  #menu .mhead{margin:clamp(4px,1vh,12px) 4px clamp(4px,.7vh,8px);font-size:clamp(15px,1.6vh,18px)}
+  #menu .tiles{min-height:0;grid-template-columns:repeat(3,minmax(0,1fr));grid-auto-rows:minmax(0,1fr);gap:clamp(8px,1vh,12px)}
+  #menu .tiles.g1{flex:2 1 0}#menu .tiles.g2{flex:3 1 0}#menu .tiles.g3{flex:1 1 0}
+  #menu .tile{min-height:0;padding:6px;gap:2px;overflow:hidden}
+  #menu .tile.wide{grid-column:auto;flex-direction:column;gap:2px}
+  #menu .tile.wide>span[style]{align-items:center!important}
+  #menu .tile .ti,#menu .tile.wide .ti{font-size:clamp(26px,3.4vh,40px)}
+  #menu .tile .tn{font-size:clamp(15px,2vh,21px)}
+  #menu .tile .ts{font-size:clamp(11px,1.2vh,13px);line-height:1.3}
+  #menu .bgm-btn{margin-top:clamp(6px,1vh,14px);padding:8px 20px;font-size:17px}
+}
+
+/* エアホッケー せってい */
+.hkset{display:none;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(600px,90vw);background:var(--card);border-radius:24px;padding:14px;flex-direction:column;align-items:center;gap:12px;box-shadow:0 10px 40px rgba(0,0,0,.35);z-index:5}
+.hkset.on{display:flex}
+.hkrow{display:flex;flex-direction:column;align-items:center;gap:6px;width:100%}
+.hkrow b{font-size:17px}
+.hkrow.top{transform:rotate(180deg)}
+.hkset .jchip{padding:7px 12px;font-size:16px}
+.hkrow:first-child,.hkrow:last-child{background:#f6efe2;border-radius:16px;padding:8px}
 </style>
 </head>
 <body>
@@ -461,7 +494,7 @@ html,body{overflow:hidden;overscroll-behavior:none}
   <h1 class="title">🎮 あそびば ゲーム</h1>
   <p class="sub">iPadを まんなかに おいて むかいあって あそぼう！</p>
   <div class="mhead">🧠 じっくり かんがえる</div>
-  <div class="tiles">
+  <div class="tiles g1">
     <button class="tile" style="--c:#2f9c58" onclick="startOthello()"><span class="ti">⚫⚪</span><span class="tn">オセロ</span><span class="ts">はさんで ひっくりかえす</span></button>
     <button class="tile" style="--c:#ff8a3d" onclick="startTTT()"><span class="ti">⭕❌</span><span class="tn">まるばつ</span><span class="ts">3つ ならべたら かち</span></button>
     <button class="tile" style="--c:#2b5fd9" onclick="startC4()"><span class="ti">🔴🔵</span><span class="tn">よんもくならべ</span><span class="ts">4つ ならべたら かち</span></button>
@@ -470,10 +503,10 @@ html,body{overflow:hidden;overscroll-behavior:none}
     <button class="tile" style="--c:#7b1e2b" onclick="startKoi()"><span class="ti">🎴</span><span class="tn">はなふだ こいこい</span><span class="ts">おなじ つきを あつめて やく</span></button>
   </div>
   <div class="mhead">⚡ わいわい からだを つかう</div>
-  <div class="tiles">
-    <button class="tile wide" style="--c:#ff6f3c" onclick="startPiko()"><span class="ti">🔨</span><span style="display:flex;flex-direction:column;align-items:flex-start;gap:2px"><span class="tn">ピコピコ たいけつ</span><span class="ts">たたくと まもれない！ さきに 5かい あてたら かち</span></span></button>
-    <button class="tile wide" style="--c:#c27c0e" onclick="startCup()"><span class="ti">💎</span><span style="display:flex;flex-direction:column;align-items:flex-start;gap:2px"><span class="tn">ほうせき さがし</span><span class="ts">シャッフルした コップの どこに ある？</span></span></button>
-    <button class="tile wide" style="--c:#3b4fd8" onclick="startPuyo()"><span class="ti">🟢</span><span style="display:flex;flex-direction:column;align-items:flex-start;gap:2px"><span class="tn">ころころ ドロップ <span class="new">NEW</span></span><span class="ts">おなじ いろを 4つ つなげて けす！ れんさで こうげき</span></span></button>
+  <div class="tiles g2">
+    <button class="tile wide" style="--c:#ff6f3c" onclick="startPiko()"><span class="ti">🔨</span><span style="display:flex;flex-direction:column;align-items:flex-start;gap:2px"><span class="tn">ピコピコ たいけつ</span><span class="ts">たたくと まもれない！</span></span></button>
+    <button class="tile wide" style="--c:#c27c0e" onclick="startCup()"><span class="ti">💎</span><span style="display:flex;flex-direction:column;align-items:flex-start;gap:2px"><span class="tn">ほうせき さがし</span><span class="ts">コップの どこに ある？</span></span></button>
+    <button class="tile wide" style="--c:#3b4fd8" onclick="startPuyo()"><span class="ti">🟢</span><span style="display:flex;flex-direction:column;align-items:flex-start;gap:2px"><span class="tn">ころころ ドロップ <span class="new">NEW</span></span><span class="ts">4つ つなげて けす！</span></span></button>
     <button class="tile" style="--c:#0f8a5f" onclick="startSpd()"><span class="ti">🃏</span><span class="tn">スピード</span><span class="ts">はやく カードを だしきれ</span></button>
     <button class="tile" style="--c:#e0a800" onclick="startHay()"><span class="ti">⚡</span><span class="tn">はやおし たいけつ</span><span class="ts">「いまだ！」で タッチ</span></button>
     <button class="tile" style="--c:#e9546b" onclick="startTug()"><span class="ti">💪</span><span class="tn">つなひき れんだ</span><span class="ts">れんだで ひっぱれ</span></button>
@@ -482,7 +515,7 @@ html,body{overflow:hidden;overscroll-behavior:none}
     <button class="tile" style="--c:#d96aa7" onclick="startMem()"><span class="ti">🐶</span><span class="tn">しんけいすいじゃく</span><span class="ts">おなじ どうぶつを さがせ</span></button>
   </div>
   <div class="mhead">🪙 なつかしの だがしや ゲーム</div>
-  <div class="tiles two">
+  <div class="tiles two g3">
     <button class="tile" style="--c:#b87333" onclick="startHj()"><span class="ti">🪙</span><span class="tn">10えん はじき</span><span class="ts">あなに おちずに ゴールへ</span></button>
     <button class="tile" style="--c:#5b2d86" onclick="startRl()"><span class="ti">🎰</span><span class="tn">コイン ルーレット</span><span class="ts">マークに かけて まわせ</span></button>
   </div>
@@ -618,19 +651,26 @@ html,body{overflow:hidden;overscroll-behavior:none}
 
 <section id="hockey" class="screen">
   <canvas id="hkCanvas" aria-label="エアホッケーの リンク"></canvas>
-  <div class="hkbtns"><button id="hkMenu" aria-label="メニュー">🏠</button><button id="hkReset" aria-label="さいしょから">🔄</button></div>
+  <div class="hkbtns"><button id="hkMenu" aria-label="メニュー">🏠</button><button id="hkCfg" aria-label="せってい">⚙️</button><button id="hkReset" aria-label="さいしょから">🔄</button></div>
+  <div class="hkset" id="hkSet">
+    <div class="hkrow top"><b>あおの パッド</b><div class="crow hkshp" data-o="-1"></div></div>
+    <div class="hkrow"><b>ボールの かず</b><div class="crow" id="hkBalls"></div></div>
+    <div class="hkrow"><b>おじゃま ブロック</b><div class="crow" id="hkBlk"></div></div>
+    <div class="crow"><button class="cb" id="hkGo">▶ スタート</button><button class="cb gray" id="hkClose">つづける</button><button class="cb gray" id="hkSetMenu" aria-label="メニュー">🏠</button></div>
+    <div class="hkrow"><b>あかの パッド</b><div class="crow hkshp" data-o="1"></div></div>
+  </div>
 </section>
 
 <section id="puyo" class="screen">
   <div class="pyside top p2c" data-o="-1">
     <div class="pyhead"><span class="pyname">あお</span><span class="pywin"></span><span class="pygb"></span><span class="pynextw">つぎ<canvas class="pync" aria-hidden="true"></canvas></span><button class="pypause" aria-label="ひとやすみ">Ⅱ</button></div>
     <div class="pymain"><canvas class="pycv" aria-label="あおの フィールド"></canvas><div class="pypop"></div></div>
-    <div class="pyctl"><button data-k="L" aria-label="ひだりへ">◀</button><button data-k="T" aria-label="まわす">⟳</button><button data-k="D" aria-label="はやく おとす">▼</button><button data-k="R" aria-label="みぎへ">▶</button></div>
+    <div class="pyctl"><div class="pydpad"><button data-k="U" class="u" aria-label="いっきに おとす">▲</button><button data-k="L" class="l" aria-label="ひだりへ">◀</button><span class="c"></span><button data-k="R" class="r" aria-label="みぎへ">▶</button><button data-k="D" class="d" aria-label="はやく おとす">▼</button></div><div class="pyab"><button data-k="B" class="b" aria-label="ひだりまわし">⟲<small>ひだり</small></button><button data-k="A" class="a" aria-label="みぎまわし">⟳<small>みぎ</small></button></div></div>
   </div>
   <div class="pyside bottom p1c" data-o="1">
     <div class="pyhead"><span class="pyname">あか</span><span class="pywin"></span><span class="pygb"></span><span class="pynextw">つぎ<canvas class="pync" aria-hidden="true"></canvas></span><button class="pypause" aria-label="ひとやすみ">Ⅱ</button></div>
     <div class="pymain"><canvas class="pycv" aria-label="あかの フィールド"></canvas><div class="pypop"></div></div>
-    <div class="pyctl"><button data-k="L" aria-label="ひだりへ">◀</button><button data-k="T" aria-label="まわす">⟳</button><button data-k="D" aria-label="はやく おとす">▼</button><button data-k="R" aria-label="みぎへ">▶</button></div>
+    <div class="pyctl"><div class="pydpad"><button data-k="U" class="u" aria-label="いっきに おとす">▲</button><button data-k="L" class="l" aria-label="ひだりへ">◀</button><span class="c"></span><button data-k="R" class="r" aria-label="みぎへ">▶</button><button data-k="D" class="d" aria-label="はやく おとす">▼</button></div><div class="pyab"><button data-k="B" class="b" aria-label="ひだりまわし">⟲<small>ひだり</small></button><button data-k="A" class="a" aria-label="みぎまわし">⟳<small>みぎ</small></button></div></div>
   </div>
   <div class="pycenter" id="pyCenter"><div class="duo" id="pyMsg"></div><div class="crow" id="pyOpts"></div><div class="crow"><button class="cb" id="pyGo">▶ スタート</button><button class="cb gray" data-menu aria-label="メニュー">🏠</button></div></div>
 </section>
@@ -703,10 +743,18 @@ html,body{overflow:hidden;overscroll-behavior:none}
 </section>
 
 <!-- 10えん はじき -->
-<section id="hj" class="screen rt">
-  <div class="hjside top p2c" data-o="-1"><button class="hjbtn" data-side="L">◀<br>はじく<small class="hjhint">ながく おすと つよい</small></button><div class="hjcvw"><canvas id="hjCv-1" aria-label="あおの ばん"></canvas></div><button class="hjbtn" data-side="R">はじく<br>▶<small class="hjhint">ながく おすと つよい</small></button><div class="hjinfo"><span>あお　<span class="hjwin"></span></span><span class="hjmsg"></span></div></div>
-  <div class="center hjcenter"><div class="hjrow"><div class="duo" id="hjMsg"></div><div class="crow"><button class="cb" id="hjGo">▶ スタート</button><button class="cb gray" data-menu aria-label="メニュー">🏠</button></div></div><div class="crow" id="hjOpts"></div></div>
-  <div class="hjside bottom p1c" data-o="1"><button class="hjbtn" data-side="L">◀<br>はじく<small class="hjhint">ながく おすと つよい</small></button><div class="hjcvw"><canvas id="hjCv1" aria-label="あかの ばん"></canvas></div><button class="hjbtn" data-side="R">はじく<br>▶<small class="hjhint">ながく おすと つよい</small></button><div class="hjinfo"><span>あか　<span class="hjwin"></span></span><span class="hjmsg"></span></div></div>
+<section id="hj" class="screen">
+  <div class="hjside top p2c" data-o="-1">
+    <div class="hjinfo"><span class="hjname">あお <span class="hjwin"></span></span><span class="hjmsg"></span><button class="hjpause" aria-label="メニュー">🏠</button></div>
+    <div class="hjcvw"><canvas id="hjCv-1" aria-label="あおの ばん"></canvas></div>
+    <div class="hjbtns"><button class="hjbtn" data-side="L">◀ はじく<small class="hjhint">ながく おすと つよい</small></button><button class="hjbtn" data-side="R">はじく ▶<small class="hjhint">ながく おすと つよい</small></button></div>
+  </div>
+  <div class="hjside bottom p1c" data-o="1">
+    <div class="hjinfo"><span class="hjname">あか <span class="hjwin"></span></span><span class="hjmsg"></span><button class="hjpause" aria-label="メニュー">🏠</button></div>
+    <div class="hjcvw"><canvas id="hjCv1" aria-label="あかの ばん"></canvas></div>
+    <div class="hjbtns"><button class="hjbtn" data-side="L">◀ はじく<small class="hjhint">ながく おすと つよい</small></button><button class="hjbtn" data-side="R">はじく ▶<small class="hjhint">ながく おすと つよい</small></button></div>
+  </div>
+  <div class="hjcenter" id="hjCenter"><div class="duo" id="hjMsg"></div><div class="crow" id="hjOpts"></div><div class="crow"><button class="cb" id="hjGo">▶ スタート</button><button class="cb gray" data-menu aria-label="メニュー">🏠</button></div></div>
 </section>
 
 <!-- コイン ルーレット -->
@@ -1176,17 +1224,53 @@ function jFinish(){J.st='done';cancelAnimationFrame(J.raf);
 function jStop(){J.tm.forEach(clearTimeout);J.tm=[];cancelAnimationFrame(J.raf);J.st='idle';if($('jModes').childElementCount)jModesRender();}
 
 /* ========== エアホッケー ========== */
-const HK={on:false,W:0,H:0,R:0,MR:0,GW:0,puck:{x:0,y:0,vx:0,vy:0},m:{},sc:{'1':0,'-1':0},last:0,raf:0,pause:0,goal:7};
+const HK={on:false,W:0,H:0,R:0,MR:0,GW:0,pk:[],m:{},sc:{'1':0,'-1':0},last:0,raf:0,pause:0,goal:7,blk:[],sh:{},setOpen:false,started:false,
+  cfg:{shape:{'1':'maru','-1':'maru'},balls:'1',blocks:false}};
+const HK_SH=[['maru','まる','●'],['shikaku','しかく','■'],['sankaku','さんかく','▲'],['bou','ぼう','▬']];
 const cv=$('hkCanvas'),cx=cv.getContext('2d');
+function hkShape(o){const k=HK.cfg.shape[o],M=HK.MR,f=o==='1'?1:-1;let s;
+  if(k==='shikaku'){const a=M*.74;s={pts:[[-a,-a],[a,-a],[a,a],[-a,a]],rr:M*.14};}
+  else if(k==='sankaku'){const r=M*1.12;s={pts:[0,1,2].map(i=>{const t=-Math.PI/2+i*2*Math.PI/3;return[Math.cos(t)*r,Math.sin(t)*r*f];}),rr:M*.12};}   // あいてに とがった ほうを むける
+  else if(k==='bou')s={pts:[[-M*1.3,0],[M*1.3,0]],rr:M*.48};
+  else s={pts:[[0,0]],rr:M};
+  s.ex=Math.max(...s.pts.map(p=>Math.abs(p[0])))+s.rr;s.ey=Math.max(...s.pts.map(p=>Math.abs(p[1])))+s.rr;return s;}
 function hkSize(){const r=cv.getBoundingClientRect(),d=window.devicePixelRatio||1;
   HK.W=r.width;HK.H=r.height;cv.width=Math.round(r.width*d);cv.height=Math.round(r.height*d);cx.setTransform(d,0,0,d,0,0);
-  const s=Math.min(HK.W,HK.H);HK.R=s*.045;HK.MR=s*.08;HK.GW=HK.W*.42;}
-function hkPuck(to){HK.puck={x:HK.W/2,y:HK.H/2+(to?to*HK.H*.12:0),vx:0,vy:0};}
-function hkReset(full){if(full)HK.sc={'1':0,'-1':0};
+  const s=Math.min(HK.W,HK.H);HK.R=s*.045;HK.MR=s*.08;HK.GW=HK.W*.42;HK.sh={'1':hkShape('1'),'-1':hkShape('-1')};}
+// いちばん ちかい てん（てん・せんぶん・たかっけい）
+function hkNear(px,py,pts){
+  if(pts.length===1)return{x:pts[0][0],y:pts[0][1],inside:false};
+  const seg=(a,b)=>{const vx=b[0]-a[0],vy=b[1]-a[1],t=Math.max(0,Math.min(1,((px-a[0])*vx+(py-a[1])*vy)/(vx*vx+vy*vy)));return{x:a[0]+vx*t,y:a[1]+vy*t};};
+  if(pts.length===2)return{...seg(pts[0],pts[1]),inside:false};
+  let best=null,bd=1e18,inside=true;
+  for(let i=0;i<pts.length;i++){const a=pts[i],b=pts[(i+1)%pts.length];
+    if((b[0]-a[0])*(py-a[1])-(b[1]-a[1])*(px-a[0])<0)inside=false;
+    const q=seg(a,b),d=(q.x-px)**2+(q.y-py)**2;if(d<bd){bd=d;best=q;}}
+  const cw=(pts[1][0]-pts[0][0])*(pts[2][1]-pts[0][1])-(pts[1][1]-pts[0][1])*(pts[2][0]-pts[0][0])>0;
+  if(!cw){inside=true;for(let i=0;i<pts.length;i++){const a=pts[i],b=pts[(i+1)%pts.length];if((b[0]-a[0])*(py-a[1])-(b[1]-a[1])*(px-a[0])>0)inside=false;}}
+  return{...best,inside};}
+function hkBounce(pk,qx,qy,rad,vx,vy,e,inside,cxm,cym){ // q: いちばん ちかい てん / rad: まるみ
+  let nx,ny;
+  if(inside){const dx=qx-cxm,dy=qy-cym,d=Math.hypot(dx,dy)||1;nx=dx/d;ny=dy/d;}
+  else{const dx=pk.x-qx,dy=pk.y-qy,d=Math.hypot(dx,dy);if(d>=rad+HK.R)return false;if(d<1e-6){const ex=pk.x-cxm,ey=pk.y-cym,k=Math.hypot(ex,ey)||1;nx=ex/k;ny=ey/k;}else{nx=dx/d;ny=dy/d;}}
+  pk.x=qx+nx*(rad+HK.R);pk.y=qy+ny*(rad+HK.R);
+  const vn=(pk.vx-vx)*nx+(pk.vy-vy)*ny;if(vn<0){pk.vx-=(1+e)*vn*nx;pk.vy-=(1+e)*vn*ny;}return true;}
+function hkBlocks(){HK.blk=[];if(!HK.cfg.blocks)return;const{W,H}=HK,n=1+Math.floor(Math.random()*2),r=Math.random;
+  for(let i=0;i<n*4&&HK.blk.length<n*2;i++){let b;
+    if(r()<.5){const w=W*(.12+r()*.12),h=H*(.025+r()*.02);b={t:'r',x:W*.1+w/2+r()*(W*.8-w),y:H*(.23+r()*.13),w,h};}
+    else{const rr=Math.min(W,H)*(.035+r()*.03);b={t:'c',x:W*.12+r()*W*.76,y:H*(.23+r()*.13),r:rr};}
+    const m={...b,x:W-b.x,y:H-b.y};   // てんたいしょう（どちらにも こうへい）
+    const ov=(a,c)=>Math.hypot(a.x-c.x,a.y-c.y)<(a.w||a.r*2)/2+(c.w||c.r*2)/2+HK.R*2.5;
+    if(HK.blk.some(o=>ov(o,b)||ov(o,m))||ov(b,m))continue;HK.blk.push(b,m);}}
+function hkBlkNear(b,px,py){if(b.t==='c')return{x:b.x,y:b.y,rad:b.r};
+  return{x:Math.max(b.x-b.w/2,Math.min(b.x+b.w/2,px)),y:Math.max(b.y-b.h/2,Math.min(b.y+b.h/2,py)),rad:0};}
+function hkServe(to){const{W,H,R}=HK,mode=HK.cfg.balls,n=mode==='r'?1+Math.floor(Math.random()*3):+mode;
+  hkBlocks();HK.pk=[];for(let i=0;i<n;i++)HK.pk.push({x:W/2+(i-(n-1)/2)*R*3.2,y:H/2+(to?to*H*.06:0),vx:0,vy:0});}
+function hkReset(full){if(full)HK.sc={'1':0,'-1':0};HK.sh={'1':hkShape('1'),'-1':hkShape('-1')};
   HK.m={'1':{x:HK.W/2,y:HK.H*.85,vx:0,vy:0,id:null,tx:HK.W/2,ty:HK.H*.85},'-1':{x:HK.W/2,y:HK.H*.15,vx:0,vy:0,id:null,tx:HK.W/2,ty:HK.H*.15}};
-  hkPuck(0);HK.pause=0;}
-function startHockey(){show('hockey');requestAnimationFrame(()=>{hkSize();hkReset(true);HK.on=true;HK.last=performance.now();
-  cancelAnimationFrame(HK.raf);HK.raf=requestAnimationFrame(hkLoop);});}
+  hkServe(0);HK.pause=HK.setOpen?1e9:.6;}
+function startHockey(){show('hockey');HK.started=false;requestAnimationFrame(()=>{hkSize();hkReset(true);HK.on=true;HK.last=performance.now();
+  cancelAnimationFrame(HK.raf);HK.raf=requestAnimationFrame(hkLoop);hkOpenSet();});}
 function hkStop(){HK.on=false;cancelAnimationFrame(HK.raf);}
 function hkPt(e){const r=cv.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top};}
 cv.addEventListener('pointerdown',e=>{e.preventDefault();const p=hkPt(e),o=p.y>HK.H/2?'1':'-1',m=HK.m[o];if(!m||m.id!==null)return;
@@ -1195,30 +1279,42 @@ cv.addEventListener('pointermove',e=>{for(const o of['1','-1']){const m=HK.m[o];
 ['pointerup','pointercancel'].forEach(ev=>cv.addEventListener(ev,e=>{for(const o of['1','-1']){const m=HK.m[o];if(m&&m.id===e.pointerId)m.id=null;}}));
 window.addEventListener('resize',()=>{if(HK.on){hkSize();hkReset(false);}});
 function hkLoop(now){if(!HK.on)return;const dt=Math.min(.033,(now-HK.last)/1000);HK.last=now;
-  const{W,H,R,MR,GW}=HK,pk=HK.puck;
-  for(const o of['1','-1']){const m=HK.m[o],lo=o==='1'?H/2+MR:MR,hi=o==='1'?H-MR:H/2-MR;
-    const nx=Math.max(MR,Math.min(W-MR,m.tx)),ny=Math.max(lo,Math.min(hi,m.ty));
+  const{W,H,R,GW}=HK;
+  for(const o of['1','-1']){const m=HK.m[o],s=HK.sh[o],lo=o==='1'?H/2+s.ey:s.ey,hi=o==='1'?H-s.ey:H/2-s.ey;
+    let nx=Math.max(s.ex,Math.min(W-s.ex,m.tx)),ny=Math.max(lo,Math.min(hi,m.ty));
+    const br=Math.max(s.ex,s.ey);   // ブロックには めりこまない
+    for(const b of HK.blk){const q=hkBlkNear(b,nx,ny),dx=nx-q.x,dy=ny-q.y,d=Math.hypot(dx,dy);if(d<q.rad+br){const k=d||1;nx=q.x+dx/k*(q.rad+br);ny=q.y+dy/k*(q.rad+br);}}
+    nx=Math.max(s.ex,Math.min(W-s.ex,nx));ny=Math.max(lo,Math.min(hi,ny));
     m.vx=(nx-m.x)/Math.max(dt,.001);m.vy=(ny-m.y)/Math.max(dt,.001);m.x=nx;m.y=ny;}
   if(HK.pause>0){HK.pause-=dt;}
   else{const N=6,sdt=dt/N,vmax=H*2.6;
-    for(let k=0;k<N;k++){pk.x+=pk.vx*sdt;pk.y+=pk.vy*sdt;
-      if(pk.x<R){pk.x=R;pk.vx=Math.abs(pk.vx)*.9;}if(pk.x>W-R){pk.x=W-R;pk.vx=-Math.abs(pk.vx)*.9;}
-      const inGoal=Math.abs(pk.x-W/2)<GW/2-R*.3;
-      if(pk.y<R&&!inGoal){pk.y=R;pk.vy=Math.abs(pk.vy)*.9;}
-      if(pk.y>H-R&&!inGoal){pk.y=H-R;pk.vy=-Math.abs(pk.vy)*.9;}
-      if(pk.y<-R){hkGoal(1);break;}if(pk.y>H+R){hkGoal(-1);break;}
-      for(const o of['1','-1']){const m=HK.m[o],dx=pk.x-m.x,dy=pk.y-m.y,d=Math.hypot(dx,dy);
-        if(d<R+MR&&d>0){const nx=dx/d,ny=dy/d;pk.x=m.x+nx*(R+MR);pk.y=m.y+ny*(R+MR);
-          const rvx=pk.vx-m.vx,rvy=pk.vy-m.vy,vn=rvx*nx+rvy*ny;
-          if(vn<0){pk.vx-=1.9*vn*nx;pk.vy-=1.9*vn*ny;}}}
-      const sp=Math.hypot(pk.vx,pk.vy);if(sp>vmax){pk.vx*=vmax/sp;pk.vy*=vmax/sp;}}
-    const f=Math.pow(.82,dt);pk.vx*=f;pk.vy*=f;}
+    for(let k=0;k<N;k++){
+      for(let i=HK.pk.length-1;i>=0;i--){const pk=HK.pk[i];pk.x+=pk.vx*sdt;pk.y+=pk.vy*sdt;
+        if(pk.x<R){pk.x=R;pk.vx=Math.abs(pk.vx)*.9;}if(pk.x>W-R){pk.x=W-R;pk.vx=-Math.abs(pk.vx)*.9;}
+        const inGoal=Math.abs(pk.x-W/2)<GW/2-R*.3;
+        if(pk.y<R&&!inGoal){pk.y=R;pk.vy=Math.abs(pk.vy)*.9;}
+        if(pk.y>H-R&&!inGoal){pk.y=H-R;pk.vy=-Math.abs(pk.vy)*.9;}
+        if(pk.y<-R||pk.y>H+R){HK.pk.splice(i,1);hkGoal(pk.y<0?1:-1);if(HK.pause>0)break;continue;}
+        for(const o of['1','-1']){const m=HK.m[o],s=HK.sh[o],q=hkNear(pk.x-m.x,pk.y-m.y,s.pts);
+          hkBounce(pk,m.x+q.x,m.y+q.y,s.rr,m.vx,m.vy,.9,q.inside,m.x,m.y);}
+        for(const b of HK.blk){const q=hkBlkNear(b,pk.x,pk.y);hkBounce(pk,q.x,q.y,q.rad,0,0,.85,b.t==='r'&&q.x===pk.x&&q.y===pk.y,b.x,b.y);}
+        const sp=Math.hypot(pk.vx,pk.vy);if(sp>vmax){pk.vx*=vmax/sp;pk.vy*=vmax/sp;}}
+      if(HK.pause>0)break;
+      for(let i=0;i<HK.pk.length;i++)for(let j=i+1;j<HK.pk.length;j++){const a=HK.pk[i],b=HK.pk[j],dx=b.x-a.x,dy=b.y-a.y,d=Math.hypot(dx,dy);
+        if(d<2*R&&d>0){const nx=dx/d,ny=dy/d,ov=(2*R-d)/2;a.x-=nx*ov;a.y-=ny*ov;b.x+=nx*ov;b.y+=ny*ov;
+          const vn=(b.vx-a.vx)*nx+(b.vy-a.vy)*ny;if(vn<0){const j2=-vn*.95;a.vx-=j2*nx;a.vy-=j2*ny;b.vx+=j2*nx;b.vy+=j2*ny;}}}}
+    const f=Math.pow(.82,dt);for(const pk of HK.pk){pk.vx*=f;pk.vy*=f;}}
   hkDraw();HK.raf=requestAnimationFrame(hkLoop);}
 function hkGoal(o){HK.sc[o]++;sfx();buzz();
-  if(HK.sc[o]>=HK.goal){HK.pause=1e9;hkPuck(0);
-    modal(`<span class="big">🎉 ${PNAME(o)}の かち！</span><span class="small">あか ${HK.sc['1']} ・ あお ${HK.sc['-1']}</span>`,[{label:'もういちど',fn:()=>hkReset(true)}]);return;}
-  hkPuck(-o);HK.pause=.9;}
-function hkDraw(){const{W,H,R,MR,GW}=HK,pk=HK.puck;cx.clearRect(0,0,W,H);
+  if(HK.sc[o]>=HK.goal){HK.pause=1e9;HK.pk=[];
+    modal(`<span class="big">🎉 ${PNAME(o)}の かち！</span><span class="small">あか ${HK.sc['1']} ・ あお ${HK.sc['-1']}</span>`,[{label:'せってい',cls:'gray',fn:hkOpenSet},{label:'もういちど',fn:()=>hkReset(true)}]);return;}
+  if(!HK.pk.length){hkServe(-o);HK.pause=.9;}}
+function hkMallet(o,c){const m=HK.m[o],s=HK.sh[o],path=(sc,rr)=>{cx.beginPath();
+    if(s.pts.length===1){cx.arc(m.x,m.y,rr*sc,0,Math.PI*2);return 'f';}
+    s.pts.forEach((p,i)=>{const X=m.x+p[0]*sc,Y=m.y+p[1]*sc;i?cx.lineTo(X,Y):cx.moveTo(X,Y);});if(s.pts.length>2)cx.closePath();return 's';};
+  for(const [sc,col] of [[1,c],[.45,'rgba(255,255,255,.55)']]){const t=path(sc,s.rr);cx.fillStyle=col;cx.strokeStyle=col;
+    if(t==='f')cx.fill();else{cx.lineJoin='round';cx.lineCap='round';cx.lineWidth=s.rr*2*sc;cx.stroke();if(s.pts.length>2)cx.fill();}}}
+function hkDraw(){const{W,H,R,GW}=HK;cx.clearRect(0,0,W,H);
   cx.fillStyle='#eaf6ff';cx.fillRect(0,0,W,H);
   cx.strokeStyle='rgba(233,84,107,.45)';cx.lineWidth=4;cx.beginPath();cx.moveTo(0,H/2);cx.lineTo(W,H/2);cx.stroke();
   cx.beginPath();cx.arc(W/2,H/2,Math.min(W,H)*.14,0,Math.PI*2);cx.stroke();
@@ -1228,10 +1324,25 @@ function hkDraw(){const{W,H,R,MR,GW}=HK,pk=HK.puck;cx.clearRect(0,0,W,H);
   const fs=Math.min(W,H)*.09;cx.font=`bold ${fs}px "Hiragino Maru Gothic ProN",system-ui,sans-serif`;cx.textAlign='center';cx.textBaseline='middle';
   cx.fillStyle='rgba(233,84,107,.85)';cx.fillText(HK.sc['1'],W-fs*1.1,H/2+fs*1.1);
   cx.save();cx.translate(fs*1.1+60,H/2-fs*1.1);cx.rotate(Math.PI);cx.fillStyle='rgba(61,139,255,.85)';cx.fillText(HK.sc['-1'],0,0);cx.restore();
-  cx.fillStyle='#2a2a2a';cx.beginPath();cx.arc(pk.x,pk.y,R,0,Math.PI*2);cx.fill();
-  for(const[o,c]of[['1','#e9546b'],['-1','#3d8bff']]){const m=HK.m[o];
-    cx.fillStyle=c;cx.beginPath();cx.arc(m.x,m.y,MR,0,Math.PI*2);cx.fill();
-    cx.fillStyle='rgba(255,255,255,.55)';cx.beginPath();cx.arc(m.x,m.y,MR*.45,0,Math.PI*2);cx.fill();}}
+  for(const b of HK.blk){cx.fillStyle='#8a6a4a';cx.strokeStyle='#5a4128';cx.lineWidth=3;cx.beginPath();
+    if(b.t==='c')cx.arc(b.x,b.y,b.r,0,Math.PI*2);else cx.roundRect?cx.roundRect(b.x-b.w/2,b.y-b.h/2,b.w,b.h,4):cx.rect(b.x-b.w/2,b.y-b.h/2,b.w,b.h);
+    cx.fill();cx.stroke();}
+  cx.fillStyle='#2a2a2a';for(const pk of HK.pk){cx.beginPath();cx.arc(pk.x,pk.y,R,0,Math.PI*2);cx.fill();}
+  hkMallet('1','#e9546b');hkMallet('-1','#3d8bff');}
+function hkSetRender(){
+  document.querySelectorAll('#hkSet .hkshp').forEach(box=>{const o=box.dataset.o;box.innerHTML='';
+    HK_SH.forEach(([k,nm,ic])=>{const b=document.createElement('button');b.className='jchip'+(HK.cfg.shape[o]===k?' on':'');b.textContent=`${ic} ${nm}`;
+      b.onclick=()=>{HK.cfg.shape[o]=k;HK.sh[o]=hkShape(o);hkSetRender();hkDraw();};box.appendChild(b);});});
+  const bb=$('hkBalls');bb.innerHTML='';[['1','1こ'],['2','2こ'],['3','3こ'],['r','ランダム']].forEach(([v,t])=>{const b=document.createElement('button');b.className='jchip'+(HK.cfg.balls===v?' on':'');b.textContent=t;
+    b.onclick=()=>{HK.cfg.balls=v;hkSetRender();};bb.appendChild(b);});
+  const kb=$('hkBlk');kb.innerHTML='';[[false,'なし'],[true,'ランダムに おく']].forEach(([v,t])=>{const b=document.createElement('button');b.className='jchip'+(HK.cfg.blocks===v?' on':'');b.textContent=t;
+    b.onclick=()=>{HK.cfg.blocks=v;hkSetRender();};kb.appendChild(b);});
+  $('hkClose').style.display=HK.started?'':'none';}
+function hkOpenSet(){HK.setOpen=true;HK.pause=1e9;$('hkSet').classList.add('on');hkSetRender();}
+$('hkGo').addEventListener('click',()=>{$('hkSet').classList.remove('on');HK.setOpen=false;HK.started=true;hkReset(true);});
+$('hkClose').addEventListener('click',()=>{$('hkSet').classList.remove('on');HK.setOpen=false;HK.pause=.5;});
+$('hkSetMenu').addEventListener('click',askMenu);
+$('hkCfg').addEventListener('click',hkOpenSet);
 $('hkMenu').addEventListener('click',askMenu);
 $('hkReset').addEventListener('click',()=>askReset(()=>hkReset(true)));
 
@@ -1613,8 +1724,8 @@ function cupPick(i){if(CUP.st!=='pick')return;buzz();CUP.st='done';const o=CUP.t
 $('cup').addEventListener('click',e=>{const a=e.target.closest('[data-act]');if(!a)return;({menu:askMenu,reset:()=>askReset(startCup)})[a.dataset.act]?.();});
 
 // はじき：ぶつり
-const HJ_W=100,HJ_H=160,HJ_R=4.5,HJ_G=95,HJ_V=118;
-const HJ_BASE=[{x1:3,x2:30,y:150,s:'L'},{x1:70,x2:97,y:124,s:'R'},{x1:3,x2:30,y:98,s:'L'},{x1:70,x2:97,y:72,s:'R'},{x1:3,x2:30,y:46,s:'L'},{x1:66,x2:97,y:22,s:'R',goal:true}];
+const HJ_W=100,HJ_H=214,HJ_R=4.5,HJ_G=95,HJ_V=118;
+const HJ_BASE=[{x1:3,x2:30,y:204,s:'L'},{x1:70,x2:97,y:178,s:'R'},{x1:3,x2:30,y:152,s:'L'},{x1:70,x2:97,y:126,s:'R'},{x1:3,x2:30,y:100,s:'L'},{x1:70,x2:97,y:74,s:'R'},{x1:3,x2:30,y:48,s:'L'},{x1:66,x2:97,y:22,s:'R',goal:true}];
 let HJ_LEDGES=HJ_BASE.map(l=>({...l})),HJ_HOLES=[];
 function hjFixedHoles(L){const H=[];
   for(let i=1;i<L.length;i++){const t=L[i],R=t.s==='R';
@@ -1658,7 +1769,7 @@ function hjFeasible(){for(let i=0;i<HJ_LEDGES.length-1;i++){let best=0,run=0;
   return true;}
 function hjGen(){const rO=HJ.opt.out==='r',rG=HJ.opt.goal==='r';
   for(let t=0;t<80;t++){
-    const gi=rG?3+Math.floor(Math.random()*3):5;
+    const gi=rG?4+Math.floor(Math.random()*4):HJ_BASE.length-1;
     const L=HJ_BASE.slice(0,gi+1).map(l=>({...l}));
     const g=L[gi];g.goal=true;g.x1=g.s==='R'?66:3;g.x2=g.s==='R'?97:34;
     HJ_LEDGES=L;HJ_HOLES=rO?hjRandHoles(L):hjFixedHoles(L);
@@ -1670,10 +1781,10 @@ function hjOpts(){const box=$('hjOpts');box.innerHTML='';const busy=HJ.st==='cou
     [['f','きまり'],['r','ランダム']].forEach(([v,t])=>{const b=document.createElement('button');b.className='jchip'+(HJ.opt[k]===v?' on':'');b.textContent=t;b.disabled=busy;
       b.onclick=()=>{HJ.opt[k]=v;hjGen();for(const o of['1','-1']){HJ.p[o]={c:{},charge:null,msg:'',outs:0};hjPlace(HJ.p[o].c,0);}hjDraw();hjUI();hjOpts();};box.appendChild(b);});});}
 function hjCv(o){return $('hjCv'+o);}
-function hjSize(){for(const o of['1','-1']){const cv=hjCv(o),r=cv.getBoundingClientRect(),d=window.devicePixelRatio||1;
-  if(!r.width)continue;cv.width=Math.round(r.width*d);cv.height=Math.round(r.height*d);}}
+function hjSize(){for(const o of['1','-1']){const cv=hjCv(o),w=cv.parentElement.clientWidth,h=cv.parentElement.clientHeight,d=window.devicePixelRatio||1;
+  if(!w||!h)continue;const k=Math.min(w/HJ_W,h/HJ_H),cw=Math.floor(HJ_W*k),ch=Math.floor(HJ_H*k);cv.style.width=cw+'px';cv.style.height=ch+'px';cv.width=Math.round(cw*d);cv.height=Math.round(ch*d);}}
 window.addEventListener('resize',()=>{if($('hj').classList.contains('on')){hjSize();hjDraw();}});
-function startHj(){show('hj');hjStop();hjGen();for(const o of['1','-1']){HJ.p[o]={c:{},charge:null,msg:'',outs:0};hjPlace(HJ.p[o].c,0);}
+function startHj(){show('hj');hjStop();$('hjCenter').classList.remove('hide');hjGen();for(const o of['1','-1']){HJ.p[o]={c:{},charge:null,msg:'',outs:0};hjPlace(HJ.p[o].c,0);}
   requestAnimationFrame(()=>{hjSize();hjDraw();});duo('hjMsg','「スタート」で きょうそう！<br><small>ながく おすほど つよく はじくよ</small>');
   $('hjGo').disabled=false;$('hjGo').textContent='▶ スタート';hjUI();hjOpts();}
 function hjStop(){HJ.tm.forEach(clearTimeout);HJ.tm=[];cancelAnimationFrame(HJ.raf);HJ.st='idle';}
@@ -1682,7 +1793,7 @@ $('hjGo').addEventListener('click',()=>{if(HJ.st==='count'||HJ.st==='play')retur
   for(const o of['1','-1']){HJ.p[o]={c:{},charge:null,msg:'',outs:0};hjPlace(HJ.p[o].c,0);}
   HJ.st='count';$('hjGo').disabled=true;hjUI();hjDraw();hjOpts();
   ['3','2','1'].forEach((n,k)=>HJ.tm.push(setTimeout(()=>{duo('hjMsg',n);sfx();},k*700)));
-  HJ.tm.push(setTimeout(()=>{HJ.st='play';duo('hjMsg','スタート！');HJ.last=performance.now();HJ.raf=requestAnimationFrame(hjLoop);},2100));});
+  HJ.tm.push(setTimeout(()=>{HJ.st='play';duo('hjMsg','スタート！');$('hjCenter').classList.add('hide');HJ.last=performance.now();HJ.raf=requestAnimationFrame(hjLoop);},2100));});
 function hjPower(o){const ch=HJ.p[o].charge;return ch?Math.min(1,(performance.now()-ch.t0)/HJ.CHARGE):0;}
 function hjDown(o,side){if(HJ.st!=='play')return;const P=HJ.p[o];
   if(P.c.st!=='rest'){return;}
@@ -1702,7 +1813,7 @@ function hjLoop(t){if(HJ.st!=='play')return;const dt=Math.min(.05,(t-HJ.last)/10
     if(r)hjUI();}
   hjDraw();HJ.raf=requestAnimationFrame(hjLoop);}
 function hjWin(o){HJ.st='over';HJ.sc[o]++;hjSound('goal');buzz();hjDraw();hjUI();
-  duo('hjMsg',`${PNAME(+o)}の かち！`);$('hjGo').disabled=false;$('hjGo').textContent='▶ もういっかい';hjOpts();
+  duo('hjMsg',`${PNAME(+o)}の かち！`);$('hjCenter').classList.remove('hide');$('hjGo').disabled=false;$('hjGo').textContent='▶ もういっかい';hjOpts();
   setTimeout(()=>modal(`<span class="big">🎉 ${PNAME(+o)}の かち！</span><span class="small">ゴール！ （あか ${HJ.sc['1']} ・ あお ${HJ.sc['-1']}）</span>`,[{label:'OK'}]),500);}
 function hjUI(){for(const o of['1','-1']){const s=document.querySelector(`#hj .hjside[data-o="${o}"]`),P=HJ.p[o];if(!P)continue;
   s.querySelector('.hjmsg').textContent=P.msg||(HJ.st==='play'&&P.c.st==='rest'?(P.c.s==='L'?'← ひだりの ボタンで はじく':'みぎの ボタンで はじく →'):'');
@@ -1726,6 +1837,7 @@ function hjSound(k){if(!BGM.on||!BGM.ctx)return;const t=BGM.ctx.currentTime;
   if(k==='flick'){note(900,t,.05,'square',.06);}else if(k==='land'){note(660,t,.08,'triangle',.12);}
   else if(k==='out'){note(300,t,.15,'sawtooth',.07);note(180,t+.12,.25,'sawtooth',.07);}
   else if(k==='goal'){[784,988,1175,1568].forEach((f,i)=>note(f,t+i*.09,.15,'square',.06));}}
+document.querySelectorAll('#hj .hjpause').forEach(b=>b.addEventListener('click',askMenu));
 document.querySelectorAll('#hj .hjside').forEach(s=>{const o=s.dataset.o;
   s.querySelectorAll('.hjbtn').forEach(b=>{const side=b.dataset.side;
     b.addEventListener('pointerdown',e=>{e.preventDefault();try{b.setPointerCapture(e.pointerId);}catch(_){}hjDown(o,side);});
@@ -1791,7 +1903,8 @@ function pySpawn(P){const [a,b]=pyPair(P.idx++);P.cur={x:2,y:1,r:0,a,b};P.st='fa
   if(!pyFits(P,P.cur))pyLose(P);}
 function pyTouch(P){if(P.lockT>0&&P.lockN<10){P.lockT=0;P.lockN++;}}
 function pyMove(P,dx){if(P.st!=='fall')return false;const c={...P.cur,x:P.cur.x+dx};if(pyFits(P,c)){P.cur=c;pyTouch(P);return true;}return false;}
-function pyRot(P){if(P.st!=='fall')return;const c={...P.cur,r:(P.cur.r+1)%4},d=PY_D[c.r];
+function pyHard(P){if(P.st!=='fall')return;let c=P.cur;while(pyFits(P,{...c,y:c.y+1}))c={...c,y:c.y+1};P.cur=c;pyLock(P);}
+function pyRot(P,dir=1){if(P.st!=='fall')return;const c={...P.cur,r:(P.cur.r+dir+4)%4},d=PY_D[c.r];
   const tries=[[0,0]];if(d[0])tries.push([-d[0],0]);if(d[1]>0)tries.push([0,-1]);
   for(const [dx,dy] of tries){const t={...c,x:c.x+dx,y:c.y+dy};if(pyFits(P,t)){P.cur=t;pyTouch(P);pySnd('rot');return;}}
   const q={...P.cur,r:(P.cur.r+2)%4},qt=PY_D[q.r][1]>0?{...q,y:q.y-1}:q;   // せまい ところは くるっと はんてん
@@ -1836,7 +1949,7 @@ function pyLoop(t){if(PY.st!=='play')return;const dt=Math.min(50,t-PY.last);PY.l
   pyDraw();PY.raf=requestAnimationFrame(pyLoop);}
 function pyKeyDown(o,k){const P=PY.p[o];if(PY.st!=='play'||PY.paused||!P||P.dead)return;
   if(k==='L'||k==='R'){pyMove(P,k==='L'?-1:1);P.hold[k]=-170;}
-  else if(k==='T')pyRot(P);else if(k==='D')P.soft=true;}
+  else if(k==='A')pyRot(P,1);else if(k==='B')pyRot(P,-1);else if(k==='U')pyHard(P);else if(k==='D')P.soft=true;}
 function pyKeyUp(o,k){const P=PY.p[o];if(!P)return;if(k==='D')P.soft=false;else delete P.hold[k];}
 function pyHold(dt){for(const o of['1','-1']){const P=PY.p[o];for(const k in P.hold){P.hold[k]+=dt;while(P.hold[k]>=60){P.hold[k]-=60;pyMove(P,k==='L'?-1:1);}}}}
 function pyBlob(x,X,Y,s,c){const cx=(X+.5)*s,cy=(Y+.5)*s,r=s*.44,dot=(px,py,rx,ry)=>{x.beginPath();x.ellipse(px,py,rx,ry,0,0,Math.PI*2);x.fill();};

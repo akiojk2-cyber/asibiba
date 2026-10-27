@@ -23,6 +23,8 @@
 - 保存は localStorage 'asobiba-bgm' のみ。外部通信・入力欄なし。CSPは build_pwa.py で付与
 - BGMはWebAudio（BGM/note()/sfx()）
 - 将棋: kBoardMoves, kDropOK（二歩・打ち歩詰め）, kHasLegal
+- 10えんはじき: 左右分割（左は180°）。せかい 100×214・8だん（だんかん26）。ランダムゴールは5〜8だんめ
+- エアホッケー: HK.cfg（shape/balls/blocks）。パッドは てん/せんぶん/たかっけい＋まるみで あたりはんてい（hkNear/hkBounce）
 - 物理（10えんはじき）: hjFlick/hjStep。調整はnodeでシミュレーションして段差ごとに有効な強さ帯を確保
 - テストはPlaywright(headless Chromium)。オフライン再読込（setOffline）を各版で確認
 
