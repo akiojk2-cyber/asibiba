@@ -482,14 +482,11 @@ html,body{overflow:hidden;overscroll-behavior:none}
 .ckname{font-size:22px}.ckdots{font-size:22px;letter-spacing:2px;color:#ffe14d}
 .ckmsg{flex:1;font-size:16px;text-align:center}
 .ckhome{border:none;background:rgba(255,255,255,.92);border-radius:12px;width:44px;height:44px;font-size:20px}
-.ckrow2{display:flex;gap:10px;align-items:stretch;height:clamp(64px,7vh,84px)}
-.ckpow{display:flex;gap:6px}
-.ckpow button{border:none;border-radius:16px;background:rgba(255,255,255,.35);color:#fff;font-size:20px;font-weight:bold;padding:0 18px}
-.ckpow button.on{background:#fff;color:#3a2e1f}
-.ckfire{flex:1;border:none;border-radius:18px;background:#ffe14d;color:#3a2e1f;font-size:clamp(24px,4vw,34px);font-weight:900;box-shadow:0 5px 0 rgba(0,0,0,.25)}
-.ckfire:active{transform:translateY(3px);box-shadow:0 2px 0 rgba(0,0,0,.25)}
-.ckfire:disabled{background:rgba(255,255,255,.3);color:rgba(255,255,255,.7);box-shadow:none}
-.ckhelp{font-size:14px;text-align:center;min-height:18px}
+.ckrow2{display:flex;gap:10px;align-items:center;height:clamp(44px,5vh,60px)}
+.cklbl{font-weight:bold;font-size:16px;white-space:nowrap}
+.ckmeter{flex:1;height:70%;border-radius:999px;background:rgba(0,0,0,.25);overflow:hidden;box-shadow:inset 0 2px 4px rgba(0,0,0,.3)}
+.ckbar{height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,#7ee07e,#ffe14d 55%,#ff5a3c)}
+.ckhelp{font-size:15px;font-weight:bold;text-align:center;min-height:20px}
 .ckset{display:none;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(680px,94vw);max-height:96%;background:var(--card);border-radius:24px;padding:12px;flex-direction:column;align-items:center;gap:10px;box-shadow:0 10px 40px rgba(0,0,0,.4);z-index:5}
 .ckset.on{display:flex}
 .ckset .duo span{font-size:clamp(18px,3vw,24px)}
@@ -680,13 +677,13 @@ html,body{overflow:hidden;overscroll-behavior:none}
 <section id="ck" class="screen">
   <div class="ckpanel top p2c" data-o="-1">
     <div class="ckrow1"><span class="ckname">あお</span><span class="ckdots"></span><span class="ckmsg"></span><button class="ckhome" aria-label="メニュー">🏠</button></div>
-    <div class="ckrow2"><div class="ckpow"><button data-pow="w">よわ</button><button data-pow="s">つよ</button></div><button class="ckfire">パチン！</button></div>
+    <div class="ckrow2"><span class="cklbl">パワー</span><div class="ckmeter"><div class="ckbar"></div></div></div>
     <div class="ckhelp"></div>
   </div>
   <canvas id="ckCv" aria-label="たたみの どひょう"></canvas>
   <div class="ckpanel bottom p1c" data-o="1">
     <div class="ckrow1"><span class="ckname">あか</span><span class="ckdots"></span><span class="ckmsg"></span><button class="ckhome" aria-label="メニュー">🏠</button></div>
-    <div class="ckrow2"><div class="ckpow"><button data-pow="w">よわ</button><button data-pow="s">つよ</button></div><button class="ckfire">パチン！</button></div>
+    <div class="ckrow2"><span class="cklbl">パワー</span><div class="ckmeter"><div class="ckbar"></div></div></div>
     <div class="ckhelp"></div>
   </div>
   <div class="ckset" id="ckSet">
@@ -2061,7 +2058,7 @@ const CK_CARS=[
   {id:'bus',nm:'バス',kind:'bus',L:60,W:20,m:1.5,st:.72,c:'#f2b705'},
   {id:'dump',nm:'ダンプカー',kind:'dump',L:52,W:21,m:1.35,st:.85,c:'#ef7d18'},
   {id:'kei',nm:'けいじどうしゃ',kind:'kei',L:36,W:18,m:.7,st:.95,c:'#4fc3a1'}];
-const CK={st:'idle',cars:{},sel:{'1':0,'-1':1},sc:{'1':0,'-1':0},turn:'1',left:1,pow:{'1':'s','-1':'s'},aim:{'1':-Math.PI/2,'-1':Math.PI/2},
+const CK={st:'idle',cars:{},sel:{'1':0,'-1':1},sc:{'1':0,'-1':0},turn:'1',left:1,pull:0,pid:null,d0:0,aim:{'1':-Math.PI/2,'-1':Math.PI/2},
   contact:false,pen:null,raf:0,last:0,still:0,first:'1',W:0,H:0,s:1,tm:[],msg:{'1':'','-1':''}};
 const ckCv=$('ckCv'),ckX=ckCv.getContext('2d');
 const ckOpp=o=>o==='1'?'-1':'1';
@@ -2111,12 +2108,14 @@ function ckStep(dt){const cs=[CK.cars['1'],CK.cars['-1']];
     if(Math.abs(c.x)>CK_T/2||Math.abs(c.y)>CK_T/2){c.out=true;c.fall=0;ckSnd('out');}}
   const[A,B]=cs;if(!A.out&&!B.out)ckCollide(A,B);}
 function ckSupport(c,dx,dy){return Math.abs(dx*Math.cos(c.a)+dy*Math.sin(c.a))*c.L/2+Math.abs(-dx*Math.sin(c.a)+dy*Math.cos(c.a))*c.W/2;}
-function ckPenPos(o){const c=CK.cars[o],a=CK.aim[o],dx=Math.cos(a),dy=Math.sin(a),gap=CK.pen&&CK.pen.o===o?Math.max(-1,7-CK.pen.t*90):7,d=ckSupport(c,dx,dy)+gap;
+function ckPenPos(o){const c=CK.cars[o],a=CK.aim[o],dx=Math.cos(a),dy=Math.sin(a),gap=CK.pen&&CK.pen.o===o?Math.max(-1,(7+CK.pen.pull)*(1-CK.pen.t/.06)):7+(CK.st==='aim'&&CK.turn===o?CK.pull:0),d=ckSupport(c,dx,dy)+gap;
   return{x:c.x-dx*d,y:c.y-dy*d,a};}
-function ckFire(o){if(CK.st!=='aim'||CK.turn!==o)return;CK.st='fire';CK.pen={o,t:0,done:false};CK.contact=false;ckSnd('pachin');ckUI();}
+const CK_MAXPULL=60;
+function ckFire(o){if(CK.st!=='aim'||CK.turn!==o)return;const pull=CK.pull;CK.pull=0;if(pull<4){ckUI();return;}
+  CK.st='fire';CK.pen={o,t:0,done:false,pull,v:300+pull/CK_MAXPULL*850};CK.contact=false;ckSnd('pachin');ckUI();}
 function ckLoop(t){if(!$('ck').classList.contains('on'))return;const dt=Math.min(.04,(t-CK.last)/1000);CK.last=t;
   if(CK.st==='fire'){const P=CK.pen;P.t+=dt;
-    if(!P.done&&P.t>=.08){P.done=true;const c=CK.cars[P.o],a=CK.aim[P.o],v=CK.pow[P.o]==='s'?1000:700;c.vx=Math.cos(a)*v;c.vy=Math.sin(a)*v;c.w=0;}
+    if(!P.done&&P.t>=.06){P.done=true;const c=CK.cars[P.o],a=CK.aim[P.o],v=P.v;c.vx=Math.cos(a)*v;c.vy=Math.sin(a)*v;c.w=0;}
     if(P.done){for(let i=0;i<8;i++)ckStep(dt/8);}
     if(P.t>=.3){CK.pen=null;CK.st='move';CK.still=0;}}
   else if(CK.st==='move'){for(let i=0;i<8;i++)ckStep(dt/8);
@@ -2139,7 +2138,7 @@ function ckPoint(w,big,small){CK.sc[w]++;ckSnd('win');buzz();ckUI();
     if(fin){CK.st='over';modal(`<span class="big">🏆 ${PNAME(+w)}の ゆうしょう！</span><span class="small">${big} ${small}<br>あか ${CK.sc['1']}ほん ・ あお ${CK.sc['-1']}ほん</span>`,[{label:'もういちど',fn:startCk}]);}
     else{CK.first=ckOpp(w);   // まけた ほうが せんこう
       modal(`<span class="big">${big}</span><span class="small">${small?small+'<br>':''}${PNAME(+w)}に 1ほん！（あか ${CK.sc['1']} ・ あお ${CK.sc['-1']}）</span>`,[{label:'つぎの しょうぶ',fn:ckOpenSet}]);}},700));}
-function ckRound(){CK.cars={'1':ckNewCar('1'),'-1':ckNewCar('-1')};CK.turn=CK.first;CK.left=1;CK.pen=null;
+function ckRound(){CK.pull=0;CK.pid=null;CK.cars={'1':ckNewCar('1'),'-1':ckNewCar('-1')};CK.turn=CK.first;CK.left=1;CK.pen=null;
   CK.aim['1']=ckAutoAim('1');CK.aim['-1']=ckAutoAim('-1');ckMsg('','');CK.st='aim';ckUI();}
 function startCk(){show('ck');ckStop();CK.sc={'1':0,'-1':0};CK.first='1';CK.cars={'1':ckNewCar('1'),'-1':ckNewCar('-1')};CK.st='set';
   requestAnimationFrame(()=>{ckSize();CK.last=performance.now();CK.raf=requestAnimationFrame(ckLoop);ckOpenSet();});}
@@ -2155,20 +2154,23 @@ $('ckGo').addEventListener('click',()=>{$('ckSet').classList.remove('on');ckRoun
 function ckUI(){for(const o of['1','-1']){const s=document.querySelector(`#ck .ckpanel[data-o="${o}"]`),my=CK.st==='aim'&&CK.turn===o;
   s.querySelector('.ckdots').textContent='●'.repeat(CK.sc[o])+'○'.repeat(Math.max(0,3-CK.sc[o]));
   s.querySelector('.ckmsg').textContent=CK.st==='aim'?(my?(CK.left>1?'あなたの ばん（あと2かい）':'あなたの ばん！'):'あいての ばん')+(CK.msg[o]?' ・ '+CK.msg[o]:''):'';
-  s.querySelector('.ckhelp').textContent=my?'がめんを なぞって ねらいを きめてね':'';
+  s.querySelector('.ckhelp').textContent=my?(CK.pull>0?'はなすと パチン！':'ゆびで ペンを うしろに ひっぱって ねらおう'):'';
+  s.querySelector('.ckbar').style.width=(my?CK.pull/CK_MAXPULL*100:0)+'%';
   s.classList.toggle('on',my);
-  s.querySelectorAll('[data-pow]').forEach(b=>{b.classList.toggle('on',CK.pow[o]===b.dataset.pow);});
-  s.querySelector('.ckfire').disabled=!my;}}
+}}
 document.querySelectorAll('#ck .ckpanel').forEach(s=>{const o=s.dataset.o;
-  s.querySelectorAll('[data-pow]').forEach(b=>b.addEventListener('click',()=>{CK.pow[o]=b.dataset.pow;ckUI();}));
-  s.querySelector('.ckfire').addEventListener('click',()=>ckFire(o));
   s.querySelector('.ckhome').addEventListener('click',askMenu);});
 $('ckSetMenu').addEventListener('click',askMenu);
 function ckWorld(e){const r=ckCv.getBoundingClientRect();return{x:(e.clientX-r.left-CK.W/2)/CK.s,y:(e.clientY-r.top-CK.H/2)/CK.s,py:e.clientY-r.top};}
-function ckAimAt(e){if(CK.st!=='aim')return;const p=ckWorld(e),o=p.py>CK.H/2?'1':'-1';if(o!==CK.turn)return;
-  const c=CK.cars[o],dx=c.x-p.x,dy=c.y-p.y;if(Math.hypot(dx,dy)<8)return;CK.aim[o]=Math.atan2(dy,dx);}
-ckCv.addEventListener('pointerdown',e=>{e.preventDefault();try{ckCv.setPointerCapture(e.pointerId);}catch(_){}ckAimAt(e);});
-ckCv.addEventListener('pointermove',e=>{if(e.buttons||e.pointerType==='touch')ckAimAt(e);});
+// ゆびで ペンを うしろに ひっぱる → はなすと パチン
+function ckDrag(e){const p=ckWorld(e),o=CK.turn,c=CK.cars[o],dx=c.x-p.x,dy=c.y-p.y,d=Math.hypot(dx,dy);
+  if(d>6)CK.aim[o]=Math.atan2(dy,dx);
+  const np=Math.max(0,Math.min(CK_MAXPULL,d-CK.d0));if(Math.round(np/6)!==Math.round(CK.pull/6)&&np>CK.pull)ckSnd('pull',np);CK.pull=np;ckUI();}
+ckCv.addEventListener('pointerdown',e=>{e.preventDefault();if(CK.st!=='aim'||CK.pid!==null)return;const p=ckWorld(e),o=p.py>CK.H/2?'1':'-1';if(o!==CK.turn)return;
+  try{ckCv.setPointerCapture(e.pointerId);}catch(_){}CK.pid=e.pointerId;const c=CK.cars[o];CK.d0=Math.hypot(c.x-p.x,c.y-p.y);CK.pull=0;ckDrag(e);});
+ckCv.addEventListener('pointermove',e=>{if(e.pointerId===CK.pid&&CK.st==='aim')ckDrag(e);});
+['pointerup','pointercancel'].forEach(ev=>ckCv.addEventListener(ev,e=>{if(e.pointerId!==CK.pid)return;CK.pid=null;
+  if(ev==='pointerup')ckFire(CK.turn);else{CK.pull=0;ckUI();}}));
 window.addEventListener('resize',()=>{if($('ck').classList.contains('on'))ckSize();});
 
 /* --- え：たたみ・くるま・ペン --- */
@@ -2280,7 +2282,8 @@ function ckDraw(){const d=CK.d||1,x=ckX,W=CK.W,H=CK.H,s=CK.s;if(!W)return;x.setT
     x.save();x.translate(p.x*s,p.y*s);x.rotate(p.a);ckPenArt(x,s,o==='1'?'#e9546b':'#3d8bff',CK.pen&&CK.pen.t<.08?CK.pen.t*60:0);x.restore();}
   x.setTransform(d,0,0,d,0,0);}
 function ckSnd(k,j){if(!BGM.on||!BGM.ctx)return;const t=BGM.ctx.currentTime;
-  if(k==='pachin'){note(2200,t,.02,'square',.08);note(140,t+.01,.06,'triangle',.15);}
+  if(k==='pull'){note(500+(j||0)*12,t,.03,'triangle',.03);}
+  else if(k==='pachin'){note(2200,t,.02,'square',.08);note(140,t+.01,.06,'triangle',.15);}
   else if(k==='hit'){note(Math.max(120,260-(j||0)*.1),t,.07,'triangle',.14);}
   else if(k==='tip'){note(300,t,.08,'square',.06);note(200,t+.07,.12,'square',.06);}
   else if(k==='out'){[500,380,260].forEach((f,i)=>note(f,t+i*.07,.1,'triangle',.08));}
