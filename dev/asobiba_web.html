@@ -174,9 +174,12 @@ button{font-family:inherit;cursor:pointer;color:inherit}
 @supports(height:100dvh){.membox{width:min(100%,calc(100dvh - 2*var(--side) - 60px))}}
 .memgrid{width:100%;height:100%;display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(4,1fr);gap:8px}
 .mc{border:none;border-radius:16px;padding:0;font-size:13cqw;line-height:1;background:repeating-linear-gradient(45deg,#ff9f5a 0 12px,#ff8a6a 12px 24px);color:#fff;box-shadow:0 4px 0 rgba(0,0,0,.18);font-weight:bold}
-.mc::before{content:"？"}
+.mc{position:relative;overflow:hidden}
+.mc::before{content:"★";opacity:.9}
 .mc.up,.mc.got{background:#fff;color:var(--ink)}
-.mc.up::before,.mc.got::before{content:attr(data-e)}
+.mc.up::before,.mc.got::before,.mc.up::after,.mc.got::after{content:attr(data-e);position:absolute;font-size:8cqw;line-height:1;opacity:1}
+.mc.up::before,.mc.got::before{left:9%;top:8%}
+.mc.up::after,.mc.got::after{right:9%;bottom:8%;transform:rotate(180deg)}
 .mc.got{outline:5px solid var(--own);outline-offset:-5px;opacity:.85}
 .mc.flip{animation:mflip .3s}
 @keyframes mflip{50%{transform:scaleX(0)}}
@@ -402,8 +405,7 @@ html,body{overflow:hidden;overscroll-behavior:none}
 #rlWheel::after{content:"COIN\AROULETTE";white-space:pre;position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;color:#ffd400;font-weight:bold;font-size:min(5cqw,5cqh);letter-spacing:.1em;pointer-events:none}
 .lamp{position:absolute;width:16.5%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:#3b2a4d;display:flex;align-items:center;justify-content:center;font-size:min(8cqw,8cqh);box-shadow:inset 0 0 0 3px #6c5a80;filter:grayscale(.7) brightness(.65);transition:filter .05s}
 .lamp.on{background:#fff6b0;filter:none;box-shadow:0 0 18px 6px #ffe14d,inset 0 0 0 3px #ffd400;transform:translate(-50%,-50%) scale(1.15);z-index:1}
-.memgrid{transition:transform .6s ease}
-.memgrid.turned,#cupStage.turned{transform:rotate(180deg)}
+#cupStage.turned{transform:rotate(180deg)}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
 /* ころころ ドロップ（たて 2ぶんかつ） */
@@ -521,7 +523,7 @@ html,body{overflow:hidden;overscroll-behavior:none}
 .ckst{font-size:11px;line-height:1.3;color:#7a6a55}
 
 /* あそびかた */
-.hlpbtn{font-weight:900!important;background:#fff!important;color:#3a2e1f!important;opacity:1!important}
+.hlpbtn{flex:0 0 auto!important;min-width:44px!important;width:auto!important;padding-left:14px!important;padding-right:14px!important;font-weight:900!important;background:#fff!important;color:#3a2e1f!important;opacity:1!important}
 .mtext .hlp{display:block;font-size:16px;font-weight:normal;line-height:1.65;text-align:left;max-height:34vh;overflow-y:auto;margin-top:6px;padding:4px 2px;-webkit-overflow-scrolling:touch}
 .mtext .hlp b{color:#e9546b}
 .menubtns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
@@ -1225,7 +1227,7 @@ function memRender(){
   memCells.forEach((e,i)=>{const c=MEM.cards[i];e.className='mc'+(c.st==='up'?' up':c.st==='got'?' got':'')+(MEM.flip.includes(i)?' flip':'');
     e.dataset.e=c.e;e.style.setProperty('--own',c.o>0?'#e9546b':'#3d8bff');e.disabled=MEM.over||c.st!=='down';
     e.setAttribute('aria-label',c.st==='down'?'うらむきの カード':c.e);});
-  MEM.flip=[];$('memGrid').classList.toggle('turned',MEM.turn<0);
+  MEM.flip=[];
   document.querySelectorAll('#mem .side').forEach(s=>{const o=+s.dataset.p,mine=!MEM.over&&MEM.turn===o;
     setSide(s,mine,MEM.over?'おしまい！':mine?'きみの ばん！':'まってね',
       MEM.over?'「さいしょから」で もういちど':mine?'カードを 2まい めくってね':`${PNAME(-o)}が めくり中…`,MEM.sc[o]);});
