@@ -534,6 +534,22 @@ html,body{overflow:hidden;overscroll-behavior:none}
 #ckGo:disabled{opacity:.4}
 .cknm{font-size:14px;font-weight:bold}
 .ckst{font-size:11px;line-height:1.3;color:#7a6a55}
+
+/* あそびかた */
+.hlpbtn{font-weight:900!important;background:#fff!important;color:#3a2e1f!important;opacity:1!important}
+.mtext .hlp{display:block;font-size:16px;font-weight:normal;line-height:1.65;text-align:left;max-height:34vh;overflow-y:auto;margin-top:6px;padding:4px 2px;-webkit-overflow-scrolling:touch}
+.mtext .hlp b{color:#e9546b}
+.menubtns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.howto{position:fixed;inset:0;z-index:20;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;padding:calc(16px + env(safe-area-inset-top,0px)) 16px calc(16px + env(safe-area-inset-bottom,0px))}
+.howto.on{display:flex}
+.howbox{background:#fff;border-radius:24px;width:min(640px,100%);max-height:100%;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,.35)}
+.howbody{overflow-y:auto;padding:20px 22px;line-height:1.75;font-size:17px;-webkit-overflow-scrolling:touch}
+.howbody h2{font-size:26px;margin:0 0 8px;text-align:center}
+.howbody h3{font-size:19px;margin:18px 0 6px;color:#e9546b}
+.howbody ul{margin:0;padding-left:1.3em}
+.howbody li{margin:4px 0}
+.howbody .parent{font-size:15px;background:#f6efe2;border-radius:14px;padding:10px 14px;margin-top:14px;line-height:1.7}
+.howclose{border:none;background:var(--accent);color:#fff;font-size:20px;font-weight:bold;padding:14px;margin:0 16px 16px;border-radius:16px;box-shadow:0 4px 0 rgba(0,0,0,.2)}
 </style>
 </head>
 <body>
@@ -569,7 +585,7 @@ html,body{overflow:hidden;overscroll-behavior:none}
     <button class="tile" style="--c:#5b2d86" onclick="startRl()"><span class="ti">🎰</span><span class="tn">コイン ルーレット</span><span class="ts">マークに かけて まわせ</span></button>
     <button class="tile" style="--c:#2e7d4f" onclick="startCk()"><span class="ti">🏎️</span><span class="tn">カーけし ずもう <span class="new">NEW</span></span><span class="ts">ペンで はじいて おしだせ！</span></button>
   </div>
-  <button class="bgm-btn" id="bgmMenu" onclick="bgmToggle()">🎵 おんがく：オン</button>
+  <div class="menubtns"><button class="bgm-btn" id="howBtn" onclick="openHowto()">📖 あそびかた</button><button class="bgm-btn" id="bgmMenu" onclick="bgmToggle()">🎵 おんがく：オン</button></div>
 </div></section>
 
 <!-- どうぶつしょうぎ -->
@@ -841,6 +857,30 @@ html,body{overflow:hidden;overscroll-behavior:none}
     <div class="rlrow"><button class="gray" data-act="clear">とりけし</button><button data-act="ok">OK！</button></div>
   </div>
 </section>
+
+<div class="howto" id="howto" role="dialog" aria-label="あそびかた"><div class="howbox"><div class="howbody">
+  <h2>📖 あそびかた</h2>
+  <h3>この アプリに ついて</h3>
+  <ul>
+    <li><b>ふたりで むかいあって あそぶ</b> ゲームだよ。コンピューターと たたかう きのうは ないので、かならず ふたりで あそんでね。</li>
+    <li><b>むりょう</b>で、<b>こうこくも ない</b>よ。</li>
+    <li><b>インターネットが つかえない ところでも あそべる</b>よ。</li>
+    <li>インターネットの むこうに <b>データを おくらない</b>し、あそんだ きろくや なまえを <b>ほぞんする きのうも ない</b>よ。</li>
+  </ul>
+  <h3>はじめかた</h3>
+  <ul>
+    <li>iPadを まんなかに たてに おいて、ふたりで むかいあって すわろう。</li>
+    <li>うえの せきが「<b style="color:#3d8bff">あお</b>」、したの せきが「<b style="color:#e9546b">あか</b>」だよ。がめんは それぞれの むきに でるよ。</li>
+    <li>メニューから あそびたい ゲームを タッチしてね。</li>
+    <li>ゲームの なかの <b>？</b> ボタンで、その ゲームの あそびかたが みられるよ。</li>
+    <li>🏠 で メニューに もどる、🔄 で さいしょから やりなおし。</li>
+    <li>🎵 で おんがくの オン・オフが きりかえられるよ。</li>
+  </ul>
+  <div class="parent"><b>おうちの かたへ</b><br>
+    ・Safariで開き、共有ボタン →「ホーム画面に追加」で、アプリのように使えます。最初に一度ネットにつながった状態で開けば、以後はオフラインで動きます。<br>
+    ・外部への通信、広告、アカウント登録、個人情報の入力はありません。端末に残るのは、アプリ本体のファイルと「おんがくのオン・オフ」の設定だけです。<br>
+    ・新しい版は、Wi-Fiにつないで開き、一度閉じてからもう一度開くと反映されます。</div>
+</div><button class="howclose" onclick="closeHowto()">とじる</button></div></div>
 
 <div class="modal" id="modal"><div class="mbox top" id="mTop"></div><div class="mbox" id="mBot"></div></div>
 
@@ -2377,6 +2417,40 @@ function ckSnd(k,j){if(!BGM.on||!BGM.ctx)return;const t=BGM.ctx.currentTime;
   else if(k==='tip'){note(300,t,.08,'square',.06);note(200,t+.07,.12,'square',.06);}
   else if(k==='out'){[500,380,260].forEach((f,i)=>note(f,t+i*.07,.1,'triangle',.08));}
   else if(k==='win'){[523,659,784,1047].forEach((f,i)=>note(f,t+i*.09,.14,'square',.05));}}
+
+
+/* ========== あそびかた ========== */
+function openHowto(){$('howto').classList.add('on');$('howto').querySelector('.howbody').scrollTop=0;}
+function closeHowto(){$('howto').classList.remove('on');}
+const HELP={
+ othello:['オセロ','あいての いしを はさむと、じぶんの いろに ひっくりかえるよ。<br>おける ところが ないときは パス。<br>さいごに いしが おおいほうが かち！'],
+ ttt:['まるばつ','じゅんばんに ○と×を かこう。<br>たて・よこ・ななめの どれかに 3つ ならんだら かち！'],
+ c4:['よんもくならべ','うえから コインを おとして、たて・よこ・ななめに 4つ ならべたら かち！'],
+ shogi:['どうぶつしょうぎ','あいての ライオンを とったら かち！<br>じぶんの ライオンが あいての いちばん おくまで いけても かち。<br>とった こまは じぶんの こまとして つかえるよ。ひよこは おくまで いくと にわとりに なるよ。'],
+ kshogi:['しょうぎ','こまを タッチすると、うごける ばしょが ひかるよ。<br>あいての「おう」を にげられなく（つみに）したら かち！<br>はんそくは ゲームが おしえてくれるよ。'],
+ koi:['はなふだ こいこい','てふだと ばの ふだで、<b>おなじ つき</b>の ふだを あわせて とろう。<br>やくが できたら「こいこい」で つづけるか、「しょうぶ」で おわるか えらんでね。<br>3かい あそんで、てんすうが おおいほうが かち！<br>🙈 あいての てふだを かくす　🔢 つきの すうじを だす'],
+ piko:['ピコピコ たいけつ','「たたく」で あいての あたまを ピコッ！ でも ふっている あいだは まもれないよ。<br>「まもる」を おしている あいだは ヘルメットで ガード（ゲージが へるよ）。<br>さきに 5かい あてたら かち！'],
+ cup:['ほうせき さがし','ほうせきが はいった コップを よく みてね。<br>シャッフルの あと、どこに あるか タッチして あてよう！<br>コップの かず（3〜5こ）と、むずかしさが えらべるよ。'],
+ puyo:['ころころ ドロップ','おちてくる ふたつの たまを ならべて、<b>おなじ いろを 4つ</b> つなげると きえるよ。<br>れんさで けすと、あいてに おじゃまたまを おくれる！<br>まんなか うえの ×まで つみあがったら まけ。<br>◀▶ うごかす　▼ はやく おとす　▲ いっきに おとす　A・B まわす'],
+ spd:['スピード','てふだを タッチして えらんでから、ばの カードを タッチして だそう。<br>ばの カードより <b>1つ おおきいか、1つ ちいさい</b> かずなら だせるよ。<br>さきに カードが なくなったら かち！ どっちも だせないときは「せーの」。'],
+ hay:['はやおし たいけつ','「いまだ！」が でたら、すぐ じぶんの ばしょを タッチ！ はやいほうが かち。<br>でる まえに さわると おてつきだよ。'],
+ tug:['つなひき れんだ','「スタート」の あと、じぶんの ばしょを いっぱい タッチして ひっぱろう！<br>はたが じぶんの ゴールまで きたら かち。'],
+ hockey:['エアホッケー','ゆびで じぶんの パッドを うごかして、ボールを あいての ゴールに いれよう！<br>さきに 7てん とったら かち。<br>⚙️ で パッドの かたち・ボールの かず・おじゃまブロックが えらべるよ。'],
+ just:['ジャストタイム','めざす びょうすうに なったと おもったら、じぶんの ばしょを タッチ！<br>ぴったりに ちかいほうが かち。とちゅうで とけいが みえなくなるよ。'],
+ mem:['しんけいすいじゃく','カードを 2まい めくって、おなじ どうぶつなら もらえるよ。<br>あたったら もう いっかい！ おおく あつめた ほうが かち。'],
+ hj:['10えん はじき','ボタンを <b>ながく おすほど つよく</b> はじけるよ。<br>あなに おちないように だんを のぼって、さきに ゴールに ついたら かち！<br>ひかっている がわの ボタンを つかってね。アウトや ゴールの ばしょは ランダムにも できるよ。'],
+ rl:['コイン ルーレット','すきな マークに コインを かけて「OK」。とまった マークに かけていたら、ばいに なって もどってくるよ！<br>ひとつの マークには 5まいまで。0️⃣は みんな ハズレ。<br>さきに 50まい ためたら かち、コインが なくなったら まけ。'],
+ ck:['カーけし ずもう','まず くるまを 3だい（または 5だい）えらぼう。<br>じぶんの ばんに、ゆびで <b>ペンを うしろに ひっぱって、はなすと パチン！</b> ひっぱるほど つよいよ。<br>あいての くるまを たたみから おしだすか、たおしたら かち。<br>じぶんの くるまが おちたり たおれたりしたら はんそく。あたらなかったら、あいてが 2かい つづけて うてるよ。<br>まけた くるまは リタイア、かった くるまは つづけて でる。ぜんぶ まかしたら ゆうしょう！<br>ときどき「✨ ひっさつわざ チャンス」が でるよ。タップしてから うつと わざが でる！']};
+function showHelp(){const sc=document.querySelector('.screen.on'),h=sc&&HELP[sc.id];if(!h)return;
+  let resume=null;
+  if(sc.id==='puyo'&&PY.st==='play'&&!PY.paused){PY.paused=true;resume=()=>{PY.paused=false;PY.last=performance.now();};}
+  if(sc.id==='hockey'&&HK.pause<=0){const pv=HK.pause;HK.pause=1e9;resume=()=>{HK.pause=.4;};}
+  modal(`<span class="big">❓ ${h[0]}</span><span class="hlp">${h[1]}</span>`,[{label:'とじる',fn:resume}]);}
+// 🏠 ボタンの となりに ？ ボタンを つける
+['[data-menu]','[data-act="menu"]','#hkMenu','.pypause','.hjpause','.ckhome','#ckSetMenu','#hkSetMenu'].forEach(sel=>document.querySelectorAll(sel).forEach(b=>{
+  if(b.closest('#menu'))return;const c=b.cloneNode(false);c.removeAttribute('id');c.removeAttribute('data-menu');c.removeAttribute('data-act');
+  c.classList.add('hlpbtn');c.classList.remove('c-menu');c.textContent='？';c.setAttribute('aria-label','あそびかた');c.addEventListener('click',e=>{e.stopPropagation();showHelp();});
+  b.parentNode.insertBefore(c,b);}));
 
 /* ========== BGM・こうかおん（この ページのための オリジナル曲） ========== */
 const BGM={on:true,ctx:null,out:null,timer:null,step:0,next:0};
