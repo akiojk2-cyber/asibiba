@@ -473,7 +473,8 @@ html,body{overflow:hidden;overscroll-behavior:none}
 
 /* カーけし ずもう */
 #ck.on{display:grid;position:fixed;inset:0;width:auto;max-width:none;height:auto;grid-template-rows:auto minmax(0,1fr) auto;gap:6px;background:#5a3a20;padding:calc(8px + env(safe-area-inset-top,0px)) max(10px,env(safe-area-inset-right,0px)) calc(8px + env(safe-area-inset-bottom,0px)) max(10px,env(safe-area-inset-left,0px))}
-#ckCv{width:100%;height:100%;display:block;touch-action:none;border-radius:14px}
+.ckcvw{position:relative;min-height:0;min-width:0;overflow:hidden;border-radius:14px}
+#ckCv{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none}
 .ckpanel{border-radius:20px;padding:8px 10px;display:flex;flex-direction:column;gap:6px;color:#fff;opacity:.8;transition:opacity .2s}
 .ckpanel.on{opacity:1;box-shadow:0 0 0 4px #ffe14d}
 .ckpanel.top{transform:rotate(180deg)}
@@ -680,7 +681,7 @@ html,body{overflow:hidden;overscroll-behavior:none}
     <div class="ckrow2"><span class="cklbl">パワー</span><div class="ckmeter"><div class="ckbar"></div></div></div>
     <div class="ckhelp"></div>
   </div>
-  <canvas id="ckCv" aria-label="たたみの どひょう"></canvas>
+  <div class="ckcvw"><canvas id="ckCv" aria-label="たたみの どひょう"></canvas></div>
   <div class="ckpanel bottom p1c" data-o="1">
     <div class="ckrow1"><span class="ckname">あか</span><span class="ckdots"></span><span class="ckmsg"></span><button class="ckhome" aria-label="メニュー">🏠</button></div>
     <div class="ckrow2"><span class="cklbl">パワー</span><div class="ckmeter"><div class="ckbar"></div></div></div>
