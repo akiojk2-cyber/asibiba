@@ -494,10 +494,11 @@ html,body{overflow:hidden;overscroll-behavior:none}
 .cksp.on{background:linear-gradient(90deg,#ff5a3c,#ffb020,#ff5a3c);background-size:200% 100%;color:#fff;box-shadow:0 0 14px 4px rgba(255,200,0,.9)}
 @keyframes ckshine{to{background-position:-200% 0}}
 .ckcut{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;gap:16px;pointer-events:none;z-index:3}
-.ckcut.on{display:flex;animation:ckcut 1.3s ease-out forwards}
+.ckcut.on{display:flex;animation:ckcut .6s ease-out forwards}
+.ckcut *{pointer-events:none}
 .ckcut span{font-size:clamp(30px,6vw,52px);font-weight:900;color:#ffe14d;-webkit-text-stroke:1.5px #8a1a12;text-shadow:0 4px 0 #b3261e,0 0 24px #ffd84d;white-space:nowrap}
 .ckcut .t{transform:rotate(180deg)}
-@keyframes ckcut{0%{opacity:0;transform:scale(2.2)}15%{opacity:1;transform:scale(1)}75%{opacity:1}100%{opacity:0;transform:scale(1.1)}}
+@keyframes ckcut{0%{opacity:0;transform:scale(2)}20%{opacity:1;transform:scale(1)}70%{opacity:1}100%{opacity:0;transform:scale(1.1)}}
 .ckset{display:none;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(680px,94vw);max-height:96%;background:var(--card);border-radius:24px;padding:12px;flex-direction:column;align-items:center;gap:10px;box-shadow:0 10px 40px rgba(0,0,0,.4);z-index:5}
 .ckset.on{display:flex}
 .ckset .duo span{font-size:clamp(18px,3vw,24px)}
@@ -2135,8 +2136,8 @@ const CK_MAXPULL=60;
 const CK_SP=[{k:'turbo',nm:'ターボ ダッシュ',ic:'🔥',ds:'パワー 1.5ばい'},{k:'lock',nm:'ロックオン',ic:'🎯',ds:'あいてに むかって まがる'},
   {k:'heavy',nm:'ずっしり ヘビー',ic:'🪨',ds:'おもさ 3ばい'},{k:'ice',nm:'つるつる アイス',ic:'🧊',ds:'あいてが よく すべる'},
   {k:'thunder',nm:'ビリビリ サンダー',ic:'⚡',ds:'あいてが ころびやすい'},{k:'double',nm:'もう いっかい',ic:'✌️',ds:'2かい れんぞくで うてる'}];
-function ckOffer(){CK.sp=Math.random()<.28?{o:CK.turn,i:Math.floor(Math.random()*CK_SP.length),on:false}:null;if(CK.sp)ckSnd('chance');}
-function ckCut(o,txt){const c=$('ckCut');c.querySelectorAll('span').forEach(e=>e.textContent=txt);c.classList.remove('on');void c.offsetWidth;c.classList.add('on');}
+function ckOffer(){CK.sp=Math.random()<.1?{o:CK.turn,i:Math.floor(Math.random()*CK_SP.length),on:false}:null;if(CK.sp)ckSnd('chance');}
+function ckCut(o,txt){const c=$('ckCut');c.querySelectorAll('span').forEach(e=>e.textContent=txt);c.classList.remove('on');void c.offsetWidth;c.classList.add('on');clearTimeout(CK.cutT);CK.cutT=setTimeout(()=>c.classList.remove('on'),600);}
 function ckApplySp(o){const sp=CK.sp;CK.sp=null;if(!sp||!sp.on||sp.o!==o)return 1;const d=CK_SP[sp.i],me=CK.cars[o],op=CK.cars[ckOpp(o)];
   CK.fx={k:d.k,o};ckCut(o,`${d.ic} ${d.nm}！`);ckSnd('sp');
   if(d.k==='heavy'){me.m*=3;me.I*=3;}else if(d.k==='ice')op.ice=true;else if(d.k==='thunder')op.zap=true;else if(d.k==='lock')me.lock=true;else if(d.k==='double')CK.left+=1;
@@ -2177,7 +2178,7 @@ function ckRound(){CK.pull=0;CK.pid=null;CK.sp=null;CK.fx=null;CK.cars={'1':ckNe
 function startCk(){show('ck');ckStop();CK.team={'1':[],'-1':[]};CK.lost={'1':[],'-1':[]};CK.streak={'1':0,'-1':0};CK.lock=null;CK.first='1';
   CK.cars={'1':ckNewCar('1'),'-1':ckNewCar('-1')};CK.st='set';
   requestAnimationFrame(()=>{ckSize();CK.last=performance.now();CK.raf=requestAnimationFrame(ckLoop);ckOpenSet('team');});}
-function ckStop(){CK.tm.forEach(clearTimeout);CK.tm=[];cancelAnimationFrame(CK.raf);}
+function ckStop(){CK.tm.forEach(clearTimeout);CK.tm=[];$('ckCut').classList.remove('on');cancelAnimationFrame(CK.raf);}
 function ckOpenSet(mode){CK.mode=mode;CK.st='set';$('ckSet').classList.add('on');
   if(mode==='next'){const l=ckOpp(CK.lock);CK.cur[l]=ckAlive(l)[0];}
   ckSetRender();ckUI();}
