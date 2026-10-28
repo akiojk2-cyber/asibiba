@@ -2097,7 +2097,7 @@ function ckCollide(A,B){const h=ckSAT(A,B);if(!h)return;const{nx,ny,o,px,py}=h;
   CK.contact=true;ckSnd('hit',j);
   // ころぶ？（よこから あたると ころびやすい）
   for(const[c,dv]of[[A,j*ia],[B,j*ib]]){if(c.tip)continue;const f=Math.abs(nx*Math.cos(c.a)+ny*Math.sin(c.a));
-    const th=450*c.ty.st*(.75+.55*f)*(.88+.24*Math.random())*(c.o===CK.turn?1.8:1);/* うつ がわは ふんばれる */if(dv>th){c.tip=true;c.flip=0;ckSnd('tip');}}}
+    const th=520*c.ty.st*(.75+.55*f)*(.88+.24*Math.random())*(c.o===CK.turn?1.8:1);/* うつ がわは ふんばれる */if(dv>th){c.tip=true;c.flip=0;ckSnd('tip');}}}
 function ckStep(dt){const cs=[CK.cars['1'],CK.cars['-1']];
   for(const c of cs){if(c.out){c.fall=Math.min(1,c.fall+dt*2);continue;}
     if(c.tip)c.flip=Math.min(1,c.flip+dt*4);
@@ -2113,7 +2113,7 @@ function ckPenPos(o){const c=CK.cars[o],a=CK.aim[o],dx=Math.cos(a),dy=Math.sin(a
   return{x:c.x-dx*d,y:c.y-dy*d,a};}
 const CK_MAXPULL=60;
 function ckFire(o){if(CK.st!=='aim'||CK.turn!==o)return;const pull=CK.pull;CK.pull=0;if(pull<4){ckUI();return;}
-  CK.st='fire';CK.pen={o,t:0,done:false,pull,v:300+pull/CK_MAXPULL*850};CK.contact=false;ckSnd('pachin');ckUI();}
+  CK.st='fire';CK.pen={o,t:0,done:false,pull,v:450+500*Math.pow(pull/CK_MAXPULL,1.2)};CK.contact=false;ckSnd('pachin');ckUI();}
 function ckLoop(t){if(!$('ck').classList.contains('on'))return;const dt=Math.min(.04,(t-CK.last)/1000);CK.last=t;
   if(CK.st==='fire'){const P=CK.pen;P.t+=dt;
     if(!P.done&&P.t>=.06){P.done=true;const c=CK.cars[P.o],a=CK.aim[P.o],v=P.v;c.vx=Math.cos(a)*v;c.vy=Math.sin(a)*v;c.w=0;}
