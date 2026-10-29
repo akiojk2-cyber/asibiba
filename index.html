@@ -591,6 +591,8 @@ html,body{overflow:hidden;overscroll-behavior:none}
 .byprow{display:flex;align-items:center;gap:5px;flex-wrap:wrap}
 .byprow i{font-style:normal;font-size:13px;font-weight:bold;color:#5a4a33;min-width:3.2em}
 .byprow .jchip{padding:4px 10px;font-size:14px}
+.bycol{width:30px;height:30px;border-radius:50%;border:3px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.25);padding:0}
+.bycol.on{box-shadow:0 0 0 3px #3a2e1f}
 .bystat{display:grid;grid-template-columns:auto 1fr;gap:2px 8px;font-size:12px;font-weight:bold;color:#5a4a33;align-items:center}
 .bystat s{display:block;height:8px;border-radius:4px;background:linear-gradient(90deg,#ff8a3d,#ffd84d);text-decoration:none}
 
@@ -2438,7 +2440,7 @@ function ckLoop(t){if(!$('ck').classList.contains('on'))return;const dt=Math.min
     const moving=['1','-1'].some(o=>{const c=CK.cars[o];return(!c.out&&(Math.hypot(c.vx,c.vy)>2||Math.abs(c.w)>.05))||(c.out&&c.fall<1)||(c.tip&&c.flip<1);});
     CK.still=moving?0:CK.still+dt;if(CK.still>.25)ckJudge();}
   ckDraw();CK.raf=requestAnimationFrame(ckLoop);}
-function ckJudge(){const o=CK.turn,p=ckOpp(o),A=CK.cars[o],D=CK.cars[p];CK.st='judge';ckClearFx();
+function ckJudge(){const o=CK.turn,p=ckOpp(o),A=CK.cars[o],D=CK.cars[p];CK.st='judge';CK.pid=null;CK.pull=0;ckClearFx();
   const aBad=A.out||A.tip,dBad=D.out||D.tip;
   if(aBad){ckPoint(p,`${PNAME(+o)}は はんそく！`,A.out?'じぶんの くるまが おちた':'じぶんの くるまが ころんだ');return;}
   if(dBad){ckPoint(o,D.out?'おしだし！':'たおした！','');return;}
@@ -2505,14 +2507,16 @@ document.querySelectorAll('#ck .ckpanel').forEach(s=>{const o=s.dataset.o;
 $('ckSetMenu').addEventListener('click',askMenu);
 function ckWorld(e){const r=ckCv.getBoundingClientRect();return{x:(e.clientX-r.left-CK.W/2)/CK.s,y:(e.clientY-r.top-CK.H/2)/CK.s,py:e.clientY-r.top};}
 // ゆびで ペンを うしろに ひっぱる → はなすと パチン
-function ckDrag(e){const p=ckWorld(e),o=CK.turn,c=CK.cars[o],dx=c.x-p.x,dy=c.y-p.y,d=Math.hypot(dx,dy);
-  if(d>6)CK.aim[o]=Math.atan2(dy,dx);
-  const np=Math.max(0,Math.min(CK_MAXPULL,d-CK.d0));if(Math.round(np/6)!==Math.round(CK.pull/6)&&np>CK.pull)ckSnd('pull',np);CK.pull=np;ckUI();}
-ckCv.addEventListener('pointerdown',e=>{e.preventDefault();if(CK.st!=='aim'||CK.pid!==null)return;const p=ckWorld(e),o=p.py>CK.H/2?'1':'-1';if(o!==CK.turn)return;
-  try{ckCv.setPointerCapture(e.pointerId);}catch(_){}CK.pid=e.pointerId;const c=CK.cars[o];CK.d0=Math.hypot(c.x-p.x,c.y-p.y);CK.pull=0;ckDrag(e);});
-ckCv.addEventListener('pointermove',e=>{if(e.pointerId===CK.pid&&CK.st==='aim')ckDrag(e);});
-['pointerup','pointercancel'].forEach(ev=>ckCv.addEventListener(ev,e=>{if(e.pointerId!==CK.pid)return;CK.pid=null;
-  if(ev==='pointerup')ckFire(CK.turn);else{CK.pull=0;ckUI();}}));
+// ゆびを うごかした ぶんだけで ねらいと つよさを きめる（ゆびの いちに かんけいなく あんてい）
+function ckDrag(e){const p=ckWorld(e),o=CK.turn,dx=CK.sx-p.x,dy=CK.sy-p.y,d=Math.hypot(dx,dy);
+  if(d>4)CK.aim[o]=Math.atan2(dy,dx);
+  const np=Math.max(0,Math.min(CK_MAXPULL,(d-2)*1.1));if(Math.round(np/6)!==Math.round(CK.pull/6)&&np>CK.pull)ckSnd('pull',np);CK.pull=np;ckUI();}
+ckCv.addEventListener('pointerdown',e=>{e.preventDefault();if(CK.st!=='aim')return;const p=ckWorld(e);
+  if(CK.pid!==null&&CK.pid!==e.pointerId&&performance.now()-(CK.pt||0)<1500)return;   // ほかの ゆびが つかっている
+  try{ckCv.setPointerCapture(e.pointerId);}catch(_){}CK.pid=e.pointerId;CK.pt=performance.now();CK.sx=p.x;CK.sy=p.y;CK.pull=0;CK.aim0=CK.aim[CK.turn];ckUI();});
+ckCv.addEventListener('pointermove',e=>{if(e.pointerId===CK.pid&&CK.st==='aim'){CK.pt=performance.now();ckDrag(e);}});
+['pointerup','pointercancel','lostpointercapture'].forEach(ev=>ckCv.addEventListener(ev,e=>{if(e.pointerId!==CK.pid)return;CK.pid=null;
+  if(ev==='pointerup'&&CK.st==='aim')ckFire(CK.turn);else{CK.pull=0;ckUI();}}));
 window.addEventListener('resize',()=>{if($('ck').classList.contains('on'))ckSize();});
 if(window.ResizeObserver)new ResizeObserver(()=>{if($('ck').classList.contains('on'))ckSize();}).observe(document.querySelector('.ckcvw'));
 
@@ -2655,7 +2659,8 @@ function ckSnd(k,j){if(!BGM.on||!BGM.ctx)return;const t=BGM.ctx.currentTime;
 const BY_BODY=[{nm:'おもい',m:1.5,dec:1.3,atk:2},{nm:'ふつう',m:1.1,dec:1,atk:1},{nm:'かるい',m:.8,dec:.75,atk:0}];
 const BY_WT=[{nm:'そとがわ',dec:1.2,atk:1,sta:0},{nm:'まんなか',dec:.82,atk:0,sta:1}];
 const BY_TIP=[{nm:'とがり',move:.5,damp:1.1,dec:1,def:1,atk:0},{nm:'まるい',move:1.05,damp:.45,dec:.88,def:0,atk:1}];
-const BY={st:'idle',parts:{'1':{b:1,w:0,t:0},'-1':{b:1,w:1,t:1}},sc:{'1':0,'-1':0},tops:{},pull:{},sparks:[],raf:0,last:0,t:0,goT:0,tm:[],W:0,H:0,S:1,d:1,first:true};
+const BY_COLS=['#e9546b','#3d8bff','#2fbf55','#ffc61a','#a35cff','#ff8a3d','#3a4250','#eef1f5'];
+const BY={st:'idle',parts:{'1':{b:1,w:0,t:0,c:0},'-1':{b:1,w:1,t:1,c:1}},sc:{'1':0,'-1':0},tops:{},pull:{},sparks:[],raf:0,last:0,t:0,goT:0,tm:[],W:0,H:0,S:1,d:1,first:true};
 const byCv=$('byCv'),byX=byCv.getContext('2d');
 function byStats(p){const b=BY_BODY[p.b],w=BY_WT[p.w],t=BY_TIP[p.t],dec=b.dec*w.dec*t.dec;
   return{atk:b.atk+w.atk+t.atk,sta:Math.max(0,Math.min(4,Math.round((1.35-dec)*4.2))),def:Math.round((b.m-.8)*3)+t.def,m:b.m,dec,move:t.move,damp:t.damp,r:b.m>1.3?.12:b.m<1?.1:.11};}
@@ -2700,7 +2705,7 @@ function byStadium(x,W,H,S){const cx=W/2,cy=H/2;
   x.fillStyle='rgba(61,139,255,.25)';x.beginPath();x.arc(cx,cy-S*.8,S*.15,0,7);x.fill();}
 function byDraw(){const x=byX,d=BY.d,W=BY.W,H=BY.H,S=BY.S;if(!W)return;x.setTransform(d,0,0,d,0,0);
   byStadium(x,W,H,S);const cx=W/2,cy=H/2;
-  for(const o of['1','-1']){const T=BY.tops[o];if(!T)continue;const col=o==='1'?'#e9546b':'#3d8bff';
+  for(const o of['1','-1']){const T=BY.tops[o];if(!T)continue;const col=BY_COLS[BY.parts[o].c||0];
     if(!T.live){const lp=byLaunchPos(o),P=BY.pull[o];
       if(BY.st==='play'&&P&&P.p>0){x.save();x.strokeStyle=col;x.lineWidth=5;x.setLineDash([8,6]);x.beginPath();x.moveTo(cx+lp.x*S,cy+lp.y*S);x.lineTo(cx+(lp.x+P.dx*(.3+P.p*.6))*S,cy+(lp.y+P.dy*(.3+P.p*.6))*S);x.stroke();x.restore();}
       byTopArt(x,cx+lp.x*S,cy+lp.y*S,T.r*S,col,T.p,0,0,0);
@@ -2722,7 +2727,7 @@ function byStep(dt){const ts=[BY.tops['1'],BY.tops['-1']];
     T.vx+=(Math.random()-.5)*T.move*.8*dt;T.vy+=(Math.random()-.5)*T.move*.8*dt;
     const dm=Math.exp(-T.damp*dt);T.vx*=dm;T.vy*=dm;
     T.x+=T.vx*dt;T.y+=T.vy*dt;T.ang+=T.spin*28*dt;
-    T.spin-=.011*T.dec*dt;T.hit=Math.max(0,T.hit-dt);
+    T.spin-=.0049*T.dec*dt;T.hit=Math.max(0,T.hit-dt);
     const R=Math.hypot(T.x,T.y);
     if(R>1-T.r){const nx=T.x/R,ny=T.y/R,vr=T.vx*nx+T.vy*ny;
       if(vr>1.25){T.out=true;T.fall=0;bySnd('out');}
@@ -2738,14 +2743,14 @@ function byStep(dt){const ts=[BY.tops['1'],BY.tops['-1']];
         // よこに はじく（かいてんの むき）
         const tx=-ny,ty=nx,k=.25*(A.spin+B.spin);A.vx+=tx*k*ia;A.vy+=ty*k*ia;B.vx-=tx*k*ib;B.vy-=ty*k*ib;
         const fa=1+.28*A.atk,fb=1+.28*B.atk,ja=Math.min(1.2,j);
-        B.spin-=.032*ja*fa/Math.sqrt(B.m)/(1+.15*B.def);A.spin-=.032*ja*fb/Math.sqrt(A.m)/(1+.15*A.def);
+        B.spin-=.0142*ja*fa/Math.sqrt(B.m)/(1+.15*B.def);A.spin-=.0142*ja*fb/Math.sqrt(A.m)/(1+.15*A.def);
         A.hit=B.hit=.12;const px=A.x+nx*A.r,py=A.y+ny*A.r;
         for(let i=0;i<14;i++){const a=Math.random()*7,v=.4+Math.random()*1.2;BY.sparks.push({x:px,y:py,vx:Math.cos(a)*v,vy:Math.sin(a)*v,t:0});}
         bySnd('hit',ja);}}}
   for(const T of ts)if((T.out||T.stop)&&T.fall<1)T.fall=Math.min(1,T.fall+dt*1.5);
   for(const s of BY.sparks){s.t+=dt;s.x+=s.vx*dt;s.y+=s.vy*dt;}BY.sparks=BY.sparks.filter(s=>s.t<.4);}
 function byLoop(t){if(!$('bey').classList.contains('on'))return;const dt=Math.min(.04,(t-BY.last)/1000);BY.last=t;
-  if(BY.st==='play'){BY.t+=dt;for(let i=0;i<12;i++)byStep(dt*2/12);   // 2ばいそく
+  if(BY.st==='play'){BY.t+=dt;for(let i=0;i<18;i++)byStep(dt*3/18);   // 3ばいそく（はじめの 1.5ばい）
     // 6びょう たっても うたない ときは じどうで はっしゃ
     for(const o of['1','-1']){const T=BY.tops[o];if(!T.live&&BY.t>6){BY.pull[o]=null;byLaunch(o,.45,0,o==='1'?-1:1);}}
     const A=BY.tops['1'],B=BY.tops['-1'];
@@ -2773,9 +2778,11 @@ function byOpenSet(){BY.st='set';$('bySet').classList.add('on');byStop2();bySetR
 function bySetRender(){document.querySelectorAll('#bySet .byside').forEach(side=>{const o=side.dataset.o,p=BY.parts[o],box=side.querySelector('.byparts');box.innerHTML='';
   [['ボディ','b',BY_BODY],['おもり','w',BY_WT],['さき','t',BY_TIP]].forEach(([lb,k,arr])=>{const r=document.createElement('div');r.className='byprow';r.innerHTML=`<i>${lb}</i>`;
     arr.forEach((a,i)=>{const b=document.createElement('button');b.className='jchip'+(p[k]===i?' on':'');b.textContent=a.nm;b.onclick=()=>{p[k]=i;sfx();bySetRender();};r.appendChild(b);});box.appendChild(r);});
+  {const r=document.createElement('div');r.className='byprow';r.innerHTML='<i>いろ</i>';
+    BY_COLS.forEach((c,i)=>{const b=document.createElement('button');b.className='bycol'+((p.c||0)===i?' on':'');b.style.background=c;b.setAttribute('aria-label','いろ '+(i+1));b.onclick=()=>{p.c=i;sfx();bySetRender();};r.appendChild(b);});box.appendChild(r);}
   const st=byStats(p),bar=v=>`<s style="width:${Math.max(8,(v+1)/5*100)}%"></s>`;
   side.querySelector('.bystat').innerHTML=`こうげき${bar(st.atk)}じきゅう${bar(st.sta)}ぼうぎょ${bar(Math.min(4,st.def))}`;
-  const c=side.querySelector('.byprev'),x=c.getContext('2d');x.setTransform(1,0,0,1,0,0);x.clearRect(0,0,240,240);byTopArt(x,120,120,92,o==='1'?'#e9546b':'#3d8bff',p,.3,0,0);});
+  const c=side.querySelector('.byprev'),x=c.getContext('2d');x.setTransform(1,0,0,1,0,0);x.clearRect(0,0,240,240);byTopArt(x,120,120,92,BY_COLS[p.c||0],p,.3,0,0);});
   duo('byMsg','パーツを えらんで バトル！<br><small>おもい＋そとがわは こうげき・かるい＋まんなか＋まるいは じきゅうが つよいよ</small>');}
 $('byGo').addEventListener('click',()=>{$('bySet').classList.remove('on');byRound();});
 $('bySetMenu').addEventListener('click',askMenu);
@@ -2838,7 +2845,7 @@ function ivStep(dt){const H=IV.H;IV.t+=dt;
   IV.inv=IV.inv.filter(v=>v.y>-6&&v.y<H+6&&!v.dead);
   for(const m of IV.ms)m.y+=m.vy*dt;
   // あたりはんてい
-  const ship=o=>({x:IV.p[o].x,y:IV.p[o].y,w:8,h:5});
+  const ship=o=>({x:IV.p[o].x,y:IV.p[o].y,w:10,h:6.5});
   for(const m of IV.ms){if(m.dead)continue;const mb={x:m.x,y:m.y,w:1.2,h:3};
     for(const v of IV.inv)if(!v.dead&&ivHit(mb,{x:v.x,y:v.y,w:8,h:6})){v.dead=m.dead=true;ivBoom(v.x,v.y,IV_COL[v.k]);ivSnd('boom');break;}
     if(m.dead)continue;
@@ -2861,7 +2868,10 @@ function ivDraw(){const x=ivX,s=IV.s,d=IV.d,H=IV.H;if(!ivCv.width)return;x.setTr
   x.strokeStyle='rgba(233,84,107,.5)';x.beginPath();x.moveTo(0,H*.6);x.lineTo(100,H*.6);x.stroke();x.setLineDash([]);
   for(const v of IV.inv){const fr=Math.floor(v.f*3)%2;ivSprite(x,IV_SPR[v.k][fr],v.x,v.y,.8,IV_COL[v.k],v.vy<0);}
   for(const m of IV.ms){x.fillStyle=m.o==='1'?'#ffd0d6':'#cfe0ff';x.fillRect(m.x-.5,m.y-1.5,1,3);}
-  for(const o of['1','-1']){const P=IV.p[o];if(!P||P.dead)continue;ivSprite(x,IV_SPR.ship,P.x,P.y,.9,o==='1'?'#ff6b7f':'#6fa8ff',o==='-1');}
+  for(const o of['1','-1']){const P=IV.p[o];if(!P||P.dead)continue;const col=o==='1'?'#ff6b7f':'#6fa8ff';
+    if(P.touch){x.strokeStyle=col;x.globalAlpha=.5;x.lineWidth=.4;x.setLineDash([1,1]);x.beginPath();x.moveTo(P.fx,P.fy);x.lineTo(P.x,P.y);x.stroke();x.setLineDash([]);x.beginPath();x.arc(P.fx,P.fy,3.5,0,7);x.stroke();x.globalAlpha=1;}
+    x.fillStyle=col;x.globalAlpha=.18;x.beginPath();x.arc(P.x,P.y,7,0,7);x.fill();x.globalAlpha=1;
+    ivSprite(x,IV_SPR.ship,P.x,P.y,1.25,col,o==='-1');}
   for(const f of IV.fx){x.fillStyle=f.col;x.globalAlpha=1-f.t/.7;x.fillRect(f.x-.6,f.y-.6,1.2,1.2);}x.globalAlpha=1;}
 function ivLoop(t){if(!$('inv').classList.contains('on'))return;const dt=Math.min(.04,(t-IV.last)/1000);IV.last=t;
   if(IV.st==='play')ivStep(dt);else{for(const f of IV.fx){f.t+=dt;f.x+=f.vx*dt;f.y+=f.vy*dt;}IV.fx=IV.fx.filter(f=>f.t<.7);IV.t+=dt*.3;}
@@ -2888,11 +2898,11 @@ document.querySelectorAll('#inv .ivpanel').forEach(s=>{const o=s.dataset.o;
   s.querySelector('.ivhome').addEventListener('click',askMenu);});
 $('ivStartMenu').addEventListener('click',askMenu);
 function ivPt(e){const r=ivCv.getBoundingClientRect();return{x:(e.clientX-r.left)/IV.s,y:(e.clientY-r.top)/IV.s};}
-function ivAim(o,pt){const P=IV.p[o];if(!P)return;const f=o==='1'?1:-1;P.tx=pt.x;P.ty=pt.y-f*8;}   // ゆびより すこし まえに ほうだい
+function ivAim(o,pt){const P=IV.p[o];if(!P)return;const f=o==='1'?1:-1,off=Math.max(10,90/IV.s);P.tx=pt.x;P.ty=pt.y-f*off;P.fx=pt.x;P.fy=pt.y;P.touch=true;}   // ゆびの すぐ うえ（あいて がわ）に ほうだい
 ivCv.addEventListener('pointerdown',e=>{e.preventDefault();const pt=ivPt(e),o=pt.y>IV.H/2?'1':'-1';IV.drag=IV.drag||{};
   try{ivCv.setPointerCapture(e.pointerId);}catch(_){}IV.drag[e.pointerId]=o;ivAim(o,pt);});
 ivCv.addEventListener('pointermove',e=>{const o=IV.drag&&IV.drag[e.pointerId];if(o)ivAim(o,ivPt(e));});
-['pointerup','pointercancel'].forEach(ev=>ivCv.addEventListener(ev,e=>{if(IV.drag)delete IV.drag[e.pointerId];}));
+['pointerup','pointercancel'].forEach(ev=>ivCv.addEventListener(ev,e=>{if(IV.drag){const o=IV.drag[e.pointerId];if(o&&IV.p[o])IV.p[o].touch=false;delete IV.drag[e.pointerId];}}));
 window.addEventListener('resize',()=>{if($('inv').classList.contains('on'))ivSize();});
 if(window.ResizeObserver)new ResizeObserver(()=>{if($('inv').classList.contains('on'))ivSize();}).observe(document.querySelector('.ivcvw'));
 function ivSnd(k){if(!BGM.on||!BGM.ctx)return;const t=BGM.ctx.currentTime;
@@ -3064,10 +3074,14 @@ function jgDraw(){const x=jgX,W=JG.W,H=JG.H,d=JG.d||1;if(!W)return;x.setTransfor
     x.font=`bold ${Math.max(9,R*.36)}px sans-serif`;const tw=x.measureText(q.l).width+8;
     x.fillStyle='rgba(255,255,255,.9)';ckRR(x,cx-tw/2,cy+rr+1,tw,Math.max(12,R*.48),5);x.fill();x.fillStyle='#4a3a26';x.fillText(q.l,cx,cy+rr+1+Math.max(6,R*.24));});
   // コマ
-  JG.pl.forEach((Pl,k)=>{const p=P[Pl.pos],off=[[-.55,-.55],[.55,-.55],[-.55,.55],[.55,.55]][k],cx=p.x*W+off[0]*R,cy=p.y*H+off[1]*R;
-    x.fillStyle='rgba(0,0,0,.35)';x.beginPath();x.arc(cx+2,cy+3,R*.52,0,7);x.fill();
-    x.fillStyle=Pl.col;x.beginPath();x.arc(cx,cy,R*.52,0,7);x.fill();x.strokeStyle='#fff';x.lineWidth=3;x.stroke();
-    x.font=`${R*.6}px sans-serif`;x.fillText('🚗',cx,cy+1);});}
+  JG.pl.forEach((Pl,k)=>{const p=P[Pl.pos],same=JG.pl.filter(q=>q.pos===Pl.pos).length>1,off=same?[[-.6,-.95],[.6,-.95],[-.6,.95],[.6,.95]][k]:[0,-.95],
+      cx=p.x*W+off[0]*R,cy=p.y*H+off[1]*R,TR=R*.92,my=JG.st==='play'&&JG.pl[JG.turn]===Pl;
+    if(my){x.strokeStyle='rgba(255,225,77,.95)';x.lineWidth=6;x.beginPath();x.arc(cx,cy,TR+6+Math.sin(performance.now()/150)*2,0,7);x.stroke();}
+    x.fillStyle='rgba(0,0,0,.35)';x.beginPath();x.arc(cx+3,cy+5,TR,0,7);x.fill();
+    x.fillStyle=Pl.col;x.beginPath();x.arc(cx,cy,TR,0,7);x.fill();x.strokeStyle='#fff';x.lineWidth=4;x.stroke();
+    x.font=`${TR*1.15}px sans-serif`;x.fillText('🚗',cx,cy+2);
+    x.font=`bold ${Math.max(11,TR*.42)}px sans-serif`;const nm=PNAME(+Pl.o),tw=x.measureText(nm).width+10;
+    x.fillStyle=Pl.col;ckRR(x,cx-tw/2,cy-TR-TR*.5,tw,TR*.55,TR*.2);x.fill();x.fillStyle='#fff';x.fillText(nm,cx,cy-TR-TR*.22);});}
 if(window.ResizeObserver)new ResizeObserver(()=>{if($('jg').classList.contains('on'))jgSize();}).observe(document.querySelector('.jgboardw'));
 function jgBuild(){const w=$('jgWheel');w.innerHTML='';for(let k=0;k<12;k++){const s=document.createElement('span');s.textContent=(k%6)+1;
     const a=(k*30+15)*Math.PI/180;s.style.left=(50+36*Math.sin(a))+'%';s.style.top=(50-36*Math.cos(a))+'%';s.style.transform=`translate(-50%,-50%) rotate(${k*30+15}deg)`;w.appendChild(s);}
@@ -3163,9 +3177,12 @@ function bmBoom(b){BM.bombs=BM.bombs.filter(z=>z!==b);bmSnd('boom');
 function bmStep(dt){BM.t+=dt;
   for(const o of['1','-1']){const P=BM.p[o],k=BM.keys[o],f=o==='1'?1:-1;if(P.dead)continue;
     if(P.mv){P.mv.t+=dt*P.spd;if(P.mv.t>=1){P.x=P.mv.tx;P.y=P.mv.ty;P.mv=null;}}
-    if(!P.mv){let dir=null;for(const d of['U','D','L','R'])if(k[d])dir=d;if(!dir&&P.want)dir=P.want;P.want=null;
-      if(dir){let[dx,dy]=BM_DIR[dir];dx*=f;dy*=f;P.face=dx>0?1:dx<0?3:dy>0?2:0;   // あおは がめんが さかさ
-        if(bmFree(P.x+dx,P.y+dy,o))P.mv={fx:P.x,fy:P.y,tx:P.x+dx,ty:P.y+dy,t:0};}}
+    if(!P.mv){let ds=['U','D','L','R'].filter(d=>k[d]);if(!ds.length&&P.want)ds=[P.want];P.want=null;
+      // ななめの ときは、とおれる ほうへ。どちらも とおれれば かわりばんこに すすんで ななめに いく
+      if(ds.length===2&&ds.includes(P.last))ds=[ds.find(d=>d!==P.last),P.last];
+      for(const dir of ds){let[dx,dy]=BM_DIR[dir];dx*=f;dy*=f;   // あおは がめんが さかさ
+        if(bmFree(P.x+dx,P.y+dy,o)){P.face=dx>0?1:dx<0?3:dy>0?2:0;P.mv={fx:P.x,fy:P.y,tx:P.x+dx,ty:P.y+dy,t:0};P.last=dir;break;}
+        if(ds.length===1)P.face=dx>0?1:dx<0?3:dy>0?2:0;}}
     // じぶんの ばくだんから はなれたら もう とおれない
     const[cx,cy]=bmTile(P);for(const b of BM.bombs)if(b.pass[o]&&!(b.x===cx&&b.y===cy)&&!(P.mv&&b.x===P.mv.fx&&b.y===P.mv.fy&&P.mv.t<.5))delete b.pass[o];
     const it=BM.it[bmK(cx,cy)];if(it){if(it.k==='b')P.max=Math.min(6,P.max+1);if(it.k==='f')P.rng=Math.min(7,P.rng+1);if(it.k==='s')P.spd=Math.min(6.5,P.spd+.7);delete BM.it[bmK(cx,cy)];bmSnd('item');}}
@@ -3236,11 +3253,12 @@ document.querySelectorAll('#bm .bmpanel').forEach(s=>{const o=s.dataset.o;
   ['pointerup','pointercancel','pointerleave'].forEach(ev=>bb.addEventListener(ev,()=>bb.classList.remove('hold')));
   // スティック：ゆびの いちで むきが きまる。ゆびを すべらせれば そのまま むきが かわる
   const pad=s.querySelector('.bmpad'),knob=pad.querySelector('.knob');let pid=null;
-  const setDir=d=>{BM.keys[o]={};if(d){BM.keys[o][d]=true;if(BM.p[o])BM.p[o].want=d;}pad.querySelectorAll('i').forEach(i=>i.classList.toggle('on',i.className.split(' ')[0]===(d||'').toLowerCase()));};
+  const setDir=d=>{BM.keys[o]={};const ds=d?d.split(''):[];ds.forEach(c=>BM.keys[o][c]=true);if(ds.length&&BM.p[o])BM.p[o].want=ds[0];pad.querySelectorAll('i').forEach(i=>i.classList.toggle('on',ds.includes(i.className.split(' ')[0].toUpperCase())));};
   const upd=e=>{const r=pad.getBoundingClientRect();let dx=e.clientX-(r.left+r.width/2),dy=e.clientY-(r.top+r.height/2);
     if(o==='-1'){dx=-dx;dy=-dy;}   // うえの せきは さかさ
     const R=r.width/2,l=Math.hypot(dx,dy),k=Math.min(1,l/R)*R*.45;knob.style.transform=l?`translate(${(o==='-1'?-1:1)*dx/l*k}px,${(o==='-1'?-1:1)*dy/l*k}px)`:'';
-    setDir(l<R*.14?null:Math.abs(dx)>Math.abs(dy)?(dx>0?'R':'L'):(dy>0?'D':'U'));};
+    const ax=Math.abs(dx),ay=Math.abs(dy),h=dx>0?'R':'L',v=dy>0?'D':'U';
+    setDir(l<R*.14?null:Math.min(ax,ay)>Math.max(ax,ay)*.45?(ax>ay?h+v:v+h):ax>ay?h:v);};   // ななめも うけつける
   pad.addEventListener('pointerdown',e=>{e.preventDefault();if(pid!==null)return;pid=e.pointerId;try{pad.setPointerCapture(pid);}catch(_){}upd(e);});
   pad.addEventListener('pointermove',e=>{if(e.pointerId===pid)upd(e);});
   ['pointerup','pointercancel'].forEach(ev=>pad.addEventListener(ev,e=>{if(e.pointerId!==pid)return;pid=null;knob.style.transform='';setDir(null);}));
