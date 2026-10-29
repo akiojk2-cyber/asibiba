@@ -454,14 +454,15 @@ html,body{overflow:hidden;overscroll-behavior:none}
   #menu .title{font-size:clamp(24px,3vh,36px);margin:0}
   #menu .sub{font-size:clamp(14px,1.6vh,19px);margin:0 0 2px}
   #menu .mhead{margin:clamp(4px,1vh,12px) 4px clamp(4px,.7vh,8px);font-size:clamp(15px,1.6vh,18px)}
-  #menu .tiles{min-height:0;grid-template-columns:repeat(3,minmax(0,1fr));grid-auto-rows:minmax(0,1fr);gap:clamp(8px,1vh,12px)}
+  #menu .tiles{min-height:0;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:minmax(0,1fr);gap:clamp(8px,1vh,12px)}
   #menu .tiles.g1{flex:2 1 0}#menu .tiles.g2{flex:3 1 0}#menu .tiles.g3{flex:1 1 0}
   #menu .tile{min-height:0;padding:6px;gap:2px;overflow:hidden}
   #menu .tile.wide{grid-column:auto;flex-direction:column;gap:2px}
   #menu .tile.wide>span[style]{align-items:center!important}
   #menu .tile .ti,#menu .tile.wide .ti{font-size:clamp(26px,3.4vh,40px)}
-  #menu .tile .tn{font-size:clamp(15px,min(2vh,3.1vw),21px)}
-  #menu .tile .ts{font-size:clamp(11px,min(1.2vh,1.9vw),13px);line-height:1.3}
+  #menu .tile .tn{font-size:clamp(13px,min(2vh,2.45vw),21px)}
+  #menu .tile .tn{white-space:normal;line-height:1.15;word-break:keep-all;overflow-wrap:anywhere}
+  #menu .tile .ts{font-size:clamp(10px,min(1.2vh,1.6vw),13px);line-height:1.3}
   #menu .bgm-btn{margin-top:clamp(6px,1vh,14px);padding:8px 20px;font-size:17px}
 }
 
@@ -539,6 +540,34 @@ html,body{overflow:hidden;overscroll-behavior:none}
 .howbody .parent{font-size:15px;background:#f6efe2;border-radius:14px;padding:10px 14px;margin-top:14px;line-height:1.7}
 .howbody .credit{margin:14px 0 0;text-align:center;font-size:14px;letter-spacing:.08em;color:#8a7a62}
 .howclose{border:none;background:var(--accent);color:#fff;font-size:20px;font-weight:bold;padding:14px;margin:0 16px 16px;border-radius:16px;box-shadow:0 4px 0 rgba(0,0,0,.2)}
+
+/* ベイごま バトル */
+#bey.on{display:grid;position:fixed;inset:0;width:auto;max-width:none;height:auto;grid-template-rows:auto minmax(0,1fr) auto;gap:6px;background:#1c2230;padding:calc(8px + env(safe-area-inset-top,0px)) max(10px,env(safe-area-inset-right,0px)) calc(8px + env(safe-area-inset-bottom,0px)) max(10px,env(safe-area-inset-left,0px))}
+.bycvw{position:relative;min-height:0;min-width:0;overflow:hidden;border-radius:14px}
+#byCv{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none}
+.bypanel{border-radius:20px;padding:8px 10px;display:flex;flex-direction:column;gap:6px;color:#fff}
+.bypanel.top{transform:rotate(180deg)}
+.bypanel.p1c{background:#e9546b}.bypanel.p2c{background:#3d8bff}
+.byrow{display:flex;align-items:center;gap:10px;font-weight:bold}
+.byname{font-size:22px}.bydots{font-size:22px;letter-spacing:2px;color:#ffe14d}
+.bymsg{flex:1;font-size:16px;text-align:center}
+.byhome{border:none;background:rgba(255,255,255,.92);border-radius:12px;width:44px;height:44px;font-size:20px}
+.byrow2{display:flex;gap:10px;align-items:center;height:clamp(40px,4.5vh,56px)}
+.bylbl{font-weight:bold;font-size:16px;white-space:nowrap;min-width:4.5em}
+.byset{display:none;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(640px,94vw);max-height:96%;overflow:auto;background:var(--card);border-radius:24px;padding:12px;flex-direction:column;align-items:center;gap:10px;box-shadow:0 10px 40px rgba(0,0,0,.4);z-index:5}
+.byset.on{display:flex}
+.byset .duo span{font-size:clamp(18px,3vw,24px)}
+.byside{width:100%;display:flex;gap:10px;align-items:center;background:#eef2f8;border-radius:16px;padding:8px}
+.byside.top{transform:rotate(180deg)}
+.byprev{width:clamp(96px,16vw,130px);height:auto;aspect-ratio:1;flex-shrink:0;border-radius:50%;background:radial-gradient(#f4f7fb,#9fb1c6)}
+.byright{flex:1;display:flex;flex-direction:column;gap:5px;min-width:0}
+.byright b{font-size:16px}
+.byparts{display:flex;flex-direction:column;gap:4px}
+.byprow{display:flex;align-items:center;gap:5px;flex-wrap:wrap}
+.byprow i{font-style:normal;font-size:13px;font-weight:bold;color:#5a4a33;min-width:3.2em}
+.byprow .jchip{padding:4px 10px;font-size:14px}
+.bystat{display:grid;grid-template-columns:auto 1fr;gap:2px 8px;font-size:12px;font-weight:bold;color:#5a4a33;align-items:center}
+.bystat s{display:block;height:8px;border-radius:4px;background:linear-gradient(90deg,#ff8a3d,#ffd84d);text-decoration:none}
 </style>
 
 <!-- メニュー -->
@@ -565,12 +594,13 @@ html,body{overflow:hidden;overscroll-behavior:none}
     <button class="tile" style="--c:#1f9fb8" onclick="startHockey()"><span class="ti">🏒</span><span class="tn">エアホッケー</span><span class="ts">ゴールに いれろ</span></button>
     <button class="tile" style="--c:#8a6bd8" onclick="startJust()"><span class="ti">⏱️</span><span class="tn">ジャストタイム</span><span class="ts">ぴったりの びょうで タッチ</span></button>
     <button class="tile" style="--c:#d96aa7" onclick="startMem()"><span class="ti">🐶</span><span class="tn">しんけいすいじゃく</span><span class="ts">おなじ どうぶつを さがせ</span></button>
+    <button class="tile" style="--c:#4a5bd6" onclick="startBey()"><span class="ti">🌀</span><span class="tn">ベイごま バトル <span class="new">NEW</span></span><span class="ts">ぶつけて まわして はじきだせ！</span></button>
   </div>
   <div class="mhead">🪙 なつかしの だがしや ゲーム</div>
   <div class="tiles g3">
     <button class="tile" style="--c:#b87333" onclick="startHj()"><span class="ti">🪙</span><span class="tn">10えん はじき</span><span class="ts">あなに おちずに ゴールへ</span></button>
     <button class="tile" style="--c:#5b2d86" onclick="startRl()"><span class="ti">🎰</span><span class="tn">コイン ルーレット</span><span class="ts">マークに かけて まわせ</span></button>
-    <button class="tile" style="--c:#2e7d4f" onclick="startCk()"><span class="ti">🏎️</span><span class="tn">カーけし ずもう <span class="new">NEW</span></span><span class="ts">ペンで はじいて おしだせ！</span></button>
+    <button class="tile" style="--c:#2e7d4f" onclick="startCk()"><span class="ti">🏎️</span><span class="tn">カーけし ずもう</span><span class="ts">ペンで はじいて おしだせ！</span></button>
   </div>
   <div class="menubtns"><button class="bgm-btn" id="howBtn" onclick="openHowto()">📖 あそびかた</button><button class="bgm-btn" id="bgmMenu" onclick="bgmToggle()">🎵 おんがく：オン</button></div>
 </div></section>
@@ -731,6 +761,24 @@ html,body{overflow:hidden;overscroll-behavior:none}
     <div class="duo" id="ckSetMsg"></div><div class="crow" id="ckSize"></div>
     <div class="crow"><button class="cb" id="ckGo">はっけよい！</button><button class="cb gray" id="ckSetMenu" aria-label="メニュー">🏠</button></div>
     <div class="ckside"><b>あかの くるま</b><div class="ckpick" data-o="1"></div></div>
+  </div>
+</section>
+
+<section id="bey" class="screen">
+  <div class="bypanel top p2c" data-o="-1">
+    <div class="byrow"><span class="byname">あお</span><span class="bydots"></span><span class="bymsg"></span><button class="byhome" aria-label="メニュー">🏠</button></div>
+    <div class="byrow2"><span class="bylbl">かいてん</span><div class="ckmeter"><div class="ckbar bybar"></div></div></div>
+  </div>
+  <div class="bycvw"><canvas id="byCv" aria-label="スタジアム"></canvas><div class="ckcut" id="byCut"><span class="t"></span><span></span></div></div>
+  <div class="bypanel bottom p1c" data-o="1">
+    <div class="byrow"><span class="byname">あか</span><span class="bydots"></span><span class="bymsg"></span><button class="byhome" aria-label="メニュー">🏠</button></div>
+    <div class="byrow2"><span class="bylbl">かいてん</span><div class="ckmeter"><div class="ckbar bybar"></div></div></div>
+  </div>
+  <div class="byset" id="bySet">
+    <div class="byside top" data-o="-1"><canvas class="byprev" width="240" height="240"></canvas><div class="byright"><b>あおの こま</b><div class="byparts"></div><div class="bystat"></div></div></div>
+    <div class="duo" id="byMsg"></div>
+    <div class="crow"><button class="cb" id="byGo">▶ バトル スタート</button><button class="cb gray" id="bySetMenu" aria-label="メニュー">🏠</button></div>
+    <div class="byside" data-o="1"><canvas class="byprev" width="240" height="240"></canvas><div class="byright"><b>あかの こま</b><div class="byparts"></div><div class="bystat"></div></div></div>
   </div>
 </section>
 
@@ -1177,7 +1225,7 @@ function padSet(sec,o,big,sc,dim){const p=document.querySelector(`#${sec} .pad[d
 function bindPads(sec,fn){document.querySelectorAll(`#${sec} .pad`).forEach(p=>
   p.addEventListener('pointerdown',e=>{e.preventDefault();fn(+p.dataset.o);}));}
 document.querySelectorAll('[data-menu]').forEach(b=>b.addEventListener('click',askMenu));
-function stopAll(){if(typeof ckStop==='function')ckStop();if(typeof pyStop==='function')pyStop();if(typeof hjStop==='function')hjStop();if(typeof rlStop==='function')rlStop();if(typeof cupStop==='function')cupStop();if(typeof pkStop==='function')pkStop();hayStop();tugStop();jStop();hkStop();if(typeof spStop==='function')spStop();}
+function stopAll(){if(typeof byStop==='function')byStop();if(typeof ckStop==='function')ckStop();if(typeof pyStop==='function')pyStop();if(typeof hjStop==='function')hjStop();if(typeof rlStop==='function')rlStop();if(typeof cupStop==='function')cupStop();if(typeof pkStop==='function')pkStop();hayStop();tugStop();jStop();hkStop();if(typeof spStop==='function')spStop();}
 
 /* ========== よんもくならべ ========== */
 const C4={b:[],turn:1,first:1,hist:[],over:false,win:[],last:-1,sc:{'1':0,'-1':0}};
@@ -2407,6 +2455,161 @@ function ckSnd(k,j){if(!BGM.on||!BGM.ctx)return;const t=BGM.ctx.currentTime;
   else if(k==='win'){[523,659,784,1047].forEach((f,i)=>note(f,t+i*.09,.14,'square',.05));}}
 
 
+
+/* ========== ベイごま バトル ========== */
+// たんい：スタジアムの はんけい = 1（まんなか 0,0）
+const BY_BODY=[{nm:'おもい',m:1.5,dec:1.3,atk:2},{nm:'ふつう',m:1.1,dec:1,atk:1},{nm:'かるい',m:.8,dec:.75,atk:0}];
+const BY_WT=[{nm:'そとがわ',dec:1.2,atk:1,sta:0},{nm:'まんなか',dec:.82,atk:0,sta:1}];
+const BY_TIP=[{nm:'とがり',move:.5,damp:1.1,dec:1,def:1,atk:0},{nm:'まるい',move:1.05,damp:.45,dec:.88,def:0,atk:1}];
+const BY={st:'idle',parts:{'1':{b:1,w:0,t:0},'-1':{b:1,w:1,t:1}},sc:{'1':0,'-1':0},tops:{},pull:{},sparks:[],raf:0,last:0,t:0,goT:0,tm:[],W:0,H:0,S:1,d:1,first:true};
+const byCv=$('byCv'),byX=byCv.getContext('2d');
+function byStats(p){const b=BY_BODY[p.b],w=BY_WT[p.w],t=BY_TIP[p.t],dec=b.dec*w.dec*t.dec;
+  return{atk:b.atk+w.atk+t.atk,sta:Math.max(0,Math.min(4,Math.round((1.35-dec)*4.2))),def:Math.round((b.m-.8)*3)+t.def,m:b.m,dec,move:t.move,damp:t.damp,r:b.m>1.3?.12:b.m<1?.1:.11};}
+function bySize(){const r=byCv.getBoundingClientRect(),d=window.devicePixelRatio||1;if(!r.width)return;
+  BY.W=r.width;BY.H=r.height;BY.d=d;byCv.width=Math.round(r.width*d);byCv.height=Math.round(r.height*d);BY.S=Math.min(r.width,r.height)*.46;}
+function byLaunchPos(o){return{x:0,y:o==='1'?.8:-.8};}
+function byNewTop(o){const st=byStats(BY.parts[o]),lp=byLaunchPos(o);
+  return{o,...st,x:lp.x,y:lp.y,vx:0,vy:0,spin:0,ang:0,live:false,out:false,stop:false,fall:0,hit:0,p:BY.parts[o]};}
+// こまの え
+function byTopArt(x,cx,cy,R,col,p,ang,spin,wob){x.save();x.translate(cx,cy);
+  if(wob){x.rotate(Math.sin(wob*12)*.2);x.scale(1,1-Math.min(.25,wob*.12));}
+  x.fillStyle='rgba(0,0,0,.35)';x.beginPath();x.ellipse(R*.12,R*.18,R*1.02,R*.95,0,0,7);x.fill();
+  x.rotate(ang);
+  const body=p.b,metal=(r0,r1)=>{const g=x.createRadialGradient(-R*.3,-R*.3,R*.1,0,0,R);g.addColorStop(0,'#ffffff');g.addColorStop(.5,'#b9c0c9');g.addColorStop(1,'#5f6873');return g;};
+  // こうげき リング（ボディ）
+  x.fillStyle=metal();x.beginPath();
+  const n=body===0?6:body===1?8:14,ins=body===0?.8:body===1?.88:.95;
+  for(let i=0;i<n*2;i++){const a=i*Math.PI/n,rr=(i%2?ins:1)*R;x.lineTo(Math.cos(a)*rr,Math.sin(a)*rr);}x.closePath();x.fill();
+  x.strokeStyle='#4a525c';x.lineWidth=R*.04;x.stroke();
+  // いろの ディスク
+  const g=x.createRadialGradient(-R*.25,-R*.25,R*.05,0,0,R*.75);g.addColorStop(0,ckShade(col,40));g.addColorStop(.6,col);g.addColorStop(1,ckShade(col,-35));
+  x.fillStyle=g;x.beginPath();x.arc(0,0,R*.74,0,7);x.fill();
+  // もよう
+  x.fillStyle='rgba(255,255,255,.8)';for(let i=0;i<3;i++){x.save();x.rotate(i*2.094);x.beginPath();x.moveTo(R*.18,0);x.quadraticCurveTo(R*.5,-R*.28,R*.68,-R*.05);x.quadraticCurveTo(R*.45,-R*.08,R*.18,R*.1);x.fill();x.restore();}
+  // おもり
+  if(p.w===0){x.strokeStyle=metal();x.lineWidth=R*.12;x.beginPath();x.arc(0,0,R*.62,0,7);x.stroke();}
+  else{x.fillStyle=metal();x.beginPath();x.arc(0,0,R*.3,0,7);x.fill();}
+  x.fillStyle=p.t===0?'#222':'#555';x.beginPath();x.arc(0,0,R*(p.t===0?.08:.15),0,7);x.fill();
+  x.restore();
+  if(spin>.2){x.save();x.globalAlpha=Math.min(.35,spin*.35);x.strokeStyle='#fff';x.lineWidth=2;for(let i=0;i<3;i++){x.beginPath();x.arc(cx,cy,R*(1.05+i*.06),ang*2+i,ang*2+i+1.2);x.stroke();}x.restore();}}
+function byStadium(x,W,H,S){const cx=W/2,cy=H/2;
+  x.fillStyle='#1c2230';x.fillRect(0,0,W,H);
+  const g=x.createRadialGradient(cx,cy,S*.05,cx,cy,S);g.addColorStop(0,'#f2f6fb');g.addColorStop(.55,'#cfdae6');g.addColorStop(1,'#7f93aa');
+  x.fillStyle=g;x.beginPath();x.arc(cx,cy,S,0,7);x.fill();
+  x.strokeStyle='rgba(60,80,110,.25)';x.lineWidth=1.5;for(const k of[.25,.5,.75]){x.beginPath();x.arc(cx,cy,S*k,0,7);x.stroke();}
+  for(let i=0;i<8;i++){const a=i*Math.PI/4;x.beginPath();x.moveTo(cx+Math.cos(a)*S*.25,cy+Math.sin(a)*S*.25);x.lineTo(cx+Math.cos(a)*S*.95,cy+Math.sin(a)*S*.95);x.stroke();}
+  x.lineWidth=S*.06;const rg=x.createLinearGradient(cx-S,cy-S,cx+S,cy+S);rg.addColorStop(0,'#3a4250');rg.addColorStop(.5,'#8792a3');rg.addColorStop(1,'#2c323d');
+  x.strokeStyle=rg;x.beginPath();x.arc(cx,cy,S*1.02,0,7);x.stroke();
+  x.fillStyle='#c9ced6';for(let i=0;i<12;i++){const a=i*Math.PI/6;x.beginPath();x.arc(cx+Math.cos(a)*S*1.02,cy+Math.sin(a)*S*1.02,S*.012,0,7);x.fill();}
+  // はっしゃ ばしょ
+  x.fillStyle='rgba(233,84,107,.25)';x.beginPath();x.arc(cx,cy+S*.8,S*.15,0,7);x.fill();
+  x.fillStyle='rgba(61,139,255,.25)';x.beginPath();x.arc(cx,cy-S*.8,S*.15,0,7);x.fill();}
+function byDraw(){const x=byX,d=BY.d,W=BY.W,H=BY.H,S=BY.S;if(!W)return;x.setTransform(d,0,0,d,0,0);
+  byStadium(x,W,H,S);const cx=W/2,cy=H/2;
+  for(const o of['1','-1']){const T=BY.tops[o];if(!T)continue;const col=o==='1'?'#e9546b':'#3d8bff';
+    if(!T.live){const lp=byLaunchPos(o),P=BY.pull[o];
+      if(BY.st==='play'&&P&&P.p>0){x.save();x.strokeStyle=col;x.lineWidth=5;x.setLineDash([8,6]);x.beginPath();x.moveTo(cx+lp.x*S,cy+lp.y*S);x.lineTo(cx+(lp.x+P.dx*(.3+P.p*.6))*S,cy+(lp.y+P.dy*(.3+P.p*.6))*S);x.stroke();x.restore();}
+      byTopArt(x,cx+lp.x*S,cy+lp.y*S,T.r*S,col,T.p,0,0,0);
+      // ランチャー
+      x.save();x.translate(cx+lp.x*S,cy+lp.y*S);if(o==='-1')x.rotate(Math.PI);
+      const lg=x.createLinearGradient(-S*.12,0,S*.12,0);lg.addColorStop(0,'#555');lg.addColorStop(.5,'#ddd');lg.addColorStop(1,'#555');x.fillStyle=lg;
+      ckRR(x,-S*.13,S*.1,S*.26,S*.07,S*.02);x.fill();x.fillStyle=col;ckRR(x,-S*.04,S*.15,S*.08,S*.12+(P?P.p*S*.12:0),S*.02);x.fill();x.restore();continue;}
+    if(T.out&&T.fall>=1)continue;
+    x.save();if(T.out){x.globalAlpha=1-T.fall;}
+    byTopArt(x,cx+T.x*S,cy+T.y*S,T.r*S*(T.out?1+T.fall*.5:1),col,T.p,T.ang,T.spin,T.stop?T.fall+.3:(T.spin<.2?(.2-T.spin)*3:0));x.restore();}
+  for(const s of BY.sparks){x.fillStyle=`rgba(255,${200-s.t*300|0},60,${1-s.t*2.5})`;x.beginPath();x.arc(cx+s.x*S,cy+s.y*S,(1-s.t*2)*S*.025+1,0,7);x.fill();}
+  x.setTransform(d,0,0,d,0,0);}
+function byStep(dt){const ts=[BY.tops['1'],BY.tops['-1']];
+  for(const T of ts){if(!T.live||T.out||T.stop)continue;
+    const r=Math.hypot(T.x,T.y)||1e-6;
+    T.vx+=-2.2*T.x*dt;T.vy+=-2.2*T.y*dt;                  // すりばちの かたむき
+    {const E=BY.tops[T.o==='1'?'-1':'1'];if(E&&E.live&&!E.out&&!E.stop){const ex=E.x-T.x,ey=E.y-T.y,el=Math.hypot(ex,ey)||1;T.vx+=ex/el*1.1*T.spin*dt;T.vy+=ey/el*1.1*T.spin*dt;}}   // あいてに ひきよせられる
+    const f=T.move*T.spin*.32;T.vx+=(-T.y/r)*f*dt;T.vy+=(T.x/r)*f*dt;   // まわりながら うごく
+    T.vx+=(Math.random()-.5)*T.move*.8*dt;T.vy+=(Math.random()-.5)*T.move*.8*dt;
+    const dm=Math.exp(-T.damp*dt);T.vx*=dm;T.vy*=dm;
+    T.x+=T.vx*dt;T.y+=T.vy*dt;T.ang+=T.spin*28*dt;
+    T.spin-=.022*T.dec*dt;T.hit=Math.max(0,T.hit-dt);
+    const R=Math.hypot(T.x,T.y);
+    if(R>1-T.r){const nx=T.x/R,ny=T.y/R,vr=T.vx*nx+T.vy*ny;
+      if(vr>1.25){T.out=true;T.fall=0;bySnd('out');}
+      else{if(vr>0){T.vx-=1.5*vr*nx;T.vy-=1.5*vr*ny;T.spin-=.015;}T.x=nx*(1-T.r);T.y=ny*(1-T.r);}}
+    if(T.spin<=.04){T.spin=0;T.stop=true;T.fall=0;bySnd('stop');}}
+  const[A,B]=ts;
+  if(A.live&&B.live&&!A.out&&!B.out&&!A.stop&&!B.stop){const dx=B.x-A.x,dy=B.y-A.y,d=Math.hypot(dx,dy),rr=A.r+B.r;
+    if(d<rr&&d>0){const nx=dx/d,ny=dy/d,ov=rr-d,ia=1/A.m,ib=1/B.m;A.x-=nx*ov*ia/(ia+ib);A.y-=ny*ov*ia/(ia+ib);B.x+=nx*ov*ib/(ia+ib);B.y+=ny*ov*ib/(ia+ib);
+      const vn=(B.vx-A.vx)*nx+(B.vy-A.vy)*ny;
+      if(vn<0||(A.hit<=0&&B.hit<=0)){
+        let j=(vn<0?-(1+.85)*vn:0)/(ia+ib)+ .32*(A.spin+B.spin)/(ia+ib);   // かいてんの ちからで はじきあう
+        A.vx-=j*nx*ia;A.vy-=j*ny*ia;B.vx+=j*nx*ib;B.vy+=j*ny*ib;
+        // よこに はじく（かいてんの むき）
+        const tx=-ny,ty=nx,k=.25*(A.spin+B.spin);A.vx+=tx*k*ia;A.vy+=ty*k*ia;B.vx-=tx*k*ib;B.vy-=ty*k*ib;
+        const fa=1+.28*A.atk,fb=1+.28*B.atk,ja=Math.min(1.2,j);
+        B.spin-=.045*ja*fa/Math.sqrt(B.m)/(1+.15*B.def);A.spin-=.045*ja*fb/Math.sqrt(A.m)/(1+.15*A.def);
+        A.hit=B.hit=.12;const px=A.x+nx*A.r,py=A.y+ny*A.r;
+        for(let i=0;i<14;i++){const a=Math.random()*7,v=.4+Math.random()*1.2;BY.sparks.push({x:px,y:py,vx:Math.cos(a)*v,vy:Math.sin(a)*v,t:0});}
+        bySnd('hit',ja);}}}
+  for(const T of ts)if((T.out||T.stop)&&T.fall<1)T.fall=Math.min(1,T.fall+dt*1.5);
+  for(const s of BY.sparks){s.t+=dt;s.x+=s.vx*dt;s.y+=s.vy*dt;}BY.sparks=BY.sparks.filter(s=>s.t<.4);}
+function byLoop(t){if(!$('bey').classList.contains('on'))return;const dt=Math.min(.04,(t-BY.last)/1000);BY.last=t;
+  if(BY.st==='play'){BY.t+=dt;for(let i=0;i<6;i++)byStep(dt/6);
+    // 6びょう たっても うたない ときは じどうで はっしゃ
+    for(const o of['1','-1']){const T=BY.tops[o];if(!T.live&&BY.t>6){BY.pull[o]=null;byLaunch(o,.45,0,o==='1'?-1:1);}}
+    const A=BY.tops['1'],B=BY.tops['-1'];
+    if(A.live&&B.live){const la=A.out||A.stop,lb=B.out||B.stop;
+      if(la||lb){if((!la||A.fall>=1)&&(!lb||B.fall>=1))byEnd(la&&lb?0:la?-1:1,la?A:B);}
+      else if(BY.t>70)byEnd(A.spin===B.spin?0:A.spin>B.spin?1:-1,null);}
+    byUI();}
+  byDraw();BY.raf=requestAnimationFrame(byLoop);}
+function byLaunch(o,p,dx,dy){const T=BY.tops[o];if(T.live)return;const l=Math.hypot(dx,dy)||1;
+  const sp=.6+1.3*p;T.vx=dx/l*sp;T.vy=dy/l*sp;T.spin=.55+.45*p;T.live=true;bySnd('go');byUI();}
+function byEnd(w,loser){BY.st='end';if(w)BY.sc[w>0?'1':'-1']++;bySnd(w?'win':'stop');byUI();
+  const why=!loser?'じかん ぎれ！ かいてんが おおい ほうの かち':loser.out?'スタジアムの そとへ！':'かいてんが とまった！';
+  const fin=w&&BY.sc[w>0?'1':'-1']>=2;
+  BY.tm.push(setTimeout(()=>{
+    if(!w){modal(`<span class="big">🤝 ひきわけ！</span><span class="small">${why}<br>もう いっかい！</span>`,[{label:'つぎの しょうぶ',fn:()=>byOpenSet()}]);return;}
+    if(fin)modal(`<span class="big">🏆 ${PNAME(w)}の かち！</span><span class="small">${why}<br>あか ${BY.sc['1']} ・ あお ${BY.sc['-1']}</span>`,[{label:'もういちど',fn:startBey}]);
+    else modal(`<span class="big">${PNAME(w)}に 1ぽん！</span><span class="small">${why}<br>あか ${BY.sc['1']} ・ あお ${BY.sc['-1']}</span>`,[{label:'つぎの しょうぶ',fn:()=>byOpenSet()}]);},900));}
+function byUI(){for(const o of['1','-1']){const s=document.querySelector(`#bey .bypanel[data-o="${o}"]`),T=BY.tops[o],P=BY.pull[o];
+  s.querySelector('.bydots').textContent='●'.repeat(BY.sc[o])+'○'.repeat(Math.max(0,2-BY.sc[o]));
+  const aim=BY.st==='play'&&T&&!T.live;
+  s.querySelector('.bylbl').textContent=aim?'パワー':'かいてん';
+  s.querySelector('.bybar').style.width=(aim?(P?P.p:0):(T?Math.max(0,T.spin):0))*100+'%';
+  s.querySelector('.bymsg').textContent=aim?(P&&P.p>0?'はなすと シュート！':'ゆびで うしろに ひっぱって ねらおう'):BY.st==='play'?(T.out?'そとに でちゃった！':T.stop?'とまっちゃった…':'がんばれ〜！'):BY.st==='count'?'じゅんび…':'';}}
+function byOpenSet(){BY.st='set';$('bySet').classList.add('on');byStop2();bySetRender();byUI();}
+function bySetRender(){document.querySelectorAll('#bySet .byside').forEach(side=>{const o=side.dataset.o,p=BY.parts[o],box=side.querySelector('.byparts');box.innerHTML='';
+  [['ボディ','b',BY_BODY],['おもり','w',BY_WT],['さき','t',BY_TIP]].forEach(([lb,k,arr])=>{const r=document.createElement('div');r.className='byprow';r.innerHTML=`<i>${lb}</i>`;
+    arr.forEach((a,i)=>{const b=document.createElement('button');b.className='jchip'+(p[k]===i?' on':'');b.textContent=a.nm;b.onclick=()=>{p[k]=i;sfx();bySetRender();};r.appendChild(b);});box.appendChild(r);});
+  const st=byStats(p),bar=v=>`<s style="width:${Math.max(8,(v+1)/5*100)}%"></s>`;
+  side.querySelector('.bystat').innerHTML=`こうげき${bar(st.atk)}じきゅう${bar(st.sta)}ぼうぎょ${bar(Math.min(4,st.def))}`;
+  const c=side.querySelector('.byprev'),x=c.getContext('2d');x.setTransform(1,0,0,1,0,0);x.clearRect(0,0,240,240);byTopArt(x,120,120,92,o==='1'?'#e9546b':'#3d8bff',p,.3,0,0);});
+  duo('byMsg','パーツを えらんで バトル！<br><small>おもい＋そとがわは こうげき・かるい＋まんなか＋まるいは じきゅうが つよいよ</small>');}
+$('byGo').addEventListener('click',()=>{$('bySet').classList.remove('on');byRound();});
+$('bySetMenu').addEventListener('click',askMenu);
+document.querySelectorAll('#bey .byhome').forEach(b=>b.addEventListener('click',askMenu));
+function byRound(){BY.tops={'1':byNewTop('1'),'-1':byNewTop('-1')};BY.pull={};BY.sparks=[];BY.t=0;BY.st='count';byUI();
+  ['3','2','1'].forEach((n,k)=>BY.tm.push(setTimeout(()=>{byCount(n);sfx();},k*600)));
+  BY.tm.push(setTimeout(()=>{byCount('ゴー シュート！');BY.st='play';BY.t=0;byUI();},1800));}
+function byCount(txt){const c=$('byCut');c.querySelectorAll('span').forEach(e=>e.textContent=txt);c.classList.remove('on');void c.offsetWidth;c.classList.add('on');clearTimeout(BY.cutT);BY.cutT=setTimeout(()=>c.classList.remove('on'),600);}
+function byStop2(){BY.tm.forEach(clearTimeout);BY.tm=[];}
+function startBey(){show('bey');byStop2();cancelAnimationFrame(BY.raf);BY.sc={'1':0,'-1':0};BY.tops={'1':byNewTop('1'),'-1':byNewTop('-1')};BY.st='set';
+  requestAnimationFrame(()=>{bySize();BY.last=performance.now();BY.raf=requestAnimationFrame(byLoop);byOpenSet();});}
+function byStop(){byStop2();cancelAnimationFrame(BY.raf);BY.st='idle';}
+function byPt(e){const r=byCv.getBoundingClientRect();return{x:(e.clientX-r.left-BY.W/2)/BY.S,y:(e.clientY-r.top-BY.H/2)/BY.S,py:e.clientY-r.top};}
+byCv.addEventListener('pointerdown',e=>{e.preventDefault();if(BY.st!=='play')return;const p=byPt(e),o=p.py>BY.H/2?'1':'-1',T=BY.tops[o];
+  if(!T||T.live||BY.pull[o])return;try{byCv.setPointerCapture(e.pointerId);}catch(_){}BY.pull[o]={id:e.pointerId,sx:p.x,sy:p.y,p:0,dx:0,dy:o==='1'?-1:1};byUI();});
+byCv.addEventListener('pointermove',e=>{for(const o of['1','-1']){const P=BY.pull[o];if(!P||P.id!==e.pointerId)continue;const p=byPt(e),dx=p.x-P.sx,dy=p.y-P.sy,l=Math.hypot(dx,dy);
+  P.p=Math.min(1,l/.5);if(l>.02){P.dx=-dx/l;P.dy=-dy/l;}byUI();}});
+['pointerup','pointercancel'].forEach(ev=>byCv.addEventListener(ev,e=>{for(const o of['1','-1']){const P=BY.pull[o];if(!P||P.id!==e.pointerId)continue;
+  BY.pull[o]=null;if(ev==='pointerup'&&P.p>.05&&BY.st==='play')byLaunch(o,P.p,P.dx,P.dy);byUI();}}));
+window.addEventListener('resize',()=>{if($('bey').classList.contains('on'))bySize();});
+if(window.ResizeObserver)new ResizeObserver(()=>{if($('bey').classList.contains('on'))bySize();}).observe(document.querySelector('.bycvw'));
+function bySnd(k,j){if(!BGM.on||!BGM.ctx)return;const t=BGM.ctx.currentTime;
+  if(k==='go'){note(300,t,.05,'sawtooth',.06);note(900,t+.04,.15,'triangle',.06);}
+  else if(k==='hit'){note(1800+Math.random()*600,t,.04,'square',.05);note(160,t,.08,'triangle',.12*Math.min(1,(j||.5)+.3));}
+  else if(k==='out'){[700,500,300].forEach((f,i)=>note(f,t+i*.07,.1,'square',.06));}
+  else if(k==='stop'){note(220,t,.25,'triangle',.08);}
+  else if(k==='win'){[523,659,784,1047].forEach((f,i)=>note(f,t+i*.09,.14,'square',.05));}}
+
 /* ========== あそびかた ========== */
 function openHowto(){$('howto').classList.add('on');$('howto').querySelector('.howbody').scrollTop=0;}
 function closeHowto(){$('howto').classList.remove('on');}
@@ -2428,14 +2631,15 @@ const HELP={
  mem:['しんけいすいじゃく','カードを 2まい めくって、おなじ どうぶつなら もらえるよ。<br>あたったら もう いっかい！ おおく あつめた ほうが かち。'],
  hj:['10えん はじき','ボタンを <b>ながく おすほど つよく</b> はじけるよ。<br>あなに おちないように だんを のぼって、さきに ゴールに ついたら かち！<br>ひかっている がわの ボタンを つかってね。アウトや ゴールの ばしょは ランダムにも できるよ。'],
  rl:['コイン ルーレット','すきな マークに コインを かけて「OK」。とまった マークに かけていたら、ばいに なって もどってくるよ！<br>ひとつの マークには 5まいまで。0️⃣は みんな ハズレ。<br>さきに 50まい ためたら かち、コインが なくなったら まけ。'],
- ck:['カーけし ずもう','まず くるまを 3だい（または 5だい）えらぼう。<br>じぶんの ばんに、ゆびで <b>ペンを うしろに ひっぱって、はなすと パチン！</b> ひっぱるほど つよいよ。<br>あいての くるまを たたみから おしだすか、たおしたら かち。<br>じぶんの くるまが おちたり たおれたりしたら はんそく。あたらなかったら、あいてが 2かい つづけて うてるよ。<br>まけた くるまは リタイア、かった くるまは つづけて でる。ぜんぶ まかしたら ゆうしょう！<br>ときどき「✨ ひっさつわざ チャンス」が でるよ。タップしてから うつと わざが でる！']};
+ ck:['カーけし ずもう','まず くるまを 3だい（または 5だい）えらぼう。<br>じぶんの ばんに、ゆびで <b>ペンを うしろに ひっぱって、はなすと パチン！</b> ひっぱるほど つよいよ。<br>あいての くるまを たたみから おしだすか、たおしたら かち。<br>じぶんの くるまが おちたり たおれたりしたら はんそく。あたらなかったら、あいてが 2かい つづけて うてるよ。<br>まけた くるまは リタイア、かった くるまは つづけて でる。ぜんぶ まかしたら ゆうしょう！<br>ときどき「✨ ひっさつわざ チャンス」が でるよ。タップしてから うつと わざが でる！'],
+ bey:["ベイごま バトル", "まず こまの パーツ（ボディ・おもり・さき）を えらぼう。くみあわせで つよさが かわるよ。<br>「ゴー シュート！」の あと、ゆびで <b>うしろに ひっぱって、はなすと シュート！</b> ひっぱった ほうと はんたいに とんでいくよ。<br>こまは まんなかに あつまって ぶつかりあうよ。<b>かいてんが さきに とまるか、スタジアムの そとに とびだしたら まけ</b>。<br>2ほん さきに とったら かち！"]};
 function showHelp(){const sc=document.querySelector('.screen.on'),h=sc&&HELP[sc.id];if(!h)return;
   let resume=null;
   if(sc.id==='puyo'&&PY.st==='play'&&!PY.paused){PY.paused=true;resume=()=>{PY.paused=false;PY.last=performance.now();};}
   if(sc.id==='hockey'&&HK.pause<=0){const pv=HK.pause;HK.pause=1e9;resume=()=>{HK.pause=.4;};}
   modal(`<span class="big">❓ ${h[0]}</span><span class="hlp">${h[1]}</span>`,[{label:'とじる',fn:resume}]);}
 // 🏠 ボタンの となりに ？ ボタンを つける
-['[data-menu]','[data-act="menu"]','#hkMenu','.pypause','.hjpause','.ckhome','#ckSetMenu','#hkSetMenu'].forEach(sel=>document.querySelectorAll(sel).forEach(b=>{
+['[data-menu]','[data-act="menu"]','#hkMenu','.pypause','.hjpause','.ckhome','#ckSetMenu','#hkSetMenu','.byhome','#bySetMenu'].forEach(sel=>document.querySelectorAll(sel).forEach(b=>{
   if(b.closest('#menu'))return;const c=b.cloneNode(false);c.removeAttribute('id');c.removeAttribute('data-menu');c.removeAttribute('data-act');
   c.classList.add('hlpbtn');c.classList.remove('c-menu');c.textContent='？';c.setAttribute('aria-label','あそびかた');c.addEventListener('click',e=>{e.stopPropagation();showHelp();});
   b.parentNode.insertBefore(c,b);}));
