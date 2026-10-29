@@ -20,6 +20,14 @@ head='''<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<script>
+/* スマホ（みじかい へんが 600px みまん）では、はば600pxの がめんとして レイアウトし、ブラウザに がめんぴったりへ ちぢめて ひょうじさせる */
+(function(){var m=document.querySelector('meta[name=viewport]'),B=600;
+  function fit(){var s=Math.min(screen.width,screen.height),l=Math.max(screen.width,screen.height);if(s>=B)return;
+    var w=innerWidth>innerHeight?Math.round(B*l/s):B;
+    m.setAttribute('content','width='+w+',viewport-fit=cover');}
+  fit();addEventListener('orientationchange',function(){setTimeout(fit,100);});})();
+</script>
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; manifest-src 'self'; worker-src 'self'; media-src 'none'; object-src 'none'; frame-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 '''

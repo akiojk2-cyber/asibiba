@@ -29,6 +29,7 @@
 - テストはPlaywright(headless Chromium)。オフライン再読込（setOffline）を各版で確認
 
 ## 注意・既知
+- スマホ（iPhone）は build_pwa.py の viewport スクリプトで「幅600px・高さ約1020〜1170px」の画面として表示される。レイアウト変更時はこのサイズでもはみ出さないこと（iPadは影響なし）
 - Artifact形式のマスターを単体で開くにはdoctype+viewportのラッパーが必要
 - ユーザー要望: 低学年にも分かるUI（ひらがな中心）、簡潔な修正指示
 - 次の候補: QRコード、ポスター（別途Artifactで3案作成済み）、3年生向けにおとな向けゲームの分離
