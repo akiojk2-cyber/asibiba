@@ -617,6 +617,40 @@ html,body{overflow:hidden;overscroll-behavior:none}
 .ktstart{display:none;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(580px,90vw);background:var(--card);border-radius:24px;padding:16px;flex-direction:column;align-items:center;gap:12px;box-shadow:0 10px 40px rgba(0,0,0,.45);z-index:5}
 .ktstart.on{display:flex}
 .ktstart .duo span{font-size:clamp(18px,3.2vw,26px)}
+
+/* じんせい すごろく */
+#jg.on{display:grid;position:fixed;inset:0;width:auto;max-width:none;height:auto;grid-template-rows:auto minmax(0,1fr) auto;gap:6px;background:#fff6e0;padding:calc(8px + env(safe-area-inset-top,0px)) max(8px,env(safe-area-inset-right,0px)) calc(8px + env(safe-area-inset-bottom,0px)) max(8px,env(safe-area-inset-left,0px))}
+.jgpanel{border-radius:18px;padding:8px 10px;display:flex;flex-direction:column;gap:6px;color:#fff;opacity:.85}
+.jgpanel.on{opacity:1;box-shadow:0 0 0 4px #ffe14d}
+.jgpanel.top{transform:rotate(180deg)}
+.jgpanel.p1c{background:#e9546b}.jgpanel.p2c{background:#3d8bff}
+.jginfo{display:flex;align-items:center;gap:10px;font-weight:bold;font-size:17px;flex-wrap:wrap}
+.jgname{font-size:22px}
+.jgmoney,.jgmem{background:rgba(255,255,255,.25);border-radius:999px;padding:2px 10px}
+.jgjob{font-size:15px}.jgfam{font-size:18px;letter-spacing:1px}
+.jgrow{display:flex;align-items:center;gap:8px}
+.jgmsg{flex:1;font-size:15px;font-weight:bold;min-width:0}
+.jgspin{border:none;border-radius:16px;height:56px;padding:0 18px;font-size:20px;font-weight:900;background:#ffe14d;color:#3a2e1f;box-shadow:0 4px 0 rgba(0,0,0,.25)}
+.jgspin:disabled{background:rgba(255,255,255,.3);color:rgba(255,255,255,.75);box-shadow:none}
+.jghome{border:none;background:rgba(255,255,255,.92);border-radius:12px;width:44px;height:44px;font-size:20px}
+.jgboardw{position:relative;min-height:0;display:flex;align-items:center;justify-content:center}
+.jgboard{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));grid-template-rows:repeat(5,minmax(0,1fr));gap:4px;width:100%;height:100%;max-height:100%}
+.jgc{position:relative;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#fff;box-shadow:0 2px 0 rgba(0,0,0,.12);overflow:hidden;min-width:0}
+.jgc .e{font-size:clamp(18px,3.6vw,32px);line-height:1}
+.jgc .l{font-size:clamp(8px,1.3vw,11px);font-weight:bold;color:#5a4a33;white-space:nowrap;margin-top:2px}
+.jgc .n{position:absolute;top:2px;left:4px;font-size:9px;color:#a99a80}
+.jgc.stop{box-shadow:0 0 0 3px #ff8a3d inset}
+.jgc.pay{background:#e5f7e1}.jgc.retro{background:#fff1d6}.jgc.oops{background:#ece9f7}.jgc.big{background:#ffe3ea}.jgc.goal{background:linear-gradient(135deg,#ffd6e7,#d6ecff)}
+.jgtok{position:absolute;width:42%;aspect-ratio:1;border-radius:50%;border:2px solid #fff;box-shadow:0 2px 4px rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center;font-size:clamp(10px,1.8vw,16px);transition:all .18s}
+.jgwheelw{position:absolute;inset:0;display:none;align-items:center;justify-content:center;flex-direction:column;background:rgba(0,0,0,.35);border-radius:12px;z-index:3}
+.jgwheelw.on{display:flex}
+.jgwheel{width:min(70%,60vh);aspect-ratio:1;border-radius:50%;position:relative;border:8px solid #fff;box-shadow:0 6px 24px rgba(0,0,0,.4);
+  background:conic-gradient(#ff8a8a 0 60deg,#ffd166 60deg 120deg,#8be08b 120deg 180deg,#7cc7ff 180deg 240deg,#c49bff 240deg 300deg,#ffa8d6 300deg 360deg)}
+.jgwheel span{position:absolute;left:50%;top:50%;font-size:clamp(26px,5vw,44px);font-weight:900;color:#3a2e1f}
+.jgptr{font-size:34px;color:#fff;text-shadow:0 2px 4px rgba(0,0,0,.5);line-height:1}
+.jgstart{display:none;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(580px,90vw);background:var(--card);border-radius:24px;padding:16px;flex-direction:column;align-items:center;gap:12px;box-shadow:0 10px 40px rgba(0,0,0,.35);z-index:5}
+.jgstart.on{display:flex}
+.jgstart .duo span{font-size:clamp(18px,3.2vw,26px)}
 </style>
 
 <!-- メニュー -->
@@ -630,8 +664,9 @@ html,body{overflow:hidden;overscroll-behavior:none}
     <button class="tile" style="--c:#2b5fd9" onclick="startC4()"><span class="ti">🔴🔵</span><span class="tn">よんもくならべ</span><span class="ts">4つ ならべたら かち</span></button>
     <button class="tile" style="--c:#c0733a" onclick="startShogi()"><span class="ti">🦁</span><span class="tn">どうぶつしょうぎ</span><span class="ts">ライオンを つかまえろ</span></button>
     <button class="tile" style="--c:#7a5230" onclick="startKShogi()"><span class="ti">☗</span><span class="tn">しょうぎ</span><span class="ts">ほんものの ルール</span></button>
-    <button class="tile" style="--c:#7b1e2b" onclick="startKoi()"><span class="ti">🎴</span><span class="tn">はなふだ こいこい</span><span class="ts">おなじ つきを あつめて やく</span></button>
-    <button class="tile" style="--c:#2f7d5a" onclick="startKt()"><span class="ti">🀄</span><span class="tn">ことば とりあい <span class="new">NEW</span></span><span class="ts">はいを とって ことばを つくれ！</span></button>
+    <button class="tile" style="--c:#7b1e2b" onclick="startKoi()"><span class="ti">🎴</span><span class="tn">はなふだ こいこい</span><span class="ts">つきを あわせて やく</span></button>
+    <button class="tile" style="--c:#2f7d5a" onclick="startKt()"><span class="ti">🀄</span><span class="tn">ことば とりあい <span class="new">NEW</span></span><span class="ts">ことばを つくれ！</span></button>
+    <button class="tile" style="--c:#e07a2e" onclick="startJg()"><span class="ti">🎡</span><span class="tn">じんせい すごろく <span class="new">NEW</span></span><span class="ts">ルーレットで すすもう</span></button>
   </div>
   <div class="mhead">⚡ わいわい からだを つかう</div>
   <div class="tiles g2">
@@ -643,9 +678,9 @@ html,body{overflow:hidden;overscroll-behavior:none}
     <button class="tile" style="--c:#e9546b" onclick="startTug()"><span class="ti">💪</span><span class="tn">つなひき れんだ</span><span class="ts">れんだで ひっぱれ</span></button>
     <button class="tile" style="--c:#1f9fb8" onclick="startHockey()"><span class="ti">🏒</span><span class="tn">エアホッケー</span><span class="ts">ゴールに いれろ</span></button>
     <button class="tile" style="--c:#8a6bd8" onclick="startJust()"><span class="ti">⏱️</span><span class="tn">ジャストタイム</span><span class="ts">ぴったりの びょうで タッチ</span></button>
-    <button class="tile" style="--c:#d96aa7" onclick="startMem()"><span class="ti">🐶</span><span class="tn">しんけいすいじゃく</span><span class="ts">おなじ どうぶつを さがせ</span></button>
-    <button class="tile" style="--c:#4a5bd6" onclick="startBey()"><span class="ti">🌀</span><span class="tn">ベイごま バトル <span class="new">NEW</span></span><span class="ts">ぶつけて まわして はじきだせ！</span></button>
-    <button class="tile" style="--c:#1d2b5e" onclick="startInv()"><span class="ti">👾</span><span class="tn">インベーダー たいせん <span class="new">NEW</span></span><span class="ts">うって よけて いきのこれ！</span></button>
+    <button class="tile" style="--c:#d96aa7" onclick="startMem()"><span class="ti">🐶</span><span class="tn">しんけい すいじゃく</span><span class="ts">おなじ どうぶつを さがせ</span></button>
+    <button class="tile" style="--c:#4a5bd6" onclick="startBey()"><span class="ti">🌀</span><span class="tn">ベイごま バトル <span class="new">NEW</span></span><span class="ts">ぶつけて はじきだせ！</span></button>
+    <button class="tile" style="--c:#1d2b5e" onclick="startInv()"><span class="ti">👾</span><span class="tn">インベーダー たいせん <span class="new">NEW</span></span><span class="ts">うって よけろ！</span></button>
   </div>
   <div class="mhead">🪙 なつかしの だがしや ゲーム</div>
   <div class="tiles g3">
@@ -859,6 +894,20 @@ html,body{overflow:hidden;overscroll-behavior:none}
     <div class="ktwords"></div><div class="ktstock"></div>
   </div>
   <div class="ktstart" id="ktStart"><div class="duo" id="ktMsg"></div><div class="crow"><button class="cb" id="ktGo">▶ スタート</button><button class="cb gray" id="ktStartMenu" aria-label="メニュー">🏠</button></div></div>
+</section>
+
+<section id="jg" class="screen">
+  <div class="jgpanel top p2c" data-o="-1">
+    <div class="jginfo"><span class="jgname">あお</span><span class="jgmoney"></span><span class="jgmem"></span><span class="jgjob"></span><span class="jgfam"></span></div>
+    <div class="jgrow"><span class="jgmsg"></span><button class="jgspin">🎡 ルーレット</button><button class="jghome" aria-label="メニュー">🏠</button></div>
+  </div>
+  <div class="jgboardw"><div class="jgboard" id="jgBoard"></div>
+    <div class="jgwheelw" id="jgWheelW"><div class="jgptr">▼</div><div class="jgwheel" id="jgWheel"></div><div class="jgptr b">▲</div></div></div>
+  <div class="jgpanel bottom p1c" data-o="1">
+    <div class="jginfo"><span class="jgname">あか</span><span class="jgmoney"></span><span class="jgmem"></span><span class="jgjob"></span><span class="jgfam"></span></div>
+    <div class="jgrow"><span class="jgmsg"></span><button class="jgspin">🎡 ルーレット</button><button class="jghome" aria-label="メニュー">🏠</button></div>
+  </div>
+  <div class="jgstart" id="jgStart"><div class="duo" id="jgMsg"></div><div class="crow"><button class="cb" id="jgGo">▶ スタート</button><button class="cb gray" id="jgStartMenu" aria-label="メニュー">🏠</button></div></div>
 </section>
 
 <section id="puyo" class="screen">
@@ -1304,7 +1353,7 @@ function padSet(sec,o,big,sc,dim){const p=document.querySelector(`#${sec} .pad[d
 function bindPads(sec,fn){document.querySelectorAll(`#${sec} .pad`).forEach(p=>
   p.addEventListener('pointerdown',e=>{e.preventDefault();fn(+p.dataset.o);}));}
 document.querySelectorAll('[data-menu]').forEach(b=>b.addEventListener('click',askMenu));
-function stopAll(){if(typeof ktStop==='function')ktStop();if(typeof ivStop==='function')ivStop();if(typeof byStop==='function')byStop();if(typeof ckStop==='function')ckStop();if(typeof pyStop==='function')pyStop();if(typeof hjStop==='function')hjStop();if(typeof rlStop==='function')rlStop();if(typeof cupStop==='function')cupStop();if(typeof pkStop==='function')pkStop();hayStop();tugStop();jStop();hkStop();if(typeof spStop==='function')spStop();}
+function stopAll(){if(typeof jgStop==='function')jgStop();if(typeof ktStop==='function')ktStop();if(typeof ivStop==='function')ivStop();if(typeof byStop==='function')byStop();if(typeof ckStop==='function')ckStop();if(typeof pyStop==='function')pyStop();if(typeof hjStop==='function')hjStop();if(typeof rlStop==='function')rlStop();if(typeof cupStop==='function')cupStop();if(typeof pkStop==='function')pkStop();hayStop();tugStop();jStop();hkStop();if(typeof spStop==='function')spStop();}
 
 /* ========== よんもくならべ ========== */
 const C4={b:[],turn:1,first:1,hist:[],over:false,win:[],last:-1,sc:{'1':0,'-1':0}};
@@ -2847,6 +2896,118 @@ function ktStop(){KT.st='idle';}
 window.addEventListener('resize',()=>{if($('kt').classList.contains('on'))ktRender();});
 function ktSnd(k){if(!BGM.on||!BGM.ctx)return;const t=BGM.ctx.currentTime;if(k==='win')[523,659,784,1047].forEach((f,i)=>note(f,t+i*.09,.14,'square',.05));}
 
+
+/* ========== じんせい すごろく ========== */
+// プレイヤーは はいれつで もつ（いまは 2にん。あとで 4にんに ふやせる せっけい）
+const JG_JOBS=[{nm:'パンやさん',e:'🥐',pay:3},{nm:'おまわりさん',e:'👮',pay:4},{nm:'せんせい',e:'🧑‍🏫',pay:4},{nm:'だいくさん',e:'🔨',pay:4},{nm:'おいしゃさん',e:'🩺',pay:5},{nm:'うちゅうひこうし',e:'🚀',pay:5}];
+// k: しゅるい / m: おかね / s: おもいで / all: みんなにも / skip: やすみ / stop: かならず とまる
+const JG_SQ=[
+ {e:'🏁',l:'スタート',c:''},
+ {e:'🍬',l:'だがしや',c:'retro',t:'だがしやで 10えん ガム！ あたりが でた！',m:-1,s:6},
+ {e:'🎒',l:'がっこう',c:'',t:'がっこうで ともだちが いっぱい できた！',s:6},
+ {e:'💼',l:'しごと',c:'big stop',k:'job'},
+ {e:'💴',l:'きゅうりょう',c:'pay',k:'pay'},
+ {e:'♨️',l:'せんとう',c:'retro',t:'せんとうの おふろあがりに コーヒーぎゅうにゅう！',m:-1,s:6},
+ {e:'👛',l:'さいふ',c:'oops',t:'さいふを おとしちゃった…',m:-3},
+ {e:'🍙',l:'えんそく',c:'',t:'えんそくで おにぎりが おいしかった！',s:6},
+ {e:'💴',l:'きゅうりょう',c:'pay',k:'pay'},
+ {e:'📈',l:'しょうきゅう',c:'',k:'raise'},
+ {e:'📜',l:'かみしばい',c:'retro',t:'かみしばいやさんが きた！ みんなで みよう',s:6,all:{s:3}},
+ {e:'🎫',l:'たからくじ',c:'big',k:'lucky'},
+ {e:'💒',l:'けっこん',c:'big stop',k:'marry'},
+ {e:'💴',l:'きゅうりょう',c:'pay',k:'pay'},
+ {e:'🏎️',l:'カーけし',c:'retro',t:'ボールペンで カーけし あそび！ かちぬいた！',s:8},
+ {e:'🤧',l:'かぜ',c:'oops',t:'かぜを ひいちゃった… 1かい やすみ',skip:1},
+ {e:'👶',l:'あかちゃん',c:'big',k:'baby'},
+ {e:'💴',l:'きゅうりょう',c:'pay',k:'pay'},
+ {e:'🏮',l:'えんにち',c:'retro',t:'えんにちで きんぎょすくい！',m:-1,s:8},
+ {e:'🗻',l:'りょこう',c:'',t:'ふじさんに のぼった！ けしきが さいこう',m:-3,s:12},
+ {e:'📈',l:'しょうきゅう',c:'',k:'raise'},
+ {e:'💴',l:'きゅうりょう',c:'pay',k:'pay'},
+ {e:'🏠',l:'いえ',c:'big stop',k:'house'},
+ {e:'🃏',l:'めんこ',c:'retro',t:'めんこで ぜんぶ ひっくりかえした！',s:6},
+ {e:'☔',l:'かさ',c:'oops',t:'でんしゃに かさを わすれちゃった…',m:-2},
+ {e:'👶',l:'あかちゃん',c:'big',k:'baby'},
+ {e:'💴',l:'きゅうりょう',c:'pay',k:'pay'},
+ {e:'🎫',l:'たからくじ',c:'big',k:'lucky'},
+ {e:'📻',l:'ラジオたいそう',c:'retro',t:'なつやすみの ラジオたいそう、かいきん！',m:1,s:5},
+ {e:'🤝',l:'ボランティア',c:'',t:'まちの ごみひろいを てつだった！',s:10},
+ {e:'💴',l:'きゅうりょう',c:'pay',k:'pay'},
+ {e:'📈',l:'しょうきゅう',c:'',k:'raise'},
+ {e:'✈️',l:'せかいりょこう',c:'big',t:'せかい いっしゅう りょこう！',m:-6,s:22},
+ {e:'🌀',l:'ベーゴマ',c:'retro',t:'ベーゴマで まちいちばんに なった！',s:8},
+ {e:'🩹',l:'ころんだ',c:'oops',t:'ころんで ひざを すりむいた… 1かい やすみ',skip:1},
+ {e:'💴',l:'きゅうりょう',c:'pay',k:'pay'},
+ {e:'🎆',l:'おまつり',c:'retro',t:'なつまつりで はなびを みた！ みんなも いっしょに',s:8,all:{s:3}},
+ {e:'👵',l:'まご',c:'big',t:'まごが あそびに きた！',s:15},
+ {e:'💴',l:'きゅうりょう',c:'pay',k:'pay'},
+ {e:'🌈',l:'ゴール',c:'goal',k:'goal'}];
+const JG={st:'idle',pl:[],turn:0,busy:false,goalN:0};
+function jgCellIdx(i){const r=Math.floor(i/8),c=i%8;return{row:4-r,col:r%2?7-c:c};}   // ひだりしたから じぐざぐに のぼる
+function jgBuild(){const b=$('jgBoard');b.innerHTML='';
+  JG_SQ.forEach((q,i)=>{const d=document.createElement('div'),p=jgCellIdx(i);d.className='jgc '+q.c;d.style.gridRow=p.row+1;d.style.gridColumn=p.col+1;
+    d.innerHTML=`<span class="n">${i||''}</span><span class="e">${q.e}</span><span class="l">${q.l}</span>`;b.appendChild(d);});
+  const w=$('jgWheel');w.innerHTML='';for(let k=0;k<12;k++){const s=document.createElement('span');s.textContent=(k%6)+1;
+    const a=(k*30+15)*Math.PI/180;s.style.left=(50+36*Math.sin(a))+'%';s.style.top=(50-36*Math.cos(a))+'%';s.style.transform=`translate(-50%,-50%) rotate(${k*30+15}deg)`;w.appendChild(s);}
+  const cols=['#ff8a8a','#ffd166','#8be08b','#7cc7ff','#c49bff','#ffa8d6'];
+  w.style.background=`conic-gradient(${Array.from({length:12},(_,k)=>`${cols[k%6]} ${k*30}deg ${k*30+30}deg`).join(',')})`;}
+function jgTokens(){document.querySelectorAll('#jgBoard .jgtok').forEach(t=>t.remove());const cells=[...document.querySelectorAll('#jgBoard .jgc')];
+  JG.pl.forEach((P,k)=>{const t=document.createElement('div');t.className='jgtok';t.style.background=P.col;t.textContent='🚗';
+    const pos=[[4,52],[52,52],[4,4],[52,4]][k];t.style.left=pos[0]+'%';t.style.top=pos[1]+'%';cells[P.pos].appendChild(t);});}
+function jgPanel(P){return document.querySelector(`#jg .jgpanel[data-o="${P.o}"]`);}
+function jgUI(){JG.pl.forEach((P,k)=>{const s=jgPanel(P);if(!s)return;const my=JG.st==='play'&&JG.turn===k&&!JG.busy;
+  s.querySelector('.jgmoney').textContent=`💰 ${P.m}まん`;s.querySelector('.jgmem').textContent=`⭐ ${P.s}`;
+  s.querySelector('.jgjob').textContent=P.job?`${P.job.e}${P.job.nm}（${P.pay}まん）`:'しごと まだ';
+  s.querySelector('.jgfam').textContent=(P.wed?'💍':'')+'👶'.repeat(P.kids)+(P.house?'🏠':'');
+  s.querySelector('.jgspin').disabled=!my;s.classList.toggle('on',JG.st==='play'&&JG.turn===k);
+  s.querySelector('.jgmsg').textContent=P.done?'ゴールしたよ！':P.skip&&JG.turn===k?'やすみ…':my?'ルーレットを まわそう！':JG.turn===k?'':'まってね';});}
+function jgSpin(k){if(JG.st!=='play'||JG.turn!==k||JG.busy)return;JG.busy=true;jgUI();
+  const n=1+Math.floor(Math.random()*6);jgWheel(n,()=>jgMove(k,n));}
+function jgWheel(n,done){const ww=$('jgWheelW'),w=$('jgWheel');ww.classList.add('on');
+  const seg=(n-1)+(Math.random()<.5?0:6),base=(JG.rot||0)-((JG.rot||0)%360)+360*4,target=base+(360-(seg*30+15))+(Math.random()*16-8);
+  JG.rot=target;w.style.transition='none';void w.offsetWidth;w.style.transition='transform 2.2s cubic-bezier(.12,.8,.2,1)';w.style.transform=`rotate(${target}deg)`;
+  let tk=0;const tick=setInterval(()=>{if(BGM.on&&BGM.ctx)note(1400,BGM.ctx.currentTime,.02,'square',.03);if(++tk>18)clearInterval(tick);},110);
+  setTimeout(()=>{sfx();setTimeout(()=>{ww.classList.remove('on');done();},700);},2300);}
+function jgMove(k,n){const P=JG.pl[k];let left=n,pays=0;
+  const step=()=>{if(left<=0||P.pos>=JG_SQ.length-1){jgLand(k,pays);return;}
+    P.pos++;left--;jgTokens();if(BGM.on&&BGM.ctx)note(700,BGM.ctx.currentTime,.05,'triangle',.06);
+    const q=JG_SQ[P.pos];
+    if(q.k==='pay'&&left>0&&P.job){P.m+=P.pay;pays+=P.pay;jgUI();}       // とおりすぎても きゅうりょう
+    if(q.c.includes('stop')&&left>0)left=0;                                 // かならず とまる マス
+    setTimeout(step,230);};
+  step();}
+function jgLand(k,pays){const P=JG.pl[k],q=JG_SQ[P.pos],others=JG.pl.filter(x=>x!==P);let msg='',extra='';
+  const add=(m,s)=>{P.m=Math.max(0,P.m+(m||0));P.s+=s||0;};
+  if(q.k==='job'){P.job=JG_JOBS[Math.floor(Math.random()*JG_JOBS.length)];P.pay=P.job.pay;msg=`しごとが きまった！<br>${P.job.e} ${P.job.nm}（きゅうりょう ${P.pay}まん）`;}
+  else if(q.k==='pay'){if(P.job){P.m+=P.pay;msg=`きゅうりょうび！ 💰${P.pay}まん もらった`;}else msg='まだ しごとが ないよ';}
+  else if(q.k==='raise'){P.pay+=1;msg=`しょうきゅう！ きゅうりょうが ${P.pay}まんに なった`;}
+  else if(q.k==='lucky'){add(20,5);others.forEach(o=>o.m+=4);msg=`たからくじが あたった！ 💰20まん<br>みんなにも おすそわけ（💰4まん ずつ）`;}
+  else if(q.k==='marry'){P.wed=true;add(0,20);others.forEach(o=>o.s+=5);msg=`けっこん おめでとう！ ⭐20<br>みんなも おいわいして ⭐5`;}
+  else if(q.k==='baby'){P.kids++;add(0,15);others.forEach(o=>o.s+=3);msg=`あかちゃんが うまれた！ ⭐15<br>みんなも うれしい ⭐3`;}
+  else if(q.k==='house'){const cost=Math.min(P.m,8);P.house=true;add(-cost,10);msg=`いえを たてた！ 💰${cost}まん つかって ⭐10<br>（さいごに いえの ねうち 💰15まん）`;}
+  else if(q.k==='goal'){P.done=true;JG.goalN++;const bonus=JG.goalN===1?10:5;add(bonus,10);msg=`ゴール！ すてきな じんせいだったね<br>${JG.goalN}ばんめの ゴールで 💰${bonus}まん ⭐10`;}
+  else{add(q.m,q.s);if(q.all)others.forEach(o=>{o.m+=q.all.m||0;o.s+=q.all.s||0;});if(q.skip)P.skip=q.skip;
+    msg=q.t+'<br>'+[q.m?`💰${q.m>0?'+':''}${q.m}まん`:'',q.s?`⭐+${q.s}`:''].filter(Boolean).join('　');}
+  if(pays)extra=`<br><small>とちゅうで きゅうりょう 💰${pays}まん</small>`;
+  jgUI();modal(`<span class="big">${q.e} ${q.l}</span><span class="small">${PNAME(+P.o)}：${msg}${extra}</span>`,[{label:'OK',fn:()=>jgNext()}]);}
+function jgNext(){if(JG.pl.every(p=>p.done)){jgEnd();return;}
+  for(let g=0;g<JG.pl.length*2;g++){JG.turn=(JG.turn+1)%JG.pl.length;const P=JG.pl[JG.turn];if(P.done)continue;if(P.skip){P.skip--;continue;}break;}
+  JG.busy=false;jgUI();}
+function jgEnd(){JG.st='over';jgUI();const sc=P=>P.m+P.s+(P.house?15:0);const r=[...JG.pl].sort((a,b)=>sc(b)-sc(a));
+  const lines=JG.pl.map(P=>`${PNAME(+P.o)}：💰${P.m}まん ＋ ⭐${P.s}${P.house?' ＋ 🏠15':''} ＝ <b>${sc(P)}</b>`).join('<br>');
+  const top=sc(r[0])===sc(r[1])?'🤝 ひきわけ！':`🏆 ${PNAME(+r[0].o)}の かち！`;
+  jgSnd();modal(`<span class="big">${top}</span><span class="small">${lines}<br>どっちも すてきな じんせいでした 🌈</span>`,[{label:'OK',fn:()=>{duo('jgMsg','もう いっかい あそぶ？');$('jgGo').textContent='▶ もういっかい';$('jgStart').classList.add('on');}}]);}
+function jgNew(){JG.pl=[{o:'1',col:'#e9546b'},{o:'-1',col:'#3d8bff'}].map(p=>({...p,pos:0,m:5,s:0,job:null,pay:0,wed:false,kids:0,house:false,skip:0,done:false}));
+  JG.turn=0;JG.busy=false;JG.goalN=0;}
+function startJg(){show('jg');jgStop();jgBuild();jgNew();jgTokens();jgUI();
+  duo('jgMsg','じんせい すごろく<br><small>ルーレットで すすんで、おかねと おもいでを あつめよう！</small>');$('jgGo').textContent='▶ スタート';$('jgStart').classList.add('on');}
+function jgStop(){JG.st='idle';JG.busy=false;$('jgWheelW').classList.remove('on');}
+$('jgGo').addEventListener('click',()=>{$('jgStart').classList.remove('on');jgNew();jgTokens();JG.st='play';jgUI();});
+$('jgStartMenu').addEventListener('click',askMenu);
+document.querySelectorAll('#jg .jgpanel').forEach(s=>{s.querySelector('.jgspin').addEventListener('click',()=>{const k=JG.pl.findIndex(p=>p.o===s.dataset.o);jgSpin(k);});
+  s.querySelector('.jghome').addEventListener('click',askMenu);});
+function jgSnd(){if(!BGM.on||!BGM.ctx)return;const t=BGM.ctx.currentTime;[523,659,784,1047,1319].forEach((f,i)=>note(f,t+i*.1,.16,'triangle',.06));}
+
 /* ========== あそびかた ========== */
 function openHowto(){$('howto').classList.add('on');$('howto').querySelector('.howbody').scrollTop=0;}
 function closeHowto(){$('howto').classList.remove('on');}
@@ -2871,14 +3032,15 @@ const HELP={
  ck:['カーけし ずもう','まず くるまを 3だい（または 5だい）えらぼう。<br>じぶんの ばんに、ゆびで <b>ペンを うしろに ひっぱって、はなすと パチン！</b> ひっぱるほど つよいよ。<br>あいての くるまを たたみから おしだすか、たおしたら かち。<br>じぶんの くるまが おちたり たおれたりしたら はんそく。あたらなかったら、あいてが 2かい つづけて うてるよ。<br>まけた くるまは リタイア、かった くるまは つづけて でる。ぜんぶ まかしたら ゆうしょう！<br>ときどき「✨ ひっさつわざ チャンス」が でるよ。タップしてから うつと わざが でる！'],
  bey:["ベイごま バトル", "まず こまの パーツ（ボディ・おもり・さき）を えらぼう。くみあわせで つよさが かわるよ。<br>「ゴー シュート！」の あと、ゆびで <b>うしろに ひっぱって、はなすと シュート！</b> ひっぱった ほうと はんたいに とんでいくよ。<br>こまは まんなかに あつまって ぶつかりあうよ。<b>かいてんが さきに とまるか、スタジアムの そとに とびだしたら まけ</b>。<br>2ほん さきに とったら かち！"],
  inv:["インベーダー たいせん", "じぶんの じんち（じぶんの いろの ところ）の なかを、<b>じゅうじキー</b>で うごけるよ。<b>「うつ！」</b>で ミサイル はっしゃ！<br>あいての ほうだいに ミサイルを あてたら かち。インベーダーも ミサイルで たおせるよ。<br><b>インベーダーに ぶつかったり、あいての ミサイルに あたったら まけ</b>。じかんが たつと インベーダーが ふえるよ。<br>おなじ ときに やられたら あいうちで もう いっかい！"],
- kt:["ことば とりあい", "まんなかに ひらがなの はいが ばらまかれるよ。<b>はいを タッチすると じぶんの てもとに くる</b>（はやいもの がち）。<br>てもとの はいを タッチして えらび、うごかしたい ばしょを タッチすると いれかえられるよ。いらない はいは「↩ もどす」。<br><b>3もじの ことば 4つと 2もじの ことば 1つ</b>（ぜんぶ ちがう ことば）が そろったら「できた！」。じしょに あれば かち！"]};
+ kt:["ことば とりあい", "まんなかに ひらがなの はいが ばらまかれるよ。<b>はいを タッチすると じぶんの てもとに くる</b>（はやいもの がち）。<br>てもとの はいを タッチして えらび、うごかしたい ばしょを タッチすると いれかえられるよ。いらない はいは「↩ もどす」。<br><b>3もじの ことば 4つと 2もじの ことば 1つ</b>（ぜんぶ ちがう ことば）が そろったら「できた！」。じしょに あれば かち！"],
+ jg:["じんせい すごろく", "じぶんの ばんに「🎡 ルーレット」を おして、でた かずだけ すすむよ。<br><b>しごと・けっこん・いえ</b>の マス（オレンジの わく）は、とおりすぎずに かならず とまるよ。💴 きゅうりょうびは とおるだけでも おきゅうりょうが もらえる！<br>たからくじや けっこんでは、みんなにも おすそわけが あるよ。<br>ゴールで <b>💰おかね ＋ ⭐おもいで（＋🏠いえ）</b>の ごうけいが おおい ほうが かち！"]};
 function showHelp(){const sc=document.querySelector('.screen.on'),h=sc&&HELP[sc.id];if(!h)return;
   let resume=null;
   if(sc.id==='puyo'&&PY.st==='play'&&!PY.paused){PY.paused=true;resume=()=>{PY.paused=false;PY.last=performance.now();};}
   if(sc.id==='hockey'&&HK.pause<=0){const pv=HK.pause;HK.pause=1e9;resume=()=>{HK.pause=.4;};}
   modal(`<span class="big">❓ ${h[0]}</span><span class="hlp">${h[1]}</span>`,[{label:'とじる',fn:resume}]);}
 // 🏠 ボタンの となりに ？ ボタンを つける
-['[data-menu]','[data-act="menu"]','#hkMenu','.pypause','.hjpause','.ckhome','#ckSetMenu','#hkSetMenu','.byhome','#bySetMenu','.ivhome','#ivStartMenu','.kthome','#ktStartMenu'].forEach(sel=>document.querySelectorAll(sel).forEach(b=>{
+['[data-menu]','[data-act="menu"]','#hkMenu','.pypause','.hjpause','.ckhome','#ckSetMenu','#hkSetMenu','.byhome','#bySetMenu','.ivhome','#ivStartMenu','.kthome','#ktStartMenu','.jghome','#jgStartMenu'].forEach(sel=>document.querySelectorAll(sel).forEach(b=>{
   if(b.closest('#menu'))return;const c=b.cloneNode(false);c.removeAttribute('id');c.removeAttribute('data-menu');c.removeAttribute('data-act');
   c.classList.add('hlpbtn');c.classList.remove('c-menu');c.textContent='？';c.setAttribute('aria-label','あそびかた');c.addEventListener('click',e=>{e.stopPropagation();showHelp();});
   b.parentNode.insertBefore(c,b);}));
