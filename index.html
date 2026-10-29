@@ -591,6 +591,28 @@ html,body{overflow:hidden;overscroll-behavior:none}
 .byprow .jchip{padding:4px 10px;font-size:14px}
 .bystat{display:grid;grid-template-columns:auto 1fr;gap:2px 8px;font-size:12px;font-weight:bold;color:#5a4a33;align-items:center}
 .bystat s{display:block;height:8px;border-radius:4px;background:linear-gradient(90deg,#ff8a3d,#ffd84d);text-decoration:none}
+
+/* インベーダー たいせん */
+#inv.on{display:grid;position:fixed;inset:0;width:auto;max-width:none;height:auto;grid-template-rows:auto minmax(0,1fr) auto;gap:6px;background:#05060d;padding:calc(8px + env(safe-area-inset-top,0px)) max(10px,env(safe-area-inset-right,0px)) calc(8px + env(safe-area-inset-bottom,0px)) max(10px,env(safe-area-inset-left,0px))}
+.ivcvw{position:relative;min-height:0;min-width:0;overflow:hidden;border-radius:12px}
+#ivCv{position:absolute;inset:0;width:100%;height:100%;display:block;image-rendering:pixelated;touch-action:none}
+.ivpanel{display:flex;align-items:center;gap:10px;height:clamp(140px,15vh,190px);border-radius:20px;padding:8px 10px;color:#fff}
+.ivpanel.top{transform:rotate(180deg)}
+.ivpanel.p1c{background:#b8344a}.ivpanel.p2c{background:#2c62c9}
+.ivdpad{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr));height:100%;aspect-ratio:1;gap:3px;flex-shrink:0}
+.ivdpad .u{grid-area:1/2}.ivdpad .l{grid-area:2/1}.ivdpad .c{grid-area:2/2;background:#fff;border-radius:6px;opacity:.8}.ivdpad .r{grid-area:2/3}.ivdpad .d{grid-area:3/2}
+.ivdpad button,.ivfire{border:none;background:#fff;color:#2a2a2a;font-weight:bold;box-shadow:0 4px 0 rgba(0,0,0,.25);touch-action:none;user-select:none;-webkit-user-select:none}
+.ivdpad button{border-radius:10px;font-size:clamp(18px,2.6vh,28px);padding:0}
+.ivdpad button.hold,.ivfire.hold{transform:translateY(3px);box-shadow:0 1px 0 rgba(0,0,0,.25);background:#ffe14d}
+.ivinfo{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center}
+.ivname{font-size:20px;font-weight:bold}.ivwin{color:#ffe14d;font-size:16px}
+.ivmsg{font-size:14px;font-weight:bold;min-height:1.2em}
+.ivbtns{display:flex;gap:8px}
+.ivhome{border:none;background:rgba(255,255,255,.92);border-radius:12px;width:44px;height:44px;font-size:20px}
+.ivfire{height:85%;aspect-ratio:1;border-radius:50%;font-size:clamp(20px,2.8vh,30px);background:#ffe14d;flex-shrink:0}
+.ivstart{display:none;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(560px,90vw);background:var(--card);border-radius:24px;padding:16px;flex-direction:column;align-items:center;gap:12px;box-shadow:0 10px 40px rgba(0,0,0,.5);z-index:5}
+.ivstart.on{display:flex}
+.ivstart .duo span{font-size:clamp(18px,3.2vw,26px)}
 </style>
 </head>
 <body>
@@ -620,6 +642,7 @@ html,body{overflow:hidden;overscroll-behavior:none}
     <button class="tile" style="--c:#8a6bd8" onclick="startJust()"><span class="ti">⏱️</span><span class="tn">ジャストタイム</span><span class="ts">ぴったりの びょうで タッチ</span></button>
     <button class="tile" style="--c:#d96aa7" onclick="startMem()"><span class="ti">🐶</span><span class="tn">しんけいすいじゃく</span><span class="ts">おなじ どうぶつを さがせ</span></button>
     <button class="tile" style="--c:#4a5bd6" onclick="startBey()"><span class="ti">🌀</span><span class="tn">ベイごま バトル <span class="new">NEW</span></span><span class="ts">ぶつけて まわして はじきだせ！</span></button>
+    <button class="tile" style="--c:#1d2b5e" onclick="startInv()"><span class="ti">👾</span><span class="tn">インベーダー たいせん <span class="new">NEW</span></span><span class="ts">うって よけて いきのこれ！</span></button>
   </div>
   <div class="mhead">🪙 なつかしの だがしや ゲーム</div>
   <div class="tiles g3">
@@ -805,6 +828,21 @@ html,body{overflow:hidden;overscroll-behavior:none}
     <div class="crow"><button class="cb" id="byGo">▶ バトル スタート</button><button class="cb gray" id="bySetMenu" aria-label="メニュー">🏠</button></div>
     <div class="byside" data-o="1"><canvas class="byprev" width="240" height="240"></canvas><div class="byright"><b>あかの こま</b><div class="byparts"></div><div class="bystat"></div></div></div>
   </div>
+</section>
+
+<section id="inv" class="screen">
+  <div class="ivpanel top p2c" data-o="-1">
+    <div class="ivdpad"><button data-k="U" class="u" aria-label="うえ">▲</button><button data-k="L" class="l" aria-label="ひだり">◀</button><span class="c"></span><button data-k="R" class="r" aria-label="みぎ">▶</button><button data-k="D" class="d" aria-label="した">▼</button></div>
+    <div class="ivinfo"><span class="ivname">あお <b class="ivwin"></b></span><span class="ivmsg"></span><div class="ivbtns"><button class="ivhome" aria-label="メニュー">🏠</button></div></div>
+    <button class="ivfire" data-k="F">うつ！</button>
+  </div>
+  <div class="ivcvw"><canvas id="ivCv" aria-label="うちゅう"></canvas><div class="ckcut" id="ivCut"><span class="t"></span><span></span></div></div>
+  <div class="ivpanel bottom p1c" data-o="1">
+    <div class="ivdpad"><button data-k="U" class="u" aria-label="うえ">▲</button><button data-k="L" class="l" aria-label="ひだり">◀</button><span class="c"></span><button data-k="R" class="r" aria-label="みぎ">▶</button><button data-k="D" class="d" aria-label="した">▼</button></div>
+    <div class="ivinfo"><span class="ivname">あか <b class="ivwin"></b></span><span class="ivmsg"></span><div class="ivbtns"><button class="ivhome" aria-label="メニュー">🏠</button></div></div>
+    <button class="ivfire" data-k="F">うつ！</button>
+  </div>
+  <div class="ivstart" id="ivStart"><div class="duo" id="ivMsg"></div><div class="crow"><button class="cb" id="ivGo">▶ スタート</button><button class="cb gray" id="ivStartMenu" aria-label="メニュー">🏠</button></div></div>
 </section>
 
 <section id="puyo" class="screen">
@@ -1250,7 +1288,7 @@ function padSet(sec,o,big,sc,dim){const p=document.querySelector(`#${sec} .pad[d
 function bindPads(sec,fn){document.querySelectorAll(`#${sec} .pad`).forEach(p=>
   p.addEventListener('pointerdown',e=>{e.preventDefault();fn(+p.dataset.o);}));}
 document.querySelectorAll('[data-menu]').forEach(b=>b.addEventListener('click',askMenu));
-function stopAll(){if(typeof byStop==='function')byStop();if(typeof ckStop==='function')ckStop();if(typeof pyStop==='function')pyStop();if(typeof hjStop==='function')hjStop();if(typeof rlStop==='function')rlStop();if(typeof cupStop==='function')cupStop();if(typeof pkStop==='function')pkStop();hayStop();tugStop();jStop();hkStop();if(typeof spStop==='function')spStop();}
+function stopAll(){if(typeof ivStop==='function')ivStop();if(typeof byStop==='function')byStop();if(typeof ckStop==='function')ckStop();if(typeof pyStop==='function')pyStop();if(typeof hjStop==='function')hjStop();if(typeof rlStop==='function')rlStop();if(typeof cupStop==='function')cupStop();if(typeof pkStop==='function')pkStop();hayStop();tugStop();jStop();hkStop();if(typeof spStop==='function')spStop();}
 
 /* ========== よんもくならべ ========== */
 const C4={b:[],turn:1,first:1,hist:[],over:false,win:[],last:-1,sc:{'1':0,'-1':0}};
@@ -2635,6 +2673,95 @@ function bySnd(k,j){if(!BGM.on||!BGM.ctx)return;const t=BGM.ctx.currentTime;
   else if(k==='stop'){note(220,t,.25,'triangle',.08);}
   else if(k==='win'){[523,659,784,1047].forEach((f,i)=>note(f,t+i*.09,.14,'square',.05));}}
 
+
+/* ========== インベーダー たいせん ========== */
+// せかい：よこ 100、たては がめんに あわせる（したが あか、うえが あお）
+const IV_SPR={
+  ship:['....#....','...###...','.#######.','#########','#########','##.###.##'],
+  a:[['..######..','.########.','##.####.##','##########','.########.','.#.#..#.#.'],['..######..','.########.','##.####.##','##########','.########.','#.#....#.#']],
+  b:[['....##....','..######..','.##.##.##.','##########','..#.##.#..','.#......#.'],['....##....','..######..','.##.##.##.','##########','..#.##.#..','..#....#..']],
+  c:[['.#......#.','..#....#..','.########.','##.####.##','.########.','..##..##..'],['#........#','.#......#.','.########.','##.####.##','.########.','.##....##.']]};
+const IV_COL={a:'#5ee36b',b:'#c27bff',c:'#ffb340'};
+const IV={st:'idle',p:{},inv:[],ms:[],fx:[],t:0,spawnT:0,raf:0,last:0,W:100,H:100,s:1,d:1,keys:{'1':{},'-1':{}},sc:{'1':0,'-1':0},stars:[],tm:[]};
+const ivCv=$('ivCv'),ivX=ivCv.getContext('2d');
+function ivSize(){const r=ivCv.getBoundingClientRect(),d=window.devicePixelRatio||1;if(!r.width)return;
+  IV.d=d;ivCv.width=Math.round(r.width*d);ivCv.height=Math.round(r.height*d);IV.s=r.width/100;IV.W=100;IV.H=r.height/IV.s;
+  IV.stars=Array.from({length:70},()=>({x:Math.random()*100,y:Math.random()*IV.H,b:Math.random()}));}
+function ivZone(o){const H=IV.H;return o==='1'?{y0:H*.6,y1:H-4}:{y0:4,y1:H*.4};}
+function ivReset(){const H=IV.H;IV.p={'1':{x:50,y:H-8,cd:0,dead:false},'-1':{x:50,y:8,cd:0,dead:false}};IV.inv=[];IV.ms=[];IV.fx=[];IV.t=0;IV.spawnT=0;
+  for(let i=0;i<6;i++)ivSpawn();}
+function ivSpawn(){const H=IV.H,k=['a','b','c'][Math.floor(Math.random()*3)],dir=Math.random()<.5?1:-1;
+  IV.inv.push({k,x:8+Math.random()*84,y:H*.44+Math.random()*H*.12,vx:(Math.random()<.5?-1:1)*(6+Math.random()*8),vy:dir*(2.5+Math.random()*2.5+IV.t*.04),f:0});}
+function ivHit(a,b){return Math.abs(a.x-b.x)<(a.w+b.w)/2&&Math.abs(a.y-b.y)<(a.h+b.h)/2;}
+function ivBoom(x,y,col,n){for(let i=0;i<(n||14);i++){const a=Math.random()*7,v=10+Math.random()*30;IV.fx.push({x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v,t:0,col});}}
+function ivStep(dt){const H=IV.H;IV.t+=dt;
+  // うごかす（あおは がめんが さかさなので むきを ひっくりかえす）
+  for(const o of['1','-1']){const P=IV.p[o],k=IV.keys[o],z=ivZone(o),f=o==='1'?1:-1;if(P.dead)continue;
+    const ix=(k.R?1:0)-(k.L?1:0),iy=(k.D?1:0)-(k.U?1:0);P.x=Math.max(5,Math.min(95,P.x+ix*f*42*dt));P.y=Math.max(z.y0,Math.min(z.y1,P.y+iy*f*36*dt));
+    P.cd-=dt;if(k.F&&P.cd<=0&&IV.ms.filter(m=>m.o===o).length<3){P.cd=.35;IV.ms.push({o,x:P.x,y:P.y-f*4,vy:-f*95});ivSnd('shot');}}
+  // インベーダー
+  IV.spawnT-=dt;if(IV.spawnT<=0){ivSpawn();IV.spawnT=Math.max(.55,2-IV.t/40);}
+  for(const v of IV.inv){v.x+=v.vx*dt;v.y+=v.vy*dt;v.f+=dt;if(v.x<5){v.x=5;v.vx=Math.abs(v.vx);}if(v.x>95){v.x=95;v.vx=-Math.abs(v.vx);}}
+  IV.inv=IV.inv.filter(v=>v.y>-6&&v.y<H+6&&!v.dead);
+  for(const m of IV.ms)m.y+=m.vy*dt;
+  // あたりはんてい
+  const ship=o=>({x:IV.p[o].x,y:IV.p[o].y,w:8,h:5});
+  for(const m of IV.ms){if(m.dead)continue;const mb={x:m.x,y:m.y,w:1.2,h:3};
+    for(const v of IV.inv)if(!v.dead&&ivHit(mb,{x:v.x,y:v.y,w:8,h:6})){v.dead=m.dead=true;ivBoom(v.x,v.y,IV_COL[v.k]);ivSnd('boom');break;}
+    if(m.dead)continue;
+    for(const n of IV.ms)if(n!==m&&!n.dead&&n.o!==m.o&&ivHit(mb,{x:n.x,y:n.y,w:1.6,h:3})){m.dead=n.dead=true;ivBoom(m.x,m.y,'#fff',6);break;}
+    if(m.dead)continue;
+    const op=m.o==='1'?'-1':'1';if(!IV.p[op].dead&&ivHit(mb,ship(op))){m.dead=true;IV.p[op].hitBy='missile';IV.p[op].dying=true;}}
+  IV.ms=IV.ms.filter(m=>!m.dead&&m.y>-5&&m.y<H+5);IV.inv=IV.inv.filter(v=>!v.dead);
+  for(const o of['1','-1']){const P=IV.p[o];if(P.dead)continue;for(const v of IV.inv)if(ivHit(ship(o),{x:v.x,y:v.y,w:7,h:5})){P.hitBy='invader';P.dying=true;}}
+  const dying=['1','-1'].filter(o=>IV.p[o].dying&&!IV.p[o].dead);
+  for(const o of dying){const P=IV.p[o];P.dead=true;ivBoom(P.x,P.y,o==='1'?'#ff6b7f':'#6fa8ff',40);}
+  if(dying.length){ivSnd('die');ivEnd(dying.length===2?0:dying[0]==='1'?-1:1,dying);}
+  for(const f of IV.fx){f.t+=dt;f.x+=f.vx*dt;f.y+=f.vy*dt;}IV.fx=IV.fx.filter(f=>f.t<.7);}
+function ivSprite(x,rows,cx,cy,u,col,flip){x.fillStyle=col;const h=rows.length,w=rows[0].length;
+  for(let r=0;r<h;r++)for(let c=0;c<w;c++)if(rows[r][c]==='#'){const yy=flip?h-1-r:r;x.fillRect(cx+(c-w/2)*u,cy+(yy-h/2)*u,u+.3,u+.3);}}
+function ivDraw(){const x=ivX,s=IV.s,d=IV.d,H=IV.H;if(!ivCv.width)return;x.setTransform(d*s,0,0,d*s,0,0);
+  x.fillStyle='#05060d';x.fillRect(0,0,100,H);
+  for(const st of IV.stars){x.fillStyle=`rgba(255,255,255,${.25+.5*Math.abs(Math.sin(IV.t*1.5+st.b*9))})`;x.fillRect(st.x,st.y,.45,.45);}
+  x.fillStyle='rgba(61,139,255,.08)';x.fillRect(0,0,100,H*.4);x.fillStyle='rgba(233,84,107,.08)';x.fillRect(0,H*.6,100,H*.4);
+  x.strokeStyle='rgba(61,139,255,.5)';x.lineWidth=.3;x.setLineDash([2,2]);x.beginPath();x.moveTo(0,H*.4);x.lineTo(100,H*.4);x.stroke();
+  x.strokeStyle='rgba(233,84,107,.5)';x.beginPath();x.moveTo(0,H*.6);x.lineTo(100,H*.6);x.stroke();x.setLineDash([]);
+  for(const v of IV.inv){const fr=Math.floor(v.f*3)%2;ivSprite(x,IV_SPR[v.k][fr],v.x,v.y,.8,IV_COL[v.k],v.vy<0);}
+  for(const m of IV.ms){x.fillStyle=m.o==='1'?'#ffd0d6':'#cfe0ff';x.fillRect(m.x-.5,m.y-1.5,1,3);}
+  for(const o of['1','-1']){const P=IV.p[o];if(!P||P.dead)continue;ivSprite(x,IV_SPR.ship,P.x,P.y,.9,o==='1'?'#ff6b7f':'#6fa8ff',o==='-1');}
+  for(const f of IV.fx){x.fillStyle=f.col;x.globalAlpha=1-f.t/.7;x.fillRect(f.x-.6,f.y-.6,1.2,1.2);}x.globalAlpha=1;}
+function ivLoop(t){if(!$('inv').classList.contains('on'))return;const dt=Math.min(.04,(t-IV.last)/1000);IV.last=t;
+  if(IV.st==='play')ivStep(dt);else{for(const f of IV.fx){f.t+=dt;f.x+=f.vx*dt;f.y+=f.vy*dt;}IV.fx=IV.fx.filter(f=>f.t<.7);IV.t+=dt*.3;}
+  ivDraw();IV.raf=requestAnimationFrame(ivLoop);}
+function ivEnd(w,dying){IV.st='over';if(w)IV.sc[w>0?'1':'-1']++;ivUI();
+  const why=o=>IV.p[o].hitBy==='invader'?'インベーダーに ぶつかった':'ミサイルが あたった';
+  IV.tm.push(setTimeout(()=>{ivSnd(w?'win':'die');
+    duo('ivMsg',w?`🎉 ${PNAME(w)}の かち！<br><small>${PNAME(-w)}は ${why(w>0?'-1':'1')}</small>`:'🤝 あいうち！<br><small>ひきわけ… もう いっかい！</small>');
+    $('ivGo').textContent='▶ もういっかい';$('ivStart').classList.add('on');},1100));}
+function ivUI(){for(const o of['1','-1']){const s=document.querySelector(`#inv .ivpanel[data-o="${o}"]`);s.querySelector('.ivwin').textContent=`かち ${IV.sc[o]}`;
+  s.querySelector('.ivmsg').textContent=IV.st==='play'?'あいてと インベーダーを ねらえ！':'';}}
+function ivCount(txt){const c=$('ivCut');c.querySelectorAll('span').forEach(e=>e.textContent=txt);c.classList.remove('on');void c.offsetWidth;c.classList.add('on');clearTimeout(IV.cutT);IV.cutT=setTimeout(()=>c.classList.remove('on'),600);}
+$('ivGo').addEventListener('click',()=>{$('ivStart').classList.remove('on');ivReset();IV.keys={'1':{},'-1':{}};IV.st='count';ivUI();
+  ['3','2','1'].forEach((n,k)=>IV.tm.push(setTimeout(()=>{ivCount(n);sfx();},k*600)));
+  IV.tm.push(setTimeout(()=>{ivCount('スタート！');IV.st='play';ivUI();},1800));});
+function startInv(){show('inv');ivStop();IV.sc={'1':0,'-1':0};IV.st='idle';
+  requestAnimationFrame(()=>{ivSize();ivReset();IV.last=performance.now();IV.raf=requestAnimationFrame(ivLoop);ivUI();
+    duo('ivMsg','インベーダー たいせん<br><small>じぶんの ほうだいを まもりながら、あいてを ねらえ！</small>');$('ivGo').textContent='▶ スタート';$('ivStart').classList.add('on');});}
+function ivStop(){IV.tm.forEach(clearTimeout);IV.tm=[];cancelAnimationFrame(IV.raf);IV.st='idle';}
+document.querySelectorAll('#inv .ivpanel').forEach(s=>{const o=s.dataset.o;
+  s.querySelectorAll('[data-k]').forEach(b=>{const k=b.dataset.k;
+    b.addEventListener('pointerdown',e=>{e.preventDefault();try{b.setPointerCapture(e.pointerId);}catch(_){}b.classList.add('hold');IV.keys[o][k]=true;});
+    ['pointerup','pointercancel','lostpointercapture'].forEach(ev=>b.addEventListener(ev,()=>{b.classList.remove('hold');IV.keys[o][k]=false;}));});
+  s.querySelector('.ivhome').addEventListener('click',askMenu);});
+$('ivStartMenu').addEventListener('click',askMenu);
+window.addEventListener('resize',()=>{if($('inv').classList.contains('on'))ivSize();});
+if(window.ResizeObserver)new ResizeObserver(()=>{if($('inv').classList.contains('on'))ivSize();}).observe(document.querySelector('.ivcvw'));
+function ivSnd(k){if(!BGM.on||!BGM.ctx)return;const t=BGM.ctx.currentTime;
+  if(k==='shot'){note(1400,t,.03,'square',.04);note(900,t+.03,.04,'square',.03);}
+  else if(k==='boom'){for(let i=0;i<4;i++)note(120+Math.random()*200,t+i*.03,.05,'square',.05);}
+  else if(k==='die'){[600,450,300,180,100].forEach((f,i)=>note(f,t+i*.08,.1,'square',.07));}
+  else if(k==='win'){[523,659,784,1047].forEach((f,i)=>note(f,t+i*.09,.14,'square',.05));}}
+
 /* ========== あそびかた ========== */
 function openHowto(){$('howto').classList.add('on');$('howto').querySelector('.howbody').scrollTop=0;}
 function closeHowto(){$('howto').classList.remove('on');}
@@ -2657,14 +2784,15 @@ const HELP={
  hj:['10えん はじき','ボタンを <b>ながく おすほど つよく</b> はじけるよ。<br>あなに おちないように だんを のぼって、さきに ゴールに ついたら かち！<br>ひかっている がわの ボタンを つかってね。アウトや ゴールの ばしょは ランダムにも できるよ。'],
  rl:['コイン ルーレット','すきな マークに コインを かけて「OK」。とまった マークに かけていたら、ばいに なって もどってくるよ！<br>ひとつの マークには 5まいまで。0️⃣は みんな ハズレ。<br>さきに 50まい ためたら かち、コインが なくなったら まけ。'],
  ck:['カーけし ずもう','まず くるまを 3だい（または 5だい）えらぼう。<br>じぶんの ばんに、ゆびで <b>ペンを うしろに ひっぱって、はなすと パチン！</b> ひっぱるほど つよいよ。<br>あいての くるまを たたみから おしだすか、たおしたら かち。<br>じぶんの くるまが おちたり たおれたりしたら はんそく。あたらなかったら、あいてが 2かい つづけて うてるよ。<br>まけた くるまは リタイア、かった くるまは つづけて でる。ぜんぶ まかしたら ゆうしょう！<br>ときどき「✨ ひっさつわざ チャンス」が でるよ。タップしてから うつと わざが でる！'],
- bey:["ベイごま バトル", "まず こまの パーツ（ボディ・おもり・さき）を えらぼう。くみあわせで つよさが かわるよ。<br>「ゴー シュート！」の あと、ゆびで <b>うしろに ひっぱって、はなすと シュート！</b> ひっぱった ほうと はんたいに とんでいくよ。<br>こまは まんなかに あつまって ぶつかりあうよ。<b>かいてんが さきに とまるか、スタジアムの そとに とびだしたら まけ</b>。<br>2ほん さきに とったら かち！"]};
+ bey:["ベイごま バトル", "まず こまの パーツ（ボディ・おもり・さき）を えらぼう。くみあわせで つよさが かわるよ。<br>「ゴー シュート！」の あと、ゆびで <b>うしろに ひっぱって、はなすと シュート！</b> ひっぱった ほうと はんたいに とんでいくよ。<br>こまは まんなかに あつまって ぶつかりあうよ。<b>かいてんが さきに とまるか、スタジアムの そとに とびだしたら まけ</b>。<br>2ほん さきに とったら かち！"],
+ inv:["インベーダー たいせん", "じぶんの じんち（じぶんの いろの ところ）の なかを、<b>じゅうじキー</b>で うごけるよ。<b>「うつ！」</b>で ミサイル はっしゃ！<br>あいての ほうだいに ミサイルを あてたら かち。インベーダーも ミサイルで たおせるよ。<br><b>インベーダーに ぶつかったり、あいての ミサイルに あたったら まけ</b>。じかんが たつと インベーダーが ふえるよ。<br>おなじ ときに やられたら あいうちで もう いっかい！"]};
 function showHelp(){const sc=document.querySelector('.screen.on'),h=sc&&HELP[sc.id];if(!h)return;
   let resume=null;
   if(sc.id==='puyo'&&PY.st==='play'&&!PY.paused){PY.paused=true;resume=()=>{PY.paused=false;PY.last=performance.now();};}
   if(sc.id==='hockey'&&HK.pause<=0){const pv=HK.pause;HK.pause=1e9;resume=()=>{HK.pause=.4;};}
   modal(`<span class="big">❓ ${h[0]}</span><span class="hlp">${h[1]}</span>`,[{label:'とじる',fn:resume}]);}
 // 🏠 ボタンの となりに ？ ボタンを つける
-['[data-menu]','[data-act="menu"]','#hkMenu','.pypause','.hjpause','.ckhome','#ckSetMenu','#hkSetMenu','.byhome','#bySetMenu'].forEach(sel=>document.querySelectorAll(sel).forEach(b=>{
+['[data-menu]','[data-act="menu"]','#hkMenu','.pypause','.hjpause','.ckhome','#ckSetMenu','#hkSetMenu','.byhome','#bySetMenu','.ivhome','#ivStartMenu'].forEach(sel=>document.querySelectorAll(sel).forEach(b=>{
   if(b.closest('#menu'))return;const c=b.cloneNode(false);c.removeAttribute('id');c.removeAttribute('data-menu');c.removeAttribute('data-act');
   c.classList.add('hlpbtn');c.classList.remove('c-menu');c.textContent='？';c.setAttribute('aria-label','あそびかた');c.addEventListener('click',e=>{e.stopPropagation();showHelp();});
   b.parentNode.insertBefore(c,b);}));
