@@ -655,6 +655,18 @@ html,body{overflow:hidden;overscroll-behavior:none}
 .jgstart{display:none;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(580px,90vw);background:var(--card);border-radius:24px;padding:16px;flex-direction:column;align-items:center;gap:12px;box-shadow:0 10px 40px rgba(0,0,0,.35);z-index:5}
 .jgstart.on{display:flex}
 .jgstart .duo span{font-size:clamp(18px,3.2vw,26px)}
+
+/* ばくだん たいせん */
+#bm.on{display:grid;position:fixed;inset:0;width:auto;max-width:none;height:auto;grid-template-rows:auto minmax(0,1fr) auto;gap:6px;background:#2b3a2b;padding:calc(8px + env(safe-area-inset-top,0px)) max(10px,env(safe-area-inset-right,0px)) calc(8px + env(safe-area-inset-bottom,0px)) max(10px,env(safe-area-inset-left,0px))}
+#bmCv{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none}
+.bmpanel{display:flex;align-items:center;gap:10px;height:clamp(130px,14vh,180px);border-radius:20px;padding:8px 10px;color:#fff}
+.bmpanel.top{transform:rotate(180deg)}
+.bmpanel.p1c{background:#b8344a}.bmpanel.p2c{background:#2c62c9}
+.bmwin{color:#ffe14d;font-size:16px}
+.bmstat{font-size:15px;font-weight:bold;letter-spacing:1px}
+.bmhome{border:none;background:rgba(255,255,255,.92);border-radius:12px;width:44px;height:44px;font-size:20px}
+.bmbomb{font-size:clamp(34px,4.5vh,48px)!important;aspect-ratio:1!important;border-radius:50%!important}
+.ivdpad button.hold,.bmbomb.hold{transform:translateY(3px);background:#ffe14d}
 </style>
 
 <!-- メニュー -->
@@ -685,6 +697,7 @@ html,body{overflow:hidden;overscroll-behavior:none}
     <button class="tile" style="--c:#d96aa7" onclick="startMem()"><span class="ti">🐶</span><span class="tn">しんけい すいじゃく</span><span class="ts">おなじ どうぶつを さがせ</span></button>
     <button class="tile" style="--c:#4a5bd6" onclick="startBey()"><span class="ti">🌀</span><span class="tn">ベイごま バトル <span class="new">NEW</span></span><span class="ts">ぶつけて はじきだせ！</span></button>
     <button class="tile" style="--c:#1d2b5e" onclick="startInv()"><span class="ti">👾</span><span class="tn">インベーダー たいせん <span class="new">NEW</span></span><span class="ts">うって よけろ！</span></button>
+    <button class="tile" style="--c:#3e7d3a" onclick="startBm()"><span class="ti">💣</span><span class="tn">ばくだん たいせん <span class="new">NEW</span></span><span class="ts">ばくはつに まきこめ！</span></button>
   </div>
   <div class="mhead">🪙 なつかしの だがしや ゲーム</div>
   <div class="tiles g3">
@@ -910,6 +923,21 @@ html,body{overflow:hidden;overscroll-behavior:none}
     <div class="jgrow"><span class="jgmsg"></span><button class="jgspin">🎡 ルーレット</button><button class="jghome" aria-label="メニュー">🏠</button></div>
   </div>
   <div class="jgstart" id="jgStart"><div class="duo" id="jgMsg"></div><div class="crow"><button class="cb" id="jgGo">▶ スタート</button><button class="cb gray" id="jgStartMenu" aria-label="メニュー">🏠</button></div></div>
+</section>
+
+<section id="bm" class="screen">
+  <div class="bmpanel top p2c" data-o="-1">
+    <div class="ivdpad"><button data-k="U" class="u" aria-label="うえ">▲</button><button data-k="L" class="l" aria-label="ひだり">◀</button><span class="c"></span><button data-k="R" class="r" aria-label="みぎ">▶</button><button data-k="D" class="d" aria-label="した">▼</button></div>
+    <div class="ivinfo"><span class="ivname">あお <b class="bmwin"></b></span><span class="bmstat"></span><div class="ivbtns"><button class="bmhome" aria-label="メニュー">🏠</button></div></div>
+    <button class="ivfire bmbomb" data-k="B">💣</button>
+  </div>
+  <div class="ivcvw"><canvas id="bmCv" aria-label="めいろ"></canvas><div class="ckcut" id="bmCut"><span class="t"></span><span></span></div></div>
+  <div class="bmpanel bottom p1c" data-o="1">
+    <div class="ivdpad"><button data-k="U" class="u" aria-label="うえ">▲</button><button data-k="L" class="l" aria-label="ひだり">◀</button><span class="c"></span><button data-k="R" class="r" aria-label="みぎ">▶</button><button data-k="D" class="d" aria-label="した">▼</button></div>
+    <div class="ivinfo"><span class="ivname">あか <b class="bmwin"></b></span><span class="bmstat"></span><div class="ivbtns"><button class="bmhome" aria-label="メニュー">🏠</button></div></div>
+    <button class="ivfire bmbomb" data-k="B">💣</button>
+  </div>
+  <div class="ivstart" id="bmStart"><div class="duo" id="bmMsg"></div><div class="crow"><button class="cb" id="bmGo">▶ スタート</button><button class="cb gray" id="bmStartMenu" aria-label="メニュー">🏠</button></div></div>
 </section>
 
 <section id="puyo" class="screen">
@@ -1355,7 +1383,7 @@ function padSet(sec,o,big,sc,dim){const p=document.querySelector(`#${sec} .pad[d
 function bindPads(sec,fn){document.querySelectorAll(`#${sec} .pad`).forEach(p=>
   p.addEventListener('pointerdown',e=>{e.preventDefault();fn(+p.dataset.o);}));}
 document.querySelectorAll('[data-menu]').forEach(b=>b.addEventListener('click',askMenu));
-function stopAll(){if(typeof jgStop==='function')jgStop();if(typeof ktStop==='function')ktStop();if(typeof ivStop==='function')ivStop();if(typeof byStop==='function')byStop();if(typeof ckStop==='function')ckStop();if(typeof pyStop==='function')pyStop();if(typeof hjStop==='function')hjStop();if(typeof rlStop==='function')rlStop();if(typeof cupStop==='function')cupStop();if(typeof pkStop==='function')pkStop();hayStop();tugStop();jStop();hkStop();if(typeof spStop==='function')spStop();}
+function stopAll(){if(typeof bmStop==='function')bmStop();if(typeof jgStop==='function')jgStop();if(typeof ktStop==='function')ktStop();if(typeof ivStop==='function')ivStop();if(typeof byStop==='function')byStop();if(typeof ckStop==='function')ckStop();if(typeof pyStop==='function')pyStop();if(typeof hjStop==='function')hjStop();if(typeof rlStop==='function')rlStop();if(typeof cupStop==='function')cupStop();if(typeof pkStop==='function')pkStop();hayStop();tugStop();jStop();hkStop();if(typeof spStop==='function')spStop();}
 
 /* ========== よんもくならべ ========== */
 const C4={b:[],turn:1,first:1,hist:[],over:false,win:[],last:-1,sc:{'1':0,'-1':0}};
@@ -3064,6 +3092,123 @@ document.querySelectorAll('#jg .jgpanel').forEach(s=>{s.querySelector('.jgspin')
   s.querySelector('.jghome').addEventListener('click',askMenu);});
 function jgSnd(){if(!BGM.on||!BGM.ctx)return;const t=BGM.ctx.currentTime;[523,659,784,1047,1319].forEach((f,i)=>note(f,t+i*.1,.16,'triangle',.06));}
 
+
+/* ========== ばくだん たいせん ========== */
+// めいろ：よこ11 × たて13（0:ゆか 1:はしら 2:こわせる ブロック 3:そとかべ）
+const BM_W=11,BM_H=13;
+const BM={st:'idle',g:[],it:{},bombs:[],fire:{},p:{},keys:{'1':{},'-1':{}},sc:{'1':0,'-1':0},t:0,raf:0,last:0,s:1,ox:0,oy:0,d:1,tm:[],fx:[]};
+const bmCv=$('bmCv'),bmX=bmCv.getContext('2d');
+const BM_DIR={U:[0,-1],D:[0,1],L:[-1,0],R:[1,0]};
+function bmK(x,y){return y*BM_W+x;}
+function bmSize(){const r=bmCv.getBoundingClientRect(),d=window.devicePixelRatio||1;if(!r.width)return;BM.d=d;bmCv.width=Math.round(r.width*d);bmCv.height=Math.round(r.height*d);
+  BM.s=Math.floor(Math.min(r.width/BM_W,r.height/BM_H));BM.ox=(r.width-BM.s*BM_W)/2;BM.oy=(r.height-BM.s*BM_H)/2;}
+function bmNew(){BM.g=[];for(let y=0;y<BM_H;y++)for(let x=0;x<BM_W;x++){let v=0;
+    if(x===0||y===0||x===BM_W-1||y===BM_H-1)v=3;else if(x%2===0&&y%2===0)v=1;else if(Math.random()<.68)v=2;BM.g.push(v);}
+  const safe=[[1,11],[2,11],[1,10],[1,9],[2,10],[9,1],[8,1],[9,2],[9,3],[8,2]];   // スタートの まわりは あける
+  for(const[x,y]of safe)if(BM.g[bmK(x,y)]===2)BM.g[bmK(x,y)]=0;
+  BM.it={};BM.bombs=[];BM.fire={};BM.fx=[];BM.t=0;
+  const mk=(x,y)=>({x,y,mv:null,face:0,max:1,rng:2,spd:3.6,dead:false,dt:0});
+  BM.p={'1':mk(1,11),'-1':mk(9,1)};BM.keys={'1':{},'-1':{}};}
+function bmFree(x,y,o){if(x<0||y<0||x>=BM_W||y>=BM_H)return false;if(BM.g[bmK(x,y)])return false;
+  return !BM.bombs.some(b=>b.x===x&&b.y===y&&!(b.pass&&b.pass[o]));}
+function bmTile(P){return P.mv?(P.mv.t>.5?[P.mv.tx,P.mv.ty]:[P.mv.fx,P.mv.fy]):[P.x,P.y];}
+function bmPlace(o){const P=BM.p[o];if(BM.st!=='play'||P.dead)return;const[x,y]=bmTile(P);
+  if(BM.bombs.some(b=>b.x===x&&b.y===y)||BM.bombs.filter(b=>b.o===o).length>=P.max)return;
+  const pass={};for(const q of['1','-1']){const Q=BM.p[q];if(Q.dead)continue;const[a,b]=bmTile(Q);if(a===x&&b===y)pass[q]=1;}
+  BM.bombs.push({o,x,y,t:2.4,rng:P.rng,pass});bmSnd('put');}
+function bmBoom(b){BM.bombs=BM.bombs.filter(z=>z!==b);bmSnd('boom');
+  const burn=(x,y)=>{BM.fire[bmK(x,y)]=.55;};burn(b.x,b.y);
+  for(const[dx,dy]of Object.values(BM_DIR))for(let i=1;i<=b.rng;i++){const x=b.x+dx*i,y=b.y+dy*i,v=BM.g[bmK(x,y)];
+    if(v===1||v===3)break;
+    if(v===2){BM.g[bmK(x,y)]=0;burn(x,y);if(Math.random()<.32)BM.it[bmK(x,y)]={k:['b','f','s'][Math.floor(Math.random()*3)],safe:.6};for(let k=0;k<6;k++)BM.fx.push({x:x+.5,y:y+.5,vx:(Math.random()-.5)*4,vy:(Math.random()-.5)*4,t:0});break;}
+    const ob=BM.bombs.find(z=>z.x===x&&z.y===y);if(ob){ob.t=Math.min(ob.t,.06);burn(x,y);break;}
+    if(BM.it[bmK(x,y)]&&!(BM.it[bmK(x,y)].safe>0))delete BM.it[bmK(x,y)];
+    burn(x,y);}}
+function bmStep(dt){BM.t+=dt;
+  for(const o of['1','-1']){const P=BM.p[o],k=BM.keys[o],f=o==='1'?1:-1;if(P.dead)continue;
+    if(P.mv){P.mv.t+=dt*P.spd;if(P.mv.t>=1){P.x=P.mv.tx;P.y=P.mv.ty;P.mv=null;}}
+    if(!P.mv){let dir=null;for(const d of['U','D','L','R'])if(k[d])dir=d;
+      if(dir){let[dx,dy]=BM_DIR[dir];dx*=f;dy*=f;P.face=dx>0?1:dx<0?3:dy>0?2:0;   // あおは がめんが さかさ
+        if(bmFree(P.x+dx,P.y+dy,o))P.mv={fx:P.x,fy:P.y,tx:P.x+dx,ty:P.y+dy,t:0};}}
+    // じぶんの ばくだんから はなれたら もう とおれない
+    const[cx,cy]=bmTile(P);for(const b of BM.bombs)if(b.pass[o]&&!(b.x===cx&&b.y===cy)&&!(P.mv&&b.x===P.mv.fx&&b.y===P.mv.fy&&P.mv.t<.5))delete b.pass[o];
+    const it=BM.it[bmK(cx,cy)];if(it){if(it.k==='b')P.max=Math.min(6,P.max+1);if(it.k==='f')P.rng=Math.min(7,P.rng+1);if(it.k==='s')P.spd=Math.min(6.5,P.spd+.7);delete BM.it[bmK(cx,cy)];bmSnd('item');}}
+  for(const b of[...BM.bombs]){b.t-=dt;if(b.t<=0&&BM.bombs.includes(b))bmBoom(b);}
+  for(const key in BM.fire){BM.fire[key]-=dt;if(BM.fire[key]<=0)delete BM.fire[key];}
+  for(const key in BM.it)if(BM.it[key].safe>0)BM.it[key].safe-=dt;
+  for(const f of BM.fx){f.t+=dt;f.x+=f.vx*dt;f.y+=f.vy*dt;}BM.fx=BM.fx.filter(f=>f.t<.5);
+  const hit=['1','-1'].filter(o=>{const P=BM.p[o];if(P.dead)return false;const[x,y]=bmTile(P);return BM.fire[bmK(x,y)]>0;});
+  for(const o of hit){BM.p[o].dead=true;BM.p[o].dt=0;}
+  if(hit.length){bmSnd('die');bmEnd(hit.length===2?0:hit[0]==='1'?-1:1);}
+  else if(BM.t>150)bmEnd(0);}
+function bmPos(P){if(!P.mv)return[P.x,P.y];const t=Math.min(1,P.mv.t);return[P.mv.fx+(P.mv.tx-P.mv.fx)*t,P.mv.fy+(P.mv.ty-P.mv.fy)*t];}
+function bmDraw(){const x=bmX,s=BM.s,d=BM.d;if(!s)return;x.setTransform(d,0,0,d,0,0);x.fillStyle='#2b3a2b';x.fillRect(0,0,bmCv.width,bmCv.height);x.translate(BM.ox,BM.oy);
+  for(let yy=0;yy<BM_H;yy++)for(let xx=0;xx<BM_W;xx++){const v=BM.g[bmK(xx,yy)],X=xx*s,Y=yy*s;
+    if(v===0){x.fillStyle=(xx+yy)%2?'#6fbf5b':'#79c965';x.fillRect(X,Y,s,s);}
+    else if(v===1||v===3){x.fillStyle=v===3?'#5b6470':'#8a94a3';x.fillRect(X,Y,s,s);x.fillStyle='rgba(255,255,255,.25)';x.fillRect(X,Y,s,s*.18);x.fillStyle='rgba(0,0,0,.25)';x.fillRect(X,Y+s*.82,s,s*.18);
+      x.strokeStyle='rgba(0,0,0,.25)';x.lineWidth=1;x.strokeRect(X+.5,Y+.5,s-1,s-1);}
+    else{x.fillStyle='#c98a4a';x.fillRect(X,Y,s,s);x.strokeStyle='#8a5526';x.lineWidth=Math.max(1,s*.05);
+      for(let k=1;k<3;k++){x.beginPath();x.moveTo(X,Y+s*k/3);x.lineTo(X+s,Y+s*k/3);x.stroke();}
+      for(let k=0;k<3;k++){const ox=k%2?s*.5:s*.25;x.beginPath();x.moveTo(X+ox,Y+s*k/3);x.lineTo(X+ox,Y+s*(k+1)/3);x.stroke();x.beginPath();x.moveTo(X+ox+s*.5,Y+s*k/3);x.lineTo(X+ox+s*.5,Y+s*(k+1)/3);x.stroke();}}}
+  x.textAlign='center';x.textBaseline='middle';
+  for(const key in BM.it){const xx=key%BM_W,yy=Math.floor(key/BM_W),it=BM.it[key];x.fillStyle='rgba(255,255,255,.75)';ckRR(x,xx*s+s*.12,yy*s+s*.12,s*.76,s*.76,s*.15);x.fill();
+    x.font=`${s*.55}px sans-serif`;x.fillText({b:'💣',f:'🔥',s:'👟'}[it.k],xx*s+s/2,yy*s+s/2+1);}
+  for(const b of BM.bombs){const pul=1+.08*Math.sin(BM.t*14),cx=b.x*s+s/2,cy=b.y*s+s/2,r=s*.36*pul;
+    x.fillStyle='rgba(0,0,0,.3)';x.beginPath();x.ellipse(cx+2,cy+s*.3,r,r*.35,0,0,7);x.fill();
+    const g=x.createRadialGradient(cx-r*.35,cy-r*.35,r*.1,cx,cy,r);g.addColorStop(0,'#666');g.addColorStop(1,'#111');x.fillStyle=g;x.beginPath();x.arc(cx,cy,r,0,7);x.fill();
+    x.strokeStyle='#c8a46a';x.lineWidth=s*.06;x.beginPath();x.moveTo(cx+r*.5,cy-r*.7);x.quadraticCurveTo(cx+r*.9,cy-r*1.2,cx+r*.6,cy-r*1.4);x.stroke();
+    x.fillStyle=Math.floor(BM.t*10)%2?'#ffde59':'#ff6b2c';x.beginPath();x.arc(cx+r*.6,cy-r*1.4,s*.08,0,7);x.fill();
+    x.fillStyle=b.o==='1'?'#ff6b7f':'#6fa8ff';x.beginPath();x.arc(cx-r*.3,cy+r*.3,s*.07,0,7);x.fill();}
+  for(const key in BM.fire){const xx=key%BM_W,yy=Math.floor(key/BM_W),a=Math.min(1,BM.fire[key]*3);
+    x.fillStyle=`rgba(255,120,30,${.85*a})`;ckRR(x,xx*s+s*.05,yy*s+s*.05,s*.9,s*.9,s*.3);x.fill();x.fillStyle=`rgba(255,240,120,${a})`;ckRR(x,xx*s+s*.25,yy*s+s*.25,s*.5,s*.5,s*.2);x.fill();}
+  for(const f of BM.fx){x.fillStyle=`rgba(140,85,38,${1-f.t*2})`;x.fillRect(f.x*s-s*.06,f.y*s-s*.06,s*.12,s*.12);}
+  for(const o of['1','-1']){const P=BM.p[o];if(!P)continue;const[px,py]=bmPos(P),cx=px*s+s/2,cy=py*s+s/2,col=o==='1'?'#ff4d6a':'#3d8bff';
+    if(P.dead){P.dt+=.016;x.globalAlpha=Math.max(0,1-P.dt);}
+    const bob=P.mv?Math.sin(P.mv.t*Math.PI*2)*s*.04:0,r=s*.36;
+    x.fillStyle='rgba(0,0,0,.3)';x.beginPath();x.ellipse(cx,cy+s*.36,r*.8,r*.25,0,0,7);x.fill();
+    x.fillStyle=col;ckRR(x,cx-r*.75,cy+bob,r*1.5,r*.9,r*.3);x.fill();
+    x.fillStyle='#fff';x.beginPath();x.arc(cx,cy-r*.25+bob,r*.78,0,7);x.fill();x.strokeStyle=col;x.lineWidth=s*.07;x.stroke();
+    x.fillStyle=col;x.beginPath();x.arc(cx,cy-r*.95+bob,r*.2,0,7);x.fill();
+    x.fillStyle='#ffe0c2';ckRR(x,cx-r*.5,cy-r*.5+bob,r,r*.55,r*.22);x.fill();
+    x.fillStyle='#222';const ex=[0,1,0,-1][P.face]*r*.12,ey=[-1,0,1,0][P.face]*r*.06;x.fillRect(cx-r*.28+ex,cy-r*.38+ey+bob,r*.12,r*.22);x.fillRect(cx+r*.16+ex,cy-r*.38+ey+bob,r*.12,r*.22);
+    x.globalAlpha=1;}
+  x.setTransform(1,0,0,1,0,0);}
+function bmLoop(t){if(!$('bm').classList.contains('on'))return;const dt=Math.min(.04,(t-BM.last)/1000);BM.last=t;
+  if(BM.st==='play')bmStep(dt);else{BM.t+=dt;for(const key in BM.fire){BM.fire[key]-=dt;if(BM.fire[key]<=0)delete BM.fire[key];}}
+  bmDraw();BM.raf=requestAnimationFrame(bmLoop);}
+function bmUI(){for(const o of['1','-1']){const s=document.querySelector(`#bm .bmpanel[data-o="${o}"]`),P=BM.p[o];
+  s.querySelector('.bmwin').textContent='●'.repeat(BM.sc[o])+'○'.repeat(Math.max(0,2-BM.sc[o]));
+  s.querySelector('.bmstat').textContent=P?`💣${P.max} 🔥${P.rng} 👟${Math.round((P.spd-3.6)/.7)+1}`:'';}}
+function bmEnd(w){BM.st='over';if(w)BM.sc[w>0?'1':'-1']++;bmUI();
+  const fin=w&&BM.sc[w>0?'1':'-1']>=2;
+  BM.tm.push(setTimeout(()=>{bmSnd(w?'win':'die');
+    if(!w)duo('bmMsg','🤝 あいうち！<br><small>もう いっかい！</small>');
+    else duo('bmMsg',fin?`🏆 ${PNAME(w)}の ゆうしょう！<br><small>あか ${BM.sc['1']} ・ あお ${BM.sc['-1']}</small>`:`🎉 ${PNAME(w)}に 1ぽん！<br><small>あか ${BM.sc['1']} ・ あお ${BM.sc['-1']}</small>`);
+    if(fin)BM.sc={'1':0,'-1':0};
+    $('bmGo').textContent=fin?'▶ もういちど':'▶ つぎの しょうぶ';$('bmStart').classList.add('on');},1200));}
+function bmCount(txt){const c=$('bmCut');c.querySelectorAll('span').forEach(e=>e.textContent=txt);c.classList.remove('on');void c.offsetWidth;c.classList.add('on');clearTimeout(BM.cutT);BM.cutT=setTimeout(()=>c.classList.remove('on'),600);}
+$('bmGo').addEventListener('click',()=>{$('bmStart').classList.remove('on');bmNew();BM.st='count';bmUI();
+  ['3','2','1'].forEach((n,k)=>BM.tm.push(setTimeout(()=>{bmCount(n);sfx();},k*600)));
+  BM.tm.push(setTimeout(()=>{bmCount('スタート！');BM.st='play';},1800));});
+function startBm(){show('bm');bmStop();BM.sc={'1':0,'-1':0};bmNew();
+  requestAnimationFrame(()=>{bmSize();BM.last=performance.now();BM.raf=requestAnimationFrame(bmLoop);bmUI();
+    duo('bmMsg','ばくだん たいせん<br><small>ブロックを こわして アイテムを とり、あいてを ばくはつに まきこめ！</small>');$('bmGo').textContent='▶ スタート';$('bmStart').classList.add('on');});}
+function bmStop(){BM.tm.forEach(clearTimeout);BM.tm=[];cancelAnimationFrame(BM.raf);BM.st='idle';}
+document.querySelectorAll('#bm .bmpanel').forEach(s=>{const o=s.dataset.o;
+  s.querySelectorAll('[data-k]').forEach(b=>{const k=b.dataset.k;
+    b.addEventListener('pointerdown',e=>{e.preventDefault();try{b.setPointerCapture(e.pointerId);}catch(_){}b.classList.add('hold');if(k==='B')bmPlace(o);else BM.keys[o][k]=true;});
+    ['pointerup','pointercancel','lostpointercapture'].forEach(ev=>b.addEventListener(ev,()=>{b.classList.remove('hold');if(k!=='B')BM.keys[o][k]=false;}));});
+  s.querySelector('.bmhome').addEventListener('click',askMenu);});
+$('bmStartMenu').addEventListener('click',askMenu);
+window.addEventListener('resize',()=>{if($('bm').classList.contains('on'))bmSize();});
+if(window.ResizeObserver)new ResizeObserver(()=>{if($('bm').classList.contains('on'))bmSize();}).observe(document.querySelector('#bm .ivcvw'));
+function bmSnd(k){if(!BGM.on||!BGM.ctx)return;const t=BGM.ctx.currentTime;
+  if(k==='put')note(500,t,.05,'square',.05);
+  else if(k==='boom'){for(let i=0;i<6;i++)note(60+Math.random()*160,t+i*.025,.08,'sawtooth',.07);}
+  else if(k==='item')[880,1175].forEach((f,i)=>note(f,t+i*.06,.08,'square',.05));
+  else if(k==='die')[500,380,260,150].forEach((f,i)=>note(f,t+i*.09,.12,'square',.07));
+  else if(k==='win')[523,659,784,1047].forEach((f,i)=>note(f,t+i*.09,.14,'square',.05));}
+
 /* ========== あそびかた ========== */
 function openHowto(){$('howto').classList.add('on');$('howto').querySelector('.howbody').scrollTop=0;}
 function closeHowto(){$('howto').classList.remove('on');}
@@ -3089,14 +3234,15 @@ const HELP={
  bey:["ベイごま バトル", "まず こまの パーツ（ボディ・おもり・さき）を えらぼう。くみあわせで つよさが かわるよ。<br>「ゴー シュート！」の あと、ゆびで <b>うしろに ひっぱって、はなすと シュート！</b> ひっぱった ほうと はんたいに とんでいくよ。<br>こまは まんなかに あつまって ぶつかりあうよ。<b>かいてんが さきに とまるか、スタジアムの そとに とびだしたら まけ</b>。<br>2ほん さきに とったら かち！"],
  inv:["インベーダー たいせん", "じぶんの じんち（じぶんの いろの ところ）を <b>ゆびで なぞると ほうだいが ついてくる</b>よ。<b>「うつ！」</b>で ミサイル はっしゃ！<br>あいての ほうだいに ミサイルを あてたら かち。インベーダーも ミサイルで たおせるよ。<br><b>インベーダーに ぶつかったり、あいての ミサイルに あたったら まけ</b>。じかんが たつと インベーダーが ふえるよ。<br>おなじ ときに やられたら あいうちで もう いっかい！"],
  kt:["ことば とりあい", "まんなかに ひらがなの はいが ばらまかれるよ。<b>はいを タッチすると じぶんの てもとに くる</b>（はやいもの がち）。<br>てもとの はいを タッチして えらび、うごかしたい ばしょを タッチすると いれかえられるよ。いらない はいは「↩ もどす」。<br><b>3もじの ことば 4つと 2もじの ことば 1つ</b>（ぜんぶ ちがう ことば）が そろったら「できた！」。じしょに あれば かち！"],
- jg:["じんせい すごろく", "じぶんの ばんに「🎡 ルーレット」を おして、でた かずだけ すすむよ。<br><b>しごと・けっこん・いえ</b>の マス（オレンジの わく）は、とおりすぎずに かならず とまるよ。💴 きゅうりょうびは とおるだけでも おきゅうりょうが もらえる！<br>たからくじや けっこんでは、みんなにも おすそわけが あるよ。<br>ゴールで <b>💰おかね ＋ ⭐おもいで（＋🏠いえ）</b>の ごうけいが おおい ほうが かち！"]};
+ jg:["じんせい すごろく", "じぶんの ばんに「🎡 ルーレット」を おして、でた かずだけ すすむよ。<br><b>しごと・けっこん・いえ</b>の マス（オレンジの わく）は、とおりすぎずに かならず とまるよ。💴 きゅうりょうびは とおるだけでも おきゅうりょうが もらえる！<br>たからくじや けっこんでは、みんなにも おすそわけが あるよ。<br>ゴールで <b>💰おかね ＋ ⭐おもいで（＋🏠いえ）</b>の ごうけいが おおい ほうが かち！"],
+ bm:["ばくだん たいせん", "<b>じゅうじキー</b>で うごいて、<b>💣ボタン</b>で ばくだんを おくよ。すこし たつと たてと よこに ばくはつ！<br>ちゃいろの ブロックは こわせるよ。なかから <b>💣（おける かず アップ）・🔥（ばくはつが ながく）・👟（はやく うごける）</b>が でることも。<br>ばくはつに まきこまれたら まけ（じぶんの ばくだんにも きをつけて！）。<br>2ほん さきに とったら かち！"]};
 function showHelp(){const sc=document.querySelector('.screen.on'),h=sc&&HELP[sc.id];if(!h)return;
   let resume=null;
   if(sc.id==='puyo'&&PY.st==='play'&&!PY.paused){PY.paused=true;resume=()=>{PY.paused=false;PY.last=performance.now();};}
   if(sc.id==='hockey'&&HK.pause<=0){const pv=HK.pause;HK.pause=1e9;resume=()=>{HK.pause=.4;};}
   modal(`<span class="big">❓ ${h[0]}</span><span class="hlp">${h[1]}</span>`,[{label:'とじる',fn:resume}]);}
 // 🏠 ボタンの となりに ？ ボタンを つける
-['[data-menu]','[data-act="menu"]','#hkMenu','.pypause','.hjpause','.ckhome','#ckSetMenu','#hkSetMenu','.byhome','#bySetMenu','.ivhome','#ivStartMenu','.kthome','#ktStartMenu','.jghome','#jgStartMenu'].forEach(sel=>document.querySelectorAll(sel).forEach(b=>{
+['[data-menu]','[data-act="menu"]','#hkMenu','.pypause','.hjpause','.ckhome','#ckSetMenu','#hkSetMenu','.byhome','#bySetMenu','.ivhome','#ivStartMenu','.kthome','#ktStartMenu','.jghome','#jgStartMenu','.bmhome','#bmStartMenu'].forEach(sel=>document.querySelectorAll(sel).forEach(b=>{
   if(b.closest('#menu'))return;const c=b.cloneNode(false);c.removeAttribute('id');c.removeAttribute('data-menu');c.removeAttribute('data-act');
   c.classList.add('hlpbtn');c.classList.remove('c-menu');c.textContent='？';c.setAttribute('aria-label','あそびかた');c.addEventListener('click',e=>{e.stopPropagation();showHelp();});
   b.parentNode.insertBefore(c,b);}));
