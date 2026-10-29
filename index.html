@@ -613,6 +613,33 @@ html,body{overflow:hidden;overscroll-behavior:none}
 .ivstart{display:none;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(560px,90vw);background:var(--card);border-radius:24px;padding:16px;flex-direction:column;align-items:center;gap:12px;box-shadow:0 10px 40px rgba(0,0,0,.5);z-index:5}
 .ivstart.on{display:flex}
 .ivstart .duo span{font-size:clamp(18px,3.2vw,26px)}
+
+/* ことば とりあい */
+#kt.on{display:grid;position:fixed;inset:0;width:auto;max-width:none;height:auto;grid-template-rows:auto minmax(0,1fr) auto;gap:6px;background:#2f6b4f;padding:calc(8px + env(safe-area-inset-top,0px)) max(8px,env(safe-area-inset-right,0px)) calc(8px + env(safe-area-inset-bottom,0px)) max(8px,env(safe-area-inset-left,0px));--kt:clamp(30px,5.6vw,52px)}
+.kthand{border-radius:18px;padding:6px 8px;display:flex;flex-direction:column;gap:6px;color:#fff}
+.kthand.top{transform:rotate(180deg)}
+.kthand.p1c{background:#c94a5e}.kthand.p2c{background:#3a6fd1}
+.ktrow1{display:flex;align-items:center;gap:6px}
+.ktname{font-size:20px;font-weight:bold}
+.ktmsg{flex:1;font-size:14px;font-weight:bold;text-align:center;min-width:0}
+.ktrow1 button{border:none;border-radius:12px;height:42px;padding:0 12px;font-size:16px;font-weight:bold;background:#fff;color:#3a2e1f;box-shadow:0 3px 0 rgba(0,0,0,.2)}
+.ktrow1 .ktdone{background:#ffe14d;font-size:18px}
+.ktrow1 .ktret:disabled{opacity:.4}
+.ktrow1 .kthome{width:42px;padding:0}
+.ktwords{display:flex;gap:calc(var(--kt)*.28);justify-content:center}
+.ktgrp{display:flex;gap:2px;padding:3px;border-radius:10px;background:rgba(0,0,0,.18)}
+.ktgrp.bad{background:#ffd0d0;box-shadow:0 0 0 3px #ff3b30}
+.ktgrp.good{background:#c9f5c9}
+.ktstock{display:flex;gap:3px;justify-content:center;min-height:calc(var(--kt)*1.25)}
+.ktslot{width:var(--kt);height:calc(var(--kt)*1.25);border-radius:7px;border:2px dashed rgba(255,255,255,.5);background:rgba(255,255,255,.08);padding:0}
+.kttile{width:var(--kt);height:calc(var(--kt)*1.25);border:none;border-radius:7px;padding:0;font-size:calc(var(--kt)*.62);font-weight:900;color:#1d2b22;
+  background:linear-gradient(#fffdf6,#efe7d3);box-shadow:inset 0 -1px 0 #d8ccaf,0 calc(var(--kt)*.09) 0 #2f8f5b,0 calc(var(--kt)*.12) 3px rgba(0,0,0,.35);font-family:"Hiragino Maru Gothic ProN","Hiragino Kaku Gothic ProN",system-ui,sans-serif;line-height:1}
+.kttile.sel{background:linear-gradient(#fff6a8,#ffd84d);transform:translateY(-4px)}
+.ktfield{position:relative;min-height:0;border-radius:16px;background:radial-gradient(#3e8a63,#2a5e43);box-shadow:inset 0 0 30px rgba(0,0,0,.35);overflow:hidden}
+.ktfield .kttile{position:absolute;--kt:clamp(38px,6.4vw,56px);transition:transform .2s}
+.ktstart{display:none;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(580px,90vw);background:var(--card);border-radius:24px;padding:16px;flex-direction:column;align-items:center;gap:12px;box-shadow:0 10px 40px rgba(0,0,0,.45);z-index:5}
+.ktstart.on{display:flex}
+.ktstart .duo span{font-size:clamp(18px,3.2vw,26px)}
 </style>
 </head>
 <body>
@@ -629,6 +656,7 @@ html,body{overflow:hidden;overscroll-behavior:none}
     <button class="tile" style="--c:#c0733a" onclick="startShogi()"><span class="ti">🦁</span><span class="tn">どうぶつしょうぎ</span><span class="ts">ライオンを つかまえろ</span></button>
     <button class="tile" style="--c:#7a5230" onclick="startKShogi()"><span class="ti">☗</span><span class="tn">しょうぎ</span><span class="ts">ほんものの ルール</span></button>
     <button class="tile" style="--c:#7b1e2b" onclick="startKoi()"><span class="ti">🎴</span><span class="tn">はなふだ こいこい</span><span class="ts">おなじ つきを あつめて やく</span></button>
+    <button class="tile" style="--c:#2f7d5a" onclick="startKt()"><span class="ti">🀄</span><span class="tn">ことば とりあい <span class="new">NEW</span></span><span class="ts">はいを とって ことばを つくれ！</span></button>
   </div>
   <div class="mhead">⚡ わいわい からだを つかう</div>
   <div class="tiles g2">
@@ -843,6 +871,19 @@ html,body{overflow:hidden;overscroll-behavior:none}
     <button class="ivfire" data-k="F">うつ！</button>
   </div>
   <div class="ivstart" id="ivStart"><div class="duo" id="ivMsg"></div><div class="crow"><button class="cb" id="ivGo">▶ スタート</button><button class="cb gray" id="ivStartMenu" aria-label="メニュー">🏠</button></div></div>
+</section>
+
+<section id="kt" class="screen">
+  <div class="kthand top p2c" data-o="-1">
+    <div class="ktrow1"><span class="ktname">あお</span><span class="ktmsg"></span><button class="ktret">↩ もどす</button><button class="ktdone">できた！</button><button class="kthome" aria-label="メニュー">🏠</button></div>
+    <div class="ktwords"></div><div class="ktstock"></div>
+  </div>
+  <div class="ktfield" id="ktField"></div>
+  <div class="kthand bottom p1c" data-o="1">
+    <div class="ktrow1"><span class="ktname">あか</span><span class="ktmsg"></span><button class="ktret">↩ もどす</button><button class="ktdone">できた！</button><button class="kthome" aria-label="メニュー">🏠</button></div>
+    <div class="ktwords"></div><div class="ktstock"></div>
+  </div>
+  <div class="ktstart" id="ktStart"><div class="duo" id="ktMsg"></div><div class="crow"><button class="cb" id="ktGo">▶ スタート</button><button class="cb gray" id="ktStartMenu" aria-label="メニュー">🏠</button></div></div>
 </section>
 
 <section id="puyo" class="screen">
@@ -1288,7 +1329,7 @@ function padSet(sec,o,big,sc,dim){const p=document.querySelector(`#${sec} .pad[d
 function bindPads(sec,fn){document.querySelectorAll(`#${sec} .pad`).forEach(p=>
   p.addEventListener('pointerdown',e=>{e.preventDefault();fn(+p.dataset.o);}));}
 document.querySelectorAll('[data-menu]').forEach(b=>b.addEventListener('click',askMenu));
-function stopAll(){if(typeof ivStop==='function')ivStop();if(typeof byStop==='function')byStop();if(typeof ckStop==='function')ckStop();if(typeof pyStop==='function')pyStop();if(typeof hjStop==='function')hjStop();if(typeof rlStop==='function')rlStop();if(typeof cupStop==='function')cupStop();if(typeof pkStop==='function')pkStop();hayStop();tugStop();jStop();hkStop();if(typeof spStop==='function')spStop();}
+function stopAll(){if(typeof ktStop==='function')ktStop();if(typeof ivStop==='function')ivStop();if(typeof byStop==='function')byStop();if(typeof ckStop==='function')ckStop();if(typeof pyStop==='function')pyStop();if(typeof hjStop==='function')hjStop();if(typeof rlStop==='function')rlStop();if(typeof cupStop==='function')cupStop();if(typeof pkStop==='function')pkStop();hayStop();tugStop();jStop();hkStop();if(typeof spStop==='function')spStop();}
 
 /* ========== よんもくならべ ========== */
 const C4={b:[],turn:1,first:1,hist:[],over:false,win:[],last:-1,sc:{'1':0,'-1':0}};
@@ -2762,6 +2803,75 @@ function ivSnd(k){if(!BGM.on||!BGM.ctx)return;const t=BGM.ctx.currentTime;
   else if(k==='die'){[600,450,300,180,100].forEach((f,i)=>note(f,t+i*.08,.1,'square',.07));}
   else if(k==='win'){[523,659,784,1047].forEach((f,i)=>note(f,t+i*.09,.14,'square',.05));}}
 
+
+/* ========== ことば とりあい ========== */
+// じしょ：ひらがなの めいし（2もじ・3もじ）。つうしんせず たんまつの なかで はんてい
+const KT_W2='いぬ ねこ うし うま とり さる くま しか かめ かに たこ いか えび さめ はと かも つる わし たか へび あり はち せみ もも かき なし くり うめ まめ こめ いも ねぎ なす のり みそ しお さけ かい あめ ゆき かぜ くも そら うみ やま かわ いけ たき もり はな くさ えだ たね つち いし すな みず ほし つき あさ ひる よる なつ ふゆ はる あき いえ まど いす ふく くつ かさ ぼう はこ ほん かみ ふで かぎ くし はし さら なべ ふた びん かん つな いと はり ぬの わた かお みみ くち あし ゆび うで ひざ かた むね ほね けが うた まち むら みち えき ふね あか あお しろ くろ いろ まる おに ゆめ こえ おと たま たけ まつ ばら ゆり きく はす ひも わな なわ たる おけ くわ すず かね ぞう やぎ ぶた りす とら こま まり ふえ げた おび かべ ゆか やね にわ もん へい すし そば もち にく へそ ほお あご まゆ ひげ いわ おか しま なみ にじ きり つゆ しも ちち はは あに あね まご くに かど さか みせ ちず あせ むし はえ たい ふぐ うに ゆず かば わに こい ふな ます あじ さば ぶり たら えい きじ とき たび えり そで つの はね ひれ きば つめ あわ ごみ そり いね むぎ わら こけ つた しそ えさ おや よめ おじ おば そふ そぼ ひと うそ なぞ いき ふだ くじ かじ ふち みね たに がけ はら ぬま どろ こな すぎ かし もみ のど ひじ ざる かご つぼ かま くら おの のみ ひな すみ にし きた はぎ'.split(' '),KT_W3='ひがし みなみ たぬき くじら かえる りんご みかん いちご ぶどう すいか つくえ とけい かばん えほん はさみ おわん あたま おなか せなか でんわ くるま ひつじ ねずみ うさぎ らくだ きりん さくら きいろ かたち よろい かぶと たいこ うちわ せんす ぞうり きもの ゆかた ぼうし まくら ふとん たたみ ふすま とびら ろうか うどん おでん ごはん おかし だんご とうふ たまご さかな やさい ごぼう きのこ あらし こおり ほのお けむり こども おとな てがみ にもつ なみだ えがお わかめ こんぶ いるか からす すずめ つばめ めだか さんま いわし かつお まぐろ ひらめ あさり しじみ ほたて とんぼ ほたる ことり こねこ こいぬ ひよこ あひる きつね かもめ すみれ つばき もみじ くるみ いなり ちくわ なすび おこめ こむぎ さとう みりん あんこ つみき こけし だるま めんこ かるた ほうき やかん かがみ くすり めがね ゆびわ にかい ゆうひ あさひ いずみ はやし こかげ はたけ たんぼ のはら なぎさ みなと おがわ たにま かざん つらら おやこ ふうふ やおや ほんや はなや まつげ かかと ひたい こゆび てくび ことば なまえ こころ ちから ゆうき まつり はなび おせち さいふ おかね すもう あした きのう みどり しかく いちば みやこ おしろ おてら とりい いろり かまど ふろば こたつ のれん かんな くさり はしご おたま ふくろ つつみ ひもの ゆのみ とかげ やもり みみず くらげ ひとで なまこ さざえ あわび うなぎ なまず にしん ひばり めじろ とんび けむし うろこ わさび からし ぼたん ほこり ひのき くぬぎ けやき やなぎ みぞれ あられ しずく なだれ いかり におい おもち おすし しかけ ゆかり ひなた ひかげ いなか どうろ はしら やかた ふもと すなば そうじ せかい あまど たきび おもて うしろ ひだり みぎて つばさ かかし わらび つくし よもぎ ごまめ いなご かえで あざみ'.split(' ');
+const KT_SET2=new Set(KT_W2),KT_SET3=new Set(KT_W3);
+const KT_FREQ=(()=>{const c={};for(const w of[...KT_W2,...KT_W3])for(const ch of w)c[ch]=(c[ch]||0)+1;return Object.entries(c);})();
+const KT={st:'idle',center:[],hand:{},sel:{},nid:0,msg:{'1':'','-1':''}};
+const KT_GRP=[[0,1,2],[3,4,5],[6,7,8],[9,10,11],[12,13]];
+function ktRandCh(){let t=0;for(const[,n]of KT_FREQ)t+=Math.pow(n,.85);let r=Math.random()*t;for(const[ch,n]of KT_FREQ){r-=Math.pow(n,.85);if(r<=0)return ch;}return 'あ';}
+function ktPool(n){const out=[],pick=a=>a[Math.floor(Math.random()*a.length)];
+  while(out.length<n*.6){const w=Math.random()<.7?pick(KT_W3):pick(KT_W2);out.push(...w);}
+  while(out.length<n)out.push(ktRandCh());return out.slice(0,n).sort(()=>Math.random()-.5);}
+function ktPlace(chs){const f=$('ktField'),W=f.clientWidth||600,H=f.clientHeight||600,ts=Math.min(56,Math.max(38,W*.064)),mx=ts*.8/W,my=ts*.8/H;
+  for(const ch of chs){let best=null,bd=-1;
+    for(let k=0;k<30;k++){const x=mx+Math.random()*(1-2*mx),y=my+Math.random()*(1-2*my);
+      let md=9;for(const t of KT.center){const d=Math.hypot((t.x-x)*W,(t.y-y)*H);if(d<md*100)md=Math.min(md,d/100);}
+      if(md>bd){bd=md;best={x,y};}if(md*100>ts*1.1)break;}
+    KT.center.push({id:++KT.nid,ch,x:best.x,y:best.y,r:Math.floor(Math.random()*360)});}}
+function ktRender(){const f=$('ktField');f.innerHTML='';const W=f.clientWidth,H=f.clientHeight;
+  for(const t of KT.center){const b=document.createElement('button');b.className='kttile';b.textContent=t.ch;b.style.left=`calc(${t.x*100}% - var(--kt)/2)`;b.style.top=`calc(${t.y*100}% - var(--kt)*.625)`;
+    b.style.transform=`rotate(${t.r}deg)`;b.addEventListener('pointerdown',e=>{e.preventDefault();ktTake(t.id,e.clientY);});f.appendChild(b);}
+  for(const o of['1','-1'])ktRenderHand(o);}
+function ktTile(t,sel,cb){const b=document.createElement('button');b.className='kttile'+(sel?' sel':'');b.textContent=t.ch;b.onclick=cb;return b;}
+function ktSlot(cb){const b=document.createElement('button');b.className='ktslot';b.setAttribute('aria-label','あき');b.onclick=cb;return b;}
+function ktRenderHand(o){const s=document.querySelector(`#kt .kthand[data-o="${o}"]`),H=KT.hand[o];if(!H)return;const sel=KT.sel[o];
+  const wbox=s.querySelector('.ktwords');wbox.innerHTML='';
+  KT_GRP.forEach((g,gi)=>{const d=document.createElement('div');d.className='ktgrp'+(H.mark&&H.mark[gi]?' '+H.mark[gi]:'');
+    g.forEach(i=>{const t=H.w[i],on=sel&&sel.a==='w'&&sel.i===i;d.appendChild(t?ktTile(t,on,()=>ktTapHand(o,'w',i)):ktSlot(()=>ktTapHand(o,'w',i)));});wbox.appendChild(d);});
+  const sb=s.querySelector('.ktstock');sb.innerHTML='';
+  H.s.forEach((t,i)=>{const on=sel&&sel.a==='s'&&sel.i===i;sb.appendChild(t?ktTile(t,on,()=>ktTapHand(o,'s',i)):ktSlot(()=>ktTapHand(o,'s',i)));});
+  s.querySelector('.ktret').disabled=!sel||KT.st!=='play';s.querySelector('.ktdone').disabled=KT.st!=='play';
+  s.querySelector('.ktmsg').textContent=KT.msg[o]||(KT.st==='play'?(sel?'いれたい ばしょを タッチ':'まんなかの はいを タッチして とろう'):'');}
+function ktTake(id,cy){if(KT.st!=='play')return;const f=$('ktField').getBoundingClientRect(),o=cy>f.top+f.height/2?'1':'-1',H=KT.hand[o];
+  const t=KT.center.find(t=>t.id===id);if(!t)return;
+  let a='w',i=H.w.indexOf(null);if(i<0){a='s';i=H.s.indexOf(null);}
+  if(i<0){KT.msg[o]='てが いっぱい！ どれかを もどしてね';ktRenderHand(o);return;}
+  KT.center=KT.center.filter(x=>x.id!==id);H[a][i]={id:t.id,ch:t.ch};KT.msg[o]='';H.mark=null;sfx();
+  if(KT.center.length<12){ktPlace(ktPool(12));KT.msg['1']=KT.msg['-1']='あたらしい はいを まいたよ';}
+  ktRender();}
+function ktTapHand(o,a,i){if(KT.st!=='play')return;const H=KT.hand[o],sel=KT.sel[o];H.mark=null;KT.msg[o]='';
+  if(!sel){if(H[a][i])KT.sel[o]={a,i};}
+  else if(sel.a===a&&sel.i===i)KT.sel[o]=null;
+  else{const tmp=H[a][i];H[a][i]=H[sel.a][sel.i];H[sel.a][sel.i]=tmp;KT.sel[o]=null;sfx();}
+  ktRenderHand(o);}
+function ktReturn(o){const H=KT.hand[o],sel=KT.sel[o];if(!sel||KT.st!=='play')return;const t=H[sel.a][sel.i];H[sel.a][sel.i]=null;KT.sel[o]=null;
+  if(t)ktPlace([t.ch]);ktRender();}
+function ktCheck(o){if(KT.st!=='play')return;const H=KT.hand[o],seen=new Set(),mark=[];let ok=true,why='';
+  KT_GRP.forEach((g,gi)=>{const ts=g.map(i=>H.w[i]);if(ts.some(t=>!t)){mark[gi]='bad';ok=false;why=why||'まだ うまって ない ところが あるよ';return;}
+    const w=ts.map(t=>t.ch).join(''),dict=g.length===3?KT_SET3:KT_SET2;
+    if(!dict.has(w)){mark[gi]='bad';ok=false;why=why||`「${w}」は じしょに ないよ`;}
+    else if(seen.has(w)){mark[gi]='bad';ok=false;why=why||`「${w}」は 2かい つかってるよ`;}
+    else{mark[gi]='good';seen.add(w);}});
+  H.mark=mark;KT.sel[o]=null;
+  if(!ok){KT.msg[o]=why;buzz();ktRenderHand(o);return;}
+  KT.st='over';ktSnd('win');ktRenderHand(o);ktRenderHand(o==='1'?'-1':'1');
+  const words=KT_GRP.map(g=>g.map(i=>H.w[i].ch).join('')).join('・');
+  setTimeout(()=>modal(`<span class="big">🎉 ${PNAME(+o)}の かち！</span><span class="small">${words}</span>`,[{label:'OK',fn:()=>{duo('ktMsg','もう いっかい あそぶ？');$('ktGo').textContent='▶ もういっかい';$('ktStart').classList.add('on');}}]),400);}
+document.querySelectorAll('#kt .kthand').forEach(s=>{const o=s.dataset.o;
+  s.querySelector('.ktret').addEventListener('click',()=>ktReturn(o));s.querySelector('.ktdone').addEventListener('click',()=>ktCheck(o));
+  s.querySelector('.kthome').addEventListener('click',askMenu);});
+$('ktStartMenu').addEventListener('click',askMenu);
+$('ktGo').addEventListener('click',()=>{$('ktStart').classList.remove('on');ktNew();KT.st='play';ktRender();});
+function ktNew(){KT.center=[];KT.hand={'1':{w:Array(14).fill(null),s:Array(6).fill(null)},'-1':{w:Array(14).fill(null),s:Array(6).fill(null)}};KT.sel={};KT.msg={'1':'','-1':''};ktPlace(ktPool(40));}
+function startKt(){show('kt');KT.st='idle';requestAnimationFrame(()=>{ktNew();ktRender();
+  duo('ktMsg','ことば とりあい<br><small>まんなかの はいを とって、3もじの ことば 4つと 2もじの ことば 1つを つくろう！</small>');$('ktGo').textContent='▶ スタート';$('ktStart').classList.add('on');});}
+function ktStop(){KT.st='idle';}
+window.addEventListener('resize',()=>{if($('kt').classList.contains('on'))ktRender();});
+function ktSnd(k){if(!BGM.on||!BGM.ctx)return;const t=BGM.ctx.currentTime;if(k==='win')[523,659,784,1047].forEach((f,i)=>note(f,t+i*.09,.14,'square',.05));}
+
 /* ========== あそびかた ========== */
 function openHowto(){$('howto').classList.add('on');$('howto').querySelector('.howbody').scrollTop=0;}
 function closeHowto(){$('howto').classList.remove('on');}
@@ -2785,14 +2895,15 @@ const HELP={
  rl:['コイン ルーレット','すきな マークに コインを かけて「OK」。とまった マークに かけていたら、ばいに なって もどってくるよ！<br>ひとつの マークには 5まいまで。0️⃣は みんな ハズレ。<br>さきに 50まい ためたら かち、コインが なくなったら まけ。'],
  ck:['カーけし ずもう','まず くるまを 3だい（または 5だい）えらぼう。<br>じぶんの ばんに、ゆびで <b>ペンを うしろに ひっぱって、はなすと パチン！</b> ひっぱるほど つよいよ。<br>あいての くるまを たたみから おしだすか、たおしたら かち。<br>じぶんの くるまが おちたり たおれたりしたら はんそく。あたらなかったら、あいてが 2かい つづけて うてるよ。<br>まけた くるまは リタイア、かった くるまは つづけて でる。ぜんぶ まかしたら ゆうしょう！<br>ときどき「✨ ひっさつわざ チャンス」が でるよ。タップしてから うつと わざが でる！'],
  bey:["ベイごま バトル", "まず こまの パーツ（ボディ・おもり・さき）を えらぼう。くみあわせで つよさが かわるよ。<br>「ゴー シュート！」の あと、ゆびで <b>うしろに ひっぱって、はなすと シュート！</b> ひっぱった ほうと はんたいに とんでいくよ。<br>こまは まんなかに あつまって ぶつかりあうよ。<b>かいてんが さきに とまるか、スタジアムの そとに とびだしたら まけ</b>。<br>2ほん さきに とったら かち！"],
- inv:["インベーダー たいせん", "じぶんの じんち（じぶんの いろの ところ）の なかを、<b>じゅうじキー</b>で うごけるよ。<b>「うつ！」</b>で ミサイル はっしゃ！<br>あいての ほうだいに ミサイルを あてたら かち。インベーダーも ミサイルで たおせるよ。<br><b>インベーダーに ぶつかったり、あいての ミサイルに あたったら まけ</b>。じかんが たつと インベーダーが ふえるよ。<br>おなじ ときに やられたら あいうちで もう いっかい！"]};
+ inv:["インベーダー たいせん", "じぶんの じんち（じぶんの いろの ところ）の なかを、<b>じゅうじキー</b>で うごけるよ。<b>「うつ！」</b>で ミサイル はっしゃ！<br>あいての ほうだいに ミサイルを あてたら かち。インベーダーも ミサイルで たおせるよ。<br><b>インベーダーに ぶつかったり、あいての ミサイルに あたったら まけ</b>。じかんが たつと インベーダーが ふえるよ。<br>おなじ ときに やられたら あいうちで もう いっかい！"],
+ kt:["ことば とりあい", "まんなかに ひらがなの はいが ばらまかれるよ。<b>はいを タッチすると じぶんの てもとに くる</b>（はやいもの がち）。<br>てもとの はいを タッチして えらび、うごかしたい ばしょを タッチすると いれかえられるよ。いらない はいは「↩ もどす」。<br><b>3もじの ことば 4つと 2もじの ことば 1つ</b>（ぜんぶ ちがう ことば）が そろったら「できた！」。じしょに あれば かち！"]};
 function showHelp(){const sc=document.querySelector('.screen.on'),h=sc&&HELP[sc.id];if(!h)return;
   let resume=null;
   if(sc.id==='puyo'&&PY.st==='play'&&!PY.paused){PY.paused=true;resume=()=>{PY.paused=false;PY.last=performance.now();};}
   if(sc.id==='hockey'&&HK.pause<=0){const pv=HK.pause;HK.pause=1e9;resume=()=>{HK.pause=.4;};}
   modal(`<span class="big">❓ ${h[0]}</span><span class="hlp">${h[1]}</span>`,[{label:'とじる',fn:resume}]);}
 // 🏠 ボタンの となりに ？ ボタンを つける
-['[data-menu]','[data-act="menu"]','#hkMenu','.pypause','.hjpause','.ckhome','#ckSetMenu','#hkSetMenu','.byhome','#bySetMenu','.ivhome','#ivStartMenu'].forEach(sel=>document.querySelectorAll(sel).forEach(b=>{
+['[data-menu]','[data-act="menu"]','#hkMenu','.pypause','.hjpause','.ckhome','#ckSetMenu','#hkSetMenu','.byhome','#bySetMenu','.ivhome','#ivStartMenu','.kthome','#ktStartMenu'].forEach(sel=>document.querySelectorAll(sel).forEach(b=>{
   if(b.closest('#menu'))return;const c=b.cloneNode(false);c.removeAttribute('id');c.removeAttribute('data-menu');c.removeAttribute('data-act');
   c.classList.add('hlpbtn');c.classList.remove('c-menu');c.textContent='？';c.setAttribute('aria-label','あそびかた');c.addEventListener('click',e=>{e.stopPropagation();showHelp();});
   b.parentNode.insertBefore(c,b);}));
