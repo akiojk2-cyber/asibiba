@@ -2,13 +2,13 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <script>
 /* スマホ（みじかい へんが 600px みまん）では、はば600pxの がめんとして レイアウトし、ブラウザに がめんぴったりへ ちぢめて ひょうじさせる */
 (function(){var m=document.querySelector('meta[name=viewport]'),B=600;
   function fit(){var s=Math.min(screen.width,screen.height),l=Math.max(screen.width,screen.height);if(s>=B)return;
     var w=innerWidth>innerHeight?Math.round(B*l/s):B;
-    m.setAttribute('content','width='+w+',viewport-fit=cover');}
+    m.setAttribute('content','width='+w+',user-scalable=no,viewport-fit=cover');}
   fit();addEventListener('orientationchange',function(){setTimeout(fit,100);});})();
 </script>
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; manifest-src 'self'; worker-src 'self'; media-src 'none'; object-src 'none'; frame-src 'none'; base-uri 'none'; form-action 'none'">
@@ -246,6 +246,8 @@ button{font-family:inherit;cursor:pointer;color:inherit}
 
 /* 画面に ぴったり固定（スクロールさせない＝タッチのずれ防止） */
 html,body{overflow:hidden;overscroll-behavior:none}
+.screen:not(#menu),.screen:not(#menu) *{touch-action:none;-webkit-touch-callout:none}
+.byset,.ckset{touch-action:pan-y!important}
 .game.on,.rt.on,#hockey.on{position:fixed;inset:0;width:auto;max-width:860px;margin:0 auto;padding:calc(10px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));height:auto}
 #hockey.on{display:block}
 .mid{overflow:hidden;min-width:0}
@@ -688,6 +690,12 @@ html,body{overflow:hidden;overscroll-behavior:none}
 .bmwin{color:#ffe14d;font-size:16px}
 .bmstat{font-size:15px;font-weight:bold;letter-spacing:1px}
 .bmhome{border:none;background:rgba(255,255,255,.92);border-radius:12px;width:44px;height:44px;font-size:20px}
+.bmpad{position:relative;height:100%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#ffffff 0 30%,#e8ecf2 31% 100%);box-shadow:inset 0 0 0 4px rgba(0,0,0,.08),0 4px 0 rgba(0,0,0,.25);flex-shrink:0;touch-action:none}
+.bmpad i{position:absolute;font-style:normal;font-size:clamp(16px,2.2vh,24px);color:#555;line-height:1}
+.bmpad .u{top:6%;left:50%;transform:translateX(-50%)}.bmpad .d{bottom:6%;left:50%;transform:translateX(-50%)}.bmpad .l{left:7%;top:50%;transform:translateY(-50%)}.bmpad .r{right:7%;top:50%;transform:translateY(-50%)}
+.bmpad i.on{color:#ff8a00;transform-origin:center;text-shadow:0 0 8px #ffd84d}
+.bmpad .knob{position:absolute;left:50%;top:50%;width:38%;height:38%;margin:-19% 0 0 -19%;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff,#ffd84d 60%,#e0a800);box-shadow:0 3px 6px rgba(0,0,0,.35);transition:transform .05s}
+.bmpanel{height:clamp(150px,16vh,200px)!important}
 .bmbomb{font-size:clamp(34px,4.5vh,48px)!important;aspect-ratio:1!important;border-radius:50%!important}
 .ivdpad button.hold,.bmbomb.hold{transform:translateY(3px);background:#ffe14d}
 </style>
@@ -952,13 +960,13 @@ html,body{overflow:hidden;overscroll-behavior:none}
 
 <section id="bm" class="screen">
   <div class="bmpanel top p2c" data-o="-1">
-    <div class="ivdpad"><button data-k="U" class="u" aria-label="うえ">▲</button><button data-k="L" class="l" aria-label="ひだり">◀</button><span class="c"></span><button data-k="R" class="r" aria-label="みぎ">▶</button><button data-k="D" class="d" aria-label="した">▼</button></div>
+    <div class="bmpad" aria-label="いどう スティック"><i class="u">▲</i><i class="d">▼</i><i class="l">◀</i><i class="r">▶</i><b class="knob"></b></div>
     <div class="ivinfo"><span class="ivname">あお <b class="bmwin"></b></span><span class="bmstat"></span><div class="ivbtns"><button class="bmhome" aria-label="メニュー">🏠</button></div></div>
     <button class="ivfire bmbomb" data-k="B">💣</button>
   </div>
   <div class="ivcvw"><canvas id="bmCv" aria-label="めいろ"></canvas><div class="ckcut" id="bmCut"><span class="t"></span><span></span></div></div>
   <div class="bmpanel bottom p1c" data-o="1">
-    <div class="ivdpad"><button data-k="U" class="u" aria-label="うえ">▲</button><button data-k="L" class="l" aria-label="ひだり">◀</button><span class="c"></span><button data-k="R" class="r" aria-label="みぎ">▶</button><button data-k="D" class="d" aria-label="した">▼</button></div>
+    <div class="bmpad" aria-label="いどう スティック"><i class="u">▲</i><i class="d">▼</i><i class="l">◀</i><i class="r">▶</i><b class="knob"></b></div>
     <div class="ivinfo"><span class="ivname">あか <b class="bmwin"></b></span><span class="bmstat"></span><div class="ivbtns"><button class="bmhome" aria-label="メニュー">🏠</button></div></div>
     <button class="ivfire bmbomb" data-k="B">💣</button>
   </div>
@@ -3152,7 +3160,7 @@ function bmBoom(b){BM.bombs=BM.bombs.filter(z=>z!==b);bmSnd('boom');
 function bmStep(dt){BM.t+=dt;
   for(const o of['1','-1']){const P=BM.p[o],k=BM.keys[o],f=o==='1'?1:-1;if(P.dead)continue;
     if(P.mv){P.mv.t+=dt*P.spd;if(P.mv.t>=1){P.x=P.mv.tx;P.y=P.mv.ty;P.mv=null;}}
-    if(!P.mv){let dir=null;for(const d of['U','D','L','R'])if(k[d])dir=d;
+    if(!P.mv){let dir=null;for(const d of['U','D','L','R'])if(k[d])dir=d;if(!dir&&P.want)dir=P.want;P.want=null;
       if(dir){let[dx,dy]=BM_DIR[dir];dx*=f;dy*=f;P.face=dx>0?1:dx<0?3:dy>0?2:0;   // あおは がめんが さかさ
         if(bmFree(P.x+dx,P.y+dy,o))P.mv={fx:P.x,fy:P.y,tx:P.x+dx,ty:P.y+dy,t:0};}}
     // じぶんの ばくだんから はなれたら もう とおれない
@@ -3220,9 +3228,19 @@ function startBm(){show('bm');bmStop();BM.sc={'1':0,'-1':0};bmNew();
     duo('bmMsg','ばくだん たいせん<br><small>ブロックを こわして アイテムを とり、あいてを ばくはつに まきこめ！</small>');$('bmGo').textContent='▶ スタート';$('bmStart').classList.add('on');});}
 function bmStop(){BM.tm.forEach(clearTimeout);BM.tm=[];cancelAnimationFrame(BM.raf);BM.st='idle';}
 document.querySelectorAll('#bm .bmpanel').forEach(s=>{const o=s.dataset.o;
-  s.querySelectorAll('[data-k]').forEach(b=>{const k=b.dataset.k;
-    b.addEventListener('pointerdown',e=>{e.preventDefault();try{b.setPointerCapture(e.pointerId);}catch(_){}b.classList.add('hold');if(k==='B')bmPlace(o);else BM.keys[o][k]=true;});
-    ['pointerup','pointercancel','lostpointercapture'].forEach(ev=>b.addEventListener(ev,()=>{b.classList.remove('hold');if(k!=='B')BM.keys[o][k]=false;}));});
+  const bb=s.querySelector('.bmbomb');
+  bb.addEventListener('pointerdown',e=>{e.preventDefault();bb.classList.add('hold');bmPlace(o);});
+  ['pointerup','pointercancel','pointerleave'].forEach(ev=>bb.addEventListener(ev,()=>bb.classList.remove('hold')));
+  // スティック：ゆびの いちで むきが きまる。ゆびを すべらせれば そのまま むきが かわる
+  const pad=s.querySelector('.bmpad'),knob=pad.querySelector('.knob');let pid=null;
+  const setDir=d=>{BM.keys[o]={};if(d){BM.keys[o][d]=true;if(BM.p[o])BM.p[o].want=d;}pad.querySelectorAll('i').forEach(i=>i.classList.toggle('on',i.className.split(' ')[0]===(d||'').toLowerCase()));};
+  const upd=e=>{const r=pad.getBoundingClientRect();let dx=e.clientX-(r.left+r.width/2),dy=e.clientY-(r.top+r.height/2);
+    if(o==='-1'){dx=-dx;dy=-dy;}   // うえの せきは さかさ
+    const R=r.width/2,l=Math.hypot(dx,dy),k=Math.min(1,l/R)*R*.45;knob.style.transform=l?`translate(${(o==='-1'?-1:1)*dx/l*k}px,${(o==='-1'?-1:1)*dy/l*k}px)`:'';
+    setDir(l<R*.14?null:Math.abs(dx)>Math.abs(dy)?(dx>0?'R':'L'):(dy>0?'D':'U'));};
+  pad.addEventListener('pointerdown',e=>{e.preventDefault();if(pid!==null)return;pid=e.pointerId;try{pad.setPointerCapture(pid);}catch(_){}upd(e);});
+  pad.addEventListener('pointermove',e=>{if(e.pointerId===pid)upd(e);});
+  ['pointerup','pointercancel'].forEach(ev=>pad.addEventListener(ev,e=>{if(e.pointerId!==pid)return;pid=null;knob.style.transform='';setDir(null);}));
   s.querySelector('.bmhome').addEventListener('click',askMenu);});
 $('bmStartMenu').addEventListener('click',askMenu);
 window.addEventListener('resize',()=>{if($('bm').classList.contains('on'))bmSize();});
@@ -3233,6 +3251,11 @@ function bmSnd(k){if(!BGM.on||!BGM.ctx)return;const t=BGM.ctx.currentTime;
   else if(k==='item')[880,1175].forEach((f,i)=>note(f,t+i*.06,.08,'square',.05));
   else if(k==='die')[500,380,260,150].forEach((f,i)=>note(f,t+i*.09,.12,'square',.07));
   else if(k==='win')[523,659,784,1047].forEach((f,i)=>note(f,t+i*.09,.14,'square',.05));}
+
+/* ========== かくだい ぼうし（ふたりで どうじに さわっても ズームしない） ========== */
+['gesturestart','gesturechange','gestureend'].forEach(ev=>document.addEventListener(ev,e=>e.preventDefault(),{passive:false}));
+document.addEventListener('touchmove',e=>{if(e.touches.length>1)e.preventDefault();},{passive:false});
+document.addEventListener('dblclick',e=>e.preventDefault(),{passive:false});
 
 /* ========== あそびかた ========== */
 function openHowto(){$('howto').classList.add('on');$('howto').querySelector('.howbody').scrollTop=0;}
