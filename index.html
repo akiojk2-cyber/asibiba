@@ -2413,7 +2413,7 @@ function ckStep(dt){const cs=[CK.cars['1'],CK.cars['-1']];
     if(Math.abs(c.x)>CK_T/2||Math.abs(c.y)>CK_T/2){c.out=true;c.fall=0;ckSnd('out');}}
   const[A,B]=cs;if(!A.out&&!B.out)ckCollide(A,B);}
 function ckSupport(c,dx,dy){return Math.abs(dx*Math.cos(c.a)+dy*Math.sin(c.a))*c.L/2+Math.abs(-dx*Math.sin(c.a)+dy*Math.cos(c.a))*c.W/2;}
-function ckPenPos(o){const c=CK.cars[o],a=CK.aim[o],dx=Math.cos(a),dy=Math.sin(a),gap=CK.pen&&CK.pen.o===o?Math.max(-1,(7+CK.pen.pull)*(1-CK.pen.t/.06)):7+(CK.st==='aim'&&CK.turn===o?CK.pull:0),d=ckSupport(c,dx,dy)+gap;
+function ckPenPos(o){const c=CK.cars[o],a=CK.aim[o],dx=Math.cos(a),dy=Math.sin(a),gap=8,d=ckSupport(c,dx,dy)+gap;   // ノックの さきが くるまの 8mm うしろ
   return{x:c.x-dx*d,y:c.y-dy*d,a};}
 const CK_MAXPULL=60;
 // ひっさつわざ（ランダムで でる）
@@ -2428,7 +2428,7 @@ function ckApplySp(o){const sp=CK.sp;CK.sp=null;if(!sp||!sp.on||sp.o!==o)return 
   return d.k==='turbo'?1.5:1;}
 function ckClearFx(){for(const c of Object.values(CK.cars)){c.m=c.ty.m;c.I=c.m*(c.L*c.L+c.W*c.W)/12;c.ice=c.zap=c.lock=false;}CK.fx=null;}
 function ckFire(o){if(CK.st!=='aim'||CK.turn!==o)return;const pull=CK.pull;CK.pull=0;if(pull<4){ckUI();return;}
-  const mul=ckApplySp(o);CK.st='fire';CK.pen={o,t:0,done:false,pull,v:(450+500*Math.pow(pull/CK_MAXPULL,1.2))*mul};CK.contact=false;ckSnd('pachin');ckUI();}
+  const mul=ckApplySp(o);const pos=ckPenPos(o);CK.st='fire';CK.pen={o,t:0,done:false,pull,pos,v:(450+500*Math.pow(pull/CK_MAXPULL,1.2))*mul};CK.contact=false;ckSnd('pachin');ckUI();}
 function ckLoop(t){if(!$('ck').classList.contains('on'))return;const dt=Math.min(.04,(t-CK.last)/1000);CK.last=t;
   if(CK.st==='fire'){const P=CK.pen;P.t+=dt;
     if(!P.done&&P.t>=.06){P.done=true;const c=CK.cars[P.o],a=CK.aim[P.o],v=P.v;c.vx=Math.cos(a)*v;c.vy=Math.sin(a)*v;c.w=0;}
@@ -2494,7 +2494,7 @@ function ckUI(){for(const o of['1','-1']){const s=document.querySelector(`#ck .c
   s.querySelector('.ckmsg').textContent=CK.st==='aim'?(my?(CK.left>1?'あなたの ばん（あと2かい）':'あなたの ばん！'):'あいての ばん')+(CK.msg[o]?' ・ '+CK.msg[o]:''):'';
   const sb=s.querySelector('.cksp'),sp=CK.sp,show=my&&sp&&sp.o===o;sb.classList.toggle('show',!!show);sb.classList.toggle('on',!!(show&&sp.on));
   if(show){const d=CK_SP[sp.i];sb.textContent=sp.on?`${d.ic} ${d.nm} じゅんび OK！（${d.ds}）`:`✨ ひっさつわざ チャンス！ ${d.ic} ${d.nm} ← タップで つかう`;}
-  s.querySelector('.ckhelp').textContent=my?(CK.pull>0?'はなすと パチン！':'ゆびで ペンを うしろに ひっぱって ねらおう'):'';
+  s.querySelector('.ckhelp').textContent=my?(CK.pull>0?'はなすと ノックが パチン！':'ゆびで うしろに ひっぱって ノックを おしこもう'):'';
   if(show)s.querySelector('.ckhelp').textContent='';
   s.querySelector('.ckbar').style.width=(my?CK.pull/CK_MAXPULL*100:0)+'%';
   s.classList.toggle('on',my);
@@ -2599,14 +2599,14 @@ function ckPenArt(x,k,col,ext){ // さきが 0,0、うしろは -x がわ
   // グリップ（ゴム）
   const gg=x.createLinearGradient(0,-r,0,r);gg.addColorStop(0,'#111');gg.addColorStop(.4,'#4a4a4a');gg.addColorStop(1,'#0b0b0b');x.fillStyle=gg;ckRR(x,-k*40,-r,k*28.5,r*2,k*2);x.fill();
   x.strokeStyle='rgba(255,255,255,.12)';x.lineWidth=k*.6;for(let u=-k*38;u<-k*13;u+=k*2.5){x.beginPath();x.moveTo(u,-r+k);x.lineTo(u,r-k);x.stroke();}
+  // ノック
+  const ng=x.createLinearGradient(0,-r,0,r);ng.addColorStop(0,'#777d85');ng.addColorStop(.45,'#f0f2f4');ng.addColorStop(1,'#5d636a');x.fillStyle=ng;ckRR(x,-k*(122-ext),-r*.62,k*11,r*1.24,k*2);x.fill();
   // じく
   const bg=x.createLinearGradient(0,-r,0,r);bg.addColorStop(0,ckShade(col,-45));bg.addColorStop(.35,ckShade(col,35));bg.addColorStop(.5,ckShade(col,10));bg.addColorStop(1,ckShade(col,-50));
   x.fillStyle=bg;ckRR(x,-k*112,-r,k*73,r*2,k*2.5);x.fill();
   x.fillStyle='rgba(255,255,255,.35)';x.fillRect(-k*108,-r*.45,k*64,k*.9);
   // クリップ
   const cg=x.createLinearGradient(0,-k*2,0,k*2);cg.addColorStop(0,'#9aa0a8');cg.addColorStop(.5,'#ffffff');cg.addColorStop(1,'#80868e');x.fillStyle=cg;ckRR(x,-k*108,-k*1.8,k*42,k*3.6,k*1.6);x.fill();
-  // ノック
-  const ng=x.createLinearGradient(0,-r,0,r);ng.addColorStop(0,'#777d85');ng.addColorStop(.45,'#f0f2f4');ng.addColorStop(1,'#5d636a');x.fillStyle=ng;ckRR(x,-k*(122-ext),-r*.62,k*11,r*1.24,k*2);x.fill();
   x.restore();}
 function ckDraw(){const d=CK.d||1,x=ckX,W=CK.W,H=CK.H,s=CK.s;if(!W)return;x.setTransform(d,0,0,d,0,0);
   ckFloor(x,W,H);
@@ -2631,9 +2631,12 @@ function ckDraw(){const d=CK.d||1,x=ckX,W=CK.W,H=CK.H,s=CK.s;if(!W)return;x.setT
     if(CK.fx&&CK.fx.k==='lock'&&CK.fx.o!==c.o&&!c.out&&!CK.contact){x.save();x.translate(c.x*s,c.y*s);x.strokeStyle='rgba(255,40,40,.9)';x.lineWidth=3;const R=(c.L/2+10)*s;x.beginPath();x.arc(0,0,R,0,7);x.moveTo(-R-8,0);x.lineTo(-R+10,0);x.moveTo(R-10,0);x.lineTo(R+8,0);x.moveTo(0,-R-8);x.lineTo(0,-R+10);x.moveTo(0,R-10);x.lineTo(0,R+8);x.stroke();x.restore();}}
   // ねらいせん と ペン
   const o=CK.pen?CK.pen.o:CK.turn;
-  if((CK.st==='aim'||CK.st==='fire')&&CK.cars[o]&&!CK.cars[o].out){const p=ckPenPos(o),c=CK.cars[o];
+  if((CK.st==='aim'||CK.st==='fire')&&CK.cars[o]&&!CK.cars[o].out){const p=CK.pen&&CK.pen.pos?CK.pen.pos:ckPenPos(o),c=CK.cars[o];
     if(CK.st==='aim'){x.save();x.strokeStyle='rgba(255,255,255,.7)';x.lineWidth=2;x.setLineDash([4,6]);x.beginPath();x.moveTo(c.x*s,c.y*s);x.lineTo((c.x+Math.cos(p.a)*120)*s,(c.y+Math.sin(p.a)*120)*s);x.stroke();x.restore();}
-    x.save();x.translate(p.x*s,p.y*s);x.rotate(p.a);ckPenArt(x,s,o==='1'?'#e9546b':'#3d8bff',CK.pen&&CK.pen.t<.08?CK.pen.t*60:0);x.restore();}
+    // ノックを くるまに むけて おく。ひっぱると ノックが おしこまれ、はなすと パチンと とびだす
+    let ext=0;if(CK.st==='aim'&&CK.turn===o)ext=CK.pull*.16;
+    else if(CK.pen){const P=CK.pen,pr=P.pull*.16;ext=P.t<.06?pr+(-8-pr)*(P.t/.06):Math.min(0,-8+(P.t-.06)*40);}
+    x.save();x.translate(p.x*s,p.y*s);x.rotate(p.a);x.scale(-1,1);x.translate(122*s,0);ckPenArt(x,s,o==='1'?'#e9546b':'#3d8bff',ext);x.restore();}
   x.setTransform(d,0,0,d,0,0);}
 function ckSnd(k,j){if(!BGM.on||!BGM.ctx)return;const t=BGM.ctx.currentTime;
   if(k==='chance'){[880,1175,1568].forEach((f,i)=>note(f,t+i*.06,.08,'square',.05));}
@@ -3278,7 +3281,7 @@ const HELP={
  mem:['しんけいすいじゃく','カードを 2まい めくって、おなじ どうぶつなら もらえるよ。<br>あたったら もう いっかい！ おおく あつめた ほうが かち。'],
  hj:['10えん はじき','ボタンを <b>ながく おすほど つよく</b> はじけるよ。<br>あなに おちないように だんを のぼって、さきに ゴールに ついたら かち！<br>ひかっている がわの ボタンを つかってね。アウトや ゴールの ばしょは ランダムにも できるよ。'],
  rl:['コイン ルーレット','すきな マークに コインを かけて「OK」。とまった マークに かけていたら、ばいに なって もどってくるよ！<br>ひとつの マークには 5まいまで。0️⃣は みんな ハズレ。<br>さきに 50まい ためたら かち、コインが なくなったら まけ。'],
- ck:['カーけし ずもう','まず くるまを 3だい（または 5だい）えらぼう。<br>じぶんの ばんに、ゆびで <b>ペンを うしろに ひっぱって、はなすと パチン！</b> ひっぱるほど つよいよ。<br>あいての くるまを たたみから おしだすか、たおしたら かち。<br>じぶんの くるまが おちたり たおれたりしたら はんそく。あたらなかったら、あいてが 2かい つづけて うてるよ。<br>まけた くるまは リタイア、かった くるまは つづけて でる。ぜんぶ まかしたら ゆうしょう！<br>ときどき「✨ ひっさつわざ チャンス」が でるよ。タップしてから うつと わざが でる！'],
+ ck:['カーけし ずもう','まず くるまを 3だい（または 5だい）えらぼう。<br>ペンの <b>ノック</b>が くるまの うしろに あるよ。じぶんの ばんに ゆびで <b>うしろに ひっぱると ノックが おしこまれて、はなすと パチン！</b> ひっぱるほど つよいよ。<br>あいての くるまを たたみから おしだすか、たおしたら かち。<br>じぶんの くるまが おちたり たおれたりしたら はんそく。あたらなかったら、あいてが 2かい つづけて うてるよ。<br>まけた くるまは リタイア、かった くるまは つづけて でる。ぜんぶ まかしたら ゆうしょう！<br>ときどき「✨ ひっさつわざ チャンス」が でるよ。タップしてから うつと わざが でる！'],
  bey:["ベイごま バトル", "まず こまの パーツ（ボディ・おもり・さき）を えらぼう。くみあわせで つよさが かわるよ。<br>「ゴー シュート！」の あと、ゆびで <b>うしろに ひっぱって、はなすと シュート！</b> ひっぱった ほうと はんたいに とんでいくよ。<br>こまは まんなかに あつまって ぶつかりあうよ。<b>かいてんが さきに とまるか、スタジアムの そとに とびだしたら まけ</b>。<br>2ほん さきに とったら かち！"],
  inv:["インベーダー たいせん", "じぶんの じんち（じぶんの いろの ところ）を <b>ゆびで なぞると ほうだいが ついてくる</b>よ。<b>「うつ！」</b>で ミサイル はっしゃ！<br>あいての ほうだいに ミサイルを あてたら かち。インベーダーも ミサイルで たおせるよ。<br><b>インベーダーに ぶつかったり、あいての ミサイルに あたったら まけ</b>。じかんが たつと インベーダーが ふえるよ。<br>おなじ ときに やられたら あいうちで もう いっかい！"],
  kt:["ことば とりあい", "まんなかに ひらがなの はいが ばらまかれるよ。<b>はいを タッチすると じぶんの てもとに くる</b>（はやいもの がち）。<br>てもとの はいを タッチして えらび、うごかしたい ばしょを タッチすると いれかえられるよ。いらない はいは「↩ もどす」。<br><b>3もじの ことば 4つと 2もじの ことば 1つ</b>（ぜんぶ ちがう ことば）が そろったら「できた！」。じしょに あれば かち！"],
