@@ -677,6 +677,32 @@ html,body{overflow:hidden;overscroll-behavior:none}
 .bmpanel{height:clamp(150px,16vh,200px)!important}
 .bmbomb{font-size:clamp(34px,4.5vh,48px)!important;aspect-ratio:1!important;border-radius:50%!important}
 .ivdpad button.hold,.bmbomb.hold{transform:translateY(3px);background:#ffe14d}
+
+/* ふうせん ドキドキ */
+#fb.on{display:grid;position:fixed;inset:0;width:auto;max-width:none;height:auto;grid-template-rows:auto minmax(0,1fr) auto;gap:6px;background:#fff6e0;padding:calc(8px + env(safe-area-inset-top,0px)) max(10px,env(safe-area-inset-right,0px)) calc(8px + env(safe-area-inset-bottom,0px)) max(10px,env(safe-area-inset-left,0px))}
+.fbcvw{position:relative;min-height:0;min-width:0;overflow:hidden;border-radius:18px;background:radial-gradient(#fffdf6,#ffe9c2)}
+#fbCv{position:absolute;inset:0;width:100%;height:100%;display:block}
+.fbflash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none}
+.fbflash.on{animation:fbflash .5s ease-out}
+@keyframes fbflash{0%{opacity:1}100%{opacity:0}}
+.fbcvw.shake{animation:fbshake .45s}
+@keyframes fbshake{0%,100%{transform:none}15%{transform:translate(-12px,6px)}30%{transform:translate(10px,-8px)}45%{transform:translate(-8px,-4px)}60%{transform:translate(6px,8px)}80%{transform:translate(-3px,2px)}}
+.fbpanel{border-radius:20px;padding:8px 10px;display:flex;flex-direction:column;gap:8px;color:#fff;opacity:.75;transition:opacity .2s}
+.fbpanel.on{opacity:1;box-shadow:0 0 0 4px #ffe14d}
+.fbpanel.top{transform:rotate(180deg)}
+.fbpanel.p1c{background:#e9546b}.fbpanel.p2c{background:#3d8bff}
+.fbrow{display:flex;align-items:center;gap:10px;font-weight:bold}
+.fbname{font-size:22px}.fbsc{font-size:20px;background:rgba(255,255,255,.25);border-radius:999px;padding:2px 12px}
+.fbturn{flex:1;text-align:center;font-size:16px}
+.fbhome{border:none;background:rgba(255,255,255,.92);border-radius:12px;width:44px;height:44px;font-size:20px}
+.fbrow2{display:flex;gap:10px;height:clamp(70px,8.5vh,100px)}
+.fbpump{flex:2;border:none;border-radius:20px;background:#ffe14d;color:#3a2e1f;font-size:clamp(24px,4vw,34px);font-weight:900;box-shadow:0 6px 0 rgba(0,0,0,.25)}
+.fbpump:active{transform:translateY(4px);box-shadow:0 2px 0 rgba(0,0,0,.25)}
+.fbstop{flex:1;border:none;border-radius:20px;background:#fff;color:#3a2e1f;font-size:clamp(20px,3.2vw,28px);font-weight:900;box-shadow:0 6px 0 rgba(0,0,0,.25)}
+.fbpump:disabled,.fbstop:disabled{background:rgba(255,255,255,.3);color:rgba(255,255,255,.7);box-shadow:none}
+.fbstart{display:none;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(560px,88vw);background:var(--card);border-radius:24px;padding:16px;flex-direction:column;align-items:center;gap:12px;box-shadow:0 10px 40px rgba(0,0,0,.3);z-index:5}
+.fbstart.on{display:flex}
+.fbstart .duo span{font-size:clamp(18px,3.2vw,26px)}
 </style>
 
 <!-- メニュー -->
@@ -714,6 +740,7 @@ html,body{overflow:hidden;overscroll-behavior:none}
     <button class="tile" style="--c:#b87333" onclick="startHj()"><span class="ti">🪙</span><span class="tn">10えん はじき</span><span class="ts">あなに おちずに ゴールへ</span></button>
     <button class="tile" style="--c:#5b2d86" onclick="startRl()"><span class="ti">🎰</span><span class="tn">コイン ルーレット</span><span class="ts">マークに かけて まわせ</span></button>
     <button class="tile" style="--c:#2e7d4f" onclick="startCk()"><span class="ti">🏎️</span><span class="tn">カーけし ずもう</span><span class="ts">ペンで はじいて おしだせ！</span></button>
+    <button class="tile" style="--c:#e8467a" onclick="startFb()"><span class="ti">🎈</span><span class="tn">ふうせん ドキドキ <span class="new">NEW</span></span><span class="ts">わったら まけ！</span></button>
   </div>
   <div class="menubtns"><button class="bgm-btn" id="howBtn" onclick="openHowto()">📖 あそびかた</button><button class="bgm-btn" id="bgmMenu" onclick="bgmToggle()">🎵 おんがく：オン</button></div>
 </div></section>
@@ -948,6 +975,19 @@ html,body{overflow:hidden;overscroll-behavior:none}
     <button class="ivfire bmbomb" data-k="B">💣</button>
   </div>
   <div class="ivstart" id="bmStart"><div class="duo" id="bmMsg"></div><div class="crow"><button class="cb" id="bmGo">▶ スタート</button><button class="cb gray" id="bmStartMenu" aria-label="メニュー">🏠</button></div></div>
+</section>
+
+<section id="fb" class="screen">
+  <div class="fbpanel top p2c" data-o="-1">
+    <div class="fbrow"><span class="fbname">あお</span><span class="fbsc">0てん</span><span class="fbturn"></span><button class="fbhome" aria-label="メニュー">🏠</button></div>
+    <div class="fbrow2"><button class="fbpump">ふくらます！</button><button class="fbstop">やめる</button></div>
+  </div>
+  <div class="fbcvw" id="fbWrap"><canvas id="fbCv" aria-label="ふくらむ もの"></canvas><div class="fbflash" id="fbFlash"></div>
+    <div class="fbstart" id="fbStart"><div class="duo" id="fbMsg"></div><div class="crow"><button class="cb" id="fbGo">▶ スタート</button><button class="cb gray" id="fbStartMenu" aria-label="メニュー">🏠</button></div></div></div>
+  <div class="fbpanel bottom p1c" data-o="1">
+    <div class="fbrow"><span class="fbname">あか</span><span class="fbsc">0てん</span><span class="fbturn"></span><button class="fbhome" aria-label="メニュー">🏠</button></div>
+    <div class="fbrow2"><button class="fbpump">ふくらます！</button><button class="fbstop">やめる</button></div>
+  </div>
 </section>
 
 <section id="puyo" class="screen">
@@ -1393,7 +1433,7 @@ function padSet(sec,o,big,sc,dim){const p=document.querySelector(`#${sec} .pad[d
 function bindPads(sec,fn){document.querySelectorAll(`#${sec} .pad`).forEach(p=>
   p.addEventListener('pointerdown',e=>{e.preventDefault();fn(+p.dataset.o);}));}
 document.querySelectorAll('[data-menu]').forEach(b=>b.addEventListener('click',askMenu));
-function stopAll(){if(typeof bmStop==='function')bmStop();if(typeof jgStop==='function')jgStop();if(typeof ktStop==='function')ktStop();if(typeof ivStop==='function')ivStop();if(typeof byStop==='function')byStop();if(typeof ckStop==='function')ckStop();if(typeof pyStop==='function')pyStop();if(typeof hjStop==='function')hjStop();if(typeof rlStop==='function')rlStop();if(typeof cupStop==='function')cupStop();if(typeof pkStop==='function')pkStop();hayStop();tugStop();jStop();hkStop();if(typeof spStop==='function')spStop();}
+function stopAll(){if(typeof fbStop==='function')fbStop();if(typeof bmStop==='function')bmStop();if(typeof jgStop==='function')jgStop();if(typeof ktStop==='function')ktStop();if(typeof ivStop==='function')ivStop();if(typeof byStop==='function')byStop();if(typeof ckStop==='function')ckStop();if(typeof pyStop==='function')pyStop();if(typeof hjStop==='function')hjStop();if(typeof rlStop==='function')rlStop();if(typeof cupStop==='function')cupStop();if(typeof pkStop==='function')pkStop();hayStop();tugStop();jStop();hkStop();if(typeof spStop==='function')spStop();}
 
 /* ========== よんもくならべ ========== */
 const C4={b:[],turn:1,first:1,hist:[],over:false,win:[],last:-1,sc:{'1':0,'-1':0}};
@@ -3253,6 +3293,147 @@ function bmSnd(k){if(!BGM.on||!BGM.ctx)return;const t=BGM.ctx.currentTime;
 document.addEventListener('touchmove',e=>{if(e.touches.length>1)e.preventDefault();},{passive:false});
 document.addEventListener('dblclick',e=>e.preventDefault(),{passive:false});
 
+
+/* ========== ふうせん ドキドキ ========== */
+const FB_IT=[
+ {nm:'ふうせん',k:'balloon',c:'#ff5a7a',pop:'pop',say:'パーン！'},
+ {nm:'バブルガム',k:'gum',c:'#ff8fc8',pop:'splat',say:'ベチャッ！'},
+ {nm:'フグ',k:'emoji',e:'🐡',c:'#ffd27a',pop:'fly',say:'ぷしゅ〜！'},
+ {nm:'カエル',k:'emoji',e:'🐸',c:'#7ad36b',pop:'boom',say:'ゲコッ！'},
+ {nm:'ハリネズミ',k:'emoji',e:'🦔',c:'#b07a4a',pop:'needle',say:'ポンッ！'},
+ {nm:'ペンギン',k:'emoji',e:'🐧',c:'#4a5a70',pop:'fly',say:'ぷしゅ〜！'},
+ {nm:'タコ',k:'emoji',e:'🐙',c:'#ff6b6b',pop:'ink',say:'ボフッ！'},
+ {nm:'せんせいの あたま',k:'emoji',e:'👨‍🏫',c:'#ffcc99',pop:'boom',say:'ボカーン！'},
+ {nm:'おかんの おなか',k:'belly',e:'👩',c:'#ff9cc0',pop:'boom',say:'ぷぅ〜！'},
+ {nm:'パパの おなか',k:'belly',e:'👨',c:'#7cb6ff',pop:'button',say:'ボヨーン！'},
+ {nm:'おじいちゃんの ヒゲ',k:'beard',e:'👴',c:'#f4f4f4',pop:'fluff',say:'ボワッ！'},
+ {nm:'カレーの なべ',k:'pot',c:'#c47a1c',pop:'splat',say:'ドバーッ！'},
+ {nm:'トイレの うんち',k:'emoji',e:'💩',c:'#8a5a2b',pop:'splat',say:'ブリッ！'},
+ {nm:'たまご',k:'emoji',e:'🥚',c:'#ffcc33',pop:'splat',say:'パカッ！'},
+ {nm:'たんさんの ペットボトル',k:'bottle',c:'#9fdcff',pop:'spray',say:'シュワーッ！'},
+ {nm:'ふった かんジュース',k:'can',c:'#ff9a3c',pop:'spray',say:'プシャーッ！'},
+ {nm:'おもち',k:'mochi',c:'#fffaf0',pop:'mochi',say:'ぷくっ パーン！'}];
+const FB={st:'idle',items:[],round:0,limit:10,size:0,shown:0,turn:'1',pumps:0,turnPts:0,sc:{'1':0,'-1':0},loser:{},pa:[],splats:[],anim:0,t:0,raf:0,last:0,W:0,H:0,d:1,tm:[],fly:null,popAt:0,say:'',aah:null};
+const fbCv=$('fbCv'),fbX=fbCv.getContext('2d');
+function fbSize(){const r=fbCv.getBoundingClientRect(),d=window.devicePixelRatio||1;if(!r.width)return;FB.W=r.width;FB.H=r.height;FB.d=d;fbCv.width=Math.round(r.width*d);fbCv.height=Math.round(r.height*d);}
+function fbIt(){return FB.items[FB.round]||FB_IT[0];}
+// ---- え ----
+function fbShine(x,cx,cy,r,p){x.save();x.globalAlpha=.25+.55*p;const g=x.createRadialGradient(cx-r*.35,cy-r*.4,0,cx-r*.35,cy-r*.4,r*.55);g.addColorStop(0,'#fff');g.addColorStop(1,'rgba(255,255,255,0)');
+  x.fillStyle=g;x.beginPath();x.ellipse(cx-r*.3,cy-r*.38,r*.42,r*.26,-.5,0,7);x.fill();x.restore();}
+function fbBlob(x,cx,cy,rx,ry,col,p){const g=x.createRadialGradient(cx-rx*.3,cy-ry*.3,rx*.1,cx,cy,Math.max(rx,ry));g.addColorStop(0,ckShade(col,30+p*40));g.addColorStop(1,ckShade(col,-25+p*35));
+  x.fillStyle=g;x.beginPath();x.ellipse(cx,cy,rx,ry,0,0,7);x.fill();}
+function fbDrawItem(x,it,cx,cy,R,R0,p){x.textAlign='center';x.textBaseline='middle';
+  if(it.k==='balloon'){x.strokeStyle='#9a8a7a';x.lineWidth=2;x.beginPath();x.moveTo(cx,cy+R);x.bezierCurveTo(cx-R*.3,cy+R*1.4,cx+R*.3,cy+R*1.6,cx,cy+R*2);x.stroke();
+    fbBlob(x,cx,cy,R*.86,R,it.c,p);x.fillStyle=ckShade(it.c,-20);x.beginPath();x.moveTo(cx-R*.08,cy+R*1.08);x.lineTo(cx+R*.08,cy+R*1.08);x.lineTo(cx,cy+R*.96);x.fill();fbShine(x,cx,cy,R,p);}
+  else if(it.k==='gum'){x.font=`${R0*2.2}px sans-serif`;x.fillText('😗',cx,cy);x.save();x.globalAlpha=.88;fbBlob(x,cx+R0*.05,cy+R0*.25,R*.85,R*.8,it.c,p);x.restore();fbShine(x,cx,cy+R0*.25,R*.82,p);}
+  else if(it.k==='emoji'){x.save();x.translate(cx,cy);x.scale(1+p*.12,1-p*.04);x.font=`${R*2}px sans-serif`;x.fillText(it.e,0,R*.06);x.restore();
+    x.save();x.globalAlpha=p*p*.35;x.fillStyle='#fff';x.beginPath();x.arc(cx,cy,R*.92,0,7);x.fill();x.restore();fbShine(x,cx,cy,R*.9,p*.8);}
+  else if(it.k==='belly'){fbBlob(x,cx,cy+R0*.3,R*.95,R*.85,it.c,p);x.fillStyle=ckShade(it.c,-30);x.beginPath();x.arc(cx,cy+R0*.3+R*.15,Math.max(3,R*.05),0,7);x.fill();
+    if(it.pop==='button'){x.fillStyle='#fff';for(let k=-1;k<=1;k++){x.beginPath();x.arc(cx,cy+R0*.3+k*R*.35,Math.max(3,R*.06),0,7);x.fill();}}
+    fbShine(x,cx,cy+R0*.3,R*.9,p);x.font=`${R0*1.25}px sans-serif`;x.fillText(it.e,cx,cy+R0*.3-R*.85-R0*.35);}
+  else if(it.k==='beard'){x.font=`${R0*1.7}px sans-serif`;x.fillText(it.e,cx,cy-R0*.9);
+    for(let k=0;k<9;k++){const a=Math.PI*(.1+.8*k/8),r=R*.75;x.fillStyle=ckShade('#f4f4f4',-10+k%2*8);x.beginPath();x.arc(cx+Math.cos(a)*r*.9,cy-R0*.3+Math.sin(a)*r*1.1,R*.38,0,7);x.fill();}
+    x.fillStyle='#fff';x.beginPath();x.ellipse(cx,cy-R0*.15+R*.45,R*.6,R*.55,0,0,7);x.fill();fbShine(x,cx,cy+R*.3,R*.6,p);}
+  else if(it.k==='pot'){fbBlob(x,cx,cy-R0*.2,R*.95,R*.75,it.c,p);x.fillStyle='rgba(255,255,255,.6)';for(let k=0;k<4;k++){x.beginPath();x.arc(cx+(k-1.5)*R*.35,cy-R0*.2-R*.2+Math.sin(FB.t*4+k)*4,R*.07,0,7);x.fill();}
+    const pw=R0*2.4,ph=R0*1.1;const g=x.createLinearGradient(cx-pw/2,0,cx+pw/2,0);g.addColorStop(0,'#555c66');g.addColorStop(.5,'#b9c0c9');g.addColorStop(1,'#4a5058');
+    x.fillStyle=g;ckRR(x,cx-pw/2,cy+R0*.1,pw,ph,R0*.2);x.fill();x.fillStyle='#333';x.fillRect(cx-pw/2-R0*.3,cy+R0*.25,R0*.3,R0*.15);x.fillRect(cx+pw/2,cy+R0*.25,R0*.3,R0*.15);}
+  else if(it.k==='bottle'||it.k==='can'){const bot=it.k==='bottle',gs=1+FB.shown*.035,w=R0*(bot?1.3:1.5)*gs,h=R0*(bot?3.2:2.3)*gs,b=w*(.04+p*.3),top=cy-h/2;
+    x.beginPath();x.moveTo(cx-w/2,top+h*(bot?.3:.05));x.quadraticCurveTo(cx-w/2-b,cy,cx-w/2,top+h);x.lineTo(cx+w/2,top+h);x.quadraticCurveTo(cx+w/2+b,cy,cx+w/2,top+h*(bot?.3:.05));
+    if(bot){x.lineTo(cx+w*.2,top+h*.12);x.lineTo(cx+w*.2,top);x.lineTo(cx-w*.2,top);x.lineTo(cx-w*.2,top+h*.12);}x.closePath();
+    const g=x.createLinearGradient(cx-w/2,0,cx+w/2,0);g.addColorStop(0,ckShade(it.c,-30));g.addColorStop(.4,ckShade(it.c,40));g.addColorStop(1,ckShade(it.c,-35));x.fillStyle=g;x.globalAlpha=bot?.85:1;x.fill();x.globalAlpha=1;
+    if(bot){x.fillStyle='#e84a3a';ckRR(x,cx-w*.24,top-R0*.18,w*.48,R0*.22,4);x.fill();x.fillStyle='rgba(255,255,255,.8)';for(let k=0;k<Math.min(40,FB.size*2);k++){const rx=(Math.sin(k*12.9)*.5)*w*.8,ry=((k*37%100)/100)*h*.6;x.beginPath();x.arc(cx+rx,top+h*.35+ry-(FB.t*30+k*7)%(h*.5),2+k%3,0,7);x.fill();}}
+    else{x.fillStyle='#ccc';x.fillRect(cx-w/2,top+h*.05,w,R0*.12);x.fillRect(cx-w/2,top+h-R0*.12,w,R0*.12);x.fillStyle='#fff';x.font=`bold ${R0*.4}px sans-serif`;x.fillText('JUICE',cx,cy);}
+    fbShine(x,cx,cy,w*.7,p);}
+  else if(it.k==='mochi'){x.strokeStyle='#777';x.lineWidth=3;for(let k=-3;k<=3;k++){x.beginPath();x.moveTo(cx+k*R0*.4,cy+R0*.85);x.lineTo(cx+k*R0*.4,cy+R0*1.05);x.stroke();}
+    x.fillStyle='#d9a066';ckRR(x,cx-R0*1.1,cy+R0*.4,R0*2.2,R0*.5,R0*.2);x.fill();
+    fbBlob(x,cx,cy+R0*.45-R*.55,R*.95,R*.62,it.c,p);x.strokeStyle='#d8c9a8';x.lineWidth=3;x.beginPath();x.ellipse(cx,cy+R0*.45-R*.55,R*.95,R*.62,0,0,7);x.stroke();x.fillStyle='rgba(190,120,50,.45)';for(let k=0;k<5;k++){x.beginPath();x.ellipse(cx+(k-2)*R*.3,cy+R0*.45-R*.55+((k*7)%3-1)*R*.15,R*.12,R*.06,k,0,7);x.fill();}fbShine(x,cx,cy+R0*.45-R*.55,R*.7,p);}}
+function fbParticles(it,cx,cy,R){const add=o=>FB.pa.push(Object.assign({t:0,g:600,rot:0,vr:(Math.random()-.5)*12,life:1.6},o)),rnd=(a,b)=>a+Math.random()*(b-a),conf=['#ff5a7a','#ffd84d','#5ed0ff','#7ad36b','#c49bff','#ff9a3c'];
+  for(let i=0;i<46;i++){const a=rnd(0,6.28),v=rnd(150,620);add({sh:'conf',x:cx,y:cy,vx:Math.cos(a)*v,vy:Math.sin(a)*v-200,col:conf[i%6],sz:rnd(5,10)});}
+  const pop=it.pop;
+  if(pop==='pop'||pop==='boom'||pop==='button')for(let i=0;i<26;i++){const a=rnd(0,6.28),v=rnd(200,700);add({sh:'r',x:cx+Math.cos(a)*R*.6,y:cy+Math.sin(a)*R*.6,vx:Math.cos(a)*v,vy:Math.sin(a)*v,col:it.c,sz:rnd(8,22)});}
+  if(pop==='boom')for(let i=0;i<14;i++){const a=rnd(0,6.28),v=rnd(40,160);add({sh:'smoke',x:cx,y:cy,vx:Math.cos(a)*v,vy:Math.sin(a)*v-40,g:-30,col:'#888',sz:rnd(R*.3,R*.6),life:1.2});}
+  if(pop==='button')add({sh:'btn',x:cx,y:cy,vx:rnd(-200,200),vy:-900,col:'#fff',sz:R*.14,life:2.2,g:900});
+  if(pop==='needle')for(let i=0;i<40;i++){const a=rnd(0,6.28),v=rnd(300,800);add({sh:'l',x:cx,y:cy,vx:Math.cos(a)*v,vy:Math.sin(a)*v,col:'#6b4a2a',sz:R*.25,rot:a,vr:0,g:300});}
+  if(pop==='fluff')for(let i=0;i<34;i++){const a=rnd(0,6.28),v=rnd(80,380);add({sh:'c',x:cx,y:cy,vx:Math.cos(a)*v,vy:Math.sin(a)*v,g:-40,col:'#ffffff',sz:rnd(8,22),life:2});}
+  if(pop==='spray'){for(let i=0;i<70;i++)add({sh:'c',x:cx,y:cy-R*.6,vx:rnd(-160,160),vy:rnd(-1100,-500),col:i%3?it.c:'#ffffff',sz:rnd(4,10),g:900,life:2});add({sh:'cap',x:cx,y:cy-R,vx:rnd(-80,80),vy:-1300,col:'#e84a3a',sz:R0FB()*.3,g:900,life:2.2});}
+  if(pop==='fly'){FB.fly={x:cx,y:cy,vx:rnd(-300,300),vy:-650,r:0,s:1,e:it.e};for(let i=0;i<20;i++)add({sh:'c',x:cx,y:cy,vx:rnd(-120,120),vy:rnd(40,200),g:-60,col:'rgba(255,255,255,.9)',sz:rnd(8,18),life:1});}
+  if(pop==='splat'||pop==='ink'||pop==='mochi'||pop==='splat'){const col=pop==='ink'?'#1b1b22':pop==='mochi'?'#fffaf0':it.c,n=pop==='mochi'?10:14;
+    for(let i=0;i<n;i++)FB.splats.push({x:rnd(.08,.92)*FB.W,y:rnd(.08,.92)*FB.H,r:rnd(R*.25,R*.6),col,t:0,life:3,seed:Math.random()*9});
+    for(let i=0;i<24;i++){const a=rnd(0,6.28),v=rnd(200,700);add({sh:'c',x:cx,y:cy,vx:Math.cos(a)*v,vy:Math.sin(a)*v,col,sz:rnd(8,18)});}}}
+function R0FB(){return Math.min(FB.W,FB.H)*.12;}
+function fbDraw(){const x=fbX,W=FB.W,H=FB.H,d=FB.d;if(!W)return;x.setTransform(d,0,0,d,0,0);x.clearRect(0,0,W,H);
+  const it=fbIt(),R0=R0FB(),p=Math.min(1,FB.shown/FB.limit),cx=W/2,cy=H/2;
+  // じょうほう（うえと したに）
+  x.textAlign='center';x.textBaseline='middle';x.fillStyle='rgba(90,74,51,.85)';x.font=`bold ${Math.max(14,H*.028)}px sans-serif`;
+  const info=`ラウンド ${FB.round+1}/3 ・ ${it.nm}`;x.fillText(info,cx,H-H*.05);x.save();x.translate(cx,H*.05);x.rotate(Math.PI);x.fillText(info,0,0);x.restore();
+  if(FB.st!=='popped'){
+    const a=FB.anim,stretch=a>0?Math.sin((1-a/.35)*Math.PI)*.12*(a/.35):0,frozen=FB.st==='silence';
+    const amp=frozen?0:R0*(.01+.07*p*p*p),sx=Math.sin(FB.t*38)*amp,sy=Math.cos(FB.t*31)*amp*.6;
+    const R=R0*(1+FB.shown*.065)*(frozen?1.06:1);
+    x.save();x.translate(cx+sx,cy+sy);x.scale(1+stretch,1-stretch*.7);fbDrawItem(x,it,0,0,R,R0,p);x.restore();}
+  // とんでいく もの
+  if(FB.fly){const f=FB.fly;x.save();x.translate(f.x,f.y);x.rotate(f.r);x.font=`${R0*2.4*f.s}px sans-serif`;x.fillText(f.e,0,0);x.restore();}
+  for(const s of FB.splats){const a=Math.min(1,(s.life-s.t)/.8);x.save();x.globalAlpha=a;x.fillStyle=s.col;x.beginPath();
+    for(let k=0;k<12;k++){const ang=k/12*Math.PI*2,rr=s.r*(.75+.35*Math.sin(k*2.3+s.seed));x.lineTo(s.x+Math.cos(ang)*rr,s.y+Math.sin(ang)*rr);}x.closePath();x.fill();
+    x.fillRect(s.x-s.r*.08,s.y,s.r*.16,s.r*(.5+Math.min(1,s.t)*.8));x.restore();}
+  for(const q of FB.pa){const a=Math.max(0,1-q.t/q.life);x.save();x.globalAlpha=a;x.translate(q.x,q.y);x.rotate(q.rot);x.fillStyle=q.col;
+    if(q.sh==='conf')x.fillRect(-q.sz/2,-q.sz/4,q.sz,q.sz/2);else if(q.sh==='r'){x.beginPath();x.moveTo(-q.sz/2,-q.sz/3);x.lineTo(q.sz/2,-q.sz/2);x.lineTo(q.sz/3,q.sz/2);x.closePath();x.fill();}
+    else if(q.sh==='l'){x.strokeStyle=q.col;x.lineWidth=3;x.beginPath();x.moveTo(-q.sz/2,0);x.lineTo(q.sz/2,0);x.stroke();}
+    else if(q.sh==='smoke'){x.globalAlpha=a*.5;x.beginPath();x.arc(0,0,q.sz*(1+q.t),0,7);x.fill();}
+    else if(q.sh==='btn'||q.sh==='cap'){x.beginPath();x.arc(0,0,q.sz,0,7);x.fill();x.strokeStyle='#999';x.lineWidth=2;x.stroke();}
+    else{x.beginPath();x.arc(0,0,q.sz,0,7);x.fill();}x.restore();}
+  if(FB.st==='popped'&&FB.popT<1.6){const k=Math.min(1,FB.popT*4);x.save();x.font=`900 ${Math.min(W,H)*.13*k}px sans-serif`;x.lineWidth=8;x.strokeStyle='#fff';x.fillStyle='#e8312a';
+    x.strokeText(FB.say,cx,cy);x.fillText(FB.say,cx,cy);x.restore();}
+  if(FB.aah&&FB.popT<2.4){const o=FB.aah,y=o==='1'?H*.8:H*.2;x.save();x.translate(cx,y);if(o==='-1')x.rotate(Math.PI);x.font=`900 ${Math.min(W,H)*.12}px sans-serif`;x.lineWidth=8;x.strokeStyle='#fff';
+    x.fillStyle=o==='1'?'#e9546b':'#3d8bff';x.strokeText('あーっ！',0,0);x.fillText('あーっ！',0,0);x.restore();}}
+function fbLoop(t){if(!$('fb').classList.contains('on'))return;const dt=Math.min(.04,(t-FB.last)/1000);FB.last=t;FB.t+=dt;
+  if(FB.anim>0)FB.anim=Math.max(0,FB.anim-dt);FB.shown+=(FB.size-FB.shown)*Math.min(1,dt*9);
+  if(FB.st==='popped')FB.popT+=dt;
+  for(const q of FB.pa){q.t+=dt;q.vy+=q.g*dt;q.x+=q.vx*dt;q.y+=q.vy*dt;q.rot+=q.vr*dt;q.vx*=.99;}FB.pa=FB.pa.filter(q=>q.t<q.life);
+  for(const s of FB.splats)s.t+=dt;FB.splats=FB.splats.filter(s=>s.t<s.life);
+  if(FB.fly){const f=FB.fly;f.vy+=200*dt;f.x+=f.vx*dt;f.y+=f.vy*dt;f.r+=dt*14;f.s=Math.max(.3,f.s-dt*.4);if(f.y<-200||f.x<-200||f.x>FB.W+200)FB.fly=null;}
+  fbDraw();FB.raf=requestAnimationFrame(fbLoop);}
+function fbUI(){for(const o of['1','-1']){const s=document.querySelector(`#fb .fbpanel[data-o="${o}"]`),my=FB.st==='play'&&FB.turn===o;
+  s.classList.toggle('on',my);s.querySelector('.fbsc').textContent=`${FB.sc[o]}てん`;
+  s.querySelector('.fbpump').disabled=!my;s.querySelector('.fbstop').disabled=!my||FB.pumps<1;
+  s.querySelector('.fbturn').textContent=my?`このばん ${FB.pumps}かい（あと ${7-FB.pumps}かい）＋${FB.turnPts}てん`:FB.st==='play'?'まってね…':'';}}
+function fbPump(o){if(FB.st!=='play'||FB.turn!==o)return;FB.pumps++;FB.size+=.8+Math.random()*.4;FB.anim=.35;
+  if(FB.size>FB.limit){fbPop(o);return;}
+  FB.turnPts+=10;fbSnd('pump');if(navigator.vibrate)try{navigator.vibrate(10);}catch(e){}
+  if(FB.pumps>=7){fbUI();FB.st='wait';FB.tm.push(setTimeout(()=>fbEndTurn(o),600));return;}
+  fbUI();}
+function fbEndTurn(o){FB.sc[o]+=FB.turnPts;FB.turnPts=0;FB.pumps=0;FB.turn=o==='1'?'-1':'1';FB.st='play';sfx();fbUI();}
+function fbPop(o){FB.st='silence';fbUI();FB.loser[FB.round]=o;
+  FB.tm.push(setTimeout(()=>{const it=fbIt(),R0=R0FB();FB.st='popped';FB.popT=0;FB.say=it.say;FB.aah=o;
+    fbParticles(it,FB.W/2,FB.H/2,R0*(1+FB.size*.065));fbSnd('pop');buzz();
+    const fl=$('fbFlash');fl.classList.remove('on');void fl.offsetWidth;fl.classList.add('on');
+    const w=$('fbWrap');w.classList.remove('shake');void w.offsetWidth;w.classList.add('shake');
+    FB.tm.push(setTimeout(()=>fbRoundEnd(o),2300));},450));}
+function fbRoundEnd(o){const lost=FB.turnPts,last=FB.round>=2;FB.turnPts=0;FB.pumps=0;fbUI();
+  const head=`ラウンド ${FB.round+1}：${PNAME(+o)}が わっちゃった！`,sub=`${PNAME(+o)}の この ばんの ${lost}てんは なし<br>あか ${FB.sc['1']}てん ・ あお ${FB.sc['-1']}てん`;
+  if(!last){modal(`<span class="big">💥</span>${head}<span class="small">${sub}</span>`,[{label:'つぎの ラウンド',fn:()=>fbRound(FB.round+1)}]);return;}
+  const a=FB.sc['1'],b=FB.sc['-1'];FB.st='over';
+  modal(`<span class="big">${a===b?'🤝 ひきわけ！':'🏆 '+PNAME(a>b?1:-1)+'の かち！'}</span><span class="small">${head}<br>あか ${a}てん ・ あお ${b}てん</span>`,[{label:'もういちど',fn:startFb}]);}
+function fbRound(r){FB.round=r;FB.size=0;FB.shown=0;FB.limit=8+Math.random()*18;FB.pumps=0;FB.turnPts=0;FB.pa=[];FB.splats=[];FB.fly=null;FB.aah=null;
+  FB.turn=r%2?'-1':'1';FB.st='play';fbUI();}
+function startFb(){show('fb');fbStop();FB.sc={'1':0,'-1':0};FB.loser={};const pool=[...FB_IT].sort(()=>Math.random()-.5);FB.items=pool.slice(0,3);FB.round=0;FB.size=0;FB.shown=0;FB.st='idle';
+  requestAnimationFrame(()=>{fbSize();FB.last=performance.now();FB.raf=requestAnimationFrame(fbLoop);fbUI();
+    duo('fbMsg',`ふうせん ドキドキ<br><small>じゅんばんに ふくらませて、わったら まけ！<br>こんかいは ${FB.items.map(i=>i.nm).join('・')}</small>`);$('fbStart').classList.add('on');});}
+function fbStop(){FB.tm.forEach(clearTimeout);FB.tm=[];cancelAnimationFrame(FB.raf);FB.st='idle';}
+$('fbGo').addEventListener('click',()=>{$('fbStart').classList.remove('on');fbRound(0);});
+$('fbStartMenu').addEventListener('click',askMenu);
+document.querySelectorAll('#fb .fbpanel').forEach(s=>{const o=s.dataset.o;
+  s.querySelector('.fbpump').addEventListener('pointerdown',e=>{e.preventDefault();fbPump(o);});
+  s.querySelector('.fbstop').addEventListener('click',()=>{if(FB.st==='play'&&FB.turn===o&&FB.pumps>0)fbEndTurn(o);});
+  s.querySelector('.fbhome').addEventListener('click',askMenu);});
+window.addEventListener('resize',()=>{if($('fb').classList.contains('on'))fbSize();});
+if(window.ResizeObserver)new ResizeObserver(()=>{if($('fb').classList.contains('on'))fbSize();}).observe(document.querySelector('.fbcvw'));
+function fbSnd(k){if(!BGM.on||!BGM.ctx)return;const c=BGM.ctx,t=c.currentTime;
+  if(k==='pump'){const o=c.createOscillator(),g=c.createGain(),f=180+FB.size*22;o.type='sawtooth';o.frequency.setValueAtTime(f,t);o.frequency.linearRampToValueAtTime(f*1.35,t+.28);
+    g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.08,t+.04);g.gain.exponentialRampToValueAtTime(.0001,t+.32);o.connect(g);g.connect(BGM.out||c.destination);o.start(t);o.stop(t+.34);}
+  else if(k==='pop'){const n=c.sampleRate*.6,buf=c.createBuffer(1,n,c.sampleRate),dd=buf.getChannelData(0);for(let i=0;i<n;i++)dd[i]=(Math.random()*2-1)*Math.pow(1-i/n,3);
+    const s=c.createBufferSource(),g=c.createGain();s.buffer=buf;g.gain.value=.9;s.connect(g);g.connect(BGM.out||c.destination);s.start(t);note(90,t,.25,'sine',.3);}}
+
 /* ========== あそびかた ========== */
 function openHowto(){$('howto').classList.add('on');$('howto').querySelector('.howbody').scrollTop=0;}
 function closeHowto(){$('howto').classList.remove('on');}
@@ -3279,14 +3460,15 @@ const HELP={
  inv:["インベーダー たいせん", "じぶんの じんち（じぶんの いろの ところ）を <b>ゆびで なぞると ほうだいが ついてくる</b>よ。<b>「うつ！」</b>で ミサイル はっしゃ！<br>あいての ほうだいに ミサイルを あてたら かち。インベーダーも ミサイルで たおせるよ。<br><b>インベーダーに ぶつかったり、あいての ミサイルに あたったら まけ</b>。じかんが たつと インベーダーが ふえるよ。<br>おなじ ときに やられたら あいうちで もう いっかい！"],
  kt:["ことば とりあい", "まんなかに ひらがなの はいが ばらまかれるよ。<b>はいを タッチすると じぶんの てもとに くる</b>（はやいもの がち）。<br>てもとの はいを タッチして えらび、うごかしたい ばしょを タッチすると いれかえられるよ。いらない はいは「↩ もどす」。<br><b>3もじの ことば 4つと 2もじの ことば 1つ</b>（ぜんぶ ちがう ことば）が そろったら「できた！」。じしょに あれば かち！"],
  jg:["じんせい すごろく", "じぶんの ばんに「🎡 ルーレット」を おして、でた かずだけ すすむよ。<br><b>しごと・けっこん・いえ</b>の マス（オレンジの わく）は、とおりすぎずに かならず とまるよ。💴 きゅうりょうびは とおるだけでも おきゅうりょうが もらえる！<br>たからくじや けっこんでは、みんなにも おすそわけが あるよ。<br>ゴールで <b>💰おかね ＋ ⭐おもいで（＋🏠いえ）</b>の ごうけいが おおい ほうが かち！"],
- bm:["ばくだん たいせん", "<b>じゅうじキー</b>で うごいて、<b>💣ボタン</b>で ばくだんを おくよ。すこし たつと たてと よこに ばくはつ！<br>ちゃいろの ブロックは こわせるよ。なかから <b>💣（おける かず アップ）・🔥（ばくはつが ながく）・👟（はやく うごける）</b>が でることも。<br>ばくはつに まきこまれたら まけ（じぶんの ばくだんにも きをつけて！）。<br>2ほん さきに とったら かち！"]};
+ bm:["ばくだん たいせん", "<b>じゅうじキー</b>で うごいて、<b>💣ボタン</b>で ばくだんを おくよ。すこし たつと たてと よこに ばくはつ！<br>ちゃいろの ブロックは こわせるよ。なかから <b>💣（おける かず アップ）・🔥（ばくはつが ながく）・👟（はやく うごける）</b>が でることも。<br>ばくはつに まきこまれたら まけ（じぶんの ばくだんにも きをつけて！）。<br>2ほん さきに とったら かち！"],
+ fb:["ふうせん ドキドキ", "じゅんばんに「ふくらます！」を おして、ふうせんや どうぶつを ふくらませよう。1かい おすと 10てん。1かいの ばんで 7かいまで おせるよ。こわくなったら「やめる」で こうたい。<br>どこかで とつぜん われる！ わった ひとは その ばんの てんが なしに なって、ラウンドの まけ。<br>3ラウンドで ごうけいてんが おおい ほうの かち！"]};
 function showHelp(){const sc=document.querySelector('.screen.on'),h=sc&&HELP[sc.id];if(!h)return;
   let resume=null;
   if(sc.id==='puyo'&&PY.st==='play'&&!PY.paused){PY.paused=true;resume=()=>{PY.paused=false;PY.last=performance.now();};}
   if(sc.id==='hockey'&&HK.pause<=0){const pv=HK.pause;HK.pause=1e9;resume=()=>{HK.pause=.4;};}
   modal(`<span class="big">❓ ${h[0]}</span><span class="hlp">${h[1]}</span>`,[{label:'とじる',fn:resume}]);}
 // 🏠 ボタンの となりに ？ ボタンを つける
-['[data-menu]','[data-act="menu"]','#hkMenu','.pypause','.hjpause','.ckhome','#ckSetMenu','#hkSetMenu','.byhome','#bySetMenu','.ivhome','#ivStartMenu','.kthome','#ktStartMenu','.jghome','#jgStartMenu','.bmhome','#bmStartMenu'].forEach(sel=>document.querySelectorAll(sel).forEach(b=>{
+['[data-menu]','[data-act="menu"]','#hkMenu','.pypause','.hjpause','.ckhome','#ckSetMenu','#hkSetMenu','.byhome','#bySetMenu','.ivhome','#ivStartMenu','.kthome','#ktStartMenu','.jghome','#jgStartMenu','.bmhome','#bmStartMenu','.fbhome','#fbStartMenu'].forEach(sel=>document.querySelectorAll(sel).forEach(b=>{
   if(b.closest('#menu'))return;const c=b.cloneNode(false);c.removeAttribute('id');c.removeAttribute('data-menu');c.removeAttribute('data-act');
   c.classList.add('hlpbtn');c.classList.remove('c-menu');c.textContent='？';c.setAttribute('aria-label','あそびかた');c.addEventListener('click',e=>{e.stopPropagation();showHelp();});
   b.parentNode.insertBefore(c,b);}));
