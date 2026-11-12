@@ -1,0 +1,116 @@
+231¦🎲 Random¦🎲 Випадково¦🎲 随机¦🎲 랜덤¦🎲 Aleatorio¦🎲 Aleatório
+232¦sec¦с¦秒¦초¦s¦s
+233¦🙈 Timer: hide all¦🙈 Таймер: сховати¦🙈 计时器：全部隐藏¦🙈 타이머: 모두 숨김¦🙈 Cronómetro: oculto¦🙈 Cronômetro: oculto
+234¦👀 Timer: visible at first¦👀 Таймер: видно спочатку¦👀 计时器：开头可见¦👀 타이머: 처음만 보임¦👀 Cronómetro: visible al inicio¦👀 Cronômetro: visível no início
+235¦The seconds are set when you start!¦Секунди визначаться після старту!¦按开始后决定秒数！¦시작하면 초가 정해져!¦¡Los segundos se eligen al empezar!¦Os segundos são sorteados no início!
+236¦When you think {0} seconds have passed¦Коли здасться, що минуло {0} с,¦觉得到了{0}秒时¦{0}초가 됐다 싶으면¦Cuando creas que pasaron {0} s¦Quando achar que passaram {0} s
+237¦tap your side!¦торкнися свого боку!¦按你这边！¦내 쪽을 터치!¦¡toca tu lado!¦toque no seu lado!
+238¦Just¦Точно¦刚好¦딱¦Justo¦Exato
+239¦{0} s¦{0} с¦{0}秒¦{0}초¦{0} s¦{0} s
+240¦This time:¦Цього разу:¦这次是¦이번에는¦Esta vez:¦Desta vez:
+241¦Target¦Ціль¦目标¦목표¦Objetivo¦Meta
+242¦Target {0} s¦Ціль {0} с¦目标 {0}秒¦목표 {0}초¦Objetivo {0} s¦Meta {0} s
+243¦At {0} s¦На {0} с¦在{0}秒时¦{0}초에¦A los {0} s¦Aos {0} s
+244¦Target {0}¦Ціль {0}¦目标 {0}¦목표 {0}¦Objetivo {0}¦Meta {0}
+245¦Stop!¦Стоп!¦停！¦스톱!¦¡Alto!¦Pare!
+246¦Time over¦Час вийшов¦超时¦시간 초과¦Se acabó el tiempo¦Tempo esgotado
+247¦✨Perfect! Off by 0.00 s¦✨Ідеально! Похибка 0.00 с¦✨刚刚好！误差 0.00秒¦✨딱 맞았다! 오차 0.00초¦✨¡Perfecto! Error 0.00 s¦✨Perfeito! Erro 0,00 s
+248¦Off by {0}{1} s¦Похибка {0}{1} с¦误差 {0}{1}秒¦오차 {0}{1}초¦Error {0}{1} s¦Erro {0}{1} s
+249¦Target {0} s¦Ціль {0} с¦目标 {0}秒¦목표 {0}초¦Objetivo {0} s¦Meta {0} s
+250¦{0} {1} wins¦{0}: {1} перемог¦{0} 胜{1}次¦{0} {1}승¦{0} {1} victorias¦{0} {1} vitórias
+251¦Draw!¦Нічия!¦平局！¦무승부!¦¡Empate!¦Empate!
+252¦Square¦Квадрат¦方块¦네모¦Cuadrado¦Quadrado
+253¦Triangle¦Трикутник¦三角¦세모¦Triángulo¦Triângulo
+254¦Bar¦Паличка¦长条¦막대¦Barra¦Barra
+255¦Red {0} · Blue {1}¦Червоні {0} · Сині {1}¦红 {0} · 蓝 {1}¦빨강 {0} · 파랑 {1}¦Rojo {0} · Azul {1}¦Vermelho {0} · Azul {1}
+256¦1¦1¦1个¦1개¦1¦1
+257¦2¦2¦2个¦2개¦2¦2
+258¦3¦3¦3个¦3개¦3¦3
+259¦Random¦Випадково¦随机¦랜덤¦Aleatorio¦Aleatório
+260¦None¦Немає¦无¦없음¦Ninguno¦Nenhum
+261¦Place randomly¦Розставити випадково¦随机摆放¦랜덤으로 놓기¦Colocar al azar¦Colocar aleatório
+264¦¦¦¦¦¦
+265¦Pine¦Сосна¦松¦소나무¦Pino¦Pinheiro
+266¦Plum¦Слива¦梅¦매화¦Ciruelo¦Ameixeira
+267¦Cherry¦Сакура¦樱¦벚꽃¦Cerezo¦Cerejeira
+268¦Wisteria¦Гліцинія¦藤¦등나무¦Glicina¦Glicínia
+269¦Iris¦Ірис¦菖蒲¦붓꽃¦Iris¦Íris
+270¦Peony¦Півонія¦牡丹¦모란¦Peonía¦Peônia
+271¦Clover¦Леспедеца¦萩¦싸리¦Trébol¦Trevo
+272¦Grass¦Трава¦芒草¦억새¦Hierba¦Capim
+273¦Mum¦Хризантема¦菊¦국화¦Crisantemo¦Crisântemo
+274¦Maple¦Клен¦枫¦단풍¦Arce¦Bordo
+275¦Willow¦Верба¦柳¦버드나무¦Sauce¦Salgueiro
+276¦Paulownia¦Павловнія¦桐¦오동¦Paulonia¦Paulównia
+277¦Brights¦Яскраві¦光牌¦광¦Brillantes¦Brilhantes
+278¦Animals¦Тварини¦种牌¦열끗¦Animales¦Animais
+279¦Ribbons¦Стрічки¦短册¦띠¦Cintas¦Fitas
+280¦Plains¦Прості¦皮牌¦피¦Básicas¦Simples
+281¦Five Brights¦П'ять яскравих¦五光¦오광¦Cinco brillantes¦Cinco brilhantes
+282¦Rainy Four Brights¦Дощові чотири¦雨四光¦비사광¦Cuatro brillantes con lluvia¦Quatro brilhantes com chuva
+283¦Four Brights¦Чотири яскраві¦四光¦사광¦Cuatro brillantes¦Quatro brilhantes
+284¦Three Brights¦Три яскраві¦三光¦삼광¦Tres brillantes¦Três brilhantes
+285¦Boar-Deer-Butterfly¦Кабан-Олень-Метелик¦猪鹿蝶¦멧돼지·사슴·나비¦Jabalí-Ciervo-Mariposa¦Javali-Cervo-Borboleta
+286¦Flower Viewing¦Милування квітами¦花见酒¦꽃구경 한잔¦Contemplar flores¦Contemplar flores
+287¦Moon Viewing¦Милування місяцем¦月见酒¦달구경 한잔¦Contemplar la luna¦Contemplar a lua
+288¦Red Ribbons¦Червоні стрічки¦赤短¦홍단¦Cintas rojas¦Fitas vermelhas
+289¦Blue Ribbons¦Сині стрічки¦青短¦청단¦Cintas azules¦Fitas azuis
+290¦Animals {0}¦Тварини {0}¦种牌 {0}张¦열끗 {0}장¦Animales {0}¦Animais {0}
+291¦Ribbons {0}¦Стрічки {0}¦短册 {0}张¦띠 {0}장¦Cintas {0}¦Fitas {0}
+292¦Plains {0}¦Прості {0}¦皮牌 {0}张¦피 {0}장¦Básicas {0}¦Simples {0}
+293¦Left {0}¦Залишилось {0}¦剩余 {0}¦남은 {0}¦Quedan {0}¦Restam {0}
+294¦Round {0}/{1}¦Раунд {0}/{1}¦第{0}/{1}局¦{0}/{1}판째¦Ronda {0}/{1}¦Rodada {0}/{1}
+295¦Finish¦Завершити¦结束¦그만하기¦Terminar¦Encerrar
+296¦Flipping…¦Відкриваємо…¦翻牌中…¦뒤집는 중…¦Volteando…¦Virando…
+297¦Month {0} {1}¦Місяць {0} {1}¦{0}月 {1}¦{0}월 {1}¦Mes {0} {1}¦Mês {0} {1}
+298¦Face-down card¦Перевернута карта¦背面朝上的牌¦뒤집힌 패¦Carta boca abajo¦Carta virada
+300¦{0}¦{0}¦{0}张¦{0}장¦{0}¦{0}
+302¦{0} ({1} pts)¦{0} ({1} оч.)¦{0}（{1}分）¦{0} ({1}점)¦{0} ({1} pts)¦{0} ({1} pts)
+303¦Koi-koi on!¦Кой-кой!¦来来中！¦코이코이 중!¦¡Koi-koi!¦Koi-koi!
+304¦Which one? Tap a glowing card¦Яку взяти? Торкнися карти, що світиться¦拿哪张？点发光的牌¦어느 걸 가질까? 빛나는 패를 터치¦¿Cuál? Toca una carta brillante¦Qual? Toque numa carta brilhante
+305¦Pick 1 card from your hand ("Match!" can take)¦Вибери 1 карту з руки («Пара!» можна взяти)¦从手牌选1张（“配对！”可以拿）¦패를 1장 골라줘 ("짝!"은 가져갈 수 있어)¦Elige 1 carta de tu mano («¡Pareja!» se lleva)¦Escolha 1 carta da mão («Par!» pode pegar)
+306¦Tap again to take!¦Торкнися ще раз, щоб взяти!¦再点一次就拿走！¦한 번 더 터치하면 가져가!¦¡Toca otra vez para llevarla!¦Toque de novo para pegar!
+307¦Tap again to put it down¦Торкнися ще раз, щоб покласти¦再点一次放到场上¦한 번 더 터치하면 바닥에 놓아¦Toca otra vez para dejarla¦Toque de novo para colocar
+308¦{0} {1} pts¦{0} {1} оч.¦{0} {1}分¦{0} {1}점¦{0} {1} pts¦{0} {1} pts
+309¦No cards left, round over!¦Карт немає — кінець раунду!¦没有手牌了，结束！¦패가 없어서 끝!¦¡Sin cartas, se acaba!¦Sem cartas, fim da rodada!
+310¦Koi-koi?¦Кой-кой?¦要来来吗？¦코이코이 할까?¦¿Koi-koi?¦Koi-koi?
+311¦🎴 Yaku!¦🎴 Комбінація!¦🎴 成役！¦🎴 족보!¦🎴 ¡Combinación!¦🎴 Combinação!
+312¦Stop here¦Зупинитися¦结束这局¦여기서 끝¦Plantarse¦Parar aqui
+313¦Koi-koi!¦Кой-кой!¦来来！¦코이코이!¦¡Koi-koi!¦Koi-koi!
+314¦7+ points = double¦7+ очок — подвоєння¦7分以上翻倍¦7점 이상이면 2배¦7 o más puntos = doble¦7+ pontos = dobro
+315¦Double for opponent's koi-koi¦Подвоєння за кой-кой суперника¦对方来来过，翻倍¦상대가 코이코이해서 2배¦Doble por el koi-koi rival¦Dobro pelo koi-koi do rival
+316¦🎉 {0} {1} pts!¦🎉 {0} {1} оч.!¦🎉 {0} {1}分！¦🎉 {0} {1}점!¦🎉 ¡{0} {1} pts!¦🎉 {0} {1} pts!
+317¦🤝 No score¦🤝 Нічия¦🤝 流局¦🤝 무효¦🤝 Sin puntos¦🤝 Sem pontos
+318¦Nobody made a yaku (0 pts)¦Ніхто не зібрав комбінацію (0 оч.)¦谁都没成役（0分）¦아무도 못 났어 (0점)¦Nadie hizo combinación (0 pts)¦Ninguém fez combinação (0 pts)
+319¦Total: Red {0} · Blue {1}¦Разом: Червоні {0} · Сині {1}¦总分：红 {0} · 蓝 {1}¦합계: 빨강 {0} · 파랑 {1}¦Total: Rojo {0} · Azul {1}¦Total: Vermelho {0} · Azul {1}
+320¦ is the champion!¦ — чемпіони!¦获得冠军！¦ 우승!¦ ¡es campeón!¦ é campeão!
+321¦See cards¦Подивитися карти¦看牌¦패 보기¦Ver cartas¦Ver cartas
+322¦Play again?¦Зіграти ще?¦再玩一次吗？¦한 번 더 할까?¦¿Jugar otra vez?¦Jogar de novo?
+323¦On to the next round¦До наступного раунду¦进入下一局¦다음 판으로¦A la siguiente ronda¦Para a próxima rodada
+324¦Next round¦Наступний раунд¦下一局¦다음 판¦Siguiente ronda¦Próxima rodada
+325¦Start!¦Старт!¦开始！¦시작!¦¡Empieza!¦Começou!
+326¦Red {0} · Blue {1}¦Червоні {0} · Сині {1}¦红 {0}次 · 蓝 {1}次¦빨강 {0}번 · 파랑 {1}번¦Rojo {0} · Azul {1}¦Vermelho {0} · Azul {1}
+327¦One more time¦Ще раз¦再来一次¦한 번 더¦Otra vez¦Mais uma vez
+328¦Nobody can play!¦Ніхто не може походити!¦谁都出不了！¦둘 다 낼 수 없어!¦¡Nadie puede jugar!¦Ninguém pode jogar!
+329¦Press "Ready, go!"¦Натисни «Раз, два — пішли!»¦按“预备——出！”¦"하나 둘 셋!"을 눌러줘¦Pulsa «¡Ya!»¦Toque em «Já!»
+330¦Play fast!¦Скидай швидше!¦快出牌！¦빨리 내!¦¡Rápido!¦Rápido!
+331¦You can play!¦Можна ходити!¦可以出！¦낼 수 있어!¦¡Puedes jugar!¦Pode jogar!
+332¦Wait…¦Чекай…¦等等…¦기다려…¦Espera…¦Espere…
+333¦Ready¦Готуйся¦准备¦준비¦Listos¦Preparar
+334¦Bonk Battle!¦Бій молотками!¦敲敲对决！¦뿅망치 대결!¦¡Duelo de martillos!¦Duelo de marteladas!
+335¦DING!¦ДЗЕНЬ!¦当！¦땡!¦¡DING!¦DING!
+336¦BONK!¦БАЦ!¦啪！¦뿅!¦¡PUM!¦TOIM!
+337¦💫 Dizzy…¦💫 Паморочиться…¦💫 晕乎乎…¦💫 어질어질…¦💫 Mareado…¦💫 Tonto…
+338¦Helmet broke! Wait a bit¦Шолом зламався! Зачекай¦头盔坏了！等一下¦헬멧이 부서졌어! 기다려¦¡Se rompió el casco! Espera¦O capacete quebrou! Espere
+339¦Can't guard while swinging!¦Поки б'єш — не захищаєшся!¦挥锤时不能防守！¦휘두르는 동안엔 못 막아!¦¡No te cubres mientras golpeas!¦Batendo, não dá pra defender!
+340¦Guarding!¦Захищаюся!¦防守中！¦막는 중!¦¡Cubierto!¦Defendendo!
+341¦Easy¦Легко¦简单¦쉬움¦Fácil¦Fácil
+342¦Normal¦Звичайно¦普通¦보통¦Normal¦Normal
+343¦Hard¦Важко¦困难¦어려움¦Difícil¦Difícil
+344¦🔥 Super hard¦🔥 Надважко¦🔥 超难¦🔥 초고난도¦🔥 Dificilísimo¦🔥 Dificílimo
+345¦Choose the cups and difficulty¦Вибери кількість чашок і складність¦选择杯子数量和难度¦컵 개수와 난이도를 골라¦Elige vasos y dificultad¦Escolha copos e dificuldade
+346¦then "Start"!¦і тисни «Старт»!¦然后按“开始”！¦"시작"!¦¡y pulsa «Empezar»!¦e toque em «Começar»!
+347¦{0} cups¦{0} чашок¦{0}个杯子¦컵 {0}개¦{0} vasos¦{0} copos
+348¦▶ Play again¦▶ Ще раз¦▶ 再来一次¦▶ 한 번 더¦▶ Otra vez¦▶ De novo
+349¦▶ Next¦▶ Далі¦▶ 下一个¦▶ 다음¦▶ Siguiente¦▶ Próximo
+350¦Cup¦Чашка¦杯子¦컵¦Vaso¦Copo

@@ -1,0 +1,120 @@
+351¦Where is it?¦Де ж він?¦在哪里呢？¦어디 있을까?¦¿Dónde está?¦Onde está?
+352¦Watch closely!¦Дивись уважно!¦仔细看！¦잘 봐!¦¡Mira bien!¦Olhe bem!
+353¦Your turn next¦Далі ти¦下一个是你¦다음은 너야¦Ahora te toca¦Agora é você
+354¦Found {0} / {1} rounds ({2} each)¦Знайдено {0} / {1} раундів (по {2})¦猜中 {0} ／ 共{1}次（每人{2}次）¦맞힌 수 {0} / {1}번 (각 {2}번)¦Aciertos {0} / {1} rondas ({2} cada uno)¦Acertos {0} / {1} rodadas ({2} cada)
+355¦{0}'s turn!¦Хід: {0}!¦轮到{0}！¦{0} 차례!¦¡Turno de {0}!¦Vez de {0}!
+356¦The gem is here!¦Скарб тут!¦宝石在这里！¦보석은 여기!¦¡La gema está aquí!¦A joia está aqui!
+357¦Shuffle!¦Перемішуємо!¦洗牌！¦섞는다!¦¡A mezclar!¦Embaralhar!
+358¦Watch carefully¦Дивись уважно¦仔细看哦¦잘 봐¦Mira con atención¦Olhe com atenção
+359¦{0}: which one is it in?¦{0}: де він?¦{0}：在哪个里面？¦{0}: 어디에 들어 있을까?¦{0}: ¿en cuál está?¦{0}: em qual está?
+360¦Tap a cup¦Торкнися чашки¦点杯子¦컵을 터치¦Toca un vaso¦Toque num copo
+361¦🎉 Got it!¦🎉 Вгадав!¦🎉 猜中了！¦🎉 정답!¦🎉 ¡Acertaste!¦🎉 Acertou!
+362¦Too bad!¦Шкода!¦可惜！¦아쉽다!¦¡Qué pena!¦Que pena!
+363¦The gem was here¦Скарб був тут¦宝石在这边¦보석은 여기 있었어¦La gema estaba aquí¦A joia estava aqui
+364¦ wins!¦ — перемога!¦赢了！¦ 승리!¦ ¡gana!¦ venceu!
+365¦Red {0} · Blue {1} found¦Червоні {0} · Сині {1} вгадано¦红 {0}次 · 蓝 {1}次 猜中¦빨강 {0}번 · 파랑 {1}번 정답¦Rojo {0} · Azul {1} aciertos¦Vermelho {0} · Azul {1} acertos
+366¦Out spots¦Місця «аут»¦出局位置¦아웃 위치¦Zonas de fuera¦Posição das saídas
+367¦Goal spots¦Місця фінішу¦终点位置¦골 위치¦Zonas de meta¦Posição das metas
+368¦Fixed¦Звичайні¦固定¦고정¦Fijo¦Fixo
+369¦Race with "Start"!¦Змагайтеся — тисни «Старт»!¦按“开始”来比赛！¦"시작"으로 경주!¦¡Compite con «Empezar»!¦Corra com «Começar»!
+370¦The longer you hold, the harder it flicks¦Що довше тиснеш, то сильніше щиглик¦按得越久弹得越强¦길게 누를수록 세게 튕겨¦Cuanto más mantienes, más fuerte¦Quanto mais segurar, mais forte
+371¦It's the right button →¦Права кнопка →¦是右边的按钮 →¦오른쪽 버튼이야 →¦Es el botón derecho →¦É o botão direito →
+372¦← It's the left button¦← Ліва кнопка¦← 是左边的按钮¦← 왼쪽 버튼이야¦← Es el botón izquierdo¦← É o botão esquerdo
+373¦Level {0}!¦Рівень {0}!¦第{0}层！¦{0}단!¦¡Nivel {0}!¦Nível {0}!
+374¦Out! Back to the start¦Аут! Спочатку¦出局！从头开始¦아웃! 처음부터¦¡Fuera! Al principio¦Fora! Volta ao início
+375¦It fell…¦Впала…¦掉下去了…¦떨어졌다…¦Se cayó…¦Caiu…
+376¦Goal! (Red {0} · Blue {1})¦Фініш! (Червоні {0} · Сині {1})¦到终点！（红 {0} · 蓝 {1}）¦골! (빨강 {0} · 파랑 {1})¦¡Meta! (Rojo {0} · Azul {1})¦Chegou! (Vermelho {0} · Azul {1})
+377¦← Flick with the left button¦← Щиглик лівою кнопкою¦← 用左边的按钮弹¦← 왼쪽 버튼으로 튕겨¦← Lanza con el botón izquierdo¦← Lance com o botão esquerdo
+378¦Flick with the right button →¦Щиглик правою кнопкою →¦用右边的按钮弹 →¦오른쪽 버튼으로 튕겨 →¦Lanza con el botón derecho →¦Lance com o botão direito →
+379¦Wins {0}¦🏆 {0}¦胜 {0}¦승 {0}¦🏆 {0}¦🏆 {0}
+380¦OUT¦АУТ¦出局¦아웃¦FUERA¦FORA
+381¦🎁 GOAL¦🎁 ФІНІШ¦🎁 终点¦🎁 골¦🎁 META¦🎁 META
+382¦Start¦Старт¦开始¦시작¦Inicio¦Início
+383¦Round {0} / Collect {1} to win!¦Раунд {0} / Збери {1}, щоб перемогти!¦第{0}轮／攒够{1}枚就赢！¦{0}번째 / {1}개 모으면 승리!¦Ronda {0} / ¡Junta {1} para ganar!¦Rodada {0} / Junte {1} para vencer!
+384¦Up to {0} per mark · 0️⃣ loses¦До {0} на знак · 0️⃣ — програш¦每个标记最多{0}枚 · 0️⃣ 是落空¦한 칸에 {0}개까지 · 0️⃣은 꽝¦Máx. {0} por símbolo · 0️⃣ pierde¦Até {0} por símbolo · 0️⃣ perde
+385¦🪙 {0} / {1}¦🪙 {0} / {1}¦🪙 {0} ／ {1}枚¦🪙 {0} / {1}개¦🪙 {0} / {1}¦🪙 {0} / {1}
+386¦Bet {0}¦Ставка {0}¦下注 {0}枚¦건 {0}개¦Apuesta {0}¦Aposta {0}
+387¦Spin!¦Крутись!¦转起来！¦돌아라~!¦¡Gira!¦Gira!
+388¦{0} +{1}!¦{0} +{1}!¦{0} ＋{1}枚！¦{0} +{1}개!¦¡{0} +{1}!¦{0} +{1}!
+389¦{0} missed¦{0} — шкода¦{0} 可惜¦{0} 아쉽다¦{0} sin suerte¦{0} sem sorte
+390¦Miss!¦Мимо!¦落空！¦꽝!¦¡Nada!¦Errou!
+391¦{0} reached!¦{0} зібрано!¦达到{0}枚！¦{0}개 달성!¦¡{0} logrado!¦{0} alcançado!
+392¦Out of coins¦Монети закінчилися¦硬币用光了¦동전이 다 떨어졌어¦Sin monedas¦Acabaram as moedas
+393¦Round {0} over¦Раунд {0} завершено¦第{0}轮结束¦{0}번째 끝¦Fin de la ronda {0}¦Fim da rodada {0}
+394¦Red {0} · Blue {1}¦Червоні {0} · Сині {1}¦红 {0}枚 · 蓝 {1}枚¦빨강 {0}개 · 파랑 {1}개¦Rojo {0} · Azul {1}¦Vermelho {0} · Azul {1}
+395¦{0} chain!¦Ланцюг ×{0}!¦{0}连锁！¦{0}연쇄!¦¡Cadena de {0}!¦Cadeia de {0}!
+396¦{0} blockers incoming!¦Летить {0} перешкод!¦{0}个障碍要来了！¦방해 {0}개 간다!¦¡Vienen {0} estorbos!¦Lá vêm {0} obstáculos!
+397¦{0} ({1} colors)¦{0} ({1} кольорів)¦{0}（{1}色）¦{0} ({1}색)¦{0} ({1} colores)¦{0} ({1} cores)
+398¦Link 4 of the same color to clear them!¦З'єднай 4 одного кольору, щоб прибрати!¦把同色的4个连起来消除！¦같은 색 4개를 이어서 없애자!¦¡Une 4 del mismo color para borrarlas!¦Junte 4 da mesma cor para limpar!
+399¦Make chains to send blockers¦Роби ланцюги — шли перешкоди¦用连锁给对方送障碍¦연쇄로 상대에게 방해를 보내¦Haz cadenas para enviar estorbos¦Faça cadeias para mandar obstáculos
+400¦You win!¦Перемога!¦赢了！¦승리!¦¡Ganaste!¦Venceu!
+401¦Game over~¦Кінець~¦完蛋啦～¦끝났다~¦¡Se acabó!¦Já era~
+402¦Draw¦Нічия¦平局¦무승부¦Empate¦Empate
+403¦Paused¦Пауза¦暂停中¦쉬는 중¦En pausa¦Pausado
+404¦To menu¦У меню¦回菜单¦메뉴로¦Al menú¦Ao menu
+405¦Supercar¦Суперкар¦超跑¦슈퍼카¦Superdeportivo¦Supercarro
+406¦Sports car¦Спорткар¦跑车¦스포츠카¦Deportivo¦Esportivo
+407¦Formula¦Болід¦方程式赛车¦포뮬러¦Fórmula¦Fórmula
+408¦Police car¦Поліцейська¦警车¦경찰차¦Patrulla¦Viatura
+409¦Fire truck¦Пожежна¦消防车¦소방차¦Camión de bomberos¦Caminhão de bombeiros
+410¦Bus¦Автобус¦公交车¦버스¦Autobús¦Ônibus
+411¦Dump truck¦Самоскид¦翻斗车¦덤프트럭¦Volquete¦Caçamba
+412¦Mini car¦Малолітражка¦小型车¦경차¦Coche mini¦Carrinho mini
+413¦Turbo Dash¦Турбо-ривок¦涡轮冲刺¦터보 대시¦Turbo¦Turbo
+414¦Power ×1.5¦Сила ×1.5¦力量1.5倍¦파워 1.5배¦Fuerza ×1.5¦Força ×1,5
+415¦Lock-On¦Самонаведення¦锁定¦록온¦Fijar objetivo¦Mira travada
+416¦Curves toward the opponent¦Повертає до суперника¦朝对手拐弯¦상대 쪽으로 휘어¦Gira hacia el rival¦Curva até o rival
+417¦Heavyweight¦Важковаговик¦超级重量¦묵직 헤비¦Peso pesado¦Peso pesado
+418¦Weight ×3¦Вага ×3¦重量3倍¦무게 3배¦Peso ×3¦Peso ×3
+419¦Slippery Ice¦Слизька крига¦滑溜冰面¦미끌미끌 얼음¦Hielo resbaloso¦Gelo escorregadio
+420¦Opponent slides a lot¦Суперник ковзає¦对手很容易滑¦상대가 잘 미끄러져¦El rival resbala mucho¦O rival escorrega muito
+421¦Thunder Shock¦Блискавка¦霹雳闪电¦찌릿찌릿 썬더¦Rayo eléctrico¦Choque do trovão
+422¦Opponent tips over easily¦Суперник легко перекидається¦对手容易翻倒¦상대가 잘 넘어져¦El rival vuelca fácil¦O rival tomba fácil
+423¦One More¦Ще раз¦再来一次¦한 번 더¦Otra más¦Mais uma
+424¦Shoot twice in a row¦Два постріли поспіль¦可以连续打2次¦2번 연속으로 칠 수 있어¦Dispara dos veces seguidas¦Jogue duas vezes seguidas
+425¦{0} fouled!¦{0}: порушення!¦{0}犯规！¦{0} 반칙!¦¡Falta de {0}!¦Falta de {0}!
+426¦Your own car fell off¦Твоя машинка впала¦自己的车掉下去了¦내 자동차가 떨어졌어¦Tu auto se cayó¦Seu carro caiu
+427¦Your own car tipped over¦Твоя машинка перекинулась¦自己的车翻倒了¦내 자동차가 넘어졌어¦Tu auto volcó¦Seu carro tombou
+428¦Pushed out!¦Виштовхнуто!¦推出去了！¦밀어냈다!¦¡Fuera del ring!¦Empurrou pra fora!
+429¦Knocked over!¦Перекинуто!¦撞翻了！¦넘어뜨렸다!¦¡Lo volcaste!¦Derrubou!
+430¦Missed…¦Мимо…¦没打中…¦빗나갔다…¦Fallaste…¦Errou…
+431¦{0} goes twice!¦{0} ходять двічі!¦{0}连续2次！¦{0} 2번 연속!¦¡{0} va dos veces!¦{0} joga duas vezes!
+432¦One more time!¦Ще раз!¦再来一次！¦한 번 더!¦¡Otra vez!¦Mais uma vez!
+433¦({0} wins in a row!)¦({0} перемог поспіль!)¦（{0}连胜！）¦({0}연승!)¦(¡{0} victorias seguidas!)¦({0} vitórias seguidas!)
+434¦🏆 {0} is the champion!¦🏆 {0} — чемпіони!¦🏆 {0}获得冠军！¦🏆 {0} 우승!¦🏆 ¡{0} es campeón!¦🏆 {0} é campeão!
+435¦All of {0}'s cars lost¦Усі машинки {0} програли¦{0}的车全部输了¦{0}의 자동차가 모두 졌어¦Todos los autos de {0} perdieron¦Todos os carros de {0} perderam
+436¦Last one: {0}{1}¦Останній: {0}{1}¦最后是 {0}{1}¦마지막은 {0}{1}¦Último: {0}{1}¦Último: {0}{1}
+437¦{0}{1}'s {2} wins {3}¦{0}Перемогла машинка {1}: {2} {3}¦{0}{1}的{2}赢了{3}¦{0}{1}의 {2} 승리{3}¦{0}Gana el {2} de {1} {3}¦{0}O {2} de {1} venceu {3}
+438¦{0}'s {1} retires ({2} left)¦Машинка {0} ({1}) вибуває (залишилось {2})¦{0}的{1}退场（剩余{2}辆）¦{0}의 {1}은(는) 탈락 (남은 {2}대)¦El {1} de {0} se retira (quedan {2})¦O {1} de {0} se retira (restam {2})
+439¦Choose the next car¦Обери наступну машинку¦选择下一辆车¦다음 자동차를 골라¦Elige el siguiente auto¦Escolha o próximo carro
+440¦Weight {0}¦Вага {0}¦重量 {0}¦무게 {0}¦Peso {0}¦Peso {0}
+441¦Power {0}¦Сила {0}¦力量 {0}¦힘 {0}¦Fuerza {0}¦Força {0}
+442¦Retired¦Вибула¦已退场¦탈락¦Retirado¦Fora
+443¦Stays in¦Грає далі¦继续上场¦계속 출전¦Sigue¦Continua
+444¦{0}'s team (pick {1}/{2})¦Команда {0} (обери {1}/{2})¦{0}的队伍（选{1}/{2}辆）¦{0} 팀 ({1}/{2}대 골라줘)¦Equipo {0} (elige {1}/{2})¦Time {0} (escolha {1}/{2})
+445¦{0} stays on¦{0} грають далі¦{0}继续留下¦{0} 계속 남아¦{0} sigue¦{0} continua
+446¦{0}'s next car ({1} left)¦Наступна машинка {0} (залишилось {1})¦{0}的下一辆车（剩余{1}辆）¦{0}의 다음 자동차 (남은 {1}대)¦Siguiente auto de {0} (quedan {1})¦Próximo carro de {0} (restam {1})
+447¦{0} cars each¦По {0} машинки¦每队{0}辆¦{0}대로 승부¦{0} autos cada uno¦{0} carros cada
+448¦Elimination match!¦Бій на вибування!¦淘汰赛！¦승자 진출전!¦¡Eliminatoria!¦Eliminatória!
+449¦Losing cars retire · winners stay in¦Переможені вибувають · переможці грають далі¦输的车退场・赢的车继续上场¦진 자동차는 탈락 · 이긴 자동차는 계속 출전¦El que pierde se retira · el que gana sigue¦Quem perde sai · quem vence continua
+450¦Car number 1 goes first¦Першою їде машинка №1¦从1号车开始出场¦1번 자동차부터 나가¦Empieza el auto número 1¦O carro número 1 começa
+451¦{0} goes first¦Першими ходять {0}¦{0}先攻¦{0} 선공¦Empieza {0}¦{0} começa
+452¦Choose cars, then "Hakkeyoi!"¦Обери машинки й тисни «Почали!»¦选好车后按“开始！”¦자동차를 골라 "핫케요이!"¦Elige autos y pulsa «¡A luchar!»¦Escolha os carros e toque em «Já!»
+453¦Your turn (2 shots)¦Твій хід (ще 2 постріли)¦你的回合（还剩2次）¦네 차례 (2번 남음)¦Tu turno (2 tiros)¦Sua vez (2 jogadas)
+454¦Your turn!¦Твій хід!¦轮到你！¦네 차례!¦¡Tu turno!¦Sua vez!
+455¦Opponent's turn¦Хід суперника¦对手的回合¦상대 차례¦Turno del rival¦Vez do rival
+456¦{0} {1} ready! ({2})¦{0} {1} готові! ({2})¦{0} {1} 准备好了！（{2}）¦{0} {1} 준비 완료! ({2})¦¡{0} {1} listo! ({2})¦{0} {1} pronto! ({2})
+457¦✨ Special move! {0} {1} ← tap to use¦✨ Суперприйом! {0} {1} ← торкнися¦✨ 必杀技机会！{0} {1} ← 点击使用¦✨ 필살기 찬스! {0} {1} ← 탭해서 사용¦✨ ¡Movimiento especial! {0} {1} ← toca para usar¦✨ Golpe especial! {0} {1} ← toque para usar
+458¦Let go and the knock goes SNAP!¦Відпусти — і кнопка клацне!¦松手，按钮就“啪”！¦놓으면 노크가 딱!¦¡Suelta y el botón hace CLAC!¦Solte e o botão faz CLAC!
+459¦Pull back with your finger to press the knock¦Потягни пальцем назад, щоб натиснути кнопку¦用手指往后拉，按下笔帽¦손가락으로 뒤로 당겨 노크를 눌러¦Tira hacia atrás con el dedo¦Puxe para trás com o dedo
+460¦Heavy¦Важка¦重¦무거움¦Pesado¦Pesado
+461¦Light¦Легка¦轻¦가벼움¦Ligero¦Leve
+462¦Outer¦Зовні¦外侧¦바깥쪽¦Exterior¦Externo
+463¦Center¦Центр¦中间¦가운데¦Centro¦Centro
+464¦Pointed¦Гостра¦尖¦뾰족¦Puntiaguda¦Pontuda
+465¦Round¦Кругла¦圆¦둥근¦Redonda¦Redonda
+466¦Time's up! Most spin wins¦Час вийшов! Перемагає та, що крутиться швидше¦时间到！转得多的赢¦시간 끝! 회전이 많은 쪽 승리¦¡Tiempo! Gana el que más gira¦Tempo! Vence quem gira mais
+467¦Out of the stadium!¦За межі стадіону!¦飞出场外！¦스타디움 밖으로!¦¡Fuera del estadio!¦Fora do estádio!
+468¦It stopped spinning!¦Зупинилася!¦停止旋转了！¦회전이 멈췄다!¦¡Dejó de girar!¦Parou de girar!
+469¦Next match¦Наступний бій¦下一场¦다음 승부¦Siguiente combate¦Próxima luta
+470¦🏆 {0} wins!¦🏆 Перемогли {0}!¦🏆 {0}赢了！¦🏆 {0} 승리!¦🏆 ¡Gana {0}!¦🏆 {0} venceu!

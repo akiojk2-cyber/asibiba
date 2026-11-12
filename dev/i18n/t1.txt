@@ -1,0 +1,110 @@
+1¦Asobiba Games¦Ігри Асобіба¦游戏乐园¦놀이터 게임¦Juegos Asobiba¦Jogos Asobiba
+2¦🎮 Asobiba Games¦🎮 Ігри Асобіба¦🎮 游戏乐园¦🎮 놀이터 게임¦🎮 Juegos Asobiba¦🎮 Jogos Asobiba
+3¦Put the iPad in the middle and play face to face!¦Поклади iPad посередині й грайте одне навпроти одного!¦把iPad放在中间，面对面一起玩！¦iPad를 가운데 두고 마주 보고 놀자!¦¡Pon el iPad en medio y jugad cara a cara!¦Coloque o iPad no meio e joguem frente a frente!
+4¦🧠 Think it through¦🧠 Подумай гарненько¦🧠 动脑筋¦🧠 차근차근 생각하기¦🧠 Piensa bien¦🧠 Pense com calma
+5¦Reversi¦Реверсі¦黑白棋¦오셀로¦Reversi¦Reversi
+6¦Sandwich and flip!¦Затисни й переверни¦夹住就翻过来¦사이에 끼워 뒤집기¦Encierra y voltea¦Cerque e vire
+7¦Tic-Tac-Toe¦Хрестики-нулики¦井字棋¦틱택토¦Tres en raya¦Jogo da velha
+8¦Get 3 in a row¦Три в ряд — перемога¦连成3个就赢¦3개 나란히 놓으면 승리¦Tres en línea gana¦Três em linha vence
+9¦Four in a Row¦Чотири в ряд¦四子棋¦사목¦Cuatro en raya¦Quatro em linha
+10¦Get 4 in a row¦Чотири в ряд — перемога¦连成4个就赢¦4개 나란히 놓으면 승리¦Cuatro en línea gana¦Quatro em linha vence
+11¦Animal Shogi¦Шьоґі тварин¦动物将棋¦동물 장기¦Shogi de animales¦Shogi dos animais
+12¦Catch the lion!¦Злови лева!¦抓住狮子！¦사자를 잡아라!¦¡Atrapa al león!¦Pegue o leão!
+13¦Shogi¦Шьоґі¦将棋¦쇼기¦Shogi¦Shogi
+14¦Real rules¦Справжні правила¦正式规则¦진짜 규칙¦Reglas de verdad¦Regras de verdade
+15¦Koi-Koi¦Ханафуда Кой-кой¦花札 来来¦화투 코이코이¦Hanafuda Koi-Koi¦Hanafuda Koi-Koi
+16¦Match the months¦Збирай місяці¦配对月份凑役¦달을 맞춰 족보 만들기¦Empareja los meses¦Combine os meses
+17¦Word Grab¦Хапай слова¦抢字组词¦낱말 쟁탈전¦Atrapa palabras¦Pega-palavras
+18¦Make words! (Japanese)¦Склади слова! (японська)¦组成单词！（日语）¦낱말을 만들어라! (일본어)¦¡Forma palabras! (japonés)¦Forme palavras! (japonês)
+19¦Game of Life¦Гра життя¦人生大富翁¦인생 게임¦Juego de la vida¦Jogo da vida
+20¦Spin and go!¦Крути й рушай!¦转轮盘前进！¦룰렛 돌려 앞으로!¦¡Gira y avanza!¦Gire e avance!
+21¦⚡ Action games¦⚡ Активні ігри¦⚡ 热闹动起来¦⚡ 신나게 몸으로¦⚡ Juegos de acción¦⚡ Jogos de ação
+22¦Bonk Battle¦Бій молотками¦敲敲对决¦뿅망치 대결¦Duelo de martillos¦Duelo de marteladas
+23¦Can't guard while bonking!¦Коли б'єш — не захищаєшся!¦敲的时候不能防守！¦때릴 땐 못 막아!¦¡Si golpeas, no te cubres!¦Batendo, não dá pra defender!
+24¦Gem Hunt¦Пошук скарбу¦找宝石¦보석 찾기¦Busca la gema¦Caça à joia
+25¦Which cup is it under?¦Під якою чашкою?¦在哪个杯子里？¦어느 컵에 있을까?¦¿Bajo qué vaso está?¦Em qual copo está?
+26¦Drop Pop¦Кольорові краплі¦滚滚消消乐¦데굴데굴 드롭¦Gotas en cadena¦Gotas em cadeia
+27¦Link 4 to pop!¦З'єднай 4 — і зникнуть!¦连4个就消除！¦4개 이으면 펑!¦¡Une 4 y explotan!¦Junte 4 e estoura!
+28¦Speed¦Швидкість¦快手出牌¦스피드¦Speed¦Speed
+29¦Play out your cards fast¦Скинь карти швидше¦快把牌出完¦빨리 카드를 다 내라¦Suelta tus cartas rápido¦Descarte suas cartas rápido
+30¦Quick Draw¦Хто швидший¦抢答对决¦빨리 누르기 대결¦Duelo rápido¦Duelo rápido
+31¦Tap on "NOW!"¦Тисни на «ЗАРАЗ!»¦“就是现在！”时按¦"지금이다!"에 터치¦Toca en «¡YA!»¦Toque no «AGORA!»
+32¦Tug of War¦Перетягування¦拔河连打¦줄다리기 연타¦Tira y afloja¦Cabo de guerra
+33¦Tap fast to pull!¦Тисни часто, щоб тягнути!¦连打来拉！¦연타로 당겨라!¦¡Toca rápido para tirar!¦Toque rápido para puxar!
+34¦Air Hockey¦Аерохокей¦桌上冰球¦에어하키¦Hockey de mesa¦Hóquei de mesa
+35¦Score a goal!¦Забий гол!¦射门得分！¦골을 넣어라!¦¡Mete gol!¦Faça gol!
+36¦Just Time¦Точно вчасно¦卡准时间¦저스트 타임¦Justo a tiempo¦Na hora certa
+37¦Tap at the exact second¦Тисни в потрібну секунду¦在准确的秒数按下¦딱 맞는 초에 터치¦Toca en el segundo justo¦Toque no segundo exato
+38¦Memory¦Пам'ять¦翻牌记忆¦짝 맞추기¦Memoria¦Jogo da memória
+39¦Find matching animals¦Знайди однакових тварин¦找相同的动物¦같은 동물을 찾아라¦Encuentra animales iguales¦Ache animais iguais
+40¦Spin Top Battle¦Битва дзиґ¦陀螺大战¦팽이 배틀¦Batalla de trompos¦Batalha de piões
+41¦Knock them out!¦Виштовхни суперника!¦撞出场外！¦부딪쳐 튕겨내라!¦¡Sácalo del ring!¦Jogue pra fora!
+42¦Invader Battle¦Битва з прибульцями¦太空入侵者对战¦인베이더 대전¦Batalla de invasores¦Batalha de invasores
+43¦Shoot and dodge!¦Стріляй і ухиляйся!¦射击并躲避！¦쏘고 피해라!¦¡Dispara y esquiva!¦Atire e desvie!
+44¦Bomb Battle¦Бомбова битва¦炸弹大战¦폭탄 대전¦Batalla de bombas¦Batalha de bombas
+45¦Catch them in the blast!¦Зачепи вибухом!¦用爆炸炸到对手！¦폭발에 휘말리게 해!¦¡Atrápalo en la explosión!¦Pegue na explosão!
+46¦🪙 Old-school candy-shop games¦🪙 Ретро-ігри з крамнички¦🪙 怀旧小卖部游戏¦🪙 추억의 구멍가게 게임¦🪙 Juegos clásicos de kiosco¦🪙 Jogos clássicos de vendinha
+47¦Coin Flick¦Щиглик монеткою¦弹硬币¦동전 튕기기¦Moneda al hoyo¦Peteleco na moeda
+48¦Climb without falling in¦До фінішу, не впавши в ями¦不掉进洞，到达终点¦구멍에 빠지지 말고 골로¦Llega a la meta sin caer¦Chegue ao fim sem cair
+49¦Coin Roulette¦Рулетка з монетками¦硬币轮盘¦동전 룰렛¦Ruleta de monedas¦Roleta de moedas
+50¦Bet on a mark and spin¦Став на знак і крути¦押标记再转¦마크에 걸고 돌려라¦Apuesta a un símbolo y gira¦Aposte num símbolo e gire
+51¦Eraser Car Sumo¦Сумо машинок-гумок¦橡皮车相扑¦지우개 자동차 스모¦Sumo de autos goma¦Sumô de carrinhos-borracha
+52¦Flick them out with a pen!¦Виштовхни ручкою!¦用笔弹出去！¦펜으로 튕겨 밀어내라!¦¡Sácalos con el bolígrafo!¦Empurre com a caneta!
+53¦Balloon Panic¦Повітряна кулька¦气球心跳¦풍선 두근두근¦Globo de nervios¦Balão do susto
+54¦Pop it and you lose!¦Лопнеш — програв!¦吹破就输！¦터뜨리면 진다!¦¡Si revienta, pierdes!¦Estourou, perdeu!
+55¦📖 How to play¦📖 Як грати¦📖 玩法¦📖 놀이 방법¦📖 Cómo jugar¦📖 Como jogar
+56¦🎵 Music: On¦🎵 Музика: Увімк.¦🎵 音乐：开¦🎵 음악: 켜짐¦🎵 Música: Sí¦🎵 Música: Liga
+57¦Blue¦Сині¦蓝¦파랑¦Azul¦Azul
+58¦↩ Undo¦↩ Назад¦↩ 悔棋¦↩ 무르기¦↩ Deshacer¦↩ Desfazer
+59¦🔄 Restart¦🔄 Спочатку¦🔄 重来¦🔄 처음부터¦🔄 Reiniciar¦🔄 Recomeçar
+60¦Red¦Червоні¦红¦빨강¦Rojo¦Vermelho
+61¦White¦Білі¦白¦흰돌¦Blancas¦Brancas
+62¦¦¦个¦개¦¦
+63¦Black¦Чорні¦黑¦검은돌¦Negras¦Pretas
+64¦X¦Хрестики¦叉¦X¦X¦X
+65¦wins¦перемог¦胜¦승¦victorias¦vitórias
+66¦▶ Next game¦▶ Наступна гра¦▶ 下一局¦▶ 다음 게임¦▶ Siguiente partida¦▶ Próxima partida
+67¦O¦Нулики¦圈¦O¦O¦O
+68¦pairs¦пар¦对¦쌍¦parejas¦pares
+69¦▶ Start¦▶ Старт¦▶ 开始¦▶ 시작¦▶ Empezar¦▶ Começar
+70¦Blue paddle¦Ракетка синіх¦蓝方球拍¦파랑 패들¦Paleta azul¦Raquete azul
+71¦Balls¦М'ячі¦球数¦공 개수¦Bolas¦Bolas
+72¦Blocker blocks¦Блоки-перешкоди¦障碍方块¦방해 블록¦Bloques estorbo¦Blocos de obstáculo
+73¦Continue¦Продовжити¦继续¦계속하기¦Seguir¦Continuar
+74¦Red paddle¦Ракетка червоних¦红方球拍¦빨강 패들¦Paleta roja¦Raquete vermelha
+75¦Power¦Сила¦力量¦파워¦Fuerza¦Força
+76¦Blue's car¦Машинка синіх¦蓝方的车¦파랑 자동차¦Auto azul¦Carro azul
+77¦Hakkeyoi!¦Почали!¦预备——开始！¦핫케요이!¦¡A luchar!¦Já!
+78¦Red's car¦Машинка червоних¦红方的车¦빨강 자동차¦Auto rojo¦Carro vermelho
+79¦Spin¦Оберти¦转速¦회전¦Giro¦Giro
+80¦Blue's top¦Дзиґа синіх¦蓝方陀螺¦파랑 팽이¦Trompo azul¦Pião azul
+81¦▶ Battle start¦▶ До бою¦▶ 开始对战¦▶ 배틀 시작¦▶ ¡A la batalla!¦▶ Começar batalha
+82¦Red's top¦Дзиґа червоних¦红方陀螺¦빨강 팽이¦Trompo rojo¦Pião vermelho
+83¦FIRE!¦ВОГОНЬ!¦发射！¦발사!¦¡FUEGO!¦FOGO!
+84¦↩ Return¦↩ Повернути¦↩ 退回¦↩ 돌려놓기¦↩ Devolver¦↩ Devolver
+85¦Done!¦Готово!¦完成！¦완성!¦¡Listo!¦Pronto!
+86¦🎡 Spin¦🎡 Крутити¦🎡 转轮盘¦🎡 룰렛¦🎡 Girar¦🎡 Girar
+87¦0 pts¦0 оч.¦0分¦0점¦0 pts¦0 pts
+88¦Pump!¦Надувай!¦吹气！¦부풀리기!¦¡Infla!¦Encher!
+89¦Stop¦Досить¦停止¦그만¦Parar¦Parar
+90¦Next¦Далі¦下一个¦다음¦Siguiente¦Próxima
+91¦Left¦Ліворуч¦左¦왼쪽¦Izquierda¦Esquerda
+92¦Right¦Праворуч¦右¦오른쪽¦Derecha¦Direita
+93¦pts¦оч.¦分¦점¦pts¦pts
+94¦Blue ♠♣¦Сині ♠♣¦蓝 ♠♣¦파랑 ♠♣¦Azul ♠♣¦Azul ♠♣
+95¦Left¦Залишилось¦剩余¦남은 카드¦Quedan¦Restam
+96¦cards¦карт¦张¦장¦cartas¦cartas
+97¦Ready, go!¦Раз, два — пішли!¦预备——出！¦하나 둘 셋!¦¡Ya!¦Já!
+98¦Red ♥♦¦Червоні ♥♦¦红 ♥♦¦빨강 ♥♦¦Rojo ♥♦¦Vermelho ♥♦
+99¦Bonk¦Бий¦敲¦때리기¦Golpear¦Bater
+100¦Guard¦Захист¦防守¦막기¦Cubrirse¦Defender
+101¦(hold)¦(тримай)¦（按住时）¦(누르는 동안)¦(mantén)¦(segure)
+102¦hits¦влучань¦次命中¦번 맞힘¦aciertos¦acertos
+103¦◀ Flick¦◀ Щиглик¦◀ 弹¦◀ 튕기기¦◀ Lanzar¦◀ Lançar
+104¦Hold longer = stronger¦Довше тиснеш — сильніше¦按得越久越有力¦길게 누를수록 세게¦Más largo, más fuerte¦Segure mais = mais forte
+105¦Flick ▶¦Щиглик ▶¦弹 ▶¦튕기기 ▶¦Lanzar ▶¦Lançar ▶
+106¦Cancel¦Скасувати¦取消¦취소¦Cancelar¦Cancelar
+107¦Menu¦Меню¦菜单¦메뉴¦Menú¦Menu
+108¦Air hockey rink¦Поле для аерохокею¦冰球场¦에어하키 링크¦Pista de hockey¦Mesa de hóquei
+109¦Settings¦Налаштування¦设置¦설정¦Ajustes¦Ajustes
+110¦Restart¦Спочатку¦重来¦처음부터¦Reiniciar¦Recomeçar

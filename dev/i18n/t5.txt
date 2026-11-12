@@ -1,0 +1,166 @@
+471¦Red {0} · Blue {1}¦Червоні {0} · Сині {1}¦红 {0} · 蓝 {1}¦빨강 {0} · 파랑 {1}¦Rojo {0} · Azul {1}¦Vermelho {0} · Azul {1}
+472¦Point to {0}!¦Очко: {0}!¦{0}得1分！¦{0} 1점!¦¡Punto para {0}!¦Ponto para {0}!
+473¦Let go to shoot!¦Відпусти — постріл!¦松手就发射！¦놓으면 슛!¦¡Suelta para lanzar!¦Solte para lançar!
+474¦Pull back with your finger to aim¦Потягни пальцем назад і цілься¦用手指往后拉来瞄准¦손가락으로 뒤로 당겨서 조준해¦Tira hacia atrás para apuntar¦Puxe para trás para mirar
+475¦It flew out!¦Вилетіла!¦飞出去了！¦밖으로 나갔다!¦¡Se salió!¦Saiu!
+476¦It stopped…¦Зупинилася…¦停下来了…¦멈춰버렸다…¦Se detuvo…¦Parou…
+477¦Go go go!¦Давай-давай!¦加油～！¦힘내라~!¦¡Vamos!¦Vai, vai!
+478¦Body¦Корпус¦主体¦몸통¦Cuerpo¦Corpo
+479¦Weight¦Вага¦配重¦무게추¦Peso¦Peso
+480¦Tip¦Вістря¦尖端¦끝¦Punta¦Ponta
+481¦Color¦Колір¦颜色¦색¦Color¦Cor
+482¦ATK{0}STA{1}DEF{2}¦АТК{0}ВИТ{1}ЗАХ{2}¦攻击{0}耐力{1}防御{2}¦공격{0}지구력{1}방어{2}¦ATQ{0}RES{1}DEF{2}¦ATQ{0}RES{1}DEF{2}
+483¦Pick your parts and battle!¦Обери деталі — і в бій!¦选好零件开始对战！¦부품을 골라 배틀!¦¡Elige piezas y a luchar!¦Escolha as peças e lute!
+484¦Heavy + outer = attack · light + center + round = stamina¦Важка + зовні = атака · легка + центр + кругла = витривалість¦重+外侧＝攻击强・轻+中间+圆＝耐力强¦무거움+바깥쪽은 공격 · 가벼움+가운데+둥근은 지구력이 강해¦Pesado + exterior = ataque · ligero + centro + redonda = resistencia¦Pesado + externo = ataque · leve + centro + redonda = resistência
+485¦Go, shoot!¦Вперед, постріл!¦发射！¦고, 슛!¦¡Lanza!¦Lança!
+486¦Double!¦Подвійна!¦双炮！¦더블!¦¡Doble!¦Duplo!
+487¦Opponent got huge!¦Суперник став величезним!¦对手变大了！¦상대가 커졌다!¦¡El rival es gigante!¦O rival ficou gigante!
+488¦crashed into an invader¦врізалися в прибульця¦撞到了入侵者¦인베이더에 부딪혔다¦chocó con un invasor¦bateu num invasor
+489¦got hit by a missile¦влучила ракета¦被导弹打中了¦미사일에 맞았다¦recibió un misil¦foi atingido por um míssil
+490¦{0} {1}¦{0}: {1}¦{0}{1}¦{0}은(는) {1}¦{0} {1}¦{0} {1}
+491¦🤝 Both down!¦🤝 Обидва!¦🤝 同归于尽！¦🤝 동시 탈락!¦🤝 ¡Los dos!¦🤝 Os dois!
+492¦Draw… one more time!¦Нічия… ще раз!¦平局…再来一次！¦무승부… 한 번 더!¦Empate… ¡otra vez!¦Empate… mais uma vez!
+493¦Move your cannon with your finger and fire!¦Веди гармату пальцем і стріляй!¦用手指移动炮台，开火！¦손가락으로 포대를 움직여 쏴라!¦¡Mueve tu cañón con el dedo y dispara!¦Mova o canhão com o dedo e atire!
+494¦Trace your color area with a finger to move¦Веди пальцем по своєму кольору, щоб рухатися¦用手指在自己颜色的区域滑动就能移动¦내 색깔 구역을 손가락으로 문지르면 움직여¦Desliza el dedo en tu zona de color para moverte¦Deslize o dedo na sua área para mover
+495¦Protect your cannon and target the opponent!¦Бережи гармату й цілься в суперника!¦保护好自己的炮台，瞄准对手！¦내 포대를 지키며 상대를 노려라!¦¡Protege tu cañón y apunta al rival!¦Proteja seu canhão e mire no rival!
+497¦⬆ Blue's area (tiles here go to Blue)¦⬆ Зона синіх (плитки тут — синім)¦⬆ 蓝方区域（这里的牌归蓝方）¦⬆ 파랑 구역 (여기 패는 파랑에게)¦⬆ Zona azul (estas fichas son de Azul)¦⬆ Área azul (estas peças vão para o Azul)
+498¦⬇ Red's area (tiles here go to Red)¦⬇ Зона червоних (плитки тут — червоним)¦⬇ 红方区域（这里的牌归红方）¦⬇ 빨강 구역 (여기 패는 빨강에게)¦⬇ Zona roja (estas fichas son de Rojo)¦⬇ Área vermelha (estas peças vão para o Vermelho)
+499¦Empty¦Порожньо¦空¦비었음¦Vacío¦Vazio
+500¦Tap where to put it¦Торкнися, куди поставити¦点你要放的位置¦넣을 곳을 터치¦Toca dónde ponerla¦Toque onde colocar
+501¦Tap a tile in the middle to take it¦Торкнися плитки посередині, щоб узяти¦点中间的牌拿过来¦가운데 패를 터치해서 가져가¦Toca una ficha del centro para tomarla¦Toque numa peça do meio para pegar
+502¦Hands full! Return one¦Руки зайняті! Поверни одну¦手牌满了！退回一张吧¦패가 꽉 찼어! 하나 돌려놔¦¡Mano llena! Devuelve una¦Mão cheia! Devolva uma
+503¦New tiles scattered!¦Розкидано нові плитки!¦撒了新的牌！¦새 패를 뿌렸어!¦¡Nuevas fichas repartidas!¦Novas peças espalhadas!
+504¦Some spots are still empty¦Ще є порожні місця¦还有没填满的位置¦아직 빈 곳이 있어¦Aún hay huecos vacíos¦Ainda há espaços vazios
+505¦"{0}" isn't in the dictionary¦«{0}» немає в словнику¦“{0}”不在词典里¦"{0}"은(는) 사전에 없어¦«{0}» no está en el diccionario¦«{0}» não está no dicionário
+506¦"{0}" is used twice¦«{0}» використано двічі¦“{0}”用了2次¦"{0}"을(를) 2번 썼어¦«{0}» está repetida¦«{0}» foi usada duas vezes
+507¦Play again?¦Зіграти ще?¦再玩一次吗？¦한 번 더 할까?¦¿Jugar otra vez?¦Jogar de novo?
+508¦Grab tiles and make four 3-letter words and one 2-letter word (Japanese hiragana)!¦Збирай плитки й склади чотири слова з 3 літер і одне з 2 (японська хірагана)!¦拿中间的牌，组成4个3字词和1个2字词（日语平假名）！¦가운데 패를 가져와 3글자 낱말 4개와 2글자 낱말 1개를 만들자 (일본어 히라가나)!¦¡Toma fichas y forma cuatro palabras de 3 letras y una de 2 (hiragana japonés)!¦Pegue peças e forme quatro palavras de 3 letras e uma de 2 (hiragana japonês)!
+509¦Baker¦Пекар¦面包师¦빵집 주인¦Panadero¦Padeiro
+510¦Police officer¦Поліцейський¦警察¦경찰관¦Policía¦Policial
+511¦Teacher¦Учитель¦老师¦선생님¦Maestro¦Professor
+512¦Carpenter¦Тесля¦木匠¦목수¦Carpintero¦Carpinteiro
+513¦Doctor¦Лікар¦医生¦의사 선생님¦Médico¦Médico
+514¦Astronaut¦Космонавт¦宇航员¦우주비행사¦Astronauta¦Astronauta
+515¦Candy shop¦Крамничка¦小卖部¦구멍가게¦Kiosco¦Vendinha
+516¦A 10-yen gum at the candy shop — you won a prize!¦Жуйка за 10 єн у крамничці — виграш!¦小卖部的10日元口香糖，中奖了！¦구멍가게 10엔 껌! 당첨이다!¦¡Chicle de 10 yenes en el kiosco y salió premio!¦Chiclete de 10 ienes na vendinha — ganhou prêmio!
+517¦School¦Школа¦学校¦학교¦Escuela¦Escola
+518¦You made lots of friends at school!¦У школі з'явилося багато друзів!¦在学校交了好多朋友！¦학교에서 친구를 많이 사귀었다!¦¡Hiciste muchos amigos en la escuela!¦Fez muitos amigos na escola!
+519¦Job¦Робота¦工作¦직업¦Trabajo¦Trabalho
+520¦Payday¦Зарплата¦发工资¦월급¦Día de pago¦Dia de pagamento
+521¦Bathhouse¦Лазня¦澡堂¦목욕탕¦Baños públicos¦Casa de banhos
+522¦Coffee milk after the bathhouse!¦Кавове молоко після лазні!¦洗完澡来瓶咖啡牛奶！¦목욕 후엔 커피우유!¦¡Leche con café después del baño!¦Leite com café depois do banho!
+523¦Wallet¦Гаманець¦钱包¦지갑¦Cartera¦Carteira
+524¦You dropped your wallet…¦Загубив гаманець…¦钱包掉了…¦지갑을 잃어버렸다…¦Se te cayó la cartera…¦Você perdeu a carteira…
+525¦Field trip¦Екскурсія¦远足¦소풍¦Excursión¦Passeio
+526¦Rice balls on the field trip were yummy!¦Рисові кульки на екскурсії — смакота!¦远足时的饭团真好吃！¦소풍 때 주먹밥이 맛있었다!¦¡Las bolas de arroz de la excursión estaban ricas!¦O bolinho de arroz do passeio estava ótimo!
+527¦Raise¦Підвищення¦加薪¦승급¦Aumento¦Aumento
+528¦Picture show¦КаміСібай¦连环画剧¦종이 연극¦Teatro de papel¦Teatro de papel
+529¦The picture-show man is here! Let's watch together¦Приїхав театр картинок! Дивимося разом¦连环画剧来了！大家一起看吧¦종이 연극 아저씨가 왔다! 다 같이 보자¦¡Llegó el teatro de papel! Veámoslo todos¦Chegou o teatro de papel! Vamos assistir juntos
+530¦Lottery¦Лотерея¦彩票¦복권¦Lotería¦Loteria
+531¦Wedding¦Весілля¦结婚¦결혼¦Boda¦Casamento
+532¦Eraser car¦Машинка-гумка¦橡皮车¦지우개 자동차¦Auto goma¦Carrinho-borracha
+533¦Eraser-car battle with a pen — you won them all!¦Бій машинок-гумок ручкою — переміг усіх!¦用圆珠笔玩橡皮车，全胜！¦볼펜으로 지우개 자동차 놀이! 다 이겼다!¦¡Batalla de autos goma con bolígrafo y ganaste todo!¦Batalha de carrinhos-borracha — venceu todas!
+534¦Cold¦Застуда¦感冒¦감기¦Resfriado¦Resfriado
+535¦You caught a cold… skip a turn¦Застудився… пропусти хід¦感冒了…休息1回¦감기에 걸렸다… 1번 쉬기¦Te resfriaste… pierdes un turno¦Pegou um resfriado… perde uma vez
+536¦Baby¦Малюк¦宝宝¦아기¦Bebé¦Bebê
+537¦Festival stalls¦Ярмарок¦庙会¦축제 노점¦Feria¦Quermesse
+538¦Goldfish scooping at the festival!¦Ловля золотих рибок на ярмарку!¦在庙会捞金鱼！¦축제에서 금붕어 건지기!¦¡Pesca de peces en la feria!¦Pescaria de peixinhos na quermesse!
+539¦Trip¦Подорож¦旅行¦여행¦Viaje¦Viagem
+540¦You climbed Mt. Fuji! What a view¦Піднявся на Фудзі! Чудовий краєвид¦爬上了富士山！风景太棒了¦후지산에 올랐다! 경치 최고¦¡Subiste el monte Fuji! Qué vista¦Subiu o monte Fuji! Que vista
+541¦House¦Дім¦房子¦집¦Casa¦Casa
+542¦Menko¦Менко¦拍画片¦딱지¦Menko¦Bafo
+543¦You flipped every menko card!¦Перевернув усі картки менко!¦把画片全拍翻了！¦딱지를 전부 뒤집었다!¦¡Volteaste todas las cartas menko!¦Virou todas as figurinhas!
+544¦Umbrella¦Парасолька¦雨伞¦우산¦Paraguas¦Guarda-chuva
+545¦You left your umbrella on the train…¦Забув парасольку в потязі…¦把伞忘在电车上了…¦전철에 우산을 두고 내렸다…¦Olvidaste el paraguas en el tren…¦Esqueceu o guarda-chuva no trem…
+546¦Radio exercises¦Ранкова зарядка¦广播体操¦라디오 체조¦Gimnasia por radio¦Ginástica do rádio
+547¦Perfect attendance at summer radio exercises!¦Жодного пропуску ранкової зарядки влітку!¦暑假广播体操全勤！¦여름방학 라디오 체조 개근!¦¡Asistencia perfecta a la gimnasia de verano!¦Presença total na ginástica de férias!
+548¦Volunteering¦Волонтерство¦志愿者¦봉사활동¦Voluntariado¦Voluntariado
+549¦You helped clean up the town!¦Допоміг прибрати місто!¦帮忙捡了街上的垃圾！¦동네 쓰레기 줍기를 도왔다!¦¡Ayudaste a limpiar el barrio!¦Ajudou a limpar o bairro!
+550¦World trip¦Навколосвітня подорож¦环球旅行¦세계 여행¦Viaje mundial¦Viagem mundial
+551¦A trip around the world!¦Подорож навколо світу!¦环游世界一周！¦세계 일주 여행!¦¡Un viaje alrededor del mundo!¦Uma volta ao mundo!
+552¦Spinning top¦Дзиґа¦陀螺¦팽이¦Trompo¦Pião
+553¦You became the town's top-spinning champ!¦Став чемпіоном міста з дзиґ!¦陀螺成了镇上第一！¦팽이로 동네 1등이 됐다!¦¡Fuiste el campeón de trompos del pueblo!¦Virou campeão de pião da cidade!
+554¦Fell down¦Впав¦摔倒¦넘어짐¦Caída¦Tombo
+555¦You fell and scraped your knee… skip a turn¦Впав і подряпав коліно… пропусти хід¦摔倒擦破了膝盖…休息1回¦넘어져서 무릎이 까졌다… 1번 쉬기¦Te caíste y te raspaste la rodilla… pierdes un turno¦Caiu e ralou o joelho… perde uma vez
+556¦Festival¦Свято¦夏日祭¦축제¦Fiesta¦Festa
+557¦Fireworks at the summer festival! Everyone joins in¦Феєрверк на літньому святі! Усі разом¦在夏日祭看了烟花！大家一起¦여름 축제에서 불꽃놀이를 봤다! 모두 함께¦¡Fuegos artificiales en la fiesta de verano! Todos juntos¦Fogos na festa de verão! Todos juntos
+558¦Grandkids¦Онуки¦孙子¦손주¦Nietos¦Netos
+559¦Your grandkids came to visit!¦Приїхали онуки!¦孙子来玩了！¦손주가 놀러 왔다!¦¡Vinieron tus nietos de visita!¦Os netos vieram visitar!
+560¦Goal¦Фініш¦终点¦골¦Meta¦Chegada
+561¦💰 {0}¦💰 {0}¦💰 {0}¦💰 {0}¦💰 {0}¦💰 {0}
+562¦{0}{1} ({2})¦{0}{1} ({2})¦{0}{1}（{2}）¦{0}{1} ({2})¦{0}{1} ({2})¦{0}{1} ({2})
+563¦No job yet¦Ще без роботи¦还没工作¦아직 직업 없음¦Sin trabajo aún¦Sem emprego ainda
+564¦Reached the goal!¦Фініш!¦到终点了！¦골인했다!¦¡Llegaste a la meta!¦Chegou!
+565¦Resting…¦Відпочинок…¦休息…¦쉬는 중…¦Descansando…¦Descansando…
+566¦Spin the wheel!¦Крути рулетку!¦转轮盘吧！¦룰렛을 돌리자!¦¡Gira la ruleta!¦Gire a roleta!
+567¦You got a job!¦Знайшов роботу!¦找到工作了！¦직업이 정해졌다!¦¡Conseguiste trabajo!¦Arrumou emprego!
+568¦{0} {1} (salary 💰{2})¦{0} {1} (зарплата 💰{2})¦{0} {1}（工资 💰{2}）¦{0} {1} (월급 💰{2})¦{0} {1} (sueldo 💰{2})¦{0} {1} (salário 💰{2})
+569¦Payday! Got 💰{0}¦Зарплата! Отримав 💰{0}¦发工资了！拿到💰{0}¦월급날! 💰{0} 받았다¦¡Día de pago! Recibes 💰{0}¦Dia de pagamento! Ganhou 💰{0}
+570¦You don't have a job yet¦У тебе ще немає роботи¦还没有工作哦¦아직 직업이 없어¦Aún no tienes trabajo¦Você ainda não tem emprego
+571¦Raise! Salary is now 💰{0}¦Підвищення! Тепер зарплата 💰{0}¦加薪了！工资变成💰{0}¦승급! 월급이 💰{0}이 됐다¦¡Aumento! Tu sueldo ahora es 💰{0}¦Aumento! Salário agora é 💰{0}
+572¦You won the lottery! 💰20¦Виграв у лотерею! 💰20¦中彩票了！💰20¦복권 당첨! 💰20¦¡Ganaste la lotería! 💰20¦Ganhou na loteria! 💰20
+573¦Share with everyone (💰4 each)¦Поділися з усіма (по 💰4)¦分给大家（每人💰4）¦모두에게 나눠 줘 (💰4씩)¦Comparte con todos (💰4 cada uno)¦Divida com todos (💰4 cada)
+574¦Congrats on your wedding! ⭐20¦Вітаємо з весіллям! ⭐20¦恭喜结婚！⭐20¦결혼 축하해! ⭐20¦¡Felicidades por tu boda! ⭐20¦Parabéns pelo casamento! ⭐20
+575¦Everyone celebrates ⭐5¦Усі святкують ⭐5¦大家也来祝贺 ⭐5¦모두 축하해 ⭐5¦Todos celebran ⭐5¦Todos comemoram ⭐5
+576¦A baby was born! ⭐15¦Народився малюк! ⭐15¦宝宝出生了！⭐15¦아기가 태어났다! ⭐15¦¡Nació un bebé! ⭐15¦Nasceu um bebê! ⭐15
+577¦Everyone is happy ⭐3¦Усі радіють ⭐3¦大家也很开心 ⭐3¦모두 기뻐 ⭐3¦Todos se alegran ⭐3¦Todos ficam felizes ⭐3
+578¦You built a house! Spent 💰{0} ⭐10¦Збудував дім! Витратив 💰{0} ⭐10¦盖了房子！花了💰{0} ⭐10¦집을 지었다! 💰{0} 쓰고 ⭐10¦¡Construiste una casa! Gastaste 💰{0} ⭐10¦Construiu uma casa! Gastou 💰{0} ⭐10
+579¦(At the end the house is worth 💰15)¦(Наприкінці дім вартує 💰15)¦（最后房子值💰15）¦(마지막에 집 값 💰15)¦(Al final la casa vale 💰15)¦(No fim a casa vale 💰15)
+580¦Goal! What a wonderful life¦Фініш! Чудове було життя¦到终点！真是美好的人生¦골! 멋진 인생이었어¦¡Meta! Qué vida tan bonita¦Chegou! Que vida maravilhosa
+581¦Finished #{0}: 💰{1} ⭐10¦Фініш №{0}: 💰{1} ⭐10¦第{0}个到终点 💰{1} ⭐10¦{0}번째 골인 💰{1} ⭐10¦Llegada n.º {0}: 💰{1} ⭐10¦Chegada nº {0}: 💰{1} ⭐10
+582¦💰{0}{1}¦💰{0}{1}¦💰{0}{1}¦💰{0}{1}¦💰{0}{1}¦💰{0}{1}
+583¦Salary on the way 💰{0}¦Зарплата дорогою 💰{0}¦途中发工资 💰{0}¦가는 길에 월급 💰{0}¦Sueldo en el camino 💰{0}¦Salário no caminho 💰{0}
+584¦{0}: 💰{1} + ⭐{2}{3} =¦{0}: 💰{1} + ⭐{2}{3} =¦{0}：💰{1} ＋ ⭐{2}{3} ＝¦{0}: 💰{1} + ⭐{2}{3} =¦{0}: 💰{1} + ⭐{2}{3} =¦{0}: 💰{1} + ⭐{2}{3} =
+585¦Both had wonderful lives 🌈¦В обох чудове життя 🌈¦两个人都度过了美好的人生 🌈¦둘 다 멋진 인생이었어 🌈¦Ambos tuvieron una vida bonita 🌈¦Os dois tiveram vidas lindas 🌈
+586¦Spin, move, and collect money and memories!¦Крути, рушай і збирай гроші та спогади!¦转轮盘前进，收集金钱和回忆！¦룰렛으로 나아가며 돈과 추억을 모으자!¦¡Gira, avanza y junta dinero y recuerdos!¦Gire, avance e junte dinheiro e memórias!
+587¦🎉 Point to {0}!¦🎉 Очко: {0}!¦🎉 {0}得1分！¦🎉 {0} 1점!¦🎉 ¡Punto para {0}!¦🎉 Ponto para {0}!
+588¦▶ Next match¦▶ Наступний бій¦▶ 下一场¦▶ 다음 승부¦▶ Siguiente combate¦▶ Próxima luta
+589¦Break blocks, grab items, and catch the opponent in a blast!¦Ламай блоки, збирай предмети й зачепи суперника вибухом!¦炸开方块拿道具，把对手卷进爆炸！¦블록을 부수고 아이템을 모아 상대를 폭발에 휘말리게 해!¦¡Rompe bloques, toma objetos y atrapa al rival en la explosión!¦Quebre blocos, pegue itens e pegue o rival na explosão!
+590¦Balloon¦Кулька¦气球¦풍선¦Globo¦Balão
+591¦POP!¦БАХ!¦砰！¦펑!¦¡PUM!¦POW!
+592¦Bubble gum¦Жуйка¦泡泡糖¦풍선껌¦Chicle¦Chiclete
+593¦SPLAT!¦ЛЯП!¦啪叽！¦철퍽!¦¡PLAF!¦SPLAT!
+594¦Pufferfish¦Риба-фугу¦河豚¦복어¦Pez globo¦Baiacu
+595¦Pfffft!¦Пш-ш-ш!¦噗咻～！¦푸슈~!¦¡Pfffs!¦Pfffff!
+596¦Frog¦Жаба¦青蛙¦개구리¦Rana¦Sapo
+597¦Ribbit!¦Ква!¦呱！¦개굴!¦¡Croac!¦Croac!
+598¦Hedgehog¦Їжачок¦刺猬¦고슴도치¦Erizo¦Ouriço
+599¦POP!¦ПУК!¦嘭！¦퐁!¦¡POP!¦POP!
+600¦Penguin¦Пінгвін¦企鹅¦펭귄¦Pingüino¦Pinguim
+601¦Octopus¦Восьминіг¦章鱼¦문어¦Pulpo¦Polvo
+602¦FWOOMP!¦БУФ!¦噗！¦보프!¦¡FUF!¦PUF!
+603¦Teacher's head¦Голова вчителя¦老师的头¦선생님 머리¦La cabeza del profe¦A cabeça do professor
+604¦KABOOM!¦БАБАХ!¦轰！¦콰광!¦¡BUM!¦BUM!
+605¦Mom's tummy¦Мамин живіт¦妈妈的肚子¦엄마 배¦La panza de mamá¦A barriga da mamãe
+606¦Pfft~!¦Пф-ф~!¦噗～！¦뿌~!¦¡Pfff!¦Pfff!
+607¦Dad's tummy¦Татів живіт¦爸爸的肚子¦아빠 배¦La panza de papá¦A barriga do papai
+608¦BOING!¦БОЙНЬ!¦嘣！¦보용!¦¡BOING!¦BOING!
+609¦Grandpa's beard¦Дідова борода¦爷爷的胡子¦할아버지 수염¦La barba del abuelo¦A barba do vovô
+610¦FWOOSH!¦ФУХ!¦呼！¦보왓!¦¡FUSH!¦FUSH!
+611¦Curry pot¦Каструля з карі¦咖喱锅¦카레 냄비¦Olla de curry¦Panela de curry
+612¦SPLOOSH!¦ХЛЮП!¦哗啦！¦콸콸!¦¡CHAF!¦SPLASH!
+613¦Toilet poop¦Какашка¦马桶里的便便¦변기 속 응가¦Popó del váter¦Cocô da privada
+614¦PLOP!¦ПЛЮХ!¦噗噜！¦뿌직!¦¡PLOF!¦PLOFT!
+615¦Egg¦Яйце¦鸡蛋¦달걀¦Huevo¦Ovo
+616¦CRACK!¦ТРІСЬ!¦咔！¦쩍!¦¡CRAC!¦CRAC!
+617¦Soda bottle¦Пляшка газованки¦汽水瓶¦탄산음료 페트병¦Botella de refresco¦Garrafa de refrigerante
+618¦FIZZZ!¦ПШШШ!¦嘶——！¦쏴아!¦¡FSSS!¦FSSS!
+619¦Shaken soda can¦Струснута банка¦摇过的罐装饮料¦흔든 캔 음료¦Lata agitada¦Lata sacudida
+620¦SPRAY!¦ПШИК!¦噗嗤——！¦푸샤!¦¡CHISSS!¦PSSSH!
+621¦Rice cake¦Рисовий коржик¦年糕¦떡¦Mochi¦Mochi
+622¦Puff… POP!¦Пуф… БАХ!¦鼓起…砰！¦뽀록… 펑!¦¡Puf… PUM!¦Puf… POW!
+623¦Round {0}/3 · {1}¦Раунд {0}/3 · {1}¦第{0}/3回合 · {1}¦라운드 {0}/3 · {1}¦Ronda {0}/3 · {1}¦Rodada {0}/3 · {1}
+624¦Aaah!¦А-а-а!¦啊——！¦아앗!¦¡Aaah!¦Aaah!
+625¦{0} pts¦{0} оч.¦{0}分¦{0}점¦{0} pts¦{0} pts
+626¦This turn: {0} (left {1}) +{2} pts¦Цей хід: {0} (залишилось {1}) +{2} оч.¦本回合 {0}次（还剩{1}次）＋{2}分¦이번 차례 {0}번 (남은 {1}번) +{2}점¦Este turno: {0} (quedan {1}) +{2} pts¦Nesta vez: {0} (restam {1}) +{2} pts
+627¦Round {0}: {1} popped it!¦Раунд {0}: {1} лопнули!¦第{0}回合：{1}弄破了！¦라운드 {0}: {1}이(가) 터뜨렸다!¦Ronda {0}: ¡{1} lo reventó!¦Rodada {0}: {1} estourou!
+628¦{0} lose the {1} pts from this turn¦{0} втрачають {1} оч. за цей хід¦{0}这回合的{1}分作废¦{0}의 이번 차례 {1}점은 없음¦{0} pierde los {1} pts de este turno¦{0} perde os {1} pts desta vez
+629¦Red {0} pts · Blue {1} pts¦Червоні {0} оч. · Сині {1} оч.¦红 {0}分 · 蓝 {1}分¦빨강 {0}점 · 파랑 {1}점¦Rojo {0} pts · Azul {1} pts¦Vermelho {0} pts · Azul {1} pts
+630¦Next round¦Наступний раунд¦下一回合¦다음 라운드¦Siguiente ronda¦Próxima rodada
+631¦Take turns pumping — pop it and you lose!¦Надувайте по черзі — хто лопне, той програв!¦轮流吹气，吹破就输！¦번갈아 부풀려서 터뜨리면 진다!¦Inflad por turnos: ¡si revienta, pierdes!¦Encham por vez — estourou, perdeu!
+632¦This time: {0}¦Цього разу: {0}¦这次是：{0}¦이번에는 {0}¦Esta vez: {0}¦Desta vez: {0}
+633¦Close¦Закрити¦关闭¦닫기¦Cerrar¦Fechar
+634¦How to play¦Як грати¦玩法¦놀이 방법¦Cómo jugar¦Como jogar
+635¦Turn music off¦Вимкнути музику¦关闭音乐¦음악 끄기¦Apagar música¦Desligar música
+636¦Turn music on¦Увімкнути музику¦打开音乐¦음악 켜기¦Encender música¦Ligar música
+637¦🔇 Music: Off¦🔇 Музика: Вимк.¦🔇 音乐：关¦🔇 음악: 꺼짐¦🔇 Música: No¦🔇 Música: Desliga

@@ -1,0 +1,5 @@
+9001¦ATK¦АТК¦攻击¦공격¦ATQ¦ATQ
+9002¦STA¦ВИТ¦耐力¦지구력¦RES¦RES
+9003¦DEF¦ЗАХ¦防御¦방어¦DEF¦DEF
+9004¦Memory¦Пам'ять¦翻牌记忆¦짝 맞추기¦Memoria¦Jogo da memória
+9005¦● Circle¦● Коло¦● 圆形¦● 동그라미¦● Círculo¦● Círculo

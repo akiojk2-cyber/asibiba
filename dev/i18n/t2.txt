@@ -1,0 +1,106 @@
+111¦Tatami ring¦Татамі-ринг¦榻榻米擂台¦다다미 씨름판¦Ring de tatami¦Ringue de tatame
+112¦Stadium¦Стадіон¦竞技场¦스타디움¦Estadio¦Estádio
+113¦Space¦Космос¦太空¦우주¦Espacio¦Espaço
+114¦Board town¦Ігрове місто¦大富翁小镇¦보드게임 마을¦Pueblo del tablero¦Cidade do tabuleiro
+115¦Move stick¦Джойстик¦移动摇杆¦이동 스틱¦Palanca¦Alavanca
+116¦Maze¦Лабіринт¦迷宫¦미로¦Laberinto¦Labirinto
+117¦The thing that inflates¦Те, що надувається¦会膨胀的东西¦부푸는 것¦Lo que se infla¦O que enche
+118¦Pause¦Пауза¦暂停¦잠깐 쉬기¦Pausa¦Pausa
+119¦Blue's field¦Поле синіх¦蓝方场地¦파랑 필드¦Campo azul¦Campo azul
+120¦Hard drop¦Скинути одразу¦直接落下¦한 번에 내리기¦Caída directa¦Queda direta
+121¦To the left¦Ліворуч¦向左¦왼쪽으로¦A la izquierda¦Para a esquerda
+122¦To the right¦Праворуч¦向右¦오른쪽으로¦A la derecha¦Para a direita
+123¦Drop faster¦Швидше вниз¦加速落下¦빨리 내리기¦Bajar rápido¦Descer rápido
+124¦Rotate left¦Обернути ліворуч¦向左转¦왼쪽 회전¦Girar a la izquierda¦Girar à esquerda
+125¦Rotate right¦Обернути праворуч¦向右转¦오른쪽 회전¦Girar a la derecha¦Girar à direita
+126¦Red's field¦Поле червоних¦红方场地¦빨강 필드¦Campo rojo¦Campo vermelho
+127¦Hide opponent's hand¦Сховати карти суперника¦隐藏对方手牌¦상대 패 가리기¦Ocultar cartas del rival¦Esconder cartas do rival
+128¦Show month numbers¦Показати номери місяців¦显示月份数字¦달 숫자 보이기¦Mostrar números de mes¦Mostrar números dos meses
+129¦Helmet gauge¦Шкала шолома¦头盔耐久¦헬멧 게이지¦Indicador de casco¦Medidor do capacete
+130¦Blue's turn¦Хід синіх¦蓝方回合¦파랑 차례¦Turno de Azul¦Vez do Azul
+131¦Red's turn¦Хід червоних¦红方回合¦빨강 차례¦Turno de Rojo¦Vez do Vermelho
+132¦Start over?¦Почати спочатку?¦要重来吗？¦다시 할까?¦¿Empezar de nuevo?¦Recomeçar?
+133¦No¦Ні¦不要¦아니요¦No¦Não
+134¦Yes¦Так¦好¦네¦Sí¦Sim
+135¦Back to¦Повернутися¦回到¦메뉴로¦¿Volver al¦Voltar ao
+136¦the menu?¦до меню?¦菜单吗？¦돌아갈까?¦menú?¦menu?
+137¦Game over!¦Кінець!¦结束！¦끝!¦¡Fin!¦Fim!
+138¦Your turn!¦Твій хід!¦轮到你！¦네 차례!¦¡Te toca!¦Sua vez!
+139¦Wait¦Чекай¦等一下¦기다려¦Espera¦Espere
+140¦Tap "Restart" to play again¦Натисни «Спочатку», щоб грати знову¦按“重来”再玩一次¦"처음부터"로 다시 하기¦Toca «Reiniciar» para jugar otra vez¦Toque em «Recomeçar» para jogar de novo
+141¦Place it on a faint circle¦Став на блідий кружечок¦放在浅色圆圈上¦연한 동그라미에 놓아줘¦Ponla en un círculo claro¦Coloque num círculo claro
+142¦{0} is thinking…¦{0} думає…¦{0}思考中…¦{0} 생각 중…¦{0} está pensando…¦{0} está pensando…
+143¦{0} has no moves, so¦{0} не має ходів, тож¦{0}没有地方可下，所以¦{0}은(는) 놓을 곳이 없어서¦{0} no puede mover, así que¦{0} não tem jogadas, então
+144¦Pass!¦Пас!¦跳过！¦패스!¦¡Pasa!¦Passa!
+145¦It's {0}'s turn again¦Знову хід: {0}¦又轮到{0}了¦다시 {0} 차례야¦Vuelve a tocar a {0}¦É a vez de {0} de novo
+146¦🤝 Draw!¦🤝 Нічия!¦🤝 平局！¦🤝 무승부!¦🤝 ¡Empate!¦🤝 Empate!
+147¦🎉 {0} wins!¦🎉 Перемогли {0}!¦🎉 {0}赢了！¦🎉 {0} 승리!¦🎉 ¡Gana {0}!¦🎉 {0} venceu!
+148¦Black {0} · White {1}¦Чорні {0} · Білі {1}¦黑 {0}个 · 白 {1}个¦검은돌 {0}개 · 흰돌 {1}개¦Negras {0} · Blancas {1}¦Pretas {0} · Brancas {1}
+149¦See the board¦Подивитися дошку¦看棋盘¦판 보기¦Ver el tablero¦Ver o tabuleiro
+150¦Play again¦Ще раз¦再来一次¦한 번 더¦Otra vez¦De novo
+151¦Tap "Next game" to play again¦Натисни «Наступна гра», щоб грати знову¦按“下一局”再玩一次¦"다음 게임"으로 다시 하기¦Toca «Siguiente partida» para jugar otra vez¦Toque em «Próxima partida» para jogar de novo
+152¦Tap an empty spot¦Торкнися вільної клітинки¦点空着的地方¦빈 곳을 터치해줘¦Toca un hueco libre¦Toque num espaço livre
+153¦Look¦Дивитися¦看看¦보기¦Ver¦Ver
+154¦Next game¦Наступна гра¦下一局¦다음 게임¦Siguiente partida¦Próxima partida
+155¦This time¦Цього разу¦这次¦이번에는¦Esta vez¦Desta vez
+156¦{0} goes first¦першими ходять {0}¦{0}先¦{0}부터¦empieza {0}¦{0} começa
+157¦You'll take turns¦Ходитимете по черзі¦轮流进行¦번갈아 가며 해¦Os turnáis¦Vocês se revezam
+158¦Lion¦Лев¦狮子¦사자¦León¦Leão
+159¦Giraffe¦Жирафа¦长颈鹿¦기린¦Jirafa¦Girafa
+160¦Elephant¦Слон¦大象¦코끼리¦Elefante¦Elefante
+161¦Chick¦Курча¦小鸡¦병아리¦Pollito¦Pintinho
+162¦Hen¦Курка¦母鸡¦닭¦Gallina¦Galinha
+163¦Captured¦Захоплені¦手中的子¦잡은 말¦Capturadas¦Capturadas
+164¦None yet¦Ще немає¦还没有¦아직 없어¦Aún nada¦Nada ainda
+165¦You caught the lion!¦Лева спіймано!¦抓住狮子了！¦사자를 잡았다!¦¡Atrapaste al león!¦Pegou o leão!
+166¦The chick¦Курча¦小鸡¦병아리가¦¡El pollito¦O pintinho
+167¦became a hen!¦стало куркою!¦变成母鸡了！¦닭이 됐다!¦se hizo gallina!¦virou galinha!
+168¦The lion reached the goal!¦Лев дійшов до мети!¦狮子到达终点了！¦사자가 골에 도착했다!¦¡El león llegó a la meta!¦O leão chegou ao fim!
+171¦King¦Король¦王¦왕¦Rey¦Rei
+173¦Rook¦Тура¦飞车¦비차¦Torre¦Torre
+175¦Dragon¦Дракон¦龙王¦용¦Dragón¦Dragão
+177¦Bishop¦Слон¦角行¦각행¦Alfil¦Bispo
+179¦Horse¦Кінь-дракон¦龙马¦용마¦Caballo¦Cavalo
+181¦Gold¦Золото¦金将¦금장¦Oro¦Ouro
+183¦Silver¦Срібло¦银将¦은장¦Plata¦Prata
+185¦+Silver¦+Срібло¦成银¦성은¦+Plata¦+Prata
+187¦Knight¦Кінь¦桂马¦계마¦Caballo¦Cavaleiro
+189¦+Knight¦+Кінь¦成桂¦성계¦+Caballo¦+Cavaleiro
+191¦Lance¦Спис¦香车¦향차¦Lanza¦Lança
+193¦+Lance¦+Спис¦成香¦성향¦+Lanza¦+Lança
+195¦Pawn¦Пішак¦步兵¦보병¦Peón¦Peão
+196¦Tokin¦Токін¦金¦토킨¦Tokin¦Tokin
+197¦Check! Escape!¦Шах! Тікай!¦将军！快逃！¦장군! 도망쳐!¦¡Jaque! ¡Escapa!¦Xeque! Fuja!
+198¦{0}: promote?¦{0}: перетворити?¦{0}：升变吗？¦{0}: 승격할까?¦{0}: ¿promover?¦{0}: promover?
+199¦Don't promote¦Ні¦不升变¦안 함¦No promover¦Não promover
+200¦Promote!¦Перетворити!¦升变！¦승격!¦¡Promover!¦Promover!
+201¦Checkmate ({0}'s king can't escape)¦Мат (королю {0} нікуди тікати)¦将死（{0}的王无路可逃）¦외통수 ({0}의 왕이 도망칠 수 없어)¦Jaque mate (el rey de {0} no puede escapar)¦Xeque-mate (o rei de {0} não pode fugir)
+202¦🤝 Draw¦🤝 Нічия¦🤝 平局¦🤝 무승부¦🤝 Empate¦🤝 Empate
+203¦Same position 4 times (repetition)¦Та сама позиція 4 рази (повтор)¦同一局面出现4次（千日手）¦같은 모양이 4번 나왔어 (천일수)¦Misma posición 4 veces (repetición)¦Mesma posição 4 vezes (repetição)
+204¦Tap the column to drop in¦Торкнися стовпчика¦点你要放的那一列¦넣을 줄을 터치해줘¦Toca la columna¦Toque na coluna
+205¦Face-down card¦Перевернута карта¦背面朝上的牌¦뒤집힌 카드¦Carta boca abajo¦Carta virada
+206¦Flip 2 cards¦Відкрий 2 карти¦翻开2张牌¦카드 2장을 뒤집어줘¦Voltea 2 cartas¦Vire 2 cartas
+207¦{0} is flipping…¦{0} відкривають…¦{0}正在翻牌…¦{0} 뒤집는 중…¦{0} está volteando…¦{0} está virando…
+208¦Red {0} pairs · Blue {1} pairs¦Червоні {0} пар · Сині {1} пар¦红 {0}对 · 蓝 {1}对¦빨강 {0}쌍 · 파랑 {1}쌍¦Rojo {0} parejas · Azul {1} parejas¦Vermelho {0} pares · Azul {1} pares
+209¦{0} {1} wins¦{0}: {1} перемог¦{0} 胜{1}次¦{0} {1}승¦{0} {1} victorias¦{0} {1} vitórias
+210¦Press "Start"¦Натисни «Старт»¦请按“开始”¦"시작"을 눌러줘¦Pulsa «Empezar»¦Toque em «Começar»
+211¦On "NOW!"¦На «ЗАРАЗ!»¦“就是现在！”时¦"지금이다!"에¦Al ver «¡YA!»¦No «AGORA!»
+212¦tap here¦тисни тут¦按这里¦여기를 터치¦toca aquí¦toque aqui
+213¦Wait…¦Чекай…¦等一下…¦기다려…¦Espera…¦Espere…
+214¦Not yet…¦Ще ні…¦还没有…¦아직이야…¦Todavía no…¦Ainda não…
+215¦NOW!¦ЗАРАЗ!¦就是现在！¦지금이다!¦¡YA!¦AGORA!
+216¦Tap!¦Тисни!¦按！¦터치!¦¡Toca!¦Toque!
+217¦{0} jumped the gun!¦{0} поквапились!¦{0}抢跑了！¦{0} 부정 출발!¦¡{0} se adelantó!¦{0} queimou a largada!
+218¦{0} wins¦Перемогли {0}¦{0}赢¦{0} 승리¦Gana {0}¦{0} vence
+219¦{0} wins!¦Перемогли {0}!¦{0}赢了！¦{0} 승리!¦¡Gana {0}!¦{0} venceu!
+220¦{0} s¦{0} с¦{0}秒¦{0}초¦{0} s¦{0} s
+221¦You win! 🎉¦Перемога! 🎉¦赢了！🎉¦승리! 🎉¦¡Ganaste! 🎉¦Venceu! 🎉
+222¦Too bad¦Шкода¦可惜¦아쉽다¦Qué pena¦Que pena
+223¦▶ Play again¦▶ Ще раз¦▶ 再来一次¦▶ 한 번 더¦▶ Otra vez¦▶ De novo
+224¦Press "Start"¦Натисни «Старт»¦按“开始”¦"시작"을 누르면¦Pulsa «Empezar»¦Toque em «Começar»
+225¦to begin¦щоб почати¦就开始了¦시작해¦para comenzar¦para começar
+226¦Tap fast¦Тисни часто¦连打¦연타로¦Toca rápido¦Toque rápido
+227¦to pull!¦щоб тягнути!¦来拉！¦당겨라!¦¡para tirar!¦para puxar!
+228¦Ready…¦Готуйся…¦准备…¦준비…¦Preparados…¦Preparar…
+229¦PULL!¦ТЯГНИ!¦拉——！¦당겨~!¦¡TIRA!¦PUXA!
+230¦Tap tap!¦Тисни-тисни!¦连打！¦연타!¦¡Toca, toca!¦Toca, toca!
