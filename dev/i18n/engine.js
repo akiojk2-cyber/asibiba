@@ -4,7 +4,7 @@
 const LANGS=[['ja','🇯🇵 にほんご'],['en','🇬🇧 English'],['uk','🇺🇦 Українська'],['zh','🇨🇳 中文'],['ko','🇰🇷 한국어'],['es','🇪🇸 Español'],['pt','🇧🇷 Português']];
 /*@@I18N@@*/
 let LANG='ja';
-const JP_RE=/[぀-ヿ一-鿿]/,TR_SKIP='.kttile,.ktslot,.ktwords,script,style,[translate="no"],.langbtn';
+const JP_RE=/[\u3040-\u309f\u30a0-\u30fa\u30fc-\u30ff]/,TR_SKIP='.kttile,.ktslot,.ktwords,script,style,[translate="no"],.langbtn';
 let TRC=new Map(),TRP=[];
 const TR_MISS=new Set();
 function trBuild(){TRC=new Map();TRP=[];const d=I18N[LANG]||{};
@@ -16,8 +16,12 @@ function trPart(g){return g&&JP_RE.test(g)?tr(g):(g||'');}
 function trCore(k){const d=I18N[LANG];if(Object.prototype.hasOwnProperty.call(d,k))return d[k];
   for(const p of TRP){const m=k.match(p.re);if(m)return p.v.replace(/\{(\d+)\}/g,(x,n)=>trPart(m[+n+1]));}
   const pm=k.match(/^([^\u3040-\u30ff\u4e00-\u9fff]+?) (.+)$/);if(pm&&JP_RE.test(pm[2])){const t=tr(pm[2]);if(t!==pm[2])return pm[1]+' '+t;}
+  const pn=k.match(/^([^\u3040-\u30ff\u4e00-\u9fffA-Za-z0-9\s]+)([\u3040-\u30ff\u4e00-\u9fff].*)$/);if(pn){const t=tr(pn[2]);if(t!==pn[2])return pn[1]+t;}
   for(const sep of['・','、']){if(k.includes(sep)){const ps=k.split(sep);if(ps.length>1){const out=ps.map(x=>tr(x));if(out.every((x,i)=>x!==ps[i]||!JP_RE.test(ps[i])))return out.join(sep==='・'?' · ':', ');}}}
+  const cm=k.match(/^(.+?)[：:]\s*(.+)$/);if(cm){const l=tr(cm[1]),r=tr(cm[2]);if(l!==cm[1]||r!==cm[2])return l+(LANG==='zh'?'：':': ')+r;}
+  if(k.includes(' ')){const ps=k.split(' '),out=ps.map(x=>JP_RE.test(x)?trCore2(x):x);if(out.every((x,i)=>x!==null))return out.join(' ');}
   TR_MISS.add(k);return k;}
+function trCore2(x){const d=I18N[LANG];if(Object.prototype.hasOwnProperty.call(d,x))return d[x];for(const p of TRP){const m=x.match(p.re);if(m)return p.v.replace(/\{(\d+)\}/g,(q,n)=>trPart(m[+n+1]));}return null;}
 function tr(s){if(LANG==='ja'||typeof s!=='string'||!JP_RE.test(s))return s;
   const m=s.match(/^(\s*)([\s\S]*?)(\s*)$/),core=m[2].replace(/\s+/g,' ');
   let r=TRC.get(core);if(r===undefined){r=trCore(core);TRC.set(core,r);}

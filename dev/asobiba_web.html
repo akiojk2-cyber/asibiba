@@ -61,10 +61,10 @@ button{font-family:inherit;cursor:pointer;color:inherit}
 @keyframes pulse{50%{transform:scale(1.25);opacity:.25}}
 
 .tbox{background:#e0c9a6;padding:8px;border-radius:22px;box-shadow:0 6px 0 #b89a6e}
-.tboard{width:100%;height:100%;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.tcell{background:#fff;border:none;border-radius:16px;padding:10%;display:flex;align-items:center;justify-content:center}
+.tboard{width:100%;height:100%;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr));gap:8px}
+.tcell{background:#fff;border:none;border-radius:16px;padding:10%;display:flex;align-items:center;justify-content:center;min-width:0;min-height:0;overflow:hidden}
 .tcell:disabled{cursor:default}
-.tcell svg{width:100%;height:100%}
+.tcell svg{width:100%;height:100%;display:block}
 .tcell.win{background:#fff27a;animation:winb .8s infinite}
 @keyframes winb{50%{transform:scale(1.06)}}
 .anim circle{stroke-dasharray:202;stroke-dashoffset:202;animation:draw .35s forwards}
@@ -3139,7 +3139,10 @@ function jgSpin(k){if(JG.st!=='play'||JG.turn!==k||JG.busy)return;JG.busy=true;j
   const n=1+Math.floor(Math.random()*6);jgWheel(n,()=>jgMove(k,n));}
 function jgWheel(n,done){const ww=$('jgWheelW'),w=$('jgWheel');ww.classList.add('on');
   const seg=(n-1)+(Math.random()<.5?0:6),base=(JG.rot||0)-((JG.rot||0)%360)+360*4,target=base+(360-(seg*30+15))+(Math.random()*16-8);
-  JG.rot=target;w.style.transition='none';void w.offsetWidth;w.style.transition='transform 2.2s cubic-bezier(.12,.8,.2,1)';w.style.transform=`rotate(${target}deg)`;
+  const from=JG.rot||0;JG.rot=target;w.style.transition='none';w.style.transform=`rotate(${from}deg)`;
+  /* CSSの transition だと iPadで まわらない ことが あるので、まいフレーム じぶんで まわす */
+  const t0=performance.now(),D=2200,ease=t=>1-Math.pow(1-t,3.4);
+  const anim=now=>{const t=Math.min(1,(now-t0)/D);w.style.transform=`rotate(${from+(target-from)*ease(t)}deg)`;if(t<1)requestAnimationFrame(anim);};requestAnimationFrame(anim);
   let tk=0;const tick=setInterval(()=>{if(BGM.on&&BGM.ctx)note(1400,BGM.ctx.currentTime,.02,'square',.03);if(++tk>18)clearInterval(tick);},110);
   setTimeout(()=>{sfx();setTimeout(()=>{ww.classList.remove('on');done();},700);},2300);}
 function jgMove(k,n){const P=JG.pl[k];let left=n,pays=0;
@@ -3848,7 +3851,7 @@ pt:`<h2>📖 Como jogar</h2><h3>Sobre o app</h3><ul>
 <p class="credit">Created by 023</p>`};
 
 let LANG='ja';
-const JP_RE=/[぀-ヿ一-鿿]/,TR_SKIP='.kttile,.ktslot,.ktwords,script,style,[translate="no"],.langbtn';
+const JP_RE=/[\u3040-\u309f\u30a0-\u30fa\u30fc-\u30ff]/,TR_SKIP='.kttile,.ktslot,.ktwords,script,style,[translate="no"],.langbtn';
 let TRC=new Map(),TRP=[];
 const TR_MISS=new Set();
 function trBuild(){TRC=new Map();TRP=[];const d=I18N[LANG]||{};
@@ -3860,8 +3863,12 @@ function trPart(g){return g&&JP_RE.test(g)?tr(g):(g||'');}
 function trCore(k){const d=I18N[LANG];if(Object.prototype.hasOwnProperty.call(d,k))return d[k];
   for(const p of TRP){const m=k.match(p.re);if(m)return p.v.replace(/\{(\d+)\}/g,(x,n)=>trPart(m[+n+1]));}
   const pm=k.match(/^([^\u3040-\u30ff\u4e00-\u9fff]+?) (.+)$/);if(pm&&JP_RE.test(pm[2])){const t=tr(pm[2]);if(t!==pm[2])return pm[1]+' '+t;}
+  const pn=k.match(/^([^\u3040-\u30ff\u4e00-\u9fffA-Za-z0-9\s]+)([\u3040-\u30ff\u4e00-\u9fff].*)$/);if(pn){const t=tr(pn[2]);if(t!==pn[2])return pn[1]+t;}
   for(const sep of['・','、']){if(k.includes(sep)){const ps=k.split(sep);if(ps.length>1){const out=ps.map(x=>tr(x));if(out.every((x,i)=>x!==ps[i]||!JP_RE.test(ps[i])))return out.join(sep==='・'?' · ':', ');}}}
+  const cm=k.match(/^(.+?)[：:]\s*(.+)$/);if(cm){const l=tr(cm[1]),r=tr(cm[2]);if(l!==cm[1]||r!==cm[2])return l+(LANG==='zh'?'：':': ')+r;}
+  if(k.includes(' ')){const ps=k.split(' '),out=ps.map(x=>JP_RE.test(x)?trCore2(x):x);if(out.every((x,i)=>x!==null))return out.join(' ');}
   TR_MISS.add(k);return k;}
+function trCore2(x){const d=I18N[LANG];if(Object.prototype.hasOwnProperty.call(d,x))return d[x];for(const p of TRP){const m=x.match(p.re);if(m)return p.v.replace(/\{(\d+)\}/g,(q,n)=>trPart(m[+n+1]));}return null;}
 function tr(s){if(LANG==='ja'||typeof s!=='string'||!JP_RE.test(s))return s;
   const m=s.match(/^(\s*)([\s\S]*?)(\s*)$/),core=m[2].replace(/\s+/g,' ');
   let r=TRC.get(core);if(r===undefined){r=trCore(core);TRC.set(core,r);}
