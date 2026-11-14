@@ -12,7 +12,7 @@
 2. build_pwa.py を実行（例: python3 build_pwa.py asobiba-v7）→ pwa/index.html と pwa/sw.js を出力（スクリプト内のパスは作業環境に合わせて調整）
 3. 出力の index.html / sw.js をリポジトリ直下へコピー → commit → push（Pages自動デプロイ）
 4. sw.jsのVERSIONを必ず上げる（iPadは Wi-Fiで開いて閉じて再度開くと更新）
-- 現在: v35（JGルーレットをrAF回転、TTTグリッド固定、i18nフォールバック強化、24ゲーム）。公開URL: https://akiojk2-cyber.github.io/asibiba/
+- 現在: v36（SWネット優先・自動リロード、メニューに版数表示、24ゲーム）。公開URL: https://akiojk2-cyber.github.io/asibiba/
 
 ## ゲーム（18）
 オセロ / まるばつ / よんもくならべ / しんけいすいじゃく / どうぶつしょうぎ / しょうぎ（駒の動き表示・反則判定・千日手）/ はなふだ こいこい（役判定・SVG札）/ スピード（手札選択→場札タッチ）/ はやおし / つなひき / エアホッケー / ジャストタイム（10秒・7.77秒・ランダム）/ ピコピコ たいけつ / ほうせき さがし（紙コップ3〜5個・激ムズ）/ 10えん はじき / コイン ルーレット / カーけし ずもう（たたみ400mm・mm単位の剛体物理 SAT＋インパルス、たおし/おしだし/はんそく/はずれ2回、3本先取、車8種。CK/ckXxx）/ ころころ ドロップ（ぷよぷよ風。iPad縦を左右に2分割、左は180°回転。連鎖・おじゃま・相殺・3〜5色。PY/pyXxx）
@@ -42,3 +42,7 @@
 - 翻訳表: dev/i18n/t1〜t6.txt（id¦en¦uk¦zh¦ko¦es¦pt、idは keys3.json）。
   新しい文言を足したら extract.py でキーを抽出 → 表に追記 → build.py → integrate.py（マスターの /*I18N-START*/〜/*I18N-END*/ を差し替え）。
 - 翻訳しない: 将棋の駒の漢字、花札の短冊の文字、ことば とりあい の牌（.kttile/.ktslot/.ktwords）。
+
+## 更新の反映（v36〜）
+- sw.js：ページ本体（navigate）はネット優先・オフライン時はキャッシュ。登録は updateViaCache:'none'、表示のたびに update()、新SWに切り替わったら1回だけ自動リロード。
+- メニュー下の小さな「vNN」（.menuver）を公開のたびに書き換える（どの版が動いているか確認用）。

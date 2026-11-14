@@ -553,7 +553,7 @@ html,body{overflow:hidden;overscroll-behavior:none}
 .hlpbtn{flex:0 0 auto!important;min-width:44px!important;width:auto!important;padding-left:14px!important;padding-right:14px!important;font-weight:900!important;background:#fff!important;color:#3a2e1f!important;opacity:1!important}
 .mtext .hlp{display:block;font-size:16px;font-weight:normal;line-height:1.65;text-align:left;max-height:34vh;overflow-y:auto;margin-top:6px;padding:4px 2px;-webkit-overflow-scrolling:touch}
 .mtext .hlp b{color:#e9546b}
-.menubtns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.menubtns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}.menuver{text-align:center;font-size:11px;color:#b9a68a;margin:4px 0 0}
 .mbtns.langrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}.mbtns.langrow .mbtn{margin:0}
 .howto{position:fixed;inset:0;z-index:20;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;padding:calc(16px + env(safe-area-inset-top,0px)) 16px calc(16px + env(safe-area-inset-bottom,0px))}
 .howto.on{display:flex}
@@ -768,7 +768,7 @@ html,body{overflow:hidden;overscroll-behavior:none}
     <button class="tile" style="--c:#2e7d4f" onclick="startCk()"><span class="ti">🏎️</span><span class="tn">カーけし ずもう</span><span class="ts">ペンで はじいて おしだせ！</span></button>
     <button class="tile" style="--c:#e8467a" onclick="startFb()"><span class="ti">🎈</span><span class="tn">ふうせん ドキドキ <span class="new">NEW</span></span><span class="ts">わったら まけ！</span></button>
   </div>
-  <div class="menubtns"><button class="bgm-btn" id="howBtn" onclick="openHowto()">📖 あそびかた</button><button class="bgm-btn" id="bgmMenu" onclick="bgmToggle()">🎵 おんがく：オン</button><button class="bgm-btn langbtn" id="langBtn" onclick="pickLang()">🌐 にほんご</button></div>
+  <div class="menubtns"><button class="bgm-btn" id="howBtn" onclick="openHowto()">📖 あそびかた</button><button class="bgm-btn" id="bgmMenu" onclick="bgmToggle()">🎵 おんがく：オン</button><button class="bgm-btn langbtn" id="langBtn" onclick="pickLang()">🌐 にほんご</button></div><p class="menuver" translate="no">v36</p>
 </div></section>
 
 <!-- どうぶつしょうぎ -->
@@ -3169,7 +3169,7 @@ function jgWheel(n,done){const ww=$('jgWheelW'),w=$('jgWheel');ww.classList.add(
   const t0=performance.now(),D=2200,ease=t=>1-Math.pow(1-t,3.4);
   const anim=now=>{const t=Math.min(1,(now-t0)/D);w.style.transform=`rotate(${from+(target-from)*ease(t)}deg)`;if(t<1)requestAnimationFrame(anim);};requestAnimationFrame(anim);
   let tk=0;const tick=setInterval(()=>{if(BGM.on&&BGM.ctx)note(1400,BGM.ctx.currentTime,.02,'square',.03);if(++tk>18)clearInterval(tick);},110);
-  setTimeout(()=>{sfx();setTimeout(()=>{ww.classList.remove('on');done();},700);},2300);}
+  setTimeout(()=>{w.style.transform=`rotate(${target}deg)`;sfx();setTimeout(()=>{ww.classList.remove('on');done();},700);},2300);}
 function jgMove(k,n){const P=JG.pl[k];let left=n,pays=0;
   const step=()=>{if(left<=0||P.pos>=JG_SQ.length-1){jgLand(k,pays);return;}
     P.pos++;left--;jgTokens();if(BGM.on&&BGM.ctx)note(700,BGM.ctx.currentTime,.05,'triangle',.06);
@@ -3925,7 +3925,7 @@ function pickLang(){modal('🌐',LANGS.map(([k,nm])=>({label:nm,cls:k===LANG?'':
 /*I18N-END*/
 </script>
 <script>
-if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js',{scope:'./'}).catch(()=>{});});}
+if('serviceWorker' in navigator){const had=!!navigator.serviceWorker.controller;let rl=false;navigator.serviceWorker.addEventListener('controllerchange',()=>{if(had&&!rl){rl=true;location.reload();}});window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js',{scope:'./',updateViaCache:'none'}).then(r=>{r.update();document.addEventListener('visibilitychange',()=>{if(!document.hidden)r.update().catch(()=>{});});}).catch(()=>{});});}
 </script>
 </body>
 </html>

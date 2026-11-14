@@ -33,12 +33,13 @@ head='''<!doctype html>
 '''
 b=head+b[:mse]+'\n</head>\n<body>'+b[mse:].rstrip()+'''
 <script>
-if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js',{scope:'./'}).catch(()=>{});});}
+if('serviceWorker' in navigator){const had=!!navigator.serviceWorker.controller;let rl=false;navigator.serviceWorker.addEventListener('controllerchange',()=>{if(had&&!rl){rl=true;location.reload();}});window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js',{scope:'./',updateViaCache:'none'}).then(r=>{r.update();document.addEventListener('visibilitychange',()=>{if(!document.hidden)r.update().catch(()=>{});});}).catch(()=>{});});}
 </script>
 </body>
 </html>
 '''
 open('pwa/index.html','w',encoding='utf8').write(b)
 w=open('pwa/sw.js',encoding='utf8').read()
+
 w=re.sub(r"const VERSION='[^']+';",f"const VERSION='{ver}';",w)
 open('pwa/sw.js','w',encoding='utf8').write(w)
